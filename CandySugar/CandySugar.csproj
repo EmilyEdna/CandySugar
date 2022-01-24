@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>CandySugar</AssemblyName>
+    <RootNamespace>CandySugar</RootNamespace>
+    <Version>1.0.0.0</Version>
+    <Configurations>Debug;Release</Configurations>
+    <Copyright>Copyright © HBL 2022</Copyright>
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;Core</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;Core</DefineConstants>
+  </PropertyGroup>
+	<ItemGroup>
+		<Reference Include="Anime.SDK">
+			<HintPath>..\Lib\Anime.SDK.dll</HintPath>
+		</Reference>
+		<Reference Include="LightNovel.SDK">
+			<HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
+		</Reference>
+		<Reference Include="Manga.SDK">
+			<HintPath>..\Lib\Manga.SDK.dll</HintPath>
+		</Reference>
+		<Reference Include="Music.SDK">
+			<HintPath>..\Lib\Music.SDK.dll</HintPath>
+		</Reference>
+		<Reference Include="Novel.SDK">
+			<HintPath>..\Lib\Novel.SDK.dll</HintPath>
+		</Reference>
+		<Reference Include="Wallpaper.SDK">
+			<HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CandySugar.Controls\CandySugar.Controls.csproj" />
+    <ProjectReference Include="..\CandySugar.Core\CandySugar.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Soft.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Soft.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Soft.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Soft.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\AnimeViews\" />
+    <Folder Include="Views\NovelViews\" />
+    <Folder Include="Views\LigthNovelViews\" />
+    <Folder Include="Views\MangaViews\" />
+    <Folder Include="Views\MusicViews\" />
+    <Folder Include="Views\WallpaperViews\" />
+    <Folder Include="Views\UserViews\" />
+  </ItemGroup>
+</Project>

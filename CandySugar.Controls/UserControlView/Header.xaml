@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="CandySugar.Controls.UserControlView.Header"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CandySugar.Controls.UserControlView"
+             mc:Ignorable="d" 
+             xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="72" d:DesignWidth="1200">
+    <Design:ColorZone x:Name="Zone" Background="#FFFF9999" 
+                      Mode="PrimaryMid"
+                      Padding="16" 
+                      Style="{DynamicResource ColorZoneStyle2}" 
+                      Width="{Binding Width,ElementName=window}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="1.6*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox SelectedIndex="1" 
+                          Margin="8 0 0 0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          BorderThickness="0"
+                          Design:ColorZoneAssist.Mode="Standard"
+                          Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                          BorderBrush="{DynamicResource MaterialDesignPaper}"  
+                          FontFamily="{Binding FontFamily,ElementName=window}"
+                          Background="Transparent">
+                <ComboBoxItem Content="宝石绿"/>
+                <ComboBoxItem Content="桃花粉"/>
+                <ComboBoxItem Content="旬子蓝"/>
+                <ComboBoxItem Content="山茶红"/>
+                <ComboBoxItem Content="墨鱼黑"/>
+            </ComboBox>
+            <ComboBox SelectedIndex="0" 
+                          Margin="8 0 0 0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          BorderThickness="0"
+                          Grid.Column="2"
+                          Design:ColorZoneAssist.Mode="Standard"
+                          Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                          BorderBrush="{DynamicResource MaterialDesignPaper}"  
+                          FontFamily="{Binding FontFamily,ElementName=window}"
+                          Background="Transparent" >
+                        <ComboBoxItem Content="背景1"/>
+                        <ComboBoxItem Content="背景2"/>
+                        <ComboBoxItem Content="背景3"/>
+                        <ComboBoxItem Content="背景4"/>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right">
+                <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                         Design:ShadowAssist.ShadowDepth="Depth2" 
+                         FontSize="20" 
+                         CommandParameter="0"
+                         Background="{Binding Background, ElementName=Zone}" 
+                         BorderBrush="{x:Null}">
+                    <Design:PackIcon Kind="ArrowCollapse"  Width="30" Height="40"/>
+                </Button>
+                <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                         Design:ShadowAssist.ShadowDepth="Depth2" 
+                         FontSize="22" 
+                         Margin="10,0,0,0" 
+                         CommandParameter="5"
+                         Background="{Binding Background, ElementName=Zone}" 
+                         BorderBrush="{x:Null}" >
+                    <Design:PackIcon Kind="CogOutline" Height="30" Width="30"/>
+                </Button>
+                <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                         Design:ShadowAssist.ShadowDepth="Depth2" 
+                         FontSize="22" 
+                         Margin="10,0,0,0" 
+                         CommandParameter="2"
+                         Background="{Binding Background, ElementName=Zone}" 
+                         BorderBrush="{x:Null}" >
+                    <Design:PackIcon Kind="PowerStandby" Height="30" Width="30"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Design:ColorZone>
+</UserControl>

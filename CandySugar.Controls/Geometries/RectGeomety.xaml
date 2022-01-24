@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Geometry x:Key="ClipCanvas">
+        M0 15C0 6.72 6.72 0 15 0L1185 0C1193.28 0 1200 6.72 1200 15L1200 785C1200 793.28 1193.28 800 1185 800L15 800C6.72 800 0 793.28 0 785L0 15Z
+    </Geometry>
+</ResourceDictionary>
