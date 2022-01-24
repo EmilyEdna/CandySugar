@@ -52,32 +52,27 @@
                         <ComboBoxItem Content="背景4"/>
             </ComboBox>
             <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right">
-                <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                         Design:ShadowAssist.ShadowDepth="Depth2" 
-                         FontSize="20" 
-                         CommandParameter="0"
-                         Background="{Binding Background, ElementName=Zone}" 
-                         BorderBrush="{x:Null}">
-                    <Design:PackIcon Kind="ArrowCollapse"  Width="30" Height="40"/>
-                </Button>
-                <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                         Design:ShadowAssist.ShadowDepth="Depth2" 
-                         FontSize="22" 
-                         Margin="10,0,0,0" 
-                         CommandParameter="5"
-                         Background="{Binding Background, ElementName=Zone}" 
-                         BorderBrush="{x:Null}" >
-                    <Design:PackIcon Kind="CogOutline" Height="30" Width="30"/>
-                </Button>
-                <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                         Design:ShadowAssist.ShadowDepth="Depth2" 
-                         FontSize="22" 
-                         Margin="10,0,0,0" 
-                         CommandParameter="2"
-                         Background="{Binding Background, ElementName=Zone}" 
-                         BorderBrush="{x:Null}" >
-                    <Design:PackIcon Kind="PowerStandby" Height="30" Width="30"/>
-                </Button>
+                <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding Handler}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                                    FontSize="20" 
+                                    Margin="10,0,0,0"
+                                    CommandParameter="{Binding Value}"
+                                    Background="{Binding Background, ElementName=Zone}" 
+                                    BorderBrush="{x:Null}">
+                                <Design:PackIcon Kind="{Binding Key}"  Width="30" Height="40"/>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    </ItemsControl>
             </StackPanel>
         </Grid>
     </Design:ColorZone>

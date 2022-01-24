@@ -15,8 +15,4 @@
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.40" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="DTO\" />
-	</ItemGroup>
 </Project>

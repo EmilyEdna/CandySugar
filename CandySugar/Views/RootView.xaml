@@ -16,7 +16,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <CtrlView:Header Width="1200" MouseMove="WindowMove"/>
+        <CtrlView:Header Width="1200" MouseMove="WindowMove" x:Name="Header"/>
     </Grid>
 
 </Ctrl:CandyWindow>

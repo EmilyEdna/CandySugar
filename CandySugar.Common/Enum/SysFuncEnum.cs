@@ -9,11 +9,10 @@ namespace CandySugar.Common.Enum
 {
     public enum SysFuncEnum
     {
-        Min,
-        Max,
-        Close,
         Play,
-        Down,
-        Config
+        Download,
+        Setting,
+        MinSize,
+        Close
     }
 }
