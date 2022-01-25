@@ -1,4 +1,5 @@
-﻿using CandySugar.ViewModels;
+﻿using CandySugar.Controls.ControlViewModel;
+using CandySugar.ViewModels;
 using Serilog;
 using Stylet;
 using StyletIoC;
@@ -61,6 +62,7 @@ namespace CandySugar
 
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
+            builder.RegistControlViewModule();
            /* builder.Bind<IOptionService>().To<OptionService>();
             builder.Bind<IWallpaperService>().To<WallpaperService>();
             builder.Bind<IMusicPlayService>().To<MusicPlayService>();

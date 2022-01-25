@@ -5,13 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CandySugar.Controls.UserControlView"
              mc:Ignorable="d" 
+             x:Name="HeaderCtrl"
+             FontFamily="{DynamicResource FontStyle}"
              xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="72" d:DesignWidth="1200">
     <Design:ColorZone x:Name="Zone" Background="#FFFF9999" 
                       Mode="PrimaryMid"
                       Padding="16" 
                       Style="{DynamicResource ColorZoneStyle2}" 
-                      Width="{Binding Width,ElementName=window}">
+                      Width="{Binding Width,ElementName=HeaderCtrl}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
@@ -27,7 +29,7 @@
                           Design:ColorZoneAssist.Mode="Standard"
                           Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
                           BorderBrush="{DynamicResource MaterialDesignPaper}"  
-                          FontFamily="{Binding FontFamily,ElementName=window}"
+                          FontFamily="{Binding FontFamily,ElementName=HeaderCtrl}"
                           Background="Transparent">
                 <ComboBoxItem Content="宝石绿"/>
                 <ComboBoxItem Content="桃花粉"/>
@@ -41,15 +43,16 @@
                           VerticalAlignment="Center"
                           BorderThickness="0"
                           Grid.Column="2"
+
                           Design:ColorZoneAssist.Mode="Standard"
                           Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
                           BorderBrush="{DynamicResource MaterialDesignPaper}"  
-                          FontFamily="{Binding FontFamily,ElementName=window}"
+                          FontFamily="{Binding FontFamily,ElementName=HeaderCtrl}"
                           Background="Transparent" >
-                        <ComboBoxItem Content="背景1"/>
-                        <ComboBoxItem Content="背景2"/>
-                        <ComboBoxItem Content="背景3"/>
-                        <ComboBoxItem Content="背景4"/>
+                <ComboBoxItem Content="背景1"/>
+                <ComboBoxItem Content="背景2"/>
+                <ComboBoxItem Content="背景3"/>
+                <ComboBoxItem Content="背景4"/>
             </ComboBox>
             <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right">
                 <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"

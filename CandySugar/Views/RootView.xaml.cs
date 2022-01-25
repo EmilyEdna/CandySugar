@@ -1,7 +1,9 @@
 ﻿using CandySugar.Common.Enum;
+using CandySugar.Controls.ControlViewModel;
 using CandySugar.Controls.UIElementHelper;
 using CandySugar.Controls.UserControls;
 using CandySugar.Controls.UserControlView;
+using CandySugar.Core.CandyUtily;
 using StyletIoC;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,14 +19,7 @@ namespace CandySugar.Views
         public RootView()
         {
             InitializeComponent();
-            HeaderViewModel HeaderView = new HeaderViewModel();
-            HeaderView.Handler = new Dictionary<string, int>
-            {
-                { "CogOutline", (int)SysFuncEnum.Setting },
-                { "ArrowCollapse", (int)SysFuncEnum.MinSize },
-                { "PowerStandby", (int)SysFuncEnum.Close }
-            };
-            Header.DataContext = HeaderView;
+            Header.DataContext = CandyContainer.Instance.Resolves<HeaderViewModel>().Baisc();
 
         }
 

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:hc="https://handyorg.github.io/handycontrol"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+        <hc:ThemeResources/>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
 
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml"/>
@@ -9,6 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml"/>
 
+        <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/GlobalStyle.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Geometries/RectGeomety.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/WindowStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
