@@ -130,5 +130,16 @@ namespace CandySugar.Properties {
                 this["PlayBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection MenuBackgroud {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MenuBackgroud"]));
+            }
+            set {
+                this["MenuBackgroud"] = value;
+            }
+        }
     }
 }

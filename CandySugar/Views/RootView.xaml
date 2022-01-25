@@ -11,13 +11,75 @@
            xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
            xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
            xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
-           xmlns:hc="https://handyorg.github.io/handycontrol">
+           xmlns:hc="https://handyorg.github.io/handycontrol"
+           xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
+           xmlns:Cmd="https://github.com/canton7/Stylet"
+           xmlns:Cv="clr-namespace:CandySugar.Controls.Converters;assembly=CandySugar.Controls"
+           xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls">
+    <Ctrl:CandyWindow.InputBindings>
+        <KeyBinding Key="N" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.Novel}" Modifiers="Ctrl"/>
+        <KeyBinding Key="L" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.LightNovel}" Modifiers="Ctrl"/>
+        <KeyBinding Key="A" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.Anime}" Modifiers="Ctrl"/>
+        <KeyBinding Key="M" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.Manga}" Modifiers="Ctrl"/>
+        <KeyBinding Key="W" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.Wallpaper}" Modifiers="Ctrl"/>
+        <KeyBinding Key="Y" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.Music}" Modifiers="Ctrl"/>
+    </Ctrl:CandyWindow.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <CtrlView:Header Width="1200" MouseMove="WindowMove" x:Name="Header"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <WrapPanel Orientation="Vertical" Height="728">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="298"/>
+                        <RowDefinition Height="430"/>
+                    </Grid.RowDefinitions>
+                    <hc:ScrollViewer>
+                        <WrapPanel Orientation="Vertical" x:Name="Navs">
+                            <ItemsControl ItemsSource="{Binding Menu}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{Binding FuncName}" 
+                                            Width="240"
+                                            Height="40"
+                                            dp:ButtonDependencyProperty.BackImage="{Binding ImageRoute}"
+                                            Style="{StaticResource LeftMenu}"
+                                            Command="{Cmd:Action Redirect}"
+                                            CommandParameter="{Binding CommandParam}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </hc:ScrollViewer>
+                    <!--<Border Grid.Row="1"  Height="400" MouseDown="UserCenterClick">
+                        <hc:Poptip.Instance>
+                            <hc:Poptip Background="Transparent"
+                                       BorderThickness="0"
+                                       PlacementType="TopRight" 
+                                       Offset="-60">
+                                <hc:Poptip.Content>
+                                    <TextBlock Text="个人中心" Foreground="#FFED556A"/>
+                                </hc:Poptip.Content>
+                            </hc:Poptip>
+                        </hc:Poptip.Instance>
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resource/Assets/Woman.png" 
+                                        Stretch="UniformToFill" 
+                                        Opacity="0.5"/>
+                        </Border.Background>
+                    </Border>-->
+                </Grid>
+            </WrapPanel>
+
+
+        </Grid>
     </Grid>
 
 </Ctrl:CandyWindow>
