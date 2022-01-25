@@ -63,13 +63,13 @@ namespace CandySugar
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
             builder.RegistControlViewModule();
-           /* builder.Bind<IOptionService>().To<OptionService>();
-            builder.Bind<IWallpaperService>().To<WallpaperService>();
-            builder.Bind<IMusicPlayService>().To<MusicPlayService>();
-            builder.Bind<IHistoryService>().To<HistoryService>();
+            /* builder.Bind<IOptionService>().To<OptionService>();
+             builder.Bind<IWallpaperService>().To<WallpaperService>();
+             builder.Bind<IMusicPlayService>().To<MusicPlayService>();
+             builder.Bind<IHistoryService>().To<HistoryService>();
 
 
-            builder.Bind<NavigationController>().And<INavigationController>().To<NavigationController>().InSingletonScope();*/
+             builder.Bind<NavigationController>().And<INavigationController>().To<NavigationController>().InSingletonScope();*/
         }
 
         /// <summary>
@@ -105,6 +105,7 @@ namespace CandySugar
         {
             /*var navigationController = this.Container.Get<NavigationController>();
             navigationController.Delegate = this.RootViewModel;*/
+            CandyViewModule.Container = this.Container;
             base.OnLaunch();
         }
 

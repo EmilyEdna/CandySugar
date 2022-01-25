@@ -13,6 +13,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontStyle}"/>
         <Setter Property="Source" Value="/CandySugar.Controls;component/Assets/Backgroud1.jpg" />
         <Setter Property="Template">
             <Setter.Value>
@@ -21,7 +22,7 @@
                         <Rectangle RadiusX="15" RadiusY="15" VerticalAlignment="Top"  Width="{TemplateBinding Width}"  Height="{TemplateBinding Height}">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="{Binding Source,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Ctrl:CandyCanvas}}}" 
-                                            Stretch="Fill" TileMode="None"/>
+                                            Stretch="UniformToFill" TileMode="None"/>
                             </Rectangle.Fill>
                             <Rectangle.Effect>
                                 <BlurEffect Radius="15"/>
@@ -34,5 +35,20 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <Style x:Key="SettingStyle" TargetType="Ctrl:CandyWindow">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="WindowState" Value="Normal"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="Width" Value="400"/>
+        <Setter Property="Height" Value="600"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontStyle}"/>
     </Style>
 </ResourceDictionary>

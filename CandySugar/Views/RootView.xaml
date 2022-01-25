@@ -4,13 +4,14 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:viewModels="clr-namespace:CandySugar.ViewModels"
-           xmlns:hc="https://handyorg.github.io/handycontrol"
            mc:Ignorable="d"
-          WindowStartupLocation="CenterScreen"
+           WindowStartupLocation="CenterScreen"
            d:DataContext="{d:DesignInstance Type=viewModels:RootViewModel}"
            Style="{StaticResource WinStyle}"
            xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
-           xmlns:CtrlView="clr-namespace:CandySugar.Controls.UserControlView;assembly=CandySugar.Controls">
+           xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
+           xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+           xmlns:hc="https://handyorg.github.io/handycontrol">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

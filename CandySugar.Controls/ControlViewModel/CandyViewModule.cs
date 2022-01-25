@@ -12,6 +12,7 @@ namespace CandySugar.Controls.ControlViewModel
 {
     public static class CandyViewModule
     {
+        public static IContainer Container { get; set; }
         public static IStyletIoCBuilder RegistControlViewModule(this IStyletIoCBuilder builder)
         {
             SyncStatic.Assembly("CandySugar.Controls")

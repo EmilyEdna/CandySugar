@@ -1,16 +1,8 @@
-﻿using CandySugar.Common.Enum;
-using CandySugar.Controls.ControlViewModel;
-using CandySugar.Controls.UIElementHelper;
-using CandySugar.Controls.UserControls;
-using CandySugar.Controls.UserControlView;
+﻿using CandySugar.Controls.ControlViewModel;
+using CandySugar.UserControlView;
 using CandySugar.Core.CandyUtily;
-using StyletIoC;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
+using CandySugar.Controls.UserControls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace CandySugar.Views
 {

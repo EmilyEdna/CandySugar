@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <None Remove="Assets\Backgroud1.jpg" />
+    <None Remove="Assets\PayCode.png" />
     <None Remove="Assets\站酷快乐体2016修订版.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\Backgroud1.jpg" />
+    <Resource Include="Assets\PayCode.png" />
     <Resource Include="Assets\站酷快乐体2016修订版.ttf" />
   </ItemGroup>
 

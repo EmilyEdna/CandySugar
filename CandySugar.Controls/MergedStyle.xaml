@@ -4,7 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <hc:ThemeResources/>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
-
+        
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml"/>
@@ -13,5 +13,7 @@
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/GlobalStyle.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Geometries/RectGeomety.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/WindowStyle.xaml"/>
+
+        <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/TextBoxStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
