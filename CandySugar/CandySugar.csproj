@@ -22,6 +22,36 @@
     <DefineConstants>TRACE;Core</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Views\AnimeViews\**" />
+    <Compile Remove="Views\LigthNovelViews\**" />
+    <Compile Remove="Views\MangaViews\**" />
+    <Compile Remove="Views\MusicViews\**" />
+    <Compile Remove="Views\NovelViews\**" />
+    <Compile Remove="Views\UserViews\**" />
+    <Compile Remove="Views\WallpaperViews\**" />
+    <EmbeddedResource Remove="Views\AnimeViews\**" />
+    <EmbeddedResource Remove="Views\LigthNovelViews\**" />
+    <EmbeddedResource Remove="Views\MangaViews\**" />
+    <EmbeddedResource Remove="Views\MusicViews\**" />
+    <EmbeddedResource Remove="Views\NovelViews\**" />
+    <EmbeddedResource Remove="Views\UserViews\**" />
+    <EmbeddedResource Remove="Views\WallpaperViews\**" />
+    <None Remove="Views\AnimeViews\**" />
+    <None Remove="Views\LigthNovelViews\**" />
+    <None Remove="Views\MangaViews\**" />
+    <None Remove="Views\MusicViews\**" />
+    <None Remove="Views\NovelViews\**" />
+    <None Remove="Views\UserViews\**" />
+    <None Remove="Views\WallpaperViews\**" />
+    <Page Remove="Views\AnimeViews\**" />
+    <Page Remove="Views\LigthNovelViews\**" />
+    <Page Remove="Views\MangaViews\**" />
+    <Page Remove="Views\MusicViews\**" />
+    <Page Remove="Views\NovelViews\**" />
+    <Page Remove="Views\UserViews\**" />
+    <Page Remove="Views\WallpaperViews\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>
 	<ItemGroup>
@@ -60,14 +90,5 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Soft.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\AnimeViews\" />
-    <Folder Include="Views\NovelViews\" />
-    <Folder Include="Views\LigthNovelViews\" />
-    <Folder Include="Views\MangaViews\" />
-    <Folder Include="Views\MusicViews\" />
-    <Folder Include="Views\WallpaperViews\" />
-    <Folder Include="Views\UserViews\" />
   </ItemGroup>
 </Project>

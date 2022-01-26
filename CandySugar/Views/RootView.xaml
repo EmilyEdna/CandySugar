@@ -50,7 +50,7 @@
                                             Width="240"
                                             Height="40"
                                             dp:ButtonDependencyProperty.BackImage="{Binding ImageRoute}"
-                                            Style="{StaticResource LeftMenu}"
+                                            Style="{StaticResource Menu}"
                                             Command="{Cmd:Action Redirect}"
                                             CommandParameter="{Binding CommandParam}"/>
                                     </DataTemplate>
@@ -77,8 +77,9 @@
                     </Border>-->
                 </Grid>
             </WrapPanel>
-
-
+            <WrapPanel Grid.Column="1">
+                <ContentControl  Cmd:View.Model="{Binding ActiveItem}" x:Name="Contents"/>
+            </WrapPanel>
         </Grid>
     </Grid>
 
