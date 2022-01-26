@@ -14,7 +14,7 @@
         <ResourceDictionary Source="/CandySugar.Controls;component/Geometries/RectGeomety.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/WindowStyle.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/ButtonStyle.xaml"/>
-        
+        <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/ContextMenuStyle.xaml"/>
 
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/TextBoxStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>

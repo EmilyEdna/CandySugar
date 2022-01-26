@@ -22,5 +22,10 @@ namespace CandySugar.Views
                 DragMove();
             }
         }
+
+        private void ProcessClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

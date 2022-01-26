@@ -9,7 +9,7 @@ namespace CandySugar.Common.Enum
 {
     public enum SysFuncEnum
     {
-        Play,
+        Play=1,
         Download,
         Setting,
         MinSize,

@@ -15,7 +15,8 @@
            xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
            xmlns:Cmd="https://github.com/canton7/Stylet"
            xmlns:Cv="clr-namespace:CandySugar.Controls.Converters;assembly=CandySugar.Controls"
-           xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls">
+           xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+           xmlns:tb="http://www.hardcodet.net/taskbar">
     <Ctrl:CandyWindow.InputBindings>
         <KeyBinding Key="N" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.Novel}" Modifiers="Ctrl"/>
         <KeyBinding Key="L" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.LightNovel}" Modifiers="Ctrl"/>
@@ -58,29 +59,50 @@
                             </ItemsControl>
                         </WrapPanel>
                     </hc:ScrollViewer>
-                    <!--<Border Grid.Row="1"  Height="400" MouseDown="UserCenterClick">
+                    <Border Grid.Row="1"  Height="400">
                         <hc:Poptip.Instance>
                             <hc:Poptip Background="Transparent"
                                        BorderThickness="0"
                                        PlacementType="TopRight" 
                                        Offset="-60">
                                 <hc:Poptip.Content>
-                                    <TextBlock Text="个人中心" Foreground="#FFED556A"/>
+                                    <TextBlock Text="个人中心" Foreground="{StaticResource RedPink}"/>
                                 </hc:Poptip.Content>
                             </hc:Poptip>
                         </hc:Poptip.Instance>
                         <Border.Background>
-                            <ImageBrush ImageSource="/Resource/Assets/Woman.png" 
+                            <ImageBrush ImageSource="/CandySugar.Controls;component/Assets/BoardGirl.png" 
                                         Stretch="UniformToFill" 
                                         Opacity="0.5"/>
                         </Border.Background>
-                    </Border>-->
+                    </Border>
                 </Grid>
             </WrapPanel>
             <WrapPanel Grid.Column="1">
                 <ContentControl  Cmd:View.Model="{Binding ActiveItem}" x:Name="Contents"/>
             </WrapPanel>
         </Grid>
+        <tb:TaskbarIcon IconSource="/CandySugar.Controls;component/Assets/Icon.ico"
+                        DoubleClickCommand="{Cmd:Action ShowWindow}">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu FontFamily="{StaticResource FontStyle}" Style="{DynamicResource TrayContextMenu}">
+                    <MenuItem Header="个人中心" Command="{Cmd:Action Redirect}" CommandParameter="7"/>
+                    <Separator />
+                    <MenuItem Header="打开漫画" Click="ProcessClick" CommandParameter="{x:Static Enum:TrayFuncEnum.Manga}"/>
+                    <MenuItem Header="打开音乐" Click="ProcessClick" CommandParameter="{x:Static Enum:TrayFuncEnum.Music}"/>
+                    <MenuItem Header="打开壁纸" Click="ProcessClick" CommandParameter="{x:Static Enum:TrayFuncEnum.Wallpaper}"/>
+                    <MenuItem Header="打开小说" Click="ProcessClick" CommandParameter="{x:Static Enum:TrayFuncEnum.Novel}"/>
+                    <Separator />
+                    <MenuItem Header="退出软件" Click="ProcessClick" CommandParameter="{x:Static Enum:TrayFuncEnum.Exit}"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+            <tb:TaskbarIcon.TrayToolTip>
+                <Border Background="White" Padding="3" BorderThickness="0" CornerRadius="5">
+                    <TextBlock Text="{Binding SoftName}"
+                               Foreground="{StaticResource TeaRed}"
+                               FontFamily="{StaticResource FontStyle}"/>
+                </Border>
+            </tb:TaskbarIcon.TrayToolTip>
+        </tb:TaskbarIcon>
     </Grid>
-
 </Ctrl:CandyWindow>

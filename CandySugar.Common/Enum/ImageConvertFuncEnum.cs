@@ -9,7 +9,7 @@ namespace CandySugar.Common.Enum
 {
     public enum ImageConvertFuncEnum
     {
-        Konachan,
+        Konachan=1,
         Manga
     }
 }

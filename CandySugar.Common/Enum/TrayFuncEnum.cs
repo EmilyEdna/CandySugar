@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace CandySugar.Common.Enum
 {
-    public enum TaskIcoFuncEnum
+    public enum TrayFuncEnum
     {
+        Exit=1,
         Manga,
         Music,
         Wallpaper,

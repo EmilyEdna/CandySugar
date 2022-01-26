@@ -32,7 +32,7 @@ namespace CandySugar.UserControlView
         private void CandySystemClick(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            var types = (SysFuncEnum)(btn).CommandParameter.ToString().AsInt();
+            var types = (SysFuncEnum)btn.CommandParameter;
             switch (types)
             {
                 case SysFuncEnum.Play:
