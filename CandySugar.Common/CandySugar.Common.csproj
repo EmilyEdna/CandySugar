@@ -10,10 +10,10 @@
 		<PackageReference Include="Microsoft.ClearScript.V8" Version="7.2.1" />
 		<PackageReference Include="Microsoft.ClearScript.V8.Native.win-x64" Version="7.2.1" />
 		<PackageReference Include="SqlSugarCore" Version="5.0.5.3" />
-		<PackageReference Include="XExten.Advance" Version="1.1.2.3-beta" />
 		<PackageReference Include="Serilog" Version="2.10.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.40" />
+		<PackageReference Include="XExten.Advance" Version="1.1.2.5-beta" />
 	</ItemGroup>
 	
 </Project>

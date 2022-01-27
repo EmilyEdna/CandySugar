@@ -9,6 +9,7 @@
              x:Name="HeaderCtrl"
              FontFamily="{DynamicResource FontStyle}"
              xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
              xmlns:hc="https://handyorg.github.io/handycontrol">
     <Design:ColorZone x:Name="Zone" Background="#FFFF9999" 
                       Mode="PrimaryMid"
@@ -38,7 +39,7 @@
                 <ComboBoxItem Content="山茶红"/>
                 <ComboBoxItem Content="墨鱼黑"/>
             </ComboBox>
-            <hc:LoadingLine Grid.Column="1" Style="{StaticResource LoadingLineLargeLight}"/>
+            <hc:LoadingLine Grid.Column="1" Style="{StaticResource LoadingLineLargeLight}"  Visibility="{C:Binding Loading,FalseToVisibility=Hidden}"/>
             <ComboBox SelectedIndex="0" 
                           Margin="8 0 0 0"
                           HorizontalAlignment="Center"

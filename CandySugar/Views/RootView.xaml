@@ -36,11 +36,11 @@
                 <ColumnDefinition Width="0.25*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <WrapPanel Orientation="Vertical" Height="728">
+            <WrapPanel Orientation="Vertical">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="298"/>
-                        <RowDefinition Height="430"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <hc:ScrollViewer>
                         <WrapPanel Orientation="Vertical" x:Name="Navs">
@@ -59,7 +59,7 @@
                             </ItemsControl>
                         </WrapPanel>
                     </hc:ScrollViewer>
-                    <Border Grid.Row="1"  Height="400">
+                    <!--<Border Grid.Row="1"  Height="400">
                         <hc:Poptip.Instance>
                             <hc:Poptip Background="Transparent"
                                        BorderThickness="0"
@@ -75,7 +75,7 @@
                                         Stretch="UniformToFill" 
                                         Opacity="0.5"/>
                         </Border.Background>
-                    </Border>
+                    </Border>-->
                 </Grid>
             </WrapPanel>
             <WrapPanel Grid.Column="1">

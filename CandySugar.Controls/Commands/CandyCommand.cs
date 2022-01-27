@@ -8,12 +8,12 @@ using System.Windows.Input;
 
 namespace CandySugar.Controls.Commands
 {
-    public class CandyCommand: Screen, ICommand
+    public class CandyCommand:ICommand
     {
         private  Action<object> _Execute;
         private  Func<bool> _CanExecute;
 
-        public void Commands(Action<object> Execute, Func<bool> CanExecute)
+        public CandyCommand(Action<object> Execute, Func<bool> CanExecute)
         {
             _Execute = Execute;
             _CanExecute = CanExecute;

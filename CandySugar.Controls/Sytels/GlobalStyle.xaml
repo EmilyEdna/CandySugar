@@ -19,5 +19,8 @@
     <sys:String x:Key="PwdStr">密码</sys:String>
     <sys:String x:Key="CacheStr">缓存时长(秒)</sys:String>
 
+    <sys:String x:Key="MangaSearchKey">请输入漫画名称</sys:String>
+
     <Cv:ImageSouceConverter x:Key="ImageSouceConverter"/>
+    <Cv:ButtonContentConverter x:Key="ButtonContentConverter"/>
 </ResourceDictionary>
