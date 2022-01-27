@@ -1,6 +1,8 @@
 ﻿using CandySugar.Common;
 using CandySugar.Controls.Commands;
+using CandySugar.Controls.ControlViewModel;
 using CandySugar.Controls.UIElementHelper;
+using CandySugar.Core.CandyUtily;
 using CandySugar.Properties;
 using Manga.SDK;
 using Manga.SDK.ViewModel;
@@ -86,7 +88,7 @@ namespace CandySugar.UserWindows.ViewModel
                 if (Index < 0)
                     return;
                 Index -= 1;
-                //Loading = true;
+                CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(true);
                 Bit = new ObservableCollection<BitmapSource>();
                 InitCurrent();
             }
@@ -95,7 +97,7 @@ namespace CandySugar.UserWindows.ViewModel
                 if (Index > Total)
                     return;
                 Index += 1;
-                //Loading = true;
+                CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(true);
                 Bit = new ObservableCollection<BitmapSource>();
                 InitCurrent();
             }
@@ -118,7 +120,7 @@ namespace CandySugar.UserWindows.ViewModel
                 };
             }).RunsAsync();
             await CacheLocal(MangaContent.ContentResults.ImageURL, Chapters[Index].TagKey);
-            //Loading = false;
+            CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(false);
             GCHelper.Dispose();
         }
 

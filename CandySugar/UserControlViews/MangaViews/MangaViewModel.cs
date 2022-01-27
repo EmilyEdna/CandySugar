@@ -16,6 +16,8 @@ using HandyControl.Controls;
 using XExten.Advance.StaticFramework;
 using CandySugar.Properties;
 using CandySugar.UserWindows.ViewModel;
+using CandySugar.Core.CandyUtily;
+using CandySugar.Controls.ControlViewModel;
 
 namespace CandySugar.UserControlViews.MangaViews
 {
@@ -95,13 +97,13 @@ namespace CandySugar.UserControlViews.MangaViews
             DetailList(input);
         }
 
-
         public void MangaDetail(MangaRecommendResult input)
         {
             if (input == null)
                 return;
             DetailList(input.Address);
         }
+
         public void MangaContent(MangaChapterResult input) 
         {
             if (Chapters.Count != 0)
@@ -109,10 +111,10 @@ namespace CandySugar.UserControlViews.MangaViews
                 if (Chapters.FirstOrDefault(t => t.TagKey == input.TagKey) != null)
                 {
                     MangaReaderViewModel vm = Container.Get<MangaReaderViewModel>();
-                    vm.Loading = true;
                     vm.Chapters = Chapters;
                     vm.Total = Chapters.Count;
                     vm.Index = Chapters.IndexOf(input);
+                    CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(true);
                     vm.InitCurrent();
 
                     BootResource.Manga(window =>
