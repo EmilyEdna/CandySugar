@@ -25,7 +25,7 @@ namespace CandySugar.UserWindows
         public MangaReaderWindows()
         {
             InitializeComponent();
-            Header.DataContext = CandyContainer.Instance.Resolves<HeaderViewModel>().Reader();
+            Header.DataContext = CandyContainer.Instance.Resolves<MangaHeaderViewModel>().Basic();
         }
 
         private void WindowMove(object sender, MouseEventArgs e)

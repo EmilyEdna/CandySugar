@@ -1,23 +1,19 @@
-﻿using Manga.SDK;
+﻿using CandySugar.Properties;
+using CandySugar.UserWindows.ViewModel;
+using HandyControl.Controls;
+using Manga.SDK;
 using Manga.SDK.ViewModel;
 using Manga.SDK.ViewModel.Emums;
+using Manga.SDK.ViewModel.Request;
 using Manga.SDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using XExten.Advance.LinqFramework;
-using Manga.SDK.ViewModel.Request;
-using HandyControl.Controls;
 using XExten.Advance.StaticFramework;
-using CandySugar.Properties;
-using CandySugar.UserWindows.ViewModel;
-using CandySugar.Core.CandyUtily;
-using CandySugar.Controls.ControlViewModel;
 
 namespace CandySugar.UserControlViews.MangaViews
 {
@@ -114,7 +110,7 @@ namespace CandySugar.UserControlViews.MangaViews
                     vm.Chapters = Chapters;
                     vm.Total = Chapters.Count;
                     vm.Index = Chapters.IndexOf(input);
-                    CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(true);
+                    vm.Loading = true;
                     vm.InitCurrent();
 
                     BootResource.Manga(window =>

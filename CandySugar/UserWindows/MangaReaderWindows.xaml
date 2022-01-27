@@ -24,7 +24,7 @@
             <RowDefinition Height="680"/>
             <RowDefinition Height="48"/>
         </Grid.RowDefinitions>
-        <CtrlView:Header Width="1200" MouseMove="WindowMove" x:Name="Header"/>
+        <CtrlView:MangaHeader Width="1200" MouseMove="WindowMove" x:Name="Header" Loading="{Binding Loading}"/>
         <Ctrl:CandyScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewerNativeBaseStyle}">
             <ItemsControl ItemsSource="{Binding Bit}">
                 <ItemsControl.ItemsPanel>

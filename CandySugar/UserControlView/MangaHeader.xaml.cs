@@ -1,7 +1,4 @@
-﻿using CandySugar.CandyWindows;
-using CandySugar.CandyWindows.CnadyWinViewModel;
-using CandySugar.Common.Enum;
-using CandySugar.Controls.ControlViewModel;
+﻿using CandySugar.Common.Enum;
 using CandySugar.Controls.UserControls;
 using System;
 using System.Collections.Generic;
@@ -17,16 +14,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using XExten.Advance.LinqFramework;
 
 namespace CandySugar.UserControlView
 {
     /// <summary>
-    /// Header.xaml 的交互逻辑
+    /// MangaHeader.xaml 的交互逻辑
     /// </summary>
-    public partial class Header : CandyControl
+    public partial class MangaHeader : CandyControl
     {
-        public Header()
+        public MangaHeader()
         {
             InitializeComponent();
         }
@@ -41,7 +37,6 @@ namespace CandySugar.UserControlView
                 case SysFuncEnum.Download:
                     break;
                 case SysFuncEnum.Setting:
-                    Setting();
                     break;
                 case SysFuncEnum.MinSize:
                     Min();
@@ -65,14 +60,6 @@ namespace CandySugar.UserControlView
         {
             Window.GetWindow(this).Close();
             //Application.Current.Shutdown();
-        }
-        private void Setting()
-        {
-            CandySettingWin win = new CandySettingWin
-            {
-                DataContext = CandyViewModule.Container.Get<CandySettingViewModel>()
-            };
-            win.Show();
         }
     }
 }

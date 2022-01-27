@@ -74,8 +74,14 @@ namespace CandySugar.UserWindows.ViewModel
             set { SetAndNotify(ref _Total, value); }
         }
 
+        private bool _Loading;
+        public bool Loading
+        {
+            get { return _Loading; }
+            set { SetAndNotify(ref _Loading, value); }
+        }
+
         public ArrayList Names { get; set; }
-        public bool Loading { get; set; }
         #endregion
 
         #region Method
@@ -88,7 +94,7 @@ namespace CandySugar.UserWindows.ViewModel
                 if (Index < 0)
                     return;
                 Index -= 1;
-                CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(true);
+                Loading = true;
                 Bit = new ObservableCollection<BitmapSource>();
                 InitCurrent();
             }
@@ -97,7 +103,7 @@ namespace CandySugar.UserWindows.ViewModel
                 if (Index > Total)
                     return;
                 Index += 1;
-                CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(true);
+                Loading = true;
                 Bit = new ObservableCollection<BitmapSource>();
                 InitCurrent();
             }
@@ -120,7 +126,7 @@ namespace CandySugar.UserWindows.ViewModel
                 };
             }).RunsAsync();
             await CacheLocal(MangaContent.ContentResults.ImageURL, Chapters[Index].TagKey);
-            CandyContainer.Instance.Resolves<HeaderViewModel>().LoadState(false);
+            Loading = false;
             GCHelper.Dispose();
         }
 
