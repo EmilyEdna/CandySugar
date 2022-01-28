@@ -1,11 +1,17 @@
-﻿using CandySugar.Properties;
+﻿using CandySugar.Controls.UIElementHelper;
+using CandySugar.Properties;
 using CandySugar.UserWindows;
+using HandyControl.Controls;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using XExten.Advance.LinqFramework;
 
 
@@ -42,6 +48,15 @@ namespace CandySugar
                 MangaReaderWindow.Clear();
                 windows = new MangaReaderWindows();
                 action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading")
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 MangaReaderWindow.TryAdd(nameof(MangaReaderWindows), windows);
                 windows.Show();
             }
@@ -49,7 +64,17 @@ namespace CandySugar
             {
                 MangaReaderWindow.Clear();
                 windows = new MangaReaderWindows();
+                windows.Loading = true;
                 action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading")
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 MangaReaderWindow.TryAdd(nameof(MangaReaderWindows), windows);
                 windows.Show();
             }

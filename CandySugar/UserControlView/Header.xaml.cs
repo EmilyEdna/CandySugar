@@ -24,7 +24,7 @@ namespace CandySugar.UserControlView
     /// <summary>
     /// Header.xaml 的交互逻辑
     /// </summary>
-    public partial class Header : CandyControl
+    public partial class Header : UserControl
     {
         public Header()
         {

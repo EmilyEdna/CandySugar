@@ -110,7 +110,7 @@ namespace CandySugar.UserControlViews.MangaViews
                     vm.Chapters = Chapters;
                     vm.Total = Chapters.Count;
                     vm.Index = Chapters.IndexOf(input);
-                    vm.Loading = true;
+                    vm.Loading = System.Windows.Visibility.Visible ;
                     vm.InitCurrent();
 
                     BootResource.Manga(window =>

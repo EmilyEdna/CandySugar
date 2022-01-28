@@ -18,5 +18,14 @@ namespace CandySugar.Controls.UserControls
 
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register("Source", typeof(ImageSource), typeof(CandyWindow), new PropertyMetadata(null));
+
+        public bool Loading
+        {
+            get { return (bool)GetValue(LoadingProperty); }
+            set { SetValue(LoadingProperty, value); }
+        }
+
+        public static readonly DependencyProperty LoadingProperty =
+            DependencyProperty.Register("Loading", typeof(bool), typeof(CandyWindow), new PropertyMetadata(false));
     }
 }

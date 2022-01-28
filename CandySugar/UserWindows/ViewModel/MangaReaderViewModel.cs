@@ -19,6 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using XExten.Advance.HttpFramework.MultiFactory;
@@ -74,8 +75,8 @@ namespace CandySugar.UserWindows.ViewModel
             set { SetAndNotify(ref _Total, value); }
         }
 
-        private bool _Loading;
-        public bool Loading
+        private Visibility _Loading;
+        public Visibility Loading
         {
             get { return _Loading; }
             set { SetAndNotify(ref _Loading, value); }
@@ -94,7 +95,7 @@ namespace CandySugar.UserWindows.ViewModel
                 if (Index < 0)
                     return;
                 Index -= 1;
-                Loading = true;
+                Loading = Visibility.Visible;
                 Bit = new ObservableCollection<BitmapSource>();
                 InitCurrent();
             }
@@ -103,7 +104,7 @@ namespace CandySugar.UserWindows.ViewModel
                 if (Index > Total)
                     return;
                 Index += 1;
-                Loading = true;
+                Loading = Visibility.Visible;
                 Bit = new ObservableCollection<BitmapSource>();
                 InitCurrent();
             }
@@ -126,7 +127,7 @@ namespace CandySugar.UserWindows.ViewModel
                 };
             }).RunsAsync();
             await CacheLocal(MangaContent.ContentResults.ImageURL, Chapters[Index].TagKey);
-            Loading = false;
+            Loading = Visibility.Hidden;
             GCHelper.Dispose();
         }
 
