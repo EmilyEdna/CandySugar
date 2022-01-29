@@ -33,7 +33,8 @@ namespace CandySugar
         }
 
         private static ConcurrentDictionary<string, CandyMangaReaderWin> MangaReaderWindow = new ConcurrentDictionary<string, CandyMangaReaderWin>();
-
+        private static ConcurrentDictionary<string, CandyVLCWin> AnimeVLCWindow = new ConcurrentDictionary<string, CandyVLCWin>();
+        private static ConcurrentDictionary<string, CandyDPlayWin> AnimeDPlayWindow = new ConcurrentDictionary<string, CandyDPlayWin>();
         /// <summary>
         /// 控制窗体打开
         /// </summary>
@@ -78,6 +79,99 @@ namespace CandySugar
                 UlHelper.FindVisualChild<LoadingLine>(content)
                     .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 MangaReaderWindow.TryAdd(nameof(CandyMangaReaderWin), windows);
+                windows.Show();
+            }
+        }
+
+        /// <summary>
+        /// 控制窗体打开
+        /// </summary>
+        /// <param name="action"></param>
+        public static void AnimeWEB(Action<CandyVLCWin> action)
+        {
+            CandyVLCWin windows = null;
+            if (AnimeVLCWindow.ContainsKey(nameof(CandyVLCWin)))
+            {
+                var old = AnimeVLCWindow.Values.FirstOrDefault();
+                old.Close();
+                AnimeVLCWindow.Clear();
+                windows = new CandyVLCWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                //var content = (windows.Header.Content as ColorZone).Content as Grid;
+                //UlHelper.FindVisualChild<LoadingLine>(content)
+                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AnimeVLCWindow.TryAdd(nameof(CandyVLCWin), windows);
+                windows.Show();
+            }
+            else
+            {
+                AnimeVLCWindow.Clear();
+                windows = new CandyVLCWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                //var content = (windows.Header.Content as ColorZone).Content as Grid;
+                //UlHelper.FindVisualChild<LoadingLine>(content)
+                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AnimeVLCWindow.TryAdd(nameof(CandyVLCWin), windows);
+                windows.Show();
+            }
+        }
+        /// <summary>
+        /// 控制窗体打开
+        /// </summary>
+        /// <param name="action"></param>
+        public static void AnimeVLC(Action<CandyDPlayWin> action)
+        {
+            CandyDPlayWin windows = null;
+            if (AnimeDPlayWindow.ContainsKey(nameof(CandyDPlayWin)))
+            {
+                var old = AnimeDPlayWindow.Values.FirstOrDefault();
+                old.Close();
+                AnimeDPlayWindow.Clear();
+                windows = new CandyDPlayWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                //var content = (windows.Header.Content as ColorZone).Content as Grid;
+                //UlHelper.FindVisualChild<LoadingLine>(content)
+                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AnimeDPlayWindow.TryAdd(nameof(CandyDPlayWin), windows);
+                windows.Show();
+            }
+            else
+            {
+                AnimeDPlayWindow.Clear();
+                windows = new CandyDPlayWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                //var content = (windows.Header.Content as ColorZone).Content as Grid;
+                //UlHelper.FindVisualChild<LoadingLine>(content)
+                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AnimeDPlayWindow.TryAdd(nameof(CandyDPlayWin), windows);
                 windows.Show();
             }
         }
