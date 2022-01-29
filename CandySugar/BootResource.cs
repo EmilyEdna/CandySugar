@@ -52,7 +52,8 @@ namespace CandySugar
                 {
                     Source = windows.DataContext,
                     //绑定到附加属性
-                    Path = new PropertyPath("Loading")
+                    Path = new PropertyPath("Loading"),
+                    Mode=BindingMode.TwoWay
                 };
                 var content = (windows.Header.Content as ColorZone).Content as Grid;
                 UlHelper.FindVisualChild<LoadingLine>(content)
@@ -70,7 +71,8 @@ namespace CandySugar
                 {
                     Source = windows.DataContext,
                     //绑定到附加属性
-                    Path = new PropertyPath("Loading")
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
                 };
                 var content = (windows.Header.Content as ColorZone).Content as Grid;
                 UlHelper.FindVisualChild<LoadingLine>(content)

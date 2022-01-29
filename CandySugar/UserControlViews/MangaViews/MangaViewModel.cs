@@ -139,11 +139,11 @@ namespace CandySugar.UserControlViews.MangaViews
         #endregion
 
         #region Internal
-        protected async Task Handle()
+        protected  void Handle()
         {
             if (Type == 1)
             {
-                await SyncStatic.TryCatch(async () =>
+                 SyncStatic.TryCatch(async () =>
                 {
                     var MangaSearch = await MangaFactory.Manga(opt =>
                     {
@@ -171,7 +171,7 @@ namespace CandySugar.UserControlViews.MangaViews
             }
             else
             {
-                await SyncStatic.TryCatch(async () =>
+                 SyncStatic.TryCatch(async () =>
                 {
                     //分类
                     var MangaCate = await MangaFactory.Manga(opt =>
