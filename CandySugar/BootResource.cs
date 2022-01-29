@@ -1,6 +1,6 @@
-﻿using CandySugar.Controls.UIElementHelper;
+﻿using CandySugar.CandyWindows;
+using CandySugar.Controls.UIElementHelper;
 using CandySugar.Properties;
-using CandySugar.UserWindows;
 using HandyControl.Controls;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -32,21 +32,21 @@ namespace CandySugar
             });
         }
 
-        private static ConcurrentDictionary<string, MangaReaderWindows> MangaReaderWindow = new ConcurrentDictionary<string, MangaReaderWindows>();
+        private static ConcurrentDictionary<string, CandyMangaReaderWin> MangaReaderWindow = new ConcurrentDictionary<string, CandyMangaReaderWin>();
 
         /// <summary>
         /// 控制窗体打开
         /// </summary>
         /// <param name="action"></param>
-        public static void Manga(Action<MangaReaderWindows> action)
+        public static void Manga(Action<CandyMangaReaderWin> action)
         {
-            MangaReaderWindows windows = null;
-            if (MangaReaderWindow.ContainsKey(nameof(MangaReaderWindows)))
+            CandyMangaReaderWin windows = null;
+            if (MangaReaderWindow.ContainsKey(nameof(CandyMangaReaderWin)))
             {
                 var old = MangaReaderWindow.Values.FirstOrDefault();
                 old.Close();
                 MangaReaderWindow.Clear();
-                windows = new MangaReaderWindows();
+                windows = new CandyMangaReaderWin();
                 action(windows);
                 var binding = new Binding
                 {
@@ -58,13 +58,13 @@ namespace CandySugar
                 var content = (windows.Header.Content as ColorZone).Content as Grid;
                 UlHelper.FindVisualChild<LoadingLine>(content)
                     .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
-                MangaReaderWindow.TryAdd(nameof(MangaReaderWindows), windows);
+                MangaReaderWindow.TryAdd(nameof(CandyMangaReaderWin), windows);
                 windows.Show();
             }
             else
             {
                 MangaReaderWindow.Clear();
-                windows = new MangaReaderWindows();
+                windows = new CandyMangaReaderWin();
                 windows.Loading = true;
                 action(windows);
                 var binding = new Binding
@@ -77,7 +77,7 @@ namespace CandySugar
                 var content = (windows.Header.Content as ColorZone).Content as Grid;
                 UlHelper.FindVisualChild<LoadingLine>(content)
                     .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
-                MangaReaderWindow.TryAdd(nameof(MangaReaderWindows), windows);
+                MangaReaderWindow.TryAdd(nameof(CandyMangaReaderWin), windows);
                 windows.Show();
             }
         }

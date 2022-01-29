@@ -1,5 +1,5 @@
-﻿using CandySugar.Properties;
-using CandySugar.UserWindows.ViewModel;
+﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Properties;
 using HandyControl.Controls;
 using Manga.SDK;
 using Manga.SDK.ViewModel;
@@ -106,7 +106,7 @@ namespace CandySugar.UserControlViews.MangaViews
             {
                 if (Chapters.FirstOrDefault(t => t.TagKey == input.TagKey) != null)
                 {
-                    MangaReaderViewModel vm = Container.Get<MangaReaderViewModel>();
+                    CandyMangaReaderViewModel vm = Container.Get<CandyMangaReaderViewModel>();
                     vm.Chapters = Chapters;
                     vm.Total = Chapters.Count;
                     vm.Index = Chapters.IndexOf(input);

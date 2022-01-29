@@ -15,14 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CandySugar.UserWindows
+namespace CandySugar.CandyWindows
 {
     /// <summary>
-    /// MangaReaderWindows.xaml 的交互逻辑
+    /// CandyMangaReaderWin.xaml 的交互逻辑
     /// </summary>
-    public partial class MangaReaderWindows : CandyWindow
+    public partial class CandyMangaReaderWin : CandyWindow
     {
-        public MangaReaderWindows()
+        public CandyMangaReaderWin()
         {
             InitializeComponent();
             Header.DataContext = CandyContainer.Instance.Resolves<MangaHeaderViewModel>().Basic();

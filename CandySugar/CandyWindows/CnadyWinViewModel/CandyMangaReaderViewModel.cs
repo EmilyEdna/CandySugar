@@ -1,8 +1,6 @@
 ﻿using CandySugar.Common;
 using CandySugar.Controls.Commands;
-using CandySugar.Controls.ControlViewModel;
 using CandySugar.Controls.UIElementHelper;
-using CandySugar.Core.CandyUtily;
 using CandySugar.Properties;
 using Manga.SDK;
 using Manga.SDK.ViewModel;
@@ -17,7 +15,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -25,13 +22,13 @@ using System.Windows.Media.Imaging;
 using XExten.Advance.HttpFramework.MultiFactory;
 using XExten.Advance.StaticFramework;
 
-namespace CandySugar.UserWindows.ViewModel
+namespace CandySugar.CandyWindows.CnadyWinViewModel
 {
-    public class MangaReaderViewModel: Screen
+    public class CandyMangaReaderViewModel : Screen
     {
         private readonly IContainer Container;
         private readonly MangaProxy Proxy;
-        public MangaReaderViewModel(IContainer Container)
+        public CandyMangaReaderViewModel(IContainer Container)
         {
             this.Container = Container;
             Proxy = new MangaProxy
@@ -87,7 +84,7 @@ namespace CandySugar.UserWindows.ViewModel
 
         #region Method
 
-        public ICommand GoChapter ()=>new CandyCommand(args =>
+        public ICommand GoChapter() => new CandyCommand(args =>
         {
             //上一章
             if (args.Equals("0"))
@@ -114,7 +111,7 @@ namespace CandySugar.UserWindows.ViewModel
         {
             GCHelper.Dispose();
 
-            var MangaContent = await  MangaFactory.Manga(opt =>
+            var MangaContent = await MangaFactory.Manga(opt =>
             {
                 opt.RequestParam = new MangaRequestInput
                 {
