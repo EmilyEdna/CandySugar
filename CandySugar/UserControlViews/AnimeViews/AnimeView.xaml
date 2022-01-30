@@ -24,7 +24,7 @@
         <hc:SearchBar TextWrapping="Wrap" 
                           BorderThickness="0,0,0,1"
                           Style="{StaticResource SearchBarBaseStyle}"
-                          dp:SearchBarDependencyProperty.Placeholder="{StaticResource MangaSearchKey}"
+                          dp:SearchBarDependencyProperty.Placeholder="{StaticResource AnimeSearchKey}"
                           Width="960"
                           ShowClearButton="True"
                           Command="{Cmd:Action SearchAnime}"

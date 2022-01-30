@@ -86,6 +86,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="AppData\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Soft.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Soft.Designer.cs</LastGenOutput>

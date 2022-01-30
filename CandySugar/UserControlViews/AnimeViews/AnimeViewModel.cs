@@ -241,7 +241,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 if (Soft.Default.PlayBox == 0)
                 {
                     var vm = Container.Get<CandyVLCViewModel>();
-                    //vm.WatchResult = AnimeWath.PlayResult;
+                    vm.WatchResult = AnimeWath.PlayResult;
                     //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
                     //DTO.PlayMode = false;
                     //Open
@@ -254,7 +254,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 if (Soft.Default.PlayBox == 1)
                 {
                     var vm = Container.Get<CandyDPlayViewModel>();
-                    //vm.WatchResult = AnimeWath.PlayResult;
+                    vm.WatchResult = AnimeWath.PlayResult;
                     //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
                     //DTO.PlayMode = true;
                     //Open

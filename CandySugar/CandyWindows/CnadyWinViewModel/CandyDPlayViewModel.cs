@@ -1,4 +1,5 @@
-﻿using Stylet;
+﻿using Anime.SDK.ViewModel.Response;
+using Stylet;
 using StyletIoC;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,13 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
         {
             this.Container = Container;
         }
+        #region Property
+        private AnimePlayResult _WatchResult;
+        public AnimePlayResult WatchResult
+        {
+            get { return _WatchResult; }
+            set { SetAndNotify(ref _WatchResult, value); }
+        }
+        #endregion
     }
 }

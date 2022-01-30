@@ -87,7 +87,7 @@ namespace CandySugar
         /// 控制窗体打开
         /// </summary>
         /// <param name="action"></param>
-        public static void AnimeWEB(Action<CandyVLCWin> action)
+        public static void AnimeVLC(Action<CandyVLCWin> action)
         {
             CandyVLCWin windows = null;
             if (AnimeVLCWindow.ContainsKey(nameof(CandyVLCWin)))
@@ -133,7 +133,7 @@ namespace CandySugar
         /// 控制窗体打开
         /// </summary>
         /// <param name="action"></param>
-        public static void AnimeVLC(Action<CandyDPlayWin> action)
+        public static void AnimeWEB(Action<CandyDPlayWin> action)
         {
             CandyDPlayWin windows = null;
             if (AnimeDPlayWindow.ContainsKey(nameof(CandyDPlayWin)))

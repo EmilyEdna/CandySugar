@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="CandySugar.UserControlView.AnimeHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CandySugar.UserControlView"
+             mc:Ignorable="d" 
+             d:DesignHeight="72" d:DesignWidth="1200"
+             x:Name="HeaderCtrl"
+             FontFamily="{DynamicResource FontStyle}"
+             xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:hc="https://handyorg.github.io/handycontrol">
+    <Design:ColorZone x:Name="Zone" Background="#FFFF9999" 
+                      Mode="PrimaryMid"
+                      Padding="16" 
+                      Style="{DynamicResource ColorZoneStyle2}" 
+                      Width="{Binding Width,ElementName=HeaderCtrl}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="1.6*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.275*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox SelectedIndex="1" 
+                          Margin="8 0 0 0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          BorderThickness="0"
+                          Design:ColorZoneAssist.Mode="Standard"
+                          Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                          BorderBrush="{DynamicResource MaterialDesignPaper}"  
+                          FontFamily="{Binding FontFamily,ElementName=HeaderCtrl}"
+                          Background="Transparent">
+                <ComboBoxItem Content="宝石绿"/>
+                <ComboBoxItem Content="桃花粉"/>
+                <ComboBoxItem Content="旬子蓝"/>
+                <ComboBoxItem Content="山茶红"/>
+                <ComboBoxItem Content="墨鱼黑"/>
+            </ComboBox>
+            <hc:LoadingLine Grid.Column="1"
+                            Style="{StaticResource LoadingLineLargeLight}"/>
+            <ComboBox SelectedIndex="0" 
+                          Margin="8 0 0 0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          BorderThickness="0"
+                          Grid.Column="2"
+                          Design:ColorZoneAssist.Mode="Standard"
+                          Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                          BorderBrush="{DynamicResource MaterialDesignPaper}"  
+                          FontFamily="{Binding FontFamily,ElementName=HeaderCtrl}"
+                          Background="Transparent" >
+                <ComboBoxItem Content="背景1"/>
+                <ComboBoxItem Content="背景2"/>
+                <ComboBoxItem Content="背景3"/>
+                <ComboBoxItem Content="背景4"/>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right">
+                <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding Handler}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                                    FontSize="20" 
+                                    Click="CandySystemClick"
+                                    Margin="{Binding Value.Item1}"
+                                    CommandParameter="{Binding Value.Item2}"
+                                    Background="{Binding Background, ElementName=Zone}" 
+                                    BorderBrush="{x:Null}">
+                                <Design:PackIcon Kind="{Binding Key}"  Width="30" Height="40"/>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
+    </Design:ColorZone>
+</UserControl>
