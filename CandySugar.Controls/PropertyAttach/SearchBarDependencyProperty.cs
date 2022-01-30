@@ -45,7 +45,7 @@ namespace CandySugar.Controls.PropertyAttach
         }
 
         public static readonly DependencyProperty PlaceHolderProperty =
-            DependencyProperty.RegisterAttached("PlaceHolder", typeof(string), typeof(TextBoxDependencyProperty), new PropertyMetadata("", OnPlaceholderChanged));
+            DependencyProperty.RegisterAttached("PlaceHolder", typeof(string), typeof(SearchBarDependencyProperty), new PropertyMetadata("", OnPlaceholderChanged));
 
         #endregion
 

@@ -18,7 +18,7 @@
         }
     </style>
     <script type="text/javascript">
-        const dp = dp || {};
+        var dp = undefined;
         function Play(args) {
             dp = new DPlayer({
                 container: document.getElementById('dplayer'),
@@ -32,9 +32,12 @@
         }
         function Destory() {
             try {
-                dp.destroy();
+                if (dp != undefined)
+                {
+                    dp.destroy();
+                }
             } catch (e) {
-
+                console.log(e);
             }
         }
     </script>

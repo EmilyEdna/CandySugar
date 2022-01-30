@@ -50,7 +50,7 @@ namespace CandySugar.CandyWindows
             webView.CoreWebView2.Navigate(new Uri($"{Environment.CurrentDirectory}\\AppData\\index.html").AbsoluteUri);
 
             webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
-            webView.CoreWebView2.Settings.AreDevToolsEnabled = true;
+            webView.CoreWebView2.Settings.AreDevToolsEnabled = false;
         }
     }
 }
