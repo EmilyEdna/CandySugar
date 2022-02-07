@@ -21,6 +21,7 @@
 
     <sys:String x:Key="MangaSearchKey">请输入漫画名称</sys:String>
     <sys:String x:Key="AnimeSearchKey">请输入动漫名称</sys:String>
+    <sys:String x:Key="NovelSearchKey">请输入小说或者作者名称</sys:String>
 
     <Cv:ImageSouceConverter x:Key="ImageSouceConverter"/>
     <Cv:ButtonContentConverter x:Key="ButtonContentConverter"/>

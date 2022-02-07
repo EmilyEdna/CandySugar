@@ -32,5 +32,8 @@
     <Setting Name="MenuBackgroud" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Theme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFF9999</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

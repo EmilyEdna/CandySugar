@@ -11,6 +11,8 @@
              xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
              xmlns:Cmd="https://github.com/canton7/Stylet"
              Width="960"
+             x:Name="uc"
+             Foreground="{Binding Themes}"
              Height="728">
     <Grid>
         <Grid.RowDefinitions>
@@ -38,6 +40,7 @@
                 <DataTemplate>
                     <Button Content="{Binding .}" 
                                 Margin="0,0,0,5"
+                                Foreground="{Binding Foreground,ElementName=uc}"
                                 Command="{Cmd:Action Category}" 
                                 BorderThickness="0"
                                 Style="{StaticResource ButtonDashedPrimary}"
@@ -123,7 +126,8 @@
                                 </Border>
                                 <Button Content="{Binding AnimeName,Converter={StaticResource ButtonContentConverter},ConverterParameter=1}" 
                                     Style="{StaticResource ButtonDashedInfo.Small}"
-                                    BorderThickness="0"
+                                    BorderThickness="0" 
+                                    Foreground="{Binding Foreground,ElementName=uc}"
                                     Command="{Cmd:Action Redirect}"
                                     CommandParameter="{C:Binding DetailAddress}" 
                                     Margin="3"/>

@@ -5,8 +5,115 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CandySugar.UserControlViews.NovelViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+             xmlns:Cmd="https://github.com/canton7/Stylet"
+             Width="960"
+             x:Name="uc"
+             Foreground="{Binding Themes}"
+             Height="728">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.12*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.13*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel>
+            <hc:SearchBar TextWrapping="Wrap" 
+                          BorderThickness="0,0,0,1"
+                          Style="{StaticResource SearchBarBaseStyle}"
+                          dp:SearchBarDependencyProperty.Placeholder="{StaticResource NovelSearchKey}"
+                          Width="960"
+                          ShowClearButton="True"
+                          Command="{Cmd:Action SearchBook}"
+                          CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />
+        </WrapPanel>
+        <hc:ButtonGroup Grid.Row="1" ItemsSource="{C:Binding NovelCategory}">
+            <hc:ButtonGroup.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{C:Binding CategoryName}" 
+                            Style="{StaticResource ButtonDashedDanger.Small}"
+                            Command="{Cmd:Action Redirect}"
+                            CommandParameter="{C:Binding CollectAddress}"/>
+                </DataTemplate>
+            </hc:ButtonGroup.ItemTemplate>
+        </hc:ButtonGroup>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ListBox  x:Name="listView_left"
+                  Grid.Row="2" 
+                  Style="{StaticResource StackPanelVerticalListBox}"
+                  ItemsSource="{C:Binding NovelRecommend}" 
+                  BorderThickness="0"
+                  BorderBrush="Transparent" 
+                  Background="Transparent"
+                  d:ItemsSource="{d:SampleData ItemCount=5}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Cmd:Action GetBook}" CommandParameter="{Binding SelectedItem, ElementName=listView_left}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.25*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{C:Binding BookName}"   Foreground="{Binding Foreground,ElementName=uc}"/>
+                            <TextBlock Text="{C:Binding Author}" Grid.Column="1"     Foreground="{Binding Foreground,ElementName=uc}"/>
+                            <TextBlock Text="{C:Binding RecommendType}" Grid.Column="2"     Foreground="{Binding Foreground,ElementName=uc}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox Grid.Column="1"
+                  x:Name="listView_right"
+                  Style="{StaticResource StackPanelVerticalListBox}"
+                  ItemsSource="{C:Binding NovelSearch}" 
+                  BorderThickness="0"
+                  BorderBrush="Transparent" 
+                  Background="Transparent"
+                  d:ItemsSource="{d:SampleData ItemCount=5}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Cmd:Action GetBook}" CommandParameter="{Binding SelectedItem, ElementName=listView_right}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.25*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{C:Binding BookName}"  Foreground="{Binding Foreground,ElementName=uc}"/>
+                            <TextBlock Text="{C:Binding Author}" Grid.Column="1"  Foreground="{Binding Foreground,ElementName=uc}"/>
+                            <TextBlock Text="{C:Binding UpdateDate}" Grid.Column="2"  Foreground="{Binding Foreground,ElementName=uc}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <hc:Pagination Grid.Row="3"
+                       Margin="0,5,0,0"
+                       HorizontalAlignment="Center"
+                       MaxPageCount="{C:Binding Total}" 
+                       PageIndex="{C:Binding PageIndex}" 
+                       IsJumpEnabled="False">
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="PageUpdated">
+                    <hc:EventToCommand Command="{Cmd:Action PageUpdated}" PassEventArgsToCommand="True"/>
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:Pagination>
     </Grid>
 </UserControl>
