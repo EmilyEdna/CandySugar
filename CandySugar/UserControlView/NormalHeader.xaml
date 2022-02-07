@@ -10,6 +10,7 @@
              FontFamily="{DynamicResource FontStyle}"
              xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
              xmlns:hc="https://handyorg.github.io/handycontrol">
     <Design:ColorZone x:Name="Zone" Background="#FFFF9999" 
                       Mode="PrimaryMid"
@@ -28,16 +29,18 @@
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           BorderThickness="0"
+                          SelectionChanged="ThemeSelected"
                           Design:ColorZoneAssist.Mode="Standard"
                           Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
                           BorderBrush="{DynamicResource MaterialDesignPaper}"  
                           FontFamily="{Binding FontFamily,ElementName=HeaderCtrl}"
                           Background="Transparent">
-                <ComboBoxItem Content="宝石绿"/>
-                <ComboBoxItem Content="桃花粉"/>
-                <ComboBoxItem Content="旬子蓝"/>
-                <ComboBoxItem Content="山茶红"/>
-                <ComboBoxItem Content="墨鱼黑"/>
+                <ComboBoxItem Content="宝石绿" TabIndex="{x:Static Enum:ThemeFuncEnum.BaoShilv}"/>
+                <ComboBoxItem Content="桃花粉" TabIndex="{x:Static Enum:ThemeFuncEnum.TaoHuafen}"/>
+                <ComboBoxItem Content="旬子蓝" TabIndex="{x:Static Enum:ThemeFuncEnum.XuZilan}"/>
+                <ComboBoxItem Content="山茶红" TabIndex="{x:Static Enum:ThemeFuncEnum.ShanChahong}"/>
+                <ComboBoxItem Content="墨鱼黑" TabIndex="{x:Static Enum:ThemeFuncEnum.MoYuhei}"/>
+                <ComboBoxItem Content="紫薯红" TabIndex="{x:Static Enum:ThemeFuncEnum.ZiShuhong}"/>
             </ComboBox>
             <hc:LoadingLine Grid.Column="1" Style="{StaticResource LoadingLineLargeLight}" />
             <ComboBox SelectedIndex="0" 

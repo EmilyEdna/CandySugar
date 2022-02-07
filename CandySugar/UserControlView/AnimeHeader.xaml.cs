@@ -1,4 +1,5 @@
 ﻿using CandySugar.Common.Enum;
+using CandySugar.Properties;
 using Microsoft.Web.WebView2.Wpf;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,35 @@ namespace CandySugar.UserControlView
         private void Close()
         {
             Window.GetWindow(this).Close();
+        }
+
+        private void ThemeSelected(object sender, SelectionChangedEventArgs e)
+        {
+            var select = (sender as ComboBox);
+            var item = (ThemeFuncEnum)(select.Items[select.SelectedIndex] as ComboBoxItem).TabIndex;
+            switch (item)
+            {
+                case ThemeFuncEnum.BaoShilv:
+                    Soft.Default.Theme = "#FF2CCFA0";
+                    break;
+                case ThemeFuncEnum.TaoHuafen:
+                    Soft.Default.Theme = "#FFFF9999";
+                    break;
+                case ThemeFuncEnum.XuZilan:
+                    Soft.Default.Theme = "#FF10AEC2";
+                    break;
+                case ThemeFuncEnum.ShanChahong:
+                    Soft.Default.Theme = "#FFED556A";
+                    break;
+                case ThemeFuncEnum.MoYuhei:
+                    Soft.Default.Theme = "#FF000000";
+                    break;
+                case ThemeFuncEnum.ZiShuhong:
+                    Soft.Default.Theme = "#FFEF4289";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
