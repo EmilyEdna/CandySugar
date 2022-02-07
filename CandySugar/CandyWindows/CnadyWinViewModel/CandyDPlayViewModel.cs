@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CandySugar.CandyWindows.CnadyWinViewModel
 {
@@ -22,6 +23,12 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
         {
             get { return _WatchResult; }
             set { SetAndNotify(ref _WatchResult, value); }
+        }
+        private Visibility _Loading;
+        public Visibility Loading
+        {
+            get { return _Loading; }
+            set { SetAndNotify(ref _Loading, value); }
         }
         #endregion
     }

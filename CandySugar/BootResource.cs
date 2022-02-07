@@ -36,7 +36,7 @@ namespace CandySugar
         private static ConcurrentDictionary<string, CandyVLCWin> AnimeVLCWindow = new ConcurrentDictionary<string, CandyVLCWin>();
         private static ConcurrentDictionary<string, CandyDPlayWin> AnimeDPlayWindow = new ConcurrentDictionary<string, CandyDPlayWin>();
         /// <summary>
-        /// 控制窗体打开
+        /// 控制漫画窗体打开
         /// </summary>
         /// <param name="action"></param>
         public static void Manga(Action<CandyMangaReaderWin> action)
@@ -84,7 +84,7 @@ namespace CandySugar
         }
 
         /// <summary>
-        /// 控制窗体打开
+        /// 控制VLC窗体打开
         /// </summary>
         /// <param name="action"></param>
         public static void AnimeVLC(Action<CandyVLCWin> action)
@@ -104,9 +104,9 @@ namespace CandySugar
                     Path = new PropertyPath("Loading"),
                     Mode = BindingMode.TwoWay
                 };
-                //var content = (windows.Header.Content as ColorZone).Content as Grid;
-                //UlHelper.FindVisualChild<LoadingLine>(content)
-                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 AnimeVLCWindow.TryAdd(nameof(CandyVLCWin), windows);
                 windows.Show();
             }
@@ -122,15 +122,15 @@ namespace CandySugar
                     Path = new PropertyPath("Loading"),
                     Mode = BindingMode.TwoWay
                 };
-                //var content = (windows.Header.Content as ColorZone).Content as Grid;
-                //UlHelper.FindVisualChild<LoadingLine>(content)
-                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 AnimeVLCWindow.TryAdd(nameof(CandyVLCWin), windows);
                 windows.Show();
             }
         }
         /// <summary>
-        /// 控制窗体打开
+        /// 控制DPlay窗体打开
         /// </summary>
         /// <param name="action"></param>
         public static void AnimeWEB(Action<CandyDPlayWin> action)
@@ -150,9 +150,9 @@ namespace CandySugar
                     Path = new PropertyPath("Loading"),
                     Mode = BindingMode.TwoWay
                 };
-                //var content = (windows.Header.Content as ColorZone).Content as Grid;
-                //UlHelper.FindVisualChild<LoadingLine>(content)
-                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 AnimeDPlayWindow.TryAdd(nameof(CandyDPlayWin), windows);
                 windows.Show();
             }
@@ -168,9 +168,9 @@ namespace CandySugar
                     Path = new PropertyPath("Loading"),
                     Mode = BindingMode.TwoWay
                 };
-                //var content = (windows.Header.Content as ColorZone).Content as Grid;
-                //UlHelper.FindVisualChild<LoadingLine>(content)
-                //    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 AnimeDPlayWindow.TryAdd(nameof(CandyDPlayWin), windows);
                 windows.Show();
             }

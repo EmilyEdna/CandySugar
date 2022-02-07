@@ -242,6 +242,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 {
                     var vm = Container.Get<CandyVLCViewModel>();
                     vm.WatchResult = AnimeWath.PlayResult;
+                    vm.Loading = System.Windows.Visibility.Hidden;
                     //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
                     //DTO.PlayMode = false;
                     //Open
@@ -255,6 +256,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 {
                     var vm = Container.Get<CandyDPlayViewModel>();
                     vm.WatchResult = AnimeWath.PlayResult;
+                    vm.Loading = System.Windows.Visibility.Hidden;
                     //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
                     //DTO.PlayMode = true;
                     //Open

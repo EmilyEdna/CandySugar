@@ -1,12 +1,80 @@
-﻿<Window x:Class="CandySugar.CandyWindows.CandyVLCWin"
+﻿<Ctrl:CandyWindow x:Class="CandySugar.CandyWindows.CandyVLCWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CandySugar.CandyWindows"
         mc:Ignorable="d"
-        Title="CandyVLCWin" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Height="800" 
+        Width="1200"
+        x:Name="window"
+        Loaded="LoadEvent"
+        MouseEnter="WindowMouseEnter"
+        xmlns:vm ="clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
+        Style="{StaticResource WinStyle}"
+        d:DataContext="{d:DesignInstance Type=vm:CandyDPlayViewModel}"
+        xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
+        xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
+        xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
+        xmlns:Cmd="https://github.com/canton7/Stylet"
+        xmlns:vlc="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
+        xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <CtrlView:NormalHeader Width="1200" MouseMove="WindowMove" x:Name="Header"/>
+        <vlc:VideoView x:Name="Videos"  
+                       Grid.Row="1"  
+                       Margin="0,0,0,52"
+                       Panel.ZIndex="1"
+                       Width="1200"
+                       Height="738"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" >
+            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,1" Width="1000" x:Name="VideoHandle">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <WrapPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <hc:PreviewSlider Width="250" IsSnapToTickEnabled="True" Value="5" 
+                             ValueChanged="VoiceChange" hc:TipElement.Visibility="Visible"  hc:TipElement.Placement="Top"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <hc:PreviewSlider Width="300" IsSnapToTickEnabled="True" x:Name="Rate" Thumb.DragCompleted="RateDragCompleted"/>
+                    <TextBlock x:Name="RatePlay" Style="{StaticResource TextBlockDefaultPrimary}"/>
+                    <TextBlock x:Name="RateTotal" Style="{StaticResource TextBlockDefaultPrimary}"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                            Background="Transparent"
+                            BorderBrush="{x:Null}"
+                            CommandParameter="{x:Static Enum:VLCFuncEnum.Pause}" 
+                            Click="BtnClick">
+                        <Design:PackIcon Kind="PauseCircleOutline" Height="30" Width="30"/>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                            Background="Transparent"
+                            BorderBrush="{x:Null}"
+                            CommandParameter="{x:Static Enum:VLCFuncEnum.Play}" 
+                            Click="BtnClick">
+                        <Design:PackIcon Kind="PlayCircleOutline" Height="30" Width="30"/>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                            Background="Transparent"
+                            BorderBrush="{x:Null}"
+                            CommandParameter="{x:Static Enum:VLCFuncEnum.Stop}" 
+                            Click="BtnClick">
+                        <Design:PackIcon Kind="StopCircleOutline" Height="30" Width="30"/>
+                    </Button>
+                </WrapPanel>
+            </Grid>
+        </vlc:VideoView>
     </Grid>
-</Window>
+</Ctrl:CandyWindow>

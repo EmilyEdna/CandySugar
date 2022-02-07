@@ -2,31 +2,17 @@
 using CandySugar.CandyWindows.CnadyWinViewModel;
 using CandySugar.Common.Enum;
 using CandySugar.Controls.ControlViewModel;
-using CandySugar.Controls.UserControls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using XExten.Advance.LinqFramework;
 
 namespace CandySugar.UserControlView
 {
     /// <summary>
-    /// Header.xaml 的交互逻辑
+    /// NormalHeader.xaml 的交互逻辑
     /// </summary>
-    public partial class Header : UserControl
+    public partial class NormalHeader : UserControl
     {
-        public Header()
+        public NormalHeader()
         {
             InitializeComponent();
         }
@@ -41,7 +27,6 @@ namespace CandySugar.UserControlView
                 case SysFuncEnum.Download:
                     break;
                 case SysFuncEnum.Setting:
-                    Setting();
                     break;
                 case SysFuncEnum.MinSize:
                     Min();
@@ -63,16 +48,18 @@ namespace CandySugar.UserControlView
         }
         private void Close()
         {
-            Window.GetWindow(this).Close();
-            //Application.Current.Shutdown();
-        }
-        private void Setting()
-        {
-            CandySettingWin win = new CandySettingWin
+            var window = Window.GetWindow(this);
+
+            if (window is CandyVLCWin)
             {
-                DataContext = CandyViewModule.Container.Get<CandySettingViewModel>()
-            };
-            win.Show();
+                var VLCWindow = ((CandyVLCWin)window);
+                VLCWindow.MediaPlayers?.Dispose();
+                VLCWindow.LibVlcs?.Dispose();
+                VLCWindow.Timer?.Stop();
+                VLCWindow.Close();
+            }
+            else 
+                window.Close();
         }
     }
 }

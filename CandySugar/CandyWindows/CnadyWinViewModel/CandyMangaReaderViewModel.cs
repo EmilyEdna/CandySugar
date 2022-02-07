@@ -109,7 +109,7 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
 
         public async Task InitCurrent()
         {
-            GCHelper.Dispose();
+            HelpUtilty.Dispose();
 
             var MangaContent = await MangaFactory.Manga(opt =>
             {
@@ -125,7 +125,7 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
             }).RunsAsync();
             await CacheLocal(MangaContent.ContentResults.ImageURL, Chapters[Index].TagKey);
             Loading = Visibility.Hidden;
-            GCHelper.Dispose();
+            HelpUtilty.Dispose();
         }
 
         protected async Task CacheLocal(List<string> URL, string key)

@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace CandySugar.Controls.ControlViewModel
 {
-    public class HeaderViewModel : Screen
+    public class BasicHeaderViewModel : Screen
     {
         private Dictionary<string, Tuple<Thickness, SysFuncEnum>> _Handler;
         public Dictionary<string, Tuple<Thickness, SysFuncEnum>> Handler
@@ -26,7 +26,7 @@ namespace CandySugar.Controls.ControlViewModel
             set { SetAndNotify(ref _Loading, value); }
         }
 
-        public HeaderViewModel Baisc()
+        public BasicHeaderViewModel Basic()
         {
             Handler = new Dictionary<string, Tuple<Thickness, SysFuncEnum>>
             {

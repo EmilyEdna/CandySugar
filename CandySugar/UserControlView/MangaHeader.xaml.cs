@@ -1,6 +1,13 @@
-﻿using CandySugar.Common.Enum;
+﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common;
+using CandySugar.Common.Enum;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using XExten.Advance.StaticFramework;
 
 namespace CandySugar.UserControlView
 {
@@ -22,6 +29,7 @@ namespace CandySugar.UserControlView
                 case SysFuncEnum.Play:
                     break;
                 case SysFuncEnum.Download:
+                    Copy();
                     break;
                 case SysFuncEnum.Setting:
                     break;
@@ -46,7 +54,25 @@ namespace CandySugar.UserControlView
         private void Close()
         {
             Window.GetWindow(this).Close();
-            //Application.Current.Shutdown();
+        }
+        private void Copy()
+        {
+            var vm = (Window.GetWindow(this).DataContext as CandyMangaReaderViewModel);
+            var root = vm.Names;
+            if (root != null)
+            {
+                FileInfo infomation = new FileInfo(root[0].ToString());
+                var ChapterInfo = vm.Chapters.FirstOrDefault(t => t.TagKey == infomation.Directory.Name);
+                var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "LoteDown", "Manga", HelpUtilty.FileNameFilter(ChapterInfo.Name), ChapterInfo.Title));
+                foreach (var item in root)
+                {
+                    FileInfo info = new FileInfo(item.ToString());
+                    var files = SyncStatic.CreateFile(Path.Combine(dir, $"{info.Name}.jpg"));
+                    info.CopyTo(files, true);
+                }
+                Process.Start("explorer.exe", dir);
+            }
+
         }
     }
 }
