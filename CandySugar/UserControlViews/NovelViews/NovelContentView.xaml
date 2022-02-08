@@ -5,8 +5,85 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CandySugar.UserControlViews.NovelViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:Opt="clr-namespace:CandySugar.Properties"
+             xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+             xmlns:Cmd="https://github.com/canton7/Stylet"
+             Width="960"
+             Height="728">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <Canvas>
+            <Border BorderBrush="#FFFF9999" Height="400" Canvas.Left="1" Canvas.Top="1">
+                <Image Source="{C:Binding NovelDetail.Cover}"  
+                   HorizontalAlignment="Center" 
+                   Stretch="Fill"
+                   VerticalAlignment="Stretch"/>
+            </Border>
+            <TextBlock Style="{StaticResource TextBlockDefaultDanger}" Canvas.Left="300" Canvas.Top="10">
+                <Run Text="书名：" Foreground="Black"/>
+                <Run Text="{C:Binding NovelDetail.BookName}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource TextBlockDefaultDanger}" Canvas.Left="300" Canvas.Top="60">
+                <Run Text="作者：" Foreground="Black"/>
+                <Run Text="{C:Binding NovelDetail.Author}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource TextBlockDefaultDanger}" Canvas.Left="300" Canvas.Top="110">
+                <Run Text="类型：" Foreground="Black"/>
+                <Run Text="{C:Binding NovelDetail.BookType}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource TextBlockDefaultDanger}" Canvas.Left="300" Canvas.Top="160">
+                <Run Text="状态：" Foreground="Black"/>
+                <Run Text="{C:Binding NovelDetail.Status}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource TextBlockDefaultDanger}" Canvas.Left="300" Canvas.Top="210">
+                <Run Text="更新时间：" Foreground="Black"/>
+                <Run Text="{C:Binding NovelDetail.LastUpdateTime,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource TextBlockDefaultDanger}" Canvas.Left="300" Canvas.Top="260" TextWrapping="WrapWithOverflow" Width="600">
+                <Run Text="简介：" Foreground="Black"/>
+                <Run Text="{C:Binding NovelDetail.Description}"  Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+            </TextBlock>
+        </Canvas>
+        <ListBox Grid.Row="1" Margin="0,20,0,0"
+                 Background="Transparent"
+                 BorderBrush="Transparent" 
+                 Style="{StaticResource WrapPanelHorizontalListBox}"
+                 ItemsSource="{C:Binding NovelDetail.Details}" 
+                 BorderThickness="0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Margin="1">
+                        <Button Content="{C:Binding ChapterName}" 
+                                Background="Transparent"
+                                BorderThickness="0" 
+                                Command="{Cmd:Action ShowContent}" 
+                                CommandParameter="{C:Binding ChapterURL}"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <hc:Pagination Grid.Row="2" Margin="0,0,100,0"
+                       HorizontalAlignment="Center"
+                       MaxPageCount="{C:Binding NovelDetail.TotalPage}" 
+                       PageIndex="{C:Binding PageIndex}" 
+                       IsJumpEnabled="False">
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="PageUpdated">
+                    <hc:EventToCommand Command="{Cmd:Action PageUpdated}" PassEventArgsToCommand="True" />
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:Pagination>
     </Grid>
 </UserControl>

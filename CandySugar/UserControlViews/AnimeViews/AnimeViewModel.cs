@@ -37,17 +37,9 @@ namespace CandySugar.UserControlViews.AnimeViews
             };
             LetterCate = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".Split(",").ToList();
             PageIndex = 1;
-            this.Themes = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Soft.Default.Theme));
         }
 
         #region Property
-        private SolidColorBrush _Themes;
-        public SolidColorBrush Themes
-        {
-            get { return _Themes; }
-            set { SetAndNotify(ref _Themes, value); }
-        }
-
         private List<string> _LetterCate;
         public List<string> LetterCate
         {

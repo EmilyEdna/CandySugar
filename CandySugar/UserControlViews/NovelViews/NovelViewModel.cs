@@ -1,4 +1,5 @@
-﻿using CandySugar.Properties;
+﻿using CandySugar.Common.Navigations;
+using CandySugar.Properties;
 using CandySugar.ViewModels;
 using HandyControl.Controls;
 using HandyControl.Data;
@@ -35,7 +36,6 @@ namespace CandySugar.UserControlViews.NovelViews
                 PassWord = Soft.Default.ProxyPwd,
                 UserName = Soft.Default.ProxyAccount
             };
-            this.Themes = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Soft.Default.Theme));
         }
 
         #region Property
@@ -72,13 +72,6 @@ namespace CandySugar.UserControlViews.NovelViews
         {
             get { return _PageIndex; }
             set { SetAndNotify(ref _PageIndex, value); }
-        }
-
-        private SolidColorBrush _Themes;
-        public SolidColorBrush Themes
-        {
-            get { return _Themes; }
-            set { SetAndNotify(ref _Themes, value); }
         }
         #endregion
 
@@ -197,7 +190,7 @@ namespace CandySugar.UserControlViews.NovelViews
                 vm.NovelDetail = NovelDetail.Details;
                 vm.PageIndex = 1;
                 vm.Addr = entity.DetailAddress;
-                Container.Get<RootViewModel>().ActivateItem(vm);
+                Container.Get<INavigationController>().Delegate.NavigateTo(vm);
             }, ex =>
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");

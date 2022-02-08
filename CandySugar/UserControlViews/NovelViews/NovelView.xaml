@@ -8,11 +8,10 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:Opt="clr-namespace:CandySugar.Properties"
              xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
              xmlns:Cmd="https://github.com/canton7/Stylet"
              Width="960"
-             x:Name="uc"
-             Foreground="{Binding Themes}"
              Height="728">
     <Grid>
         <Grid.RowDefinitions>
@@ -67,9 +66,9 @@
                                 <ColumnDefinition Width="0.5*"/>
                                 <ColumnDefinition Width="0.25*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{C:Binding BookName}"   Foreground="{Binding Foreground,ElementName=uc}"/>
-                            <TextBlock Text="{C:Binding Author}" Grid.Column="1"     Foreground="{Binding Foreground,ElementName=uc}"/>
-                            <TextBlock Text="{C:Binding RecommendType}" Grid.Column="2"     Foreground="{Binding Foreground,ElementName=uc}"/>
+                            <TextBlock Text="{C:Binding BookName}"   Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                            <TextBlock Text="{C:Binding Author}" Grid.Column="1" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                            <TextBlock Text="{C:Binding RecommendType}" Grid.Column="2" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -95,9 +94,9 @@
                                 <ColumnDefinition Width="0.5*"/>
                                 <ColumnDefinition Width="0.25*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{C:Binding BookName}"  Foreground="{Binding Foreground,ElementName=uc}"/>
-                            <TextBlock Text="{C:Binding Author}" Grid.Column="1"  Foreground="{Binding Foreground,ElementName=uc}"/>
-                            <TextBlock Text="{C:Binding UpdateDate}" Grid.Column="2"  Foreground="{Binding Foreground,ElementName=uc}"/>
+                            <TextBlock Text="{C:Binding BookName}"  Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                            <TextBlock Text="{C:Binding Author}" Grid.Column="1" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                            <TextBlock Text="{C:Binding UpdateDate}" Grid.Column="2"  Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

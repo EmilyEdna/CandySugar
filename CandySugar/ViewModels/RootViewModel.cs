@@ -1,4 +1,5 @@
 ﻿using CandySugar.Common.Enum;
+using CandySugar.Common.Navigations;
 using CandySugar.Common.WinDTO;
 using CandySugar.UserControlViews.AnimeViews;
 using CandySugar.UserControlViews.LigthNovelViews;
@@ -15,7 +16,7 @@ using System.Windows;
 
 namespace CandySugar.ViewModels
 {
-    public class RootViewModel : Conductor<IScreen>
+    public class RootViewModel : Conductor<IScreen>, IActiveNotify
     {
         private readonly IContainer Container;
         public RootViewModel(IContainer Container)
@@ -77,6 +78,11 @@ namespace CandySugar.ViewModels
             {
                 Application.Current.MainWindow.Visibility = Visibility.Visible;
             }
+        }
+
+        public void NavigateTo(IScreen screen)
+        {
+            ActivateItem(screen);
         }
         #endregion
     }

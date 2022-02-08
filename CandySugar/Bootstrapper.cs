@@ -1,4 +1,5 @@
-﻿using CandySugar.Controls.ControlViewModel;
+﻿using CandySugar.Common.Navigations;
+using CandySugar.Controls.ControlViewModel;
 using CandySugar.ViewModels;
 using Serilog;
 using Stylet;
@@ -66,10 +67,10 @@ namespace CandySugar
             /* builder.Bind<IOptionService>().To<OptionService>();
              builder.Bind<IWallpaperService>().To<WallpaperService>();
              builder.Bind<IMusicPlayService>().To<MusicPlayService>();
-             builder.Bind<IHistoryService>().To<HistoryService>();
+             builder.Bind<IHistoryService>().To<HistoryService>();*/
 
 
-             builder.Bind<NavigationController>().And<INavigationController>().To<NavigationController>().InSingletonScope();*/
+            builder.Bind<NavigationController>().And<INavigationController>().To<NavigationController>().InSingletonScope();
         }
 
         /// <summary>
@@ -103,8 +104,8 @@ namespace CandySugar
         /// </summary>
         protected override void OnLaunch()
         {
-            /*var navigationController = this.Container.Get<NavigationController>();
-            navigationController.Delegate = this.RootViewModel;*/
+            var navigationController = this.Container.Get<NavigationController>();
+            navigationController.Delegate = this.RootViewModel;
             CandyViewModule.Container = this.Container;
             base.OnLaunch();
         }
