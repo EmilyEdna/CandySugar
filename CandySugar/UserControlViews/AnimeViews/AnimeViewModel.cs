@@ -246,7 +246,6 @@ namespace CandySugar.UserControlViews.AnimeViews
                     vm.Loading = System.Windows.Visibility.Hidden;
                     //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
                     //DTO.PlayMode = false;
-                    //Open
                     BootResource.AnimeVLC(window =>
                     {
                         window.DataContext = vm;
@@ -260,7 +259,6 @@ namespace CandySugar.UserControlViews.AnimeViews
                     vm.Loading = System.Windows.Visibility.Hidden;
                     //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
                     //DTO.PlayMode = true;
-                    //Open
                     BootResource.AnimeWEB(window =>
                     {
                         window.DataContext = vm;

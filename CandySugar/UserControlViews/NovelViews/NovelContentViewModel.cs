@@ -1,4 +1,5 @@
-﻿using CandySugar.Properties;
+﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Properties;
 using HandyControl.Controls;
 using HandyControl.Data;
 using Novel.SDK;
@@ -105,21 +106,20 @@ namespace CandySugar.UserControlViews.NovelViews
                         }
                     };
                 }).RunsAsync();
+
+                var vm = Container.Get<CandyNovelViewModel>();
+                vm.NovelContent = NovelContent.Contents;
+                vm.BookName = this.NovelDetail.BookName;
+                vm.Loading = System.Windows.Visibility.Hidden;
+                BootResource.Novel(window =>
+                {
+                    window.DataContext = vm;
+                });
             }, ex =>
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                 return null;
             });
-
-      
-            //var vm = container.Get<NovelContentWindowsViewModel>();
-            //vm.NovelContent = NovelContent.Contents;
-            //vm.BookName = this.NovelDetail.BookName;
-            //Open
-            //BootResource.Novel(window =>
-            //{
-            //    window.DataContext = vm;
-            //});
 
             //LoteNovelHistoryDTO DTO = NovelContent.Contents.ToMapest<LoteNovelHistoryDTO>();
             //DTO.BookName = this.NovelDetail.BookName;

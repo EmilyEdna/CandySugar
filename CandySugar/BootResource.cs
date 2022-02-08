@@ -41,6 +41,7 @@ namespace CandySugar
         private static ConcurrentDictionary<string, CandyMangaReaderWin> MangaReaderWindow = new ConcurrentDictionary<string, CandyMangaReaderWin>();
         private static ConcurrentDictionary<string, CandyVLCWin> AnimeVLCWindow = new ConcurrentDictionary<string, CandyVLCWin>();
         private static ConcurrentDictionary<string, CandyDPlayWin> AnimeDPlayWindow = new ConcurrentDictionary<string, CandyDPlayWin>();
+        private static ConcurrentDictionary<string, CandyNovelWin> CandyNovelWindow = new ConcurrentDictionary<string, CandyNovelWin>();
         /// <summary>
         /// 控制漫画窗体打开
         /// </summary>
@@ -60,7 +61,7 @@ namespace CandySugar
                     Source = windows.DataContext,
                     //绑定到附加属性
                     Path = new PropertyPath("Loading"),
-                    Mode=BindingMode.TwoWay
+                    Mode = BindingMode.TwoWay
                 };
                 var content = (windows.Header.Content as ColorZone).Content as Grid;
                 UlHelper.FindVisualChild<LoadingLine>(content)
@@ -88,7 +89,53 @@ namespace CandySugar
                 windows.Show();
             }
         }
-
+        /// <summary>
+        /// 控制小说窗体打开
+        /// </summary>
+        /// <param name="action"></param>
+        public static void Novel(Action<CandyNovelWin> action)
+        {
+            CandyNovelWin windows = null;
+            if (CandyNovelWindow.ContainsKey(nameof(CandyNovelWin)))
+            {
+                var old = CandyNovelWindow.Values.FirstOrDefault();
+                old.Close();
+                CandyNovelWindow.Clear();
+                windows = new CandyNovelWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                CandyNovelWindow.TryAdd(nameof(CandyNovelWin), windows);
+                windows.Show();
+            }
+            else
+            {
+                CandyNovelWindow.Clear();
+                windows = new CandyNovelWin();
+                windows.Loading = true;
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                CandyNovelWindow.TryAdd(nameof(CandyNovelWin), windows);
+                windows.Show();
+            }
+        }
         /// <summary>
         /// 控制VLC窗体打开
         /// </summary>

@@ -25,4 +25,6 @@
 
     <Cv:ImageSouceConverter x:Key="ImageSouceConverter"/>
     <Cv:ButtonContentConverter x:Key="ButtonContentConverter"/>
+    <Cv:TextConverter x:Key="TextConverter"/>
+    <Cv:VisibleConverter x:Key="VisibleConverter"/>
 </ResourceDictionary>
