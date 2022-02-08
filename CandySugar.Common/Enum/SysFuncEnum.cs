@@ -13,6 +13,7 @@ namespace CandySugar.Common.Enum
         Download,
         Setting,
         MinSize,
-        Close
+        Close,
+        ShutDown
     }
 }

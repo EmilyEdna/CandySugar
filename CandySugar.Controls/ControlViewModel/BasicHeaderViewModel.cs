@@ -1,11 +1,7 @@
 ﻿using CandySugar.Common.Enum;
-using CandySugar.Controls.Commands;
 using Stylet;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CandySugar.Controls.ControlViewModel
@@ -25,14 +21,13 @@ namespace CandySugar.Controls.ControlViewModel
             get { return _Loading; }
             set { SetAndNotify(ref _Loading, value); }
         }
-
         public BasicHeaderViewModel Basic()
         {
             Handler = new Dictionary<string, Tuple<Thickness, SysFuncEnum>>
             {
                 { "CogOutline", new Tuple<Thickness, SysFuncEnum>( new Thickness(0,0,0,0),SysFuncEnum.Setting) },
                 { "ArrowCollapse",new Tuple<Thickness, SysFuncEnum>( new Thickness(10,0,0,0), SysFuncEnum.MinSize) },
-                { "PowerStandby", new Tuple<Thickness, SysFuncEnum>( new Thickness(10,0,0,0),SysFuncEnum.Close) }
+                { "PowerStandby", new Tuple<Thickness, SysFuncEnum>( new Thickness(10,0,0,0),SysFuncEnum.ShutDown) }
             };
             return this;
         }

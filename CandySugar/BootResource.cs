@@ -30,6 +30,12 @@ namespace CandySugar
             {
                 Soft.Default.GetType().GetProperty(t.Name).SetValue(Soft.Default, t.GetValue(param));
             });
+            Soft.Default.Save();
+        }
+
+        public static void SaveSettingProerty()
+        {
+            Soft.Default.Save();
         }
 
         private static ConcurrentDictionary<string, CandyMangaReaderWin> MangaReaderWindow = new ConcurrentDictionary<string, CandyMangaReaderWin>();
