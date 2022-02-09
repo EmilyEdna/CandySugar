@@ -15,11 +15,73 @@
              xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
              Width="960"
              Height="728">
+    <UserControl.Resources>
+        <Storyboard x:Key="Open">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="VolumeSetting">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.002"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.99">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="VolumeSetting">
+                <EasingDoubleKeyFrame KeyTime="0" Value="107.26"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.104">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VolumeSetting">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="VolumeSetting">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Close">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="VolumeSetting">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="VolumeSetting">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="107.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VolumeSetting">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="VolumeSetting">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
         <!--#region 头部-->
         <WrapPanel>
@@ -288,6 +350,187 @@
                 </Grid>
             </hc:TabItem>
         </hc:TabControl>
+        <!--#endregion-->
+        <!--#region 尾部-->
+        <Canvas Grid.Row="2" VerticalAlignment="Top" Width="960" Cursor="Hand">
+            <Rectangle HorizontalAlignment="Left" Height="120" VerticalAlignment="Bottom" Width="960" Opacity="0.5" Fill="{Binding Theme,Source={x:Static Opt:Soft.Default}}">
+                <Rectangle.Effect>
+                    <BlurEffect Radius="10"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Slider  VerticalAlignment="Top" 
+                     Style="{DynamicResource PlaySliderStyle}"
+                     Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"   
+                     IsMoveToPointEnabled="True"   
+                     Maximum="100" 
+                     SnapsToDevicePixels="True" 
+                     IsEnabled="False" 
+                     TickFrequency="0.001" 
+                     SmallChange="0.001" 
+                     AutoToolTipPrecision="2" 
+                     Cursor="Hand"  
+                     Canvas.Left="10" 
+                     Canvas.Top="5" 
+                     Width="940"  />
+            <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                     CommandParameter="3"
+                     Design:ShadowAssist.ShadowDepth="Depth2" 
+                     VerticalAlignment="Bottom" 
+                     BorderBrush="Transparent"
+                     Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                     Canvas.Left="545" 
+                     Canvas.Top="45">
+                <Design:PackIcon Width="30" Height="30" Kind="SkipPrevious"/>
+            </Button>
+            <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                    VerticalAlignment="Bottom" 
+                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                    BorderBrush="Transparent"   
+                    Canvas.Left="695" 
+                     CommandParameter="2"
+                    Canvas.Top="45">
+                <Design:PackIcon Width="30" Height="30" Kind="SkipNext"/>
+            </Button>
+            <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                     x:Name="暂停"
+                     CommandParameter="1"
+                     Design:ShadowAssist.ShadowDepth="Depth2" 
+                     Width="60" 
+                     Height="60" 
+                     VerticalAlignment="Bottom" 
+                     Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                     BorderBrush="Transparent" 
+                     Visibility="Collapsed" 
+                     Canvas.Left="610" 
+                     Canvas.Top="35">
+                <Design:PackIcon Width="40" Height="40" Kind="Pause"/>
+            </Button>
+            <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                    CommandParameter="0"
+                    x:Name="播放"
+                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                    Width="60" 
+                    Height="60" 
+                    VerticalAlignment="Bottom" 
+                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                    BorderBrush="Transparent" 
+                    Canvas.Left="610" 
+                    Canvas.Top="35">
+                <Design:PackIcon Width="40" Height="40" Kind="play"/>
+            </Button>
+            <ListBox  Style="{StaticResource MaterialDesignToolToggleListBox}" 
+                      x:Name="播放条件"
+                      Width="200" 
+                      Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                      SelectedIndex="0" 
+                      VerticalAlignment="Bottom" 
+                      Canvas.Left="92"
+                      Canvas.Top="63" 
+                      BorderBrush="Transparent">
+                <ListBoxItem ToolTip="列表循环">
+                    <Design:PackIcon   Kind="Repeat"/>
+                </ListBoxItem>
+                <ListBoxItem ToolTip="单曲循环">
+                    <Design:PackIcon  Kind="RepeatOnce" />
+                </ListBoxItem>
+                <ListBoxItem ToolTip="随机播放">
+                    <Design:PackIcon Kind="ShuffleVariant"/>
+                </ListBoxItem>
+                <ListBoxItem  ToolTip="顺序播放" Width="50">
+                    <Design:PackIcon Kind="ShuffleDisabled" Width="25" Height="25" />
+                </ListBoxItem>
+            </ListBox>
+            <ListBox Style="{StaticResource MaterialDesignToolToggleListBox}"
+                     Width="100" 
+                     Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                     HorizontalContentAlignment="Center"  
+                     Height="34" 
+                     Canvas.Left="825" 
+                     Canvas.Top="60">
+                <ListBoxItem  ToolTip="音量调节" 
+                             Width="50" 
+                              MouseUp="VolumeClick"
+                             Background="Transparent"  
+                             HorizontalContentAlignment="Center" 
+                             VerticalContentAlignment="Center">
+                    <Design:PackIcon  Kind="VolumeHigh" Height="25" Padding="0" Width="25" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                </ListBoxItem>
+                <ListBoxItem ToolTip="桌面歌词"
+                              Width="50" 
+                              Content="词"
+                              FontSize="18px"
+                              Background="Transparent"  
+                              HorizontalContentAlignment="Center" 
+                              VerticalContentAlignment="Center">
+                </ListBoxItem>
+            </ListBox>
+            <Label Content="请选择要播放的歌曲..." 
+                   HorizontalAlignment="Left" 
+                   Height="35" VerticalAlignment="Bottom" 
+                   VerticalContentAlignment="Center" 
+                   FontSize="18" 
+                   Canvas.Left="88" Canvas.Top="26" 
+                   MaxWidth="440"/>
+            <Label Content="00:00:00" 
+                   HorizontalAlignment="Left" 
+                   Height="29" 
+                   VerticalAlignment="Top" 
+                   Width="190" 
+                   FontSize="20"  
+                   HorizontalContentAlignment="Right" 
+                   Canvas.Left="720" 
+                   Canvas.Top="20"/>
+            <SelectiveScrollingGrid x:Name="VolumeSetting" 
+                                    Canvas.Left="835"
+                                    Canvas.Bottom="0"
+                                    Margin="0,0,0,-60"
+                                    HorizontalAlignment="Left" 
+                                    Height="220" 
+                                    VerticalAlignment="Top" 
+                                    Width="75" 
+                                    Visibility="Collapsed"
+                                    RenderTransformOrigin="0.5,0.5">
+                <SelectiveScrollingGrid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </SelectiveScrollingGrid.RenderTransform>
+                <Rectangle HorizontalAlignment="Left" 
+                           Height="215" 
+                           RadiusY="14.5" 
+                           RadiusX="14.5" 
+                           VerticalAlignment="Top" 
+                           Width="75" 
+                           Fill="White" 
+                           Stroke="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                <Label   Content="100%" 
+                         x:Name="VolumeShow"
+                         HorizontalAlignment="Left" 
+                         Height="30" 
+                         Margin="0,185,0,0" 
+                         VerticalAlignment="Top" 
+                         Width="75" 
+                         FontSize="18" 
+                         HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center"/>
+                <Slider TickFrequency="5"
+                        Orientation="Vertical"
+                        Maximum="100" 
+                        Margin="27,20,21,35" 
+                        Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
+                        TickPlacement="BottomRight" 
+                        SmallChange="1" 
+                        Value="100" 
+                        ValueChanged="VolumeChanged"
+                        BorderBrush="Transparent" 
+                        Minimum="1" 
+                        Focusable="False" />
+            </SelectiveScrollingGrid>
+        </Canvas>
         <!--#endregion-->
     </Grid>
 </UserControl>

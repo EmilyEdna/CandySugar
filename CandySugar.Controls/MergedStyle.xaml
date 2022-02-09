@@ -17,6 +17,7 @@
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/ButtonStyle.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/ContextMenuStyle.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/TabControlStyle.xaml"/>
+        <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/SliderStyle.xaml"/>
         <ResourceDictionary Source="/CandySugar.Controls;component/Sytels/TextBoxStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
