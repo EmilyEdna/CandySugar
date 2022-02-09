@@ -125,18 +125,17 @@ namespace CandySugar.UserControlViews.MangaViews
                 }
             }
         }
-        #endregion
 
-        #region Method
-        public void LoadMore(bool types)
+        public void ScrollChanged(Dictionary<string,int> input)
         {
             if (Type == 0 || Keyword.IsNullOrEmpty())
                 return;
-            int NextPage = types ? PageIndex += 1 : PageIndex -= 1;
-            if (NextPage < 0) return;
+            PageIndex += input.Values.FirstOrDefault();
+            if (PageIndex < 0) return;
             Handle();
         }
         #endregion
+
 
         #region Internal
         protected  void Handle()

@@ -334,7 +334,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
 
         public void SetSearchType(ComboBoxItem control)
         {
-            SearchType = (LightNovelSearchEnum)control.Tag.ToString().AsInt();
+            SearchType = (LightNovelSearchEnum)control.TabIndex;
         }
 
         public  void GetContent(LightNovelViewResult entity)

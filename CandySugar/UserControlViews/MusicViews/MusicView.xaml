@@ -5,8 +5,289 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CandySugar.UserControlViews.MusicViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+             xmlns:Cmd="https://github.com/canton7/Stylet"
+             xmlns:Opt="clr-namespace:CandySugar.Properties"
+             xmlns:Behavior="clr-namespace:CandySugar.Controls.Behaviors;assembly=CandySugar.Controls"
+             xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Width="960"
+             Height="728">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <!--#region 头部-->
+        <WrapPanel>
+            <ComboBox x:Name="box"  
+                      HorizontalContentAlignment="Center"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      Width="50"
+                      SelectedIndex="1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Cmd:Action SearchType}" CommandParameter="{Binding SelectedItem, ElementName=box}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ComboBoxItem Content="QQ" TabIndex="0"/>
+                <ComboBoxItem Content="网易" TabIndex="1"/>
+                <ComboBoxItem Content="酷狗" TabIndex="2"/>
+                <ComboBoxItem Content="酷我" TabIndex="3"/>
+                <ComboBoxItem Content="B站" TabIndex="4"/>
+                <ComboBoxItem Content="咪咕" TabIndex="5"/>
+            </ComboBox>
+            <hc:SearchBar TextWrapping="Wrap" 
+                          BorderThickness="0,0,0,1"
+                          Style="{StaticResource SearchBarBaseStyle}"
+                          VerticalAlignment="Center"
+                          dp:SearchBarDependencyProperty.Placeholder="{StaticResource MusicSearchKey}"
+                          Width="910"
+                          ShowClearButton="True"
+                          Command="{Cmd:Action SearchMusic}"
+                          CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />
+        </WrapPanel>
+        <!--#endregion-->
+        <!--#region 主体-->
+        <hc:TabControl Grid.Row="1" Style="{StaticResource TabControls}" x:Name="列表">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Cmd:Action TabChanged}" CommandParameter="{Binding SelectedItem,ElementName=列表}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <hc:TabItem Style="{StaticResource TabItems}" Header="单曲">
+                <ListBox ItemsSource="{Binding SongItems}"  
+                             x:Name="单曲"
+                             Style="{StaticResource WrapPanelVerticalListBoxCustomer}">
+                    <i:Interaction.Behaviors>
+                        <Behavior:ListBoxBehavior Command="{Cmd:Action ScrollChanged}"/>
+                    </i:Interaction.Behaviors>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="960">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+                                <WrapPanel Orientation="Horizontal" Margin="2">
+                                    <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" FontSize="18"
+                                           ToolTip="{Binding SongArtistName, ConverterParameter=3, Converter={StaticResource TextConverter}}">
+                                        <Run Text="{Binding SongName}" Foreground="White"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding SongAlbumName, StringFormat=(\{0\})}" Foreground="DimGray" FontSize="14"/>
+                                        <Run Text=" "/>
+                                        <Run Text="————" Foreground="DimGray"/>
+                                        <Run Text=" "/>
+                                    </TextBlock>
+                                    <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" 
+                                              ToolTip="{Binding SongArtistName, ConverterParameter=3, Converter={StaticResource TextConverter}}"
+                                               Text="{Binding SongArtistName, ConverterParameter=4, Converter={StaticResource TextConverter}}" 
+                                               Foreground="White"/>
+                                </WrapPanel>
+                                <WrapPanel Orientation="Horizontal" Grid.Column="1">
+                                    <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                                                    Width="17" Height="17" ToolTip="播放"
+                                                    Margin="0,0,5,0"
+                                                    CommandParameter="{Binding .}"
+                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    BorderBrush="{x:Null}">
+                                        <Design:PackIcon Kind="PlayOutline"  Width="14" Height="14"/>
+                                    </Button>
+                                    <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                                                    Width="17" Height="17" ToolTip="专辑"
+                                                    CommandParameter="{Binding SongAlbumId}"
+                                                    Command="{Cmd:Action ShowAlbum}"
+                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    BorderBrush="{x:Null}">
+                                        <Design:PackIcon Kind="Album"  Width="14" Height="14"/>
+                                    </Button>
+                                </WrapPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </hc:TabItem>
+            <hc:TabItem Style="{StaticResource TabItems}" Header="歌单">
+                <ListBox ItemsSource="{Binding SongSheets}"  x:Name="歌单"
+                             Style="{StaticResource WrapPanelVerticalListBoxCustomer}">
+                    <i:Interaction.Behaviors>
+                        <Behavior:ListBoxBehavior Command="{Cmd:Action ScrollChanged}"/>
+                    </i:Interaction.Behaviors>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Cmd:Action SeleteSheet}" CommandParameter="{Binding SelectedItem, ElementName=歌单}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal" Margin="2" Width="960">
+                                <Border Height="60" Width="60" BorderThickness="0" BorderBrush="Transparent">
+                                    <Image Width="50" Height="50" Source="{Binding Cover}"/>
+                                </Border>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                    <TextBlock FontSize="15">
+                                        <Run Text="歌单名称:" Foreground="White"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding SongSheetName}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="15">
+                                        <Run Text="创建时间:" Foreground="White"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding CreateTime}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="15">
+                                        <Run Text="播放次数:" Foreground="White"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding ListenNumber}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </hc:TabItem>
+            <hc:TabItem Style="{StaticResource TabItems}" Header="歌单详情">
+                <Grid  Width="960">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Canvas>
+                        <Border BorderThickness="0" Width="100" Height="100">
+                            <Image Source="{Binding SheetDetail.Logo}" Height="90" Width="90"/>
+                        </Border>
+                        <WrapPanel Canvas.Left="100" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical">
+                            <TextBlock FontSize="15" Margin="2"><Run Text="歌单名称:" Foreground="White"/><Run Text=" "/><Run Text="{Binding SheetDetail.DissName}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/></TextBlock>
+                            <TextBlock FontSize="15" Margin="2"><Run Text="歌曲数量:" Foreground="White"/><Run Text=" "/><Run Text="{Binding SheetDetail.MusicNum}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/></TextBlock>
+                            <TextBlock FontSize="15" Margin="2"><Run Text="播放次数:" Foreground="White"/><Run Text=" "/><Run Text="{Binding SheetDetail.ListenNum}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/></TextBlock>
+                            <TextBlock FontSize="15" Margin="2"><Run Text="创建时间:" Foreground="White"/><Run Text=" "/><Run Text="{Binding SheetDetail.CreateTime}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/></TextBlock>
+                        </WrapPanel>
+                    </Canvas>
+                    <ListBox ItemsSource="{Binding SheetDetail.SongItems}"  
+                                 Grid.Row="1"
+                                 Style="{StaticResource WrapPanelVerticalListBoxCustomer}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="960">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel Orientation="Horizontal" Margin="2">
+                                        <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" FontSize="18"
+                                           ToolTip="{Binding SongArtistName, ConverterParameter=3, Converter={StaticResource TextConverter}}">
+                                        <Run Text="{Binding SongName}" Foreground="White"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding SongAlbumName, StringFormat=(\{0\})}" Foreground="DimGray" FontSize="14"/>
+                                        <Run Text=" "/>
+                                        <Run Text="————" Foreground="DimGray"/>
+                                        <Run Text=" "/>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" 
+                                              ToolTip="{Binding SongArtistName, ConverterParameter=3, Converter={StaticResource TextConverter}}"
+                                               Text="{Binding SongArtistName, ConverterParameter=4, Converter={StaticResource TextConverter}}" 
+                                               Foreground="White"/>
+                                    </WrapPanel>
+                                    <WrapPanel Orientation="Horizontal" Grid.Column="1">
+                                        <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                                                    Width="17" Height="17" ToolTip="播放"
+                                                    Margin="0,0,5,0"
+                                                    CommandParameter="{Binding .}"
+                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    BorderBrush="{x:Null}">
+                                            <Design:PackIcon Kind="PlayOutline"  Width="14" Height="14"/>
+                                        </Button>
+                                        <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                                                    Width="17" Height="17" ToolTip="专辑"
+                                                    CommandParameter="{Binding SongAlbumId}" 
+                                                    Command="{Cmd:Action ShowAlbum}"
+                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    BorderBrush="{x:Null}">
+                                            <Design:PackIcon Kind="Album"  Width="14" Height="14"/>
+                                        </Button>
+                                    </WrapPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </hc:TabItem>
+            <hc:TabItem Style="{StaticResource TabItems}" Header="专辑">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding AlbumDetail.AlbumName}" Style="{StaticResource TextBlockLargeBold}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                    <ListBox ItemsSource="{Binding AlbumDetail.SongItems}"  
+                                 Grid.Row="1"
+                                 Style="{StaticResource WrapPanelVerticalListBoxCustomer}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="960">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel Orientation="Horizontal" Margin="2">
+                                        <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" FontSize="18"
+                                           ToolTip="{Binding SongArtistName, ConverterParameter=3, Converter={StaticResource TextConverter}}">
+                                        <Run Text="{Binding SongName}" Foreground="White"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding SongAlbumName, StringFormat=(\{0\})}" Foreground="DimGray" FontSize="14"/>
+                                        <Run Text=" "/>
+                                        <Run Text="————" Foreground="DimGray"/>
+                                        <Run Text=" "/>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" 
+                                              ToolTip="{Binding SongArtistName, ConverterParameter=3, Converter={StaticResource TextConverter}}"
+                                               Text="{Binding SongArtistName, ConverterParameter=4, Converter={StaticResource TextConverter}}" 
+                                               Foreground="White"/>
+                                    </WrapPanel>
+                                    <WrapPanel Orientation="Horizontal" Grid.Column="1">
+                                        <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                                    Design:ShadowAssist.ShadowDepth="Depth2" 
+                                                    Width="17" Height="17" ToolTip="播放"
+                                                    CommandParameter="{Binding .}"
+                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    BorderBrush="{x:Null}">
+                                            <Design:PackIcon Kind="PlayOutline"  Width="14" Height="14"/>
+                                        </Button>
+                                    </WrapPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </hc:TabItem>
+        </hc:TabControl>
+        <!--#endregion-->
     </Grid>
 </UserControl>

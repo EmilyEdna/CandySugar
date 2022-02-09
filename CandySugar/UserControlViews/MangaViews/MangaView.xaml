@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:Behavior="clr-namespace:CandySugar.Controls.Behaviors;assembly=CandySugar.Controls"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
              xmlns:Cmd="https://github.com/canton7/Stylet"
@@ -19,8 +20,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.02*"/>
         </Grid.RowDefinitions>
-        <WrapPanel>
-            <hc:SearchBar TextWrapping="Wrap" 
+        <hc:SearchBar TextWrapping="Wrap" 
                           BorderThickness="0,0,0,1"
                           Style="{StaticResource SearchBarBaseStyle}"
                           VerticalAlignment="Center"
@@ -29,7 +29,6 @@
                           ShowClearButton="True"
                           Command="{Cmd:Action Search}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />
-        </WrapPanel>
         <hc:ButtonGroup Grid.Row="1" ItemsSource="{C:Binding MangaCategory}">
             <hc:ButtonGroup.ItemTemplate>
                 <DataTemplate>
@@ -46,16 +45,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ListBox ItemsSource="{C:Binding MangaRecommend}" 
-                     x:Name="listView_left"
+                     x:Name="左边"
                      Style="{StaticResource WrapPanelHorizontalListBox}"
-                     ScrollViewer.ScrollChanged="MangaChanged"  
                      Background="Transparent"
                      BorderBrush="Transparent"
                      BorderThickness="0" 
                      d:ItemsSource="{d:SampleData ItemCount=5}">
+                <i:Interaction.Behaviors>
+                    <Behavior:ListBoxBehavior Command="{Cmd:Action ScrollChanged}"/>
+                </i:Interaction.Behaviors>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Cmd:Action MangaDetail}" CommandParameter="{Binding SelectedItem, ElementName=listView_left}"/>
+                        <i:InvokeCommandAction Command="{Cmd:Action MangaDetail}" CommandParameter="{Binding SelectedItem, ElementName=左边}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListBox.ItemTemplate>

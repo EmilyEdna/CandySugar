@@ -23,10 +23,10 @@
         </Grid.RowDefinitions>
         <WrapPanel>
             <ComboBox  x:Name="box"
-                Width="60"
-                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                SelectedIndex="0"
-                Design:TextFieldAssist.HasClearButton="True">
+                       Width="60"
+                       HorizontalContentAlignment="Center"
+                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                       SelectedIndex="0">
                 <ComboBoxItem Content="书名" TabIndex="0"/>
                 <ComboBoxItem Content="作者" TabIndex="1"/>
                 <i:Interaction.Triggers>

@@ -21,10 +21,13 @@ namespace CandySugar.Controls.Converters
                 return value.AsString().IsNullOrEmpty() ? null : $"\t{value.AsString().Replace("　", "\n\t")}";
             else if (Flag == 2)
                 return value.AsString().IsNullOrEmpty() ? null : $"\t{value.AsString().Replace("\r\n", "\n\t")}";
-            else if (Flag == 3)
-                return $"歌曲总数:{value}";
-            else
+            else if(Flag == 3)
                 return string.Join(",", (value as List<string>));
+            else
+            {
+                var data = string.Join(",", (value as List<string>));
+                return data.Length > 15 ? data.Substring(0, 15) + "..." : data;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
