@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CandySugar.CandyWindows"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         Height="800" 
         Width="1200"
         x:Name="window"
@@ -47,7 +47,7 @@
                                Style="{StaticResource TextBlockDefaultWarning}" FontSize="{C:Binding FontSize}"
                                TextWrapping="Wrap"
                                Width="1200"
-                               Foreground="White"
+                               Foreground="Black"
                                x:Name="Word"/>
             </hc:ScrollViewer>
         </WrapPanel>

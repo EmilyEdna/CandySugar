@@ -28,6 +28,7 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
                 PassWord = Soft.Default.ProxyPwd,
                 UserName = Soft.Default.ProxyAccount
             };
+            this.FontSize = 22;
         }
 
         #region Property

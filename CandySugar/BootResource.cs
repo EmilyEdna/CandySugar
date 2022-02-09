@@ -42,6 +42,7 @@ namespace CandySugar
         private static ConcurrentDictionary<string, CandyVLCWin> AnimeVLCWindow = new ConcurrentDictionary<string, CandyVLCWin>();
         private static ConcurrentDictionary<string, CandyDPlayWin> AnimeDPlayWindow = new ConcurrentDictionary<string, CandyDPlayWin>();
         private static ConcurrentDictionary<string, CandyNovelWin> CandyNovelWindow = new ConcurrentDictionary<string, CandyNovelWin>();
+        private static ConcurrentDictionary<string, CandyLightNovelWin> CandyLightNovelWindow = new ConcurrentDictionary<string, CandyLightNovelWin>();
         /// <summary>
         /// 控制漫画窗体打开
         /// </summary>
@@ -133,6 +134,53 @@ namespace CandySugar
                 UlHelper.FindVisualChild<LoadingLine>(content)
                     .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 CandyNovelWindow.TryAdd(nameof(CandyNovelWin), windows);
+                windows.Show();
+            }
+        }
+        /// <summary>
+        /// 控制轻小说窗体打开
+        /// </summary>
+        /// <param name="action"></param>
+        public static void LightNovel(Action<CandyLightNovelWin> action)
+        {
+            CandyLightNovelWin windows = null;
+            if (CandyLightNovelWindow.ContainsKey(nameof(CandyLightNovelWin)))
+            {
+                var old = CandyLightNovelWindow.Values.FirstOrDefault();
+                old.Close();
+                CandyLightNovelWindow.Clear();
+                windows = new CandyLightNovelWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                CandyLightNovelWindow.TryAdd(nameof(CandyLightNovelWin), windows);
+                windows.Show();
+            }
+            else
+            {
+                CandyLightNovelWindow.Clear();
+                windows = new CandyLightNovelWin();
+                windows.Loading = true;
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                CandyLightNovelWindow.TryAdd(nameof(CandyLightNovelWin), windows);
                 windows.Show();
             }
         }

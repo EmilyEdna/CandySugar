@@ -27,5 +27,6 @@ namespace CandySugar.Common
             });
             return input;
         }
+
     }
 }
