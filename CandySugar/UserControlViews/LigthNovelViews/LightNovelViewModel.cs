@@ -95,11 +95,11 @@ namespace CandySugar.UserControlViews.LigthNovelViews
             if (!Soft.Default.DefaultNovel)
                 return new Dictionary<string, string> { { Soft.Default.NovelAccount.IsNullOrEmpty() ? "-" : Soft.Default.NovelAccount, Soft.Default.NovelPwd.IsNullOrEmpty() ? "-" : Soft.Default.NovelPwd } };
             else
-                return new Dictionary<string, string> { { Account , Password } };
+                return new Dictionary<string, string> { { Account, Password } };
         }
-        protected override void OnViewLoaded()
+        protected async override void OnViewLoaded()
         {
-            SyncStatic.TryCatch(async () =>
+            try
             {
                 //初始化
                 var LightNovelInit = await LightNovelFactory.LightNovel(opt =>
@@ -146,7 +146,8 @@ namespace CandySugar.UserControlViews.LigthNovelViews
 
                 PageIndex = 1;
                 IsSearch = false;
-            }, ex =>
+            }
+            catch
             {
                 LightNovelFactory.LightNovel(opt =>
                 {
@@ -156,16 +157,16 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     };
                 }).Runs();
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
+            }
         }
 
-        public void SearchBook(string args)
+        public async void SearchBook(string args)
         {
-            SearchWord = args;
-            this.PageIndex = Page == 0 ? 1 : Page;
-            SyncStatic.TryCatch(async () =>
+
+            try
             {
+                SearchWord = args;
+                this.PageIndex = Page == 0 ? 1 : Page;
                 //搜索
                 var LightNovelSearch = await LightNovelFactory.LightNovel(opt =>
                 {
@@ -196,7 +197,8 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     Total = LightNovelSearch.SearchResults.TotalPage;
                 }
                 IsSearch = true;
-            }, ex =>
+            }
+            catch
             {
                 LightNovelFactory.LightNovel(opt =>
                 {
@@ -206,16 +208,15 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     };
                 }).Runs();
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
+            }
         }
 
-        public void Redirect(string args)
+        public async void Redirect(string args)
         {
-            CategoryAddress = args;
-            this.PageIndex = Page == 0 ? 1 : Page;
-            SyncStatic.TryCatch(async () =>
+            try
             {
+                CategoryAddress = args;
+                this.PageIndex = Page == 0 ? 1 : Page;
                 var LightNovelCate = await LightNovelFactory.LightNovel(opt =>
                 {
                     opt.RequestParam = new LightNovelRequestInput
@@ -240,7 +241,8 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 LightNovelSingleCategory = new ObservableCollection<LightNovelSingleCategoryResults>(LightNovelCate.SingleCategoryResult.Result);
                 Total = LightNovelCate.SingleCategoryResult.TotalPage;
                 IsSearch = false;
-            }, ex =>
+            }
+            catch
             {
                 LightNovelFactory.LightNovel(opt =>
                 {
@@ -250,8 +252,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     };
                 }).Runs();
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
+            }
         }
 
         public void PageUpdated(FunctionEventArgs<int> args)
@@ -268,12 +269,13 @@ namespace CandySugar.UserControlViews.LigthNovelViews
             }
         }
 
-        public void GetBook(LightNovelSingleCategoryResults entity)
+        public async void GetBook(LightNovelSingleCategoryResults entity)
         {
-            BookName = entity.BookName;
 
-            SyncStatic.TryCatch(async () =>
+
+            try
             {
+                BookName = entity.BookName;
                 var LightNovelDetail = await LightNovelFactory.LightNovel(opt =>
                 {
                     opt.RequestParam = new LightNovelRequestInput
@@ -317,7 +319,8 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 });
 
                 LightNovelViews = new ObservableCollection<LightNovelViewResult>(LightNovelView.ViewResult);
-            }, ex =>
+            }
+            catch
             {
                 LightNovelFactory.LightNovel(opt =>
                 {
@@ -327,8 +330,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     };
                 }).Runs();
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
+            }
 
         }
 
@@ -337,12 +339,12 @@ namespace CandySugar.UserControlViews.LigthNovelViews
             SearchType = (LightNovelSearchEnum)control.TabIndex;
         }
 
-        public  void GetContent(LightNovelViewResult entity)
+        public async void GetContent(LightNovelViewResult entity)
         {
             if (entity.IsDown)
             {
 
-                SyncStatic.TryCatch(async () =>
+                try
                 {
                     var LightNovelDown = await LightNovelFactory.LightNovel(opt =>
                     {
@@ -361,29 +363,30 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     var fn = SyncStatic.CreateFile(Path.Combine(dir, $"{HelpUtilty.FileNameFilter(BookName)}.txt"));
                     SyncStatic.WriteFile(LightNovelDown.DownResult.Down, fn);
                     Process.Start("explorer.exe", dir);
-                }, ex => {
+                }
+                catch
+                {
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                    return null;
-                });
+                }
             }
             else
             {
-                SyncStatic.TryCatch(async () =>
+                try
                 {
                     //内容
-                    var LightNovelContent =await LightNovelFactory.LightNovel(opt =>
-                    {
-                        opt.RequestParam = new LightNovelRequestInput
-                        {
-                            CacheSpan = Soft.Default.CacheTime,
-                            LightNovelType = LightNovelEnum.Content,
-                            Proxy = this.Proxy,
-                            Content = new LightNovelContent
-                            {
-                                ChapterURL = entity.ChapterURL,
-                            }
-                        };
-                    }).RunsAsync();
+                    var LightNovelContent = await LightNovelFactory.LightNovel(opt =>
+                     {
+                         opt.RequestParam = new LightNovelRequestInput
+                         {
+                             CacheSpan = Soft.Default.CacheTime,
+                             LightNovelType = LightNovelEnum.Content,
+                             Proxy = this.Proxy,
+                             Content = new LightNovelContent
+                             {
+                                 ChapterURL = entity.ChapterURL,
+                             }
+                         };
+                     }).RunsAsync();
 
                     if (await DownNovel(entity.ChapterURL, LightNovelContent.ContentResult.Content) == false)
                         return;
@@ -398,10 +401,11 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                         window.DataContext = vm;
                     });
 
-                }, ex => {
+                }
+                catch
+                {
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                    return null;
-                });
+                }
             }
         }
 
@@ -416,7 +420,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
 
                 if (result == System.Windows.MessageBoxResult.Yes)
                 {
-                    var LightNovelDown =await  LightNovelFactory.LightNovel(opt =>
+                    var LightNovelDown = await LightNovelFactory.LightNovel(opt =>
                     {
                         opt.RequestParam = new LightNovelRequestInput
                         {

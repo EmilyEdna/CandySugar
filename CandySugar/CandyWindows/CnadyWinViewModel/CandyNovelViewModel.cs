@@ -59,17 +59,17 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
         #endregion
 
         #region Method
-        public ICommand SliderChange => new CandyCommand(args =>
+        public ICommand SliderChange => new CandyCommand(input =>
         {
-            FontSize = (int)args;
+            FontSize = (int)input;
         }, null);
 
-        public ICommand ShowContent => new CandyCommand(args =>
+        public ICommand ShowContent => new CandyCommand(async input =>
         {
-            if (string.IsNullOrEmpty(args.ToString()))
+            if (string.IsNullOrEmpty(input.ToString()))
                 return;
 
-            SyncStatic.TryCatch(async () =>
+           try
             {
                 var NovelContent = await NovelFactory.Novel(opt =>
                 {
@@ -80,7 +80,7 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
                         Proxy = this.Proxy,
                         View = new NovelView
                         {
-                            NovelViewAddress = args.ToString()
+                            NovelViewAddress = input.ToString()
                         }
                     };
                 }).RunsAsync();
@@ -89,11 +89,10 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
                 //LoteNovelHistoryDTO DTO = NovelContent.Contents.ToMapest<LoteNovelHistoryDTO>();
                 //DTO.BookName = this.BookName;
                 //container.Get<IHistoryService>().AddNovelHistory(DTO);
-            }, ex =>
+            }catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
+            }
 
         }, null);
         #endregion

@@ -82,9 +82,9 @@ namespace CandySugar.UserControlViews.NovelViews
 
         #region Method
 
-        protected override void OnViewLoaded()
+        protected override async void OnViewLoaded()
         {
-            SyncStatic.TryCatch(async () =>
+            try
             {
                 var NovelInit = await NovelFactory.Novel(opt =>
                 {
@@ -97,22 +97,22 @@ namespace CandySugar.UserControlViews.NovelViews
                 }).RunsAsync();
                 this.NovelCategory = new ObservableCollection<NovelCategoryResult>(NovelInit.IndexCategories);
                 this.NovelRecommend = new ObservableCollection<NovelRecommendResult>(NovelInit.IndexRecommends);
-            }, ex =>
-             {
-                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                 return null;
-             });
+            }
+            catch
+            {
+                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+            }
         }
 
-        public void SearchBook(string args)
+        public async void SearchBook(string args)
         {
-            SyncStatic.TryCatch(async () =>
+            try
             {
                 var NovelSearch = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
                     {
-                        CacheSpan =Soft.Default.CacheTime,
+                        CacheSpan = Soft.Default.CacheTime,
                         NovelType = NovelEnum.Search,
                         Proxy = this.Proxy,
                         Search = new NovelSearch
@@ -122,23 +122,23 @@ namespace CandySugar.UserControlViews.NovelViews
                     };
                 }).RunsAsync();
                 this.NovelSearch = new ObservableCollection<NovelSearchResult>(NovelSearch.SearchResults);
-            }, ex =>
+
+                this.Total = 0;
+                this.Page = 1;
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
-
-            this.Total = 0;
-            this.Page = 1;
+            }  
         }
 
-        public void Redirect(string args)
+        public async void Redirect(string args)
         {
-            this.DetailAddress = args;
-            this.PageIndex = Page == 0 ? 1 : Page;
-
-            SyncStatic.TryCatch(async () =>
+            try
             {
+                this.DetailAddress = args;
+                this.PageIndex = Page == 0 ? 1 : Page;
+
                 var NovelCate = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -155,11 +155,11 @@ namespace CandySugar.UserControlViews.NovelViews
                 }).RunsAsync();
                 this.Total = NovelCate.SingleCategories.TotalPage;
                 this.NovelSearch = new ObservableCollection<NovelSearchResult>(NovelCate.SingleCategories.NovelSingles.ToMapest<List<NovelSearchResult>>());
-            }, ex =>
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
+            }
         }
 
         public void PageUpdated(FunctionEventArgs<int> args)
@@ -168,9 +168,9 @@ namespace CandySugar.UserControlViews.NovelViews
             Redirect(this.DetailAddress);
         }
 
-        public void GetBook(dynamic entity)
+        public async void GetBook(dynamic entity)
         {
-            SyncStatic.TryCatch(async () =>
+            try
             {
                 var NovelDetail = await NovelFactory.Novel(opt =>
                 {
@@ -185,18 +185,17 @@ namespace CandySugar.UserControlViews.NovelViews
                         }
                     };
                 }).RunsAsync();
-               
+
                 var vm = Container.Get<NovelContentViewModel>();
                 vm.NovelDetail = NovelDetail.Details;
                 vm.PageIndex = 1;
                 vm.Addr = entity.DetailAddress;
                 Container.Get<INavigationController>().Delegate.NavigateTo(vm);
-            }, ex =>
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
-           
+            }
         }
         #endregion
     }

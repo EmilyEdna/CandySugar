@@ -97,9 +97,9 @@ namespace CandySugar.UserControlViews.AnimeViews
         #endregion
 
         #region Internal
-        protected override void OnViewLoaded()
+        protected async override void OnViewLoaded()
         {
-            SyncStatic.TryCatch(async () =>
+            try
             {
                 var AnimeInit = await AnimeFactory.Anime(opt =>
                 {
@@ -112,17 +112,21 @@ namespace CandySugar.UserControlViews.AnimeViews
                 }).RunsAsync();
                 this.RecommendCategory = AnimeInit.RecommendCategory;
                 this.WeekDay = new ObservableCollection<AnimeWeekDayResult>(AnimeInit.WeekDays);
-            }, ex => MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"));
+            }
+            catch
+            {
+                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+            }
         }
         #endregion
 
         #region Action
-        public void SearchAnime(string args)
+        public async void SearchAnime(string args)
         {
-            SearchKey = args;
-            CategoryKey = string.Empty;
-            SyncStatic.TryCatch(async () =>
+            try
             {
+                SearchKey = args;
+                CategoryKey = string.Empty;
                 var AnimeSearch = await AnimeFactory.Anime(opt =>
                 {
                     opt.RequestParam = new AnimeRequestInput
@@ -139,14 +143,18 @@ namespace CandySugar.UserControlViews.AnimeViews
                 }).RunsAsync();
                 this.Total = AnimeSearch.SeachResults.Page;
                 this.Result = new ObservableCollection<AnimeSearchResults>(AnimeSearch.SeachResults.Searchs);
-            }, ex => MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"));
+            }
+            catch
+            {
+                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+            }
         }
 
-        public void Redirect(string args)
+        public async void Redirect(string args)
         {
-            SyncStatic.TryCatch(() =>
+            try
             {
-                var AnimeDetail = AnimeFactory.Anime(opt =>
+                var AnimeDetail = await AnimeFactory.Anime(opt =>
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
@@ -158,18 +166,22 @@ namespace CandySugar.UserControlViews.AnimeViews
                             DetailAddress = args
                         }
                     };
-                }).Runs();
+                }).RunsAsync();
                 this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults);
-            }, ex => MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"));
+            }
+            catch
+            {
+                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+            }
         }
 
-        public void Category(string args)
+        public async void Category(string args)
         {
             SearchKey = string.Empty;
             CategoryKey = args;
             if (this.LetterCate.Contains(CategoryKey))
             {
-                SyncStatic.TryCatch(async () =>
+                try
                 {
                     var AnimeCate = await AnimeFactory.Anime(opt =>
                     {
@@ -187,11 +199,15 @@ namespace CandySugar.UserControlViews.AnimeViews
                     }).RunsAsync();
                     this.Total = AnimeCate.SeachResults.Page;
                     this.Result = new ObservableCollection<AnimeSearchResults>(AnimeCate.SeachResults.Searchs);
-                }, ex => MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"));
+                }
+                catch
+                {
+                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                }
             }
             else
             {
-                SyncStatic.TryCatch(async () =>
+                try
                 {
                     var AnimeCateType = await AnimeFactory.Anime(opt =>
                     {
@@ -209,7 +225,11 @@ namespace CandySugar.UserControlViews.AnimeViews
                     }).RunsAsync();
                     this.Total = AnimeCateType.SeachResults.Page;
                     this.Result = new ObservableCollection<AnimeSearchResults>(AnimeCateType.SeachResults.Searchs);
-                }, ex => MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"));
+                }
+                catch
+                {
+                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                }
             }
         }
 
@@ -222,9 +242,9 @@ namespace CandySugar.UserControlViews.AnimeViews
                 Category(CategoryKey);
         }
 
-        public void Play(string args)
+        public async void Play(string args)
         {
-            SyncStatic.TryCatch(async () =>
+            try
             {
                 var AnimeWath = await AnimeFactory.Anime(opt =>
                  {
@@ -265,7 +285,11 @@ namespace CandySugar.UserControlViews.AnimeViews
                     });
                     //container.Get<IHistoryService>().AddAnimeHistory(DTO);
                 }
-            }, ex => MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"));
+            }
+            catch
+            {
+                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+            }
         }
         #endregion
     }

@@ -161,44 +161,42 @@ namespace CandySugar.UserControlViews.MusicViews
             }
         }
 
-        public void SeleteSheet(MusicSongSheetItem entity)
+        public async void SeleteSheet(MusicSongSheetItem entity)
         {
             if (entity == null)
                 return;
-            var SheetDetail =  SyncStatic.TryCatch(() =>
-              {
-                  var SheetDetail = MusicFactory.Music(opt =>
-                 {
-                     opt.RequestParam = new MusicRequestInput
-                     {
-                         Proxy = this.Proxy,
-                         MusicPlatformType = Platform,
-                         MusicType = MusicTypeEnum.SheetDetail,
-                         SheetSearch = new MusicSheetSearch
-                         {
-                             Page = PageIndex,
-                             Id = entity.SongSheetId.AsString()
-                         }
-                     };
-                 }).Runs();
-                  return SheetDetail;
-              }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
-            if (SheetDetail == null)
+            try
+            {
+                var SheetDetail = await MusicFactory.Music(opt =>
+                {
+                    opt.RequestParam = new MusicRequestInput
+                    {
+                        Proxy = this.Proxy,
+                        MusicPlatformType = Platform,
+                        MusicType = MusicTypeEnum.SheetDetail,
+                        SheetSearch = new MusicSheetSearch
+                        {
+                            Page = PageIndex,
+                            Id = entity.SongSheetId.AsString()
+                        }
+                    };
+                }).RunsAsync();
+
+                Tab.SelectedIndex = 2;
+
+                this.SheetDetail = SheetDetail.SongSheetDetailResult;
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return;
             }
-
-            Tab.SelectedIndex = 2;
-
-            this.SheetDetail = SheetDetail.SongSheetDetailResult;
         }
 
-        public void ShowAlbum(string input) 
+        public async void ShowAlbum(string input)
         {
-            var SongAlbum = SyncStatic.TryCatch(() =>
+            try
             {
-                var SongAlbum = MusicFactory.Music(opt =>
+                var SongAlbum = await MusicFactory.Music(opt =>
                 {
                     opt.RequestParam = new MusicRequestInput
                     {
@@ -210,18 +208,16 @@ namespace CandySugar.UserControlViews.MusicViews
                             AlbumId = input
                         }
                     };
-                }).Runs();
-                return SongAlbum;
-            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
-            if (SongAlbum == null)
+                }).RunsAsync();
+
+                Tab.SelectedIndex = 3;
+
+                this.AlbumDetail = SongAlbum.SongAlbumDetailResult;
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return;
             }
-
-            Tab.SelectedIndex = 3;
-
-            this.AlbumDetail = SongAlbum.SongAlbumDetailResult;
         }
         #endregion
 
@@ -235,67 +231,61 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         if (type == 1)
                         {
-                            var SongItem = await SyncStatic.TryCatch(async () =>
-                              {
-                                  //单曲
-                                  var SongItem = await MusicFactory.Music(opt =>
+                            try
+                            {
+                                //单曲
+                                var SongItem = await MusicFactory.Music(opt =>
+                                {
+                                    opt.RequestParam = new MusicRequestInput
                                     {
-                                        opt.RequestParam = new MusicRequestInput
+                                        Proxy = this.Proxy,
+                                        MusicPlatformType = MusicPlatformEnum.QQMusic,
+                                        MusicType = MusicTypeEnum.SongItem,
+                                        Search = new MusicSearch
                                         {
-                                            Proxy = this.Proxy,
-                                            MusicPlatformType = MusicPlatformEnum.QQMusic,
-                                            MusicType = MusicTypeEnum.SongItem,
-                                            Search = new MusicSearch
-                                            {
-                                                Page = PageIndex,
-                                                KeyWord = KeyWord
-                                            }
-                                        };
-                                    }).RunsAsync();
-                                  return SongItem;
-                              }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
+                                            Page = PageIndex,
+                                            KeyWord = KeyWord
+                                        }
+                                    };
+                                }).RunsAsync();
 
-                            if (SongItem == null)
+                                this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
+                                this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
+                                this.Total = SongItem.SongItemResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
-                            this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
-                            this.Total = SongItem.SongItemResult.Total.Value;
                         }
                         else
                         {
-                            var SongSheet = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //歌单
                                 var SongSheet = await MusicFactory.Music(opt =>
-                                 {
-                                     opt.RequestParam = new MusicRequestInput
-                                     {
-                                         Proxy = this.Proxy,
-                                         MusicPlatformType = MusicPlatformEnum.QQMusic,
-                                         MusicType = MusicTypeEnum.SongSheet,
-                                         Search = new MusicSearch
-                                         {
-                                             Page = PageIndex,
-                                             KeyWord = KeyWord
-                                         }
-                                     };
-                                 }).RunsAsync();
-                                return SongSheet;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
+                                {
+                                    opt.RequestParam = new MusicRequestInput
+                                    {
+                                        Proxy = this.Proxy,
+                                        MusicPlatformType = MusicPlatformEnum.QQMusic,
+                                        MusicType = MusicTypeEnum.SongSheet,
+                                        Search = new MusicSearch
+                                        {
+                                            Page = PageIndex,
+                                            KeyWord = KeyWord
+                                        }
+                                    };
+                                }).RunsAsync();
 
-                            if (SongSheet == null)
+                                this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
+                                this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
+                                this.Total = SongSheet.SongSheetResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
-                            this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
-                            this.Total = SongSheet.SongSheetResult.Total.Value;
                         }
                         break;
                     }
@@ -303,7 +293,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         if (type == 1)
                         {
-                            var SongItem = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //单曲
                                 var SongItem = await MusicFactory.Music(opt =>
@@ -320,26 +310,19 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongItem;
-                            }, ex =>
-                            {
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return null;
-                            });
 
-                            if (SongItem == null)
-                            {
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
+                                this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
+                                this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
+                                this.Total = SongItem.SongItemResult.Total.Value;
                             }
-
-                            this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
-                            this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
-                            this.Total = SongItem.SongItemResult.Total.Value;
+                            catch
+                            {
+                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                            }
                         }
                         else
                         {
-                            var SongSheet = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //歌单
                                 var SongSheet = await MusicFactory.Music(opt =>
@@ -356,18 +339,15 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongSheet;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
 
-                            if (SongSheet == null)
+                                this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
+                                this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
+                                this.Total = SongSheet.SongSheetResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
-                            this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
-                            this.Total = SongSheet.SongSheetResult.Total.Value;
                         }
                         break;
                     }
@@ -375,7 +355,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         if (type == 1)
                         {
-                            var SongItem = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //单曲
                                 var SongItem = await MusicFactory.Music(opt =>
@@ -392,26 +372,19 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongItem;
-                            }, ex =>
-                            {
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return null;
-                            });
 
-                            if (SongItem == null)
-                            {
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
+                                this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
+                                this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
+                                this.Total = SongItem.SongItemResult.Total.Value;
                             }
-
-                            this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
-                            this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
-                            this.Total = SongItem.SongItemResult.Total.Value;
+                            catch
+                            {
+                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                            }
                         }
                         else
                         {
-                            var SongSheet = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //歌单
                                 var SongSheet = await MusicFactory.Music(opt =>
@@ -428,18 +401,15 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongSheet;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
 
-                            if (SongSheet == null)
+                                this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
+                                this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
+                                this.Total = SongSheet.SongSheetResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
-                            this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
-                            this.Total = SongSheet.SongSheetResult.Total.Value;
                         }
                         break;
                     }
@@ -447,7 +417,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         if (type == 1)
                         {
-                            var SongItem = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //单曲
                                 var SongItem = await MusicFactory.Music(opt =>
@@ -464,22 +434,19 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongItem;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
 
-                            if (SongItem == null)
+                                this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
+                                this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
+                                this.Total = SongItem.SongItemResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
-                            this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
-                            this.Total = SongItem.SongItemResult.Total.Value;
                         }
                         else
                         {
-                            var SongSheet = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //歌单
                                 var SongSheet = await MusicFactory.Music(opt =>
@@ -496,21 +463,15 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongSheet;
-                            }, ex => { 
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); 
-                                return null; 
-                            });
 
-                            if (SongSheet == null)
+                                this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
+                                this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
+                                this.Total = SongSheet.SongSheetResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
-                            this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
-                            this.Total = SongSheet.SongSheetResult.Total.Value;
                         }
                         break;
                     }
@@ -518,7 +479,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         if (type == 1)
                         {
-                            var SongItem = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //单曲
                                 var SongItem = await MusicFactory.Music(opt =>
@@ -535,22 +496,19 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongItem;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
 
-                            if (SongItem == null)
+                                this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
+                                this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
+                                this.Total = SongItem.SongItemResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
-                            this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
-                            this.Total = SongItem.SongItemResult.Total.Value;
                         }
                         else
                         {
-                            var SongSheet = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //歌单
                                 var SongSheet = await MusicFactory.Music(opt =>
@@ -567,18 +525,15 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongSheet;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
 
-                            if (SongSheet == null)
+                                this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
+                                this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
+                                this.Total = SongSheet.SongSheetResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
-                            this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
-                            this.Total = SongSheet.SongSheetResult.Total.Value;
                         }
                         break;
                     }
@@ -586,7 +541,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         if (type == 1)
                         {
-                            var SongItem = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //单曲
                                 var SongItem = await MusicFactory.Music(opt =>
@@ -603,22 +558,19 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongItem;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
 
-                            if (SongItem == null)
+                                this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
+                                this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
+                                this.Total = SongItem.SongItemResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongItems = new ObservableCollection<MusicSongItem>(SongItem.SongItemResult.SongItems);
-                            this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
-                            this.Total = SongItem.SongItemResult.Total.Value;
                         }
                         else
                         {
-                            var SongSheet = await SyncStatic.TryCatch(async () =>
+                            try
                             {
                                 //歌单
                                 var SongSheet = await MusicFactory.Music(opt =>
@@ -635,18 +587,15 @@ namespace CandySugar.UserControlViews.MusicViews
                                         }
                                     };
                                 }).RunsAsync();
-                                return SongSheet;
-                            }, ex => { MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示"); return null; });
 
-                            if (SongSheet == null)
+                                this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
+                                this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
+                                this.Total = SongSheet.SongSheetResult.Total.Value;
+                            }
+                            catch
                             {
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                                return;
                             }
-
-                            this.SongSheets = new ObservableCollection<MusicSongSheetItem>(SongSheet.SongSheetResult.SongSheetItems);
-                            this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
-                            this.Total = SongSheet.SongSheetResult.Total.Value;
                         }
                         break;
                     }

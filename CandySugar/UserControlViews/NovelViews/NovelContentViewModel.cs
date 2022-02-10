@@ -59,11 +59,11 @@ namespace CandySugar.UserControlViews.NovelViews
         #endregion
 
         #region Method
-        public void PageUpdated(FunctionEventArgs<int> args)
+        public async void PageUpdated(FunctionEventArgs<int> args)
         {
-            PageIndex = args.Info;
-            SyncStatic.TryCatch(async () =>
+            try
             {
+                PageIndex = args.Info;
                 var NovelDetail = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -79,19 +79,18 @@ namespace CandySugar.UserControlViews.NovelViews
                     };
                 }).RunsAsync();
                 this.NovelDetail = NovelDetail.Details;
-            }, ex =>
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
-       
+            }
         }
 
-        public void ShowContent(string args)
+        public async void ShowContent(string args)
         {
             if (string.IsNullOrEmpty(args))
                 return;
-            SyncStatic.TryCatch(async () =>
+            try
             {
                 var NovelContent = await NovelFactory.Novel(opt =>
                 {
@@ -115,11 +114,11 @@ namespace CandySugar.UserControlViews.NovelViews
                 {
                     window.DataContext = vm;
                 });
-            }, ex =>
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                return null;
-            });
+            }
 
             //LoteNovelHistoryDTO DTO = NovelContent.Contents.ToMapest<LoteNovelHistoryDTO>();
             //DTO.BookName = this.NovelDetail.BookName;
