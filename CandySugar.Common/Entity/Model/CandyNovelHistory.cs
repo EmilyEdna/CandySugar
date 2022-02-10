@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CandySugar.Common.Entity.Model
 {
-    [SugarTable("LoteNovelHistory")]
-    public class LoteNovelHistory: BasicEntity
+    [SugarTable("CandyNovelHistory")]
+    public class CandyNovelHistory: BasicEntity
     {
         /// <summary>
         /// 上一页

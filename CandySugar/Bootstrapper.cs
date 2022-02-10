@@ -1,5 +1,8 @@
-﻿using CandySugar.Common.Navigations;
+﻿using CandySugar.Common;
+using CandySugar.Common.Navigations;
 using CandySugar.Controls.ControlViewModel;
+using CandySugar.Core.Service;
+using CandySugar.Core.ServiceImpl;
 using CandySugar.ViewModels;
 using Serilog;
 using Stylet;
@@ -64,6 +67,7 @@ namespace CandySugar
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
             builder.RegistControlViewModule();
+            builder.Bind<IYinYue>().To<YinYue>();
             /* builder.Bind<IOptionService>().To<OptionService>();
              builder.Bind<IWallpaperService>().To<WallpaperService>();
              builder.Bind<IMusicPlayService>().To<MusicPlayService>();
@@ -78,7 +82,7 @@ namespace CandySugar
         /// </summary>
         protected override void Configure()
         {
-            //new Lite().InitDataBase();
+            new SqlSugarDbContext().InitCandy();
             base.Configure();
         }
 

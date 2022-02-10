@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CandySugar.Common.Entity.Model
 {
-    [SugarTable("LoteFavorite")]
-    public class LoteFavorite: BasicEntity
+    [SugarTable("CandyFavorite")]
+    public class CandyFavorite: BasicEntity
     {
         [SugarColumn(ColumnDataType = "bigint")]
         public long Id { get; set; }

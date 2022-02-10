@@ -1,0 +1,47 @@
+﻿<Window x:Class="CandySugar.CandyWindows.CandyLyricWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CandySugar.CandyWindows"
+        mc:Ignorable="d"
+        Height="130" 
+        Width="1200"
+         xmlns:vm="clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
+        d:DataContext="{d:DesignInstance Type=vm:CandyLyricViewModel}"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        SnapsToDevicePixels="True"
+        Background="Transparent"
+        MouseMove="LyricMove"
+        ShowInTaskbar="False" 
+        FontFamily="{StaticResource FontStyle}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="10" SnapsToDevicePixels="True" >
+        <Rectangle HorizontalAlignment="Left" 
+                   Height="105" 
+                   VerticalAlignment="Top" 
+                   Width="1180" 
+                   RadiusX="10" 
+                   RadiusY="10" 
+                   Opacity="0.7">
+            <Rectangle.Effect>
+                <BlurEffect Radius="7"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Label Content="{Binding Lyric}" 
+               HorizontalAlignment="Left" 
+               Height="70" 
+               VerticalAlignment="Center" 
+               Width="1160" 
+               VerticalContentAlignment="Center" 
+               FontSize="40" 
+               Foreground="{StaticResource RedPink}" 
+               Margin="10,0,0,0">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="5" Opacity="0.6" Color="#FFFF9999"/>
+            </Label.Effect>
+        </Label>
+    </Grid>
+</Window>

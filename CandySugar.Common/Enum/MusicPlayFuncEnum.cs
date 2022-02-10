@@ -9,9 +9,9 @@ namespace CandySugar.Common.Enum
 {
     public enum MusicPlayFuncEnum
     {
-        Play = 1,
+        SkipPrevious,
+        Play,
         Pause,
-        SkipNext,
-        SkipPrevious
+        SkipNext
     }
 }

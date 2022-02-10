@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CandySugar.Common.Entity.Model
 {
-    [SugarTable("LotePlayLyrics")]
-    public class LotePlayLyrics: BasicEntity
+    [SugarTable("CandyPlayLyrics")]
+    public class CandyPlayLyrics: BasicEntity
     {
         [SugarColumn(ColumnDataType = "varchar(150)", IsNullable = true)]
         public string SongId { get; set; }

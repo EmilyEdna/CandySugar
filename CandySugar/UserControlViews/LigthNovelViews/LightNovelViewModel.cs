@@ -359,7 +359,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                             }
                         };
                     }).RunsAsync();
-                    var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "LoteDown", "LightNovel", $"{HelpUtilty.FileNameFilter(BookName)}"));
+                    var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandyDown", "LightNovel", $"{HelpUtilty.FileNameFilter(BookName)}"));
                     var fn = SyncStatic.CreateFile(Path.Combine(dir, $"{HelpUtilty.FileNameFilter(BookName)}.txt"));
                     SyncStatic.WriteFile(LightNovelDown.DownResult.Down, fn);
                     Process.Start("explorer.exe", dir);
@@ -433,7 +433,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                             }
                         };
                     }).RunsAsync();
-                    var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "LoteDown", "LightNovel", $"{HelpUtilty.FileNameFilter(BookName)}"));
+                    var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandyDown", "LightNovel", $"{HelpUtilty.FileNameFilter(BookName)}"));
                     var fn = SyncStatic.CreateFile(Path.Combine(dir, $"{HelpUtilty.FileNameFilter(BookName)}.txt"));
                     SyncStatic.WriteFile(LightNovelDown.DownResult.Down, fn);
                     MessageBox.Info("下载完成", "提示");

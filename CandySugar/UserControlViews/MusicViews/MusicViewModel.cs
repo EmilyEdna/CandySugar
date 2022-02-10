@@ -1,4 +1,6 @@
-﻿using CandySugar.Properties;
+﻿using CandySugar.Common.DTO;
+using CandySugar.Core.Service;
+using CandySugar.Properties;
 using HandyControl.Controls;
 using Music.SDK;
 using Music.SDK.ViewModel;
@@ -10,10 +12,13 @@ using StyletIoC;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using XExten.Advance.HttpFramework.MultiFactory;
 using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using TabControl = HandyControl.Controls.TabControl;
@@ -24,10 +29,12 @@ namespace CandySugar.UserControlViews.MusicViews
     public class MusicViewModel : Screen
     {
         private readonly IContainer Container;
+        private readonly IYinYue YinYue;
         private readonly MusicProxy Proxy;
         public MusicViewModel(IContainer Container)
         {
             this.Container = Container;
+            this.YinYue = Container.Get<IYinYue>();
             this.Proxy = new MusicProxy
             {
                 IP = Soft.Default.ProxyIP,
@@ -38,6 +45,7 @@ namespace CandySugar.UserControlViews.MusicViews
             this.PageIndex = this.DanQu_Page = this.GeDan_Page = 1;
             this.Platform = MusicPlatformEnum.NeteaseMusic;
         }
+
         #region Field
         /// <summary>
         /// 关键字
@@ -80,6 +88,13 @@ namespace CandySugar.UserControlViews.MusicViews
         {
             get { return _AlbumDetail; }
             set { SetAndNotify(ref _AlbumDetail, value); }
+        }
+
+        private ObservableCollection<CandyPlayListDto> _PlayLists;
+        public ObservableCollection<CandyPlayListDto> PlayLists
+        {
+            get { return _PlayLists; }
+            set { SetAndNotify(ref _PlayLists, value); }
         }
 
         private int _Total;
@@ -218,6 +233,115 @@ namespace CandySugar.UserControlViews.MusicViews
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
+        }
+
+        public async void AddPlayList(MusicSongItem input)
+        {
+            try
+            {
+                var SongURL = await MusicFactory.Music(opt =>
+                {
+                    opt.RequestParam = new MusicRequestInput
+                    {
+                        Proxy = this.Proxy,
+                        MusicPlatformType = this.Platform,
+                        MusicType = MusicTypeEnum.PlayAddress,
+                        AddressSearch = new MusicPlaySearch
+                        {
+                            Dynamic = input.SongId,
+                            KuGouAlbumId = input.SongAlbumId,
+                        }
+                    };
+                }).RunsAsync();
+
+                if (SongURL.SongPlayAddressResult.CanPlay == false)
+                    MessageBox.Info("当前歌曲已下架，请切换到其他其他平台搜索");
+
+                var tuple = MusicCache(input, SongURL.SongPlayAddressResult);
+
+                await this.YinYue.AddPlayList(new CandyPlayListDto
+                {
+                    Address = SongURL.SongPlayAddressResult.SongURL,
+                    SongAlbum = input.SongAlbumName,
+                    SongName = input.SongName,
+                    SongArtist = tuple.Item1,
+                    SongId = input.SongId,
+                    CacheAddress = tuple.Item2,
+                    Platform = (int)this.Platform
+                });
+
+                Launch();
+            }
+            catch
+            {
+                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+            }
+        }
+
+        public void DownMusic(CandyPlayListDto input)
+        {
+            var index = input.CacheAddress.LastIndexOf("\\");
+            var path = input.CacheAddress.Substring(0, index);
+            Process.Start("explorer.exe", path);
+        }
+
+        public async void DeleteMusic(CandyPlayListDto input)
+        {
+            await this.YinYue.RemovePlayList(input.PId);
+            SyncStatic.DeleteFile(input.CacheAddress);
+            Launch();
+        }
+
+        public async void ClearMusic()
+        {
+            await this.YinYue.ClearPlayList();
+            SyncStatic.DeleteFolder(SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandyDown", "Music")));
+            Launch();
+        }
+        #endregion
+
+        #region Method
+        protected override void OnViewLoaded()
+        {
+            Launch();
+        }
+        public async Task<MusicLyricResult> LoadLyric(CandyPlayListDto input)
+        {
+            var data = await this.YinYue.GetLyrics(input.SongId, input.Platform);
+            if (data != null)
+            {
+                return new MusicLyricResult
+                {
+                    Lyrics = data.ToMapest<List<MusicLyricItemResult>>()
+                };
+            }
+            else
+            {
+                var SongLyric = await MusicFactory.Music(opt =>
+                {
+                    opt.RequestParam = new MusicRequestInput
+                    {
+
+                        MusicPlatformType = (MusicPlatformEnum)input.Platform,
+                        Proxy = this.Proxy,
+                        MusicType = MusicTypeEnum.Lyric,
+                        LyricSearch = new MusicLyricSearch
+                        {
+                            Dynamic = input.SongId
+                        }
+                    };
+                }).RunsAsync();
+                if (SongLyric.SongLyricResult.Lyrics != null)
+                {
+                    var lyric = string.Join("_", SongLyric.SongLyricResult.Lyrics.Select(t => $"{t.Time}|{t.Lyric}"));
+                    await this.YinYue.AddLyric(input.SongId, input.Platform, lyric);
+                }
+                return SongLyric.SongLyricResult;
+            }
+        }
+        public T GetContainer<T>()
+        {
+            return Container.Get<T>();
         }
         #endregion
 
@@ -602,6 +726,32 @@ namespace CandySugar.UserControlViews.MusicViews
                 default:
                     throw new NullReferenceException();
             }
+        }
+        private Tuple<string, string> MusicCache(MusicSongItem input, MusicSongPlayAddressResult song)
+        {
+            string CacheAddress = string.Empty;
+            var SongArtist = string.Join(",", input.SongArtistName);
+            var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandyDown", "Music", $"{SongArtist}"));
+            var SongFile = $"{input.SongName}({input.SongAlbumName})-{SongArtist}_{Platform}.mp3";
+
+            if (this.Platform == MusicPlatformEnum.BiliBiliMusic)
+            {
+                var file = SyncStatic.CreateFile(Path.Combine(dir, SongFile));
+                CacheAddress = SyncStatic.WriteFile(song.BilibiliFileBytes, file);
+            }
+            else
+            {
+                var file = SyncStatic.CreateFile(Path.Combine(dir, SongFile));
+                var filebytes = IHttpMultiClient.HttpMulti.AddNode(opt => opt.NodePath = song.SongURL).Build().RunBytes().FirstOrDefault();
+                CacheAddress = SyncStatic.WriteFile(filebytes, file);
+            }
+            return new Tuple<string, string>(SongArtist, CacheAddress);
+        }
+        private async void Launch()
+        {
+            var Result = await this.YinYue.GetPlayList();
+            this.Count = Result.Count;
+            this.PlayLists = new ObservableCollection<CandyPlayListDto>(Result);
         }
         #endregion
     }
