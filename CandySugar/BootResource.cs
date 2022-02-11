@@ -76,6 +76,34 @@ namespace CandySugar
         private static ConcurrentDictionary<string, CandyNovelWin> CandyNovelWindow = new ConcurrentDictionary<string, CandyNovelWin>();
         private static ConcurrentDictionary<string, CandyLightNovelWin> CandyLightNovelWindow = new ConcurrentDictionary<string, CandyLightNovelWin>();
         private static ConcurrentDictionary<string, CandyLyricWin> CandyLyricWindow = new ConcurrentDictionary<string, CandyLyricWin>();
+        private static ConcurrentDictionary<string, CandyPreviewWin> CandyPreviewWindow = new ConcurrentDictionary<string, CandyPreviewWin>();
+
+        /// <summary>
+        /// 控制预览窗体打开
+        /// </summary>
+        /// <param name="action"></param>
+        public static void View(Action<CandyPreviewWin> action)
+        {
+            CandyPreviewWin windows = null;
+            if (CandyPreviewWindow.ContainsKey(nameof(CandyPreviewWin)))
+            {
+                var old = CandyPreviewWindow.Values.FirstOrDefault();
+                old.Close();
+                CandyPreviewWindow.Clear();
+                windows = new CandyPreviewWin();
+                action(windows);
+                CandyPreviewWindow.TryAdd(nameof(CandyPreviewWin), windows);
+                windows.Show();
+            }
+            else
+            {
+                CandyPreviewWindow.Clear();
+                windows = new CandyPreviewWin();
+                action(windows);
+                CandyPreviewWindow.TryAdd(nameof(CandyPreviewWin), windows);
+                windows.Show();
+            }
+        }
         /// <summary>
         /// 控制漫画窗体打开
         /// </summary>

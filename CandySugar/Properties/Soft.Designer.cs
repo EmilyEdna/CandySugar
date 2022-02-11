@@ -142,5 +142,29 @@ namespace CandySugar.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("rating:safe")]
+        public string Safe {
+            get {
+                return ((string)(this["Safe"]));
+            }
+            set {
+                this["Safe"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SafeModule {
+            get {
+                return ((bool)(this["SafeModule"]));
+            }
+            set {
+                this["SafeModule"] = value;
+            }
+        }
     }
 }

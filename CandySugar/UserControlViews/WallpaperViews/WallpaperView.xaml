@@ -5,8 +5,141 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CandySugar.UserControlViews.WallpaperViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:Opt="clr-namespace:CandySugar.Properties"
+             xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
+             xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+             xmlns:Cmd="https://github.com/canton7/Stylet"
+             Width="960"
+             Height="728">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.06*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.06*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal">
+            <hc:SearchBar TextWrapping="Wrap" 
+                          BorderThickness="0,0,0,1"
+                          Style="{StaticResource SearchBarBaseStyle}"
+                          dp:SearchBarDependencyProperty.Placeholder="{StaticResource NovelSearchKey}"
+                          Width="890"
+                          ShowClearButton="True"
+                          Command="{Cmd:Action Search}"
+                          CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />
+            <WrapPanel Orientation="Horizontal" Width="70" VerticalAlignment="Center">
+                <TextBlock Text="只看收藏:" Style="{StaticResource TextBlockDefaultPrimary}" Foreground="Black"/>
+                <CheckBox IsChecked="{C:Binding WatchFavorite}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Cmd:Action Check}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="Unchecked">
+                            <i:InvokeCommandAction Command="{Cmd:Action UnCheck}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </CheckBox>
+            </WrapPanel>
+        </WrapPanel>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" 
+                 Grid.Row="1"
+                 BorderThickness="0"
+                 Style="{StaticResource WrapPanelVerticalListBoxCustomer}"
+                 ItemsSource="{C:Binding Wallpaper}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Orientation="Horizontal">
+                        <Border Width="240" Height="260">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Preview}" Width="200" Height="200" VerticalAlignment="Top" Margin="0,5,0,0"/>
+                                <WrapPanel Grid.Row="1" Margin="0,2,0,0" HorizontalAlignment="Center">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="60"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Author,StringFormat=作者:{0}}" Margin="10,0,0,0"/>
+                                        <TextBlock Text="{Binding Created,StringFormat=时间:{0:yyyy-MM-dd}}" Grid.Row="1" Margin="10,0,0,0"/>
+                                        <TextBlock Text="{Binding Pixel,StringFormat=像素:{0}}"  Grid.Row="2" Margin="10,0,0,0"/>
+                                        <WrapPanel Grid.Row="3" Margin="10,0,0,0">
+                                            <ListBox Style="{StaticResource WrapPanelHorizontalListBox}" 
+                                                     BorderThickness="0" 
+                                                     Background="Transparent"
+                                                     BorderBrush="Transparent" 
+                                                     ItemsSource="{Binding Labels}">
+                                                <ListBox.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel/>
+                                                    </ItemsPanelTemplate>
+                                                </ListBox.ItemsPanel>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <WrapPanel>
+                                                            <Button Content="{Binding .}" 
+                                                                    Foreground="{StaticResource TeaRed}"
+                                                                    BorderThickness="0"
+                                                                    Background="Transparent" 
+                                                                    Style="{StaticResource ButtonDanger.Small}"
+                                                                    Command="{Cmd:Action Search}" 
+                                                                    CommandParameter="{Binding .}"/>
+                                                        </WrapPanel>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </WrapPanel>
+                                        <WrapPanel Orientation="Horizontal" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                            <Ctrl:CandyButton Shape="{StaticResource PreviewEye}" 
+                                                          Style="{StaticResource Shape}" 
+                                                          Command="{Cmd:Action Preview}"  
+                                                          CommandParameter="{Binding Id}"/>
+                                            <Ctrl:CandyButton Shape="{StaticResource Download}" 
+                                                          Style="{StaticResource Shape}" 
+                                                          Command="{Cmd:Action Download}"  
+                                                          CommandParameter="{Binding Id}"/>
+                                            <Ctrl:CandyButton Shape="{StaticResource NoFavorite}" 
+                                                          Visibility="{C:Binding !IsFavorite,FalseToVisibility=Hidden}"
+                                                          Style="{StaticResource Shape}" 
+                                                          Command="{Cmd:Action NoFavorite}"
+                                                          CommandParameter="{Binding Id}"/>
+                                            <Ctrl:CandyButton Shape="{StaticResource Favorite}" 
+                                                          Visibility="{C:Binding IsFavorite,FalseToVisibility=Hidden}"
+                                                          Style="{StaticResource Shape}" 
+                                                          Command="{Cmd:Action Favorite}"
+                                                          CommandParameter="{Binding Id}"/>
+                                        </WrapPanel>
+                                    </Grid>
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <hc:Pagination Grid.Row="2" 
+                       Margin="0,5,0,0"
+                       HorizontalAlignment="Center"
+                       MaxPageCount="{C:Binding Total}" 
+                       PageIndex="{C:Binding PageIndex}" 
+                       IsJumpEnabled="False">
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="PageUpdated">
+                    <hc:EventToCommand Command="{Cmd:Action PageUpdated}" PassEventArgsToCommand="True" />
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:Pagination>
     </Grid>
 </UserControl>

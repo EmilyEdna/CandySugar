@@ -110,6 +110,7 @@
         <ListBox  ScrollViewer.CanContentScroll="True"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top" 
+                 Height="480"
                  Canvas.Left="20" 
                  Canvas.Top="55" 
                  VerticalContentAlignment="Top"
@@ -209,6 +210,17 @@
                 <TextBox Style="{DynamicResource PlaceHolder}"  Grid.Row="1"
                          Text="{Binding Root.CacheTime,Mode=TwoWay}"
                          dp:TextBoxDependencyProperty.Placeholder="{StaticResource CacheStr}"/>
+            </Grid>
+            <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Width="340" Height="30">
+                <Label Content="壁纸设置：" 
+                       FontFamily="{StaticResource FontStyle}"
+                       VerticalContentAlignment="Center" 
+                       FontSize="14" 
+                       Height="29.333"
+                       Width="100"/>
+            </Canvas>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="40"  Width="340">
+                <CheckBox Content="一般模式" IsChecked="{Binding Root.SafeModule ,Mode=TwoWay}"/>
             </Grid>
         </ListBox>
         <TextBlock Canvas.Left="80" Canvas.Top="580">

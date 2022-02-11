@@ -32,5 +32,11 @@
     <Setting Name="Theme" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFF9999</Value>
     </Setting>
+    <Setting Name="Safe" Type="System.String" Scope="User">
+      <Value Profile="(Default)">rating:safe</Value>
+    </Setting>
+    <Setting Name="SafeModule" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
