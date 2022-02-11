@@ -162,17 +162,21 @@ namespace CandySugar.UserControlViews.MusicViews
 
         public void TabChanged(TabItem input)
         {
+
             Tab = (TabControl)input.Parent;
             var Type = Tab.SelectedIndex;
             if (Type == 0)
             {
                 PageIndex = DanQu_Page;
-                SearchBasic(1);
+                if (KeyWord != null)
+                    SearchBasic(1);
+
             }
             if (Type == 1)
             {
                 PageIndex = GeDan_Page;
-                SearchBasic(2);
+                if (KeyWord != null)
+                    SearchBasic(2);
             }
         }
 

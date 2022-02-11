@@ -21,8 +21,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
-                <ColumnDefinition Width="1.6*"/>
-                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="1.8*"/>
                 <ColumnDefinition Width="0.275*"/>
             </Grid.ColumnDefinitions>
             <ComboBox SelectedIndex="1" 
@@ -45,23 +44,7 @@
             </ComboBox>
             <hc:LoadingLine Grid.Column="1"
                             Style="{StaticResource LoadingLineLargeLight}"/>
-            <ComboBox SelectedIndex="0" 
-                          Margin="8 0 0 0"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          BorderThickness="0"
-                          Grid.Column="2"
-                          Design:ColorZoneAssist.Mode="Standard"
-                          Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
-                          BorderBrush="{DynamicResource MaterialDesignPaper}"  
-                          FontFamily="{Binding FontFamily,ElementName=HeaderCtrl}"
-                          Background="Transparent" >
-                <ComboBoxItem Content="背景1"/>
-                <ComboBoxItem Content="背景2"/>
-                <ComboBoxItem Content="背景3"/>
-                <ComboBoxItem Content="背景4"/>
-            </ComboBox>
-            <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
                 <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding Handler}">
                     <ItemsControl.ItemsPanel>
