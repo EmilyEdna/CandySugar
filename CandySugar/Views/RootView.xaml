@@ -88,7 +88,7 @@
                         DoubleClickCommand="{Cmd:Action ShowWindow}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu FontFamily="{StaticResource FontStyle}" Style="{DynamicResource TrayContextMenu}">
-                    <MenuItem Header="个人中心" Command="{Cmd:Action Redirect}" CommandParameter="7"/>
+                    <MenuItem Header="个人中心" Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.UserCenter}"/>
                     <Separator />
                     <MenuItem Header="打开漫画" Click="ProcessClick" CommandParameter="{x:Static Enum:TrayFuncEnum.Manga}"/>
                     <MenuItem Header="打开音乐" Click="ProcessClick" CommandParameter="{x:Static Enum:TrayFuncEnum.Music}"/>
