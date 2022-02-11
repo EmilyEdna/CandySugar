@@ -48,24 +48,30 @@ namespace CandySugar.ViewModels
             {
                 case MenuFuncEunm.Novel:
                     ActivateItem(Container.Get<NovelViewModel>());
+                    BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEunm.LightNovel:
                     ActivateItem(Container.Get<LightNovelViewModel>());
+                    BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEunm.Anime:
                     ActivateItem(Container.Get<AnimeViewModel>());
+                    BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEunm.Manga:
                     ActivateItem(Container.Get<MangaViewModel>());
+                    BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEunm.Wallpaper:
                     ActivateItem(Container.Get<WallpaperViewModel>());
+                    BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEunm.Music:
                     ActivateItem(Container.Get<MusicViewModel>());
                     break;
                 case MenuFuncEunm.UserCenter:
                     ActivateItem(Container.Get<UserViewModel>());
+                    BootResource.Lyric(null, 2);
                     break;
                 default:
                     break;

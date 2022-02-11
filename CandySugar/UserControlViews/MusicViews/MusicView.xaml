@@ -716,12 +716,5 @@
             </Grid>
         </Canvas>
         <!--#endregion-->
-        <!--#region 播放器-->
-        <MediaElement x:Name="MediaPlay" LoadedBehavior="Manual" SpeedRatio="1" SnapsToDevicePixels="True" Volume="1" d:IsHidden="True">
-            <MediaElement.Effect>
-                <DropShadowEffect BlurRadius="15" Opacity="0.5"/>
-            </MediaElement.Effect>
-        </MediaElement>
-        <!--#endregion-->
     </Grid>
 </UserControl>

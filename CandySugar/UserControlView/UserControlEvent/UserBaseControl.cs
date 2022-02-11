@@ -18,7 +18,7 @@ using XExten.Advance.StaticFramework;
 
 namespace CandySugar.UserControlView.UserControlEvent
 {
-    public class UserBaseControl: UserControl
+    public class UserBaseControl : UserControl
     {
         public virtual void CandySystemClick(object sender, RoutedEventArgs e)
         {
@@ -50,13 +50,13 @@ namespace CandySugar.UserControlView.UserControlEvent
         }
 
         #region Event
-        private void Play() 
+        private void Play()
         {
             var win = Window.GetWindow(this);
             WebView2 webView = (win.FindName("webView") as WebView2);
             webView.CoreWebView2.ExecuteScriptAsync($"Play('{(win.DataContext as dynamic).WatchResult.PlayURL}')");
         }
-        private void Close() 
+        private void Close()
         {
             var win = Window.GetWindow(this);
             WebView2 webView = null;
@@ -97,17 +97,20 @@ namespace CandySugar.UserControlView.UserControlEvent
             }
 
         }
-        private void ShutDown() {
+        private void ShutDown()
+        {
+            BootResource.Clear();
             Application.Current.Shutdown();
         }
-        private void Setting() {
+        private void Setting()
+        {
             CandySettingWin win = new CandySettingWin
             {
                 DataContext = CandyViewModule.Container.Get<CandySettingViewModel>()
             };
             win.Show();
         }
-        private void MinSize() 
+        private void MinSize()
         {
             if (Application.Current.MainWindow != null)
             {

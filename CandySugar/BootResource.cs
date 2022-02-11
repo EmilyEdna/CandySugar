@@ -3,12 +3,14 @@ using CandySugar.Controls.UIElementHelper;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using MaterialDesignThemes.Wpf;
+using NAudio.Wave;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +21,36 @@ namespace CandySugar
 {
     public class BootResource
     {
+        /// <summary>
+        /// 播放定时器
+        /// </summary>
+        public static Timer Timer
+        {
+            get; set;
+        }
+        /// <summary>
+        /// 歌词定时器
+        /// </summary>
+        public static Timer LyricTimer
+        {
+            get; set;
+        }
+        /// <summary>
+        /// NAudio
+        /// </summary>
+        public static WaveOutEvent Wave
+        {
+            get; set;
+        }
+        /// <summary>
+        /// Reader
+        /// </summary>
+        public static MediaFoundationReader Reader
+        {
+            get; set;
+        }
+
+
         /// <summary>
         /// 设置全局用户配置的值
         /// </summary>
@@ -43,6 +75,7 @@ namespace CandySugar
         private static ConcurrentDictionary<string, CandyDPlayWin> AnimeDPlayWindow = new ConcurrentDictionary<string, CandyDPlayWin>();
         private static ConcurrentDictionary<string, CandyNovelWin> CandyNovelWindow = new ConcurrentDictionary<string, CandyNovelWin>();
         private static ConcurrentDictionary<string, CandyLightNovelWin> CandyLightNovelWindow = new ConcurrentDictionary<string, CandyLightNovelWin>();
+        private static ConcurrentDictionary<string, CandyLyricWin> CandyLyricWindow = new ConcurrentDictionary<string, CandyLyricWin>();
         /// <summary>
         /// 控制漫画窗体打开
         /// </summary>
@@ -276,5 +309,70 @@ namespace CandySugar
                 windows.Show();
             }
         }
+        /// <summary>
+        /// 控制歌词窗体
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="Root"></param>
+        public static int Lyric(Action<CandyLyricWin> action, int Root = 1)
+        {
+
+            CandyLyricWin windows = null;
+            if (Root == 1)
+            {
+                if (CandyLyricWindow.ContainsKey(nameof(CandyLyricWin)))
+                {
+                    var old = CandyLyricWindow.Values.FirstOrDefault();
+                    old.Close();
+                    CandyLyricWindow.Clear();
+                }
+                else
+                {
+                    CandyLyricWindow.Clear();
+                    windows = new CandyLyricWin();
+                    action(windows);
+                    windows.WindowStartupLocation = WindowStartupLocation.Manual;
+                    windows.Top = (SystemParameters.PrimaryScreenHeight / 10) * 7.5;
+                    windows.Left = (SystemParameters.PrimaryScreenWidth / 10) * 1.9;
+                    windows.Topmost = true;
+                    CandyLyricWindow.TryAdd(nameof(CandyLyricWin), windows);
+                    windows.Show();
+                }
+            }
+            if (Root == 2)
+            {
+                if (CandyLyricWindow.ContainsKey(nameof(CandyLyricWin)))
+                {
+                    var old = CandyLyricWindow.Values.FirstOrDefault();
+                    old.Close();
+                    CandyLyricWindow.Clear();
+                    Clear();
+                }
+            }
+            if (Root == 3)
+            {
+                CandyLyricWindow.Clear();
+                windows = new CandyLyricWin();
+                action(windows);
+                windows.WindowStartupLocation = WindowStartupLocation.Manual;
+                windows.Top = (SystemParameters.PrimaryScreenHeight / 10) * 7.5;
+                windows.Left = (SystemParameters.PrimaryScreenWidth / 10) * 1.9;
+                windows.Topmost = true;
+                CandyLyricWindow.TryAdd(nameof(CandyLyricWin), windows);
+                windows.Show();
+            }
+
+            return CandyLyricWindow.Count;
+        }
+        public static void Clear()
+        {
+            //清理
+            Wave?.Stop();
+            Wave?.Dispose();
+            Timer?.Close();
+            LyricTimer?.Close();
+        }
     }
+
+
 }

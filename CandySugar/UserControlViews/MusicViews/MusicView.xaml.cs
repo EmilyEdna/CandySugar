@@ -3,6 +3,7 @@ using CandySugar.CandyWindows.CnadyWinViewModel;
 using CandySugar.Common.DTO;
 using CandySugar.Common.Enum;
 using Music.SDK.ViewModel.Response;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,48 +31,36 @@ namespace CandySugar.UserControlViews.MusicViews
     public partial class MusicView : UserControl
     {
         /// <summary>
-        /// 播放定时器
+        /// 歌词状态
         /// </summary>
-        public Timer Timer;
-        /// <summary>
-        /// 歌词定时器
-        /// </summary>
-        public Timer LyricTimer;
-        /// <summary>
-        /// 播放状态1表示播放中0表示为播放
-        /// </summary>
-        private bool PlayState = false;
-        /// <summary>
-        /// 歌词状态1表示播放中0表示为播放
-        /// </summary>
-        private bool LyricState = false;
+        private bool LyricStutas = false;
         /// <summary>
         /// 当前播放歌曲
         /// </summary>
         private Dictionary<string, CandyPlayListDto> CurrentPlay = null;
-        private Dictionary<string, CandyLyricWin> LryicWin = null;
 
         public MusicView()
         {
             InitializeComponent();
-
+            BootResource.Wave = new WaveOutEvent();
             CurrentPlay = new Dictionary<string, CandyPlayListDto>();
-            LryicWin = new Dictionary<string, CandyLyricWin>();
 
-            Timer = new Timer
+            BootResource.Timer = new Timer
             {
                 AutoReset = true,
                 Interval = 100,
                 Enabled = true
             };
-            Timer.Elapsed += Timer_Elapsed;
+            BootResource.Timer.Elapsed += Timer_Elapsed;
 
-            LyricTimer = new Timer
+            BootResource.LyricTimer = new Timer
             {
                 AutoReset = true,
                 Interval = 100,
                 Enabled = true
             };
+
+            BootResource.Wave.PlaybackStopped += Wave_PlaybackStopped;
 
             InitMedia();
         }
@@ -79,11 +68,10 @@ namespace CandySugar.UserControlViews.MusicViews
         #region 初始化
         protected void InitMedia()
         {
-            MediaPlay.Source = null;
-            MediaPlay.Close();
+            BootResource.Wave.Stop();
 
-            Timer.Close();
-            LyricTimer.Close();
+            BootResource.Timer.Close();
+            BootResource.LyricTimer.Close();
 
             this.暂停.Visibility = Visibility.Collapsed;
             this.播放.Visibility = Visibility.Visible;
@@ -103,16 +91,22 @@ namespace CandySugar.UserControlViews.MusicViews
                 {
                     InitMedia();
                     PlayConditions();
+                    LyricHandles();
                 }
                 else
                 {
-                    if (this.MediaPlay.Source != null && PlayState)
+                    if (BootResource.Wave.PlaybackState == PlaybackState.Playing)
                     {
-                        this.时常.Content = this.MediaPlay.Position.ToString().Split(".").FirstOrDefault();
-                        this.播放条.Value = this.MediaPlay.Position.TotalSeconds;
+                        this.时常.Content = BootResource.Reader.CurrentTime.ToString().Split(".").FirstOrDefault();
+                        this.播放条.Value = BootResource.Reader.CurrentTime.TotalSeconds;
                     }
                 }
             });
+        }
+
+        private void Wave_PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            BootResource.Wave.Stop();
         }
 
         private MusicViewModel ViewModel => this.DataContext as MusicViewModel;
@@ -147,8 +141,8 @@ namespace CandySugar.UserControlViews.MusicViews
         {
             var slider = (sender as Slider);
             VolumeShow.Content = (int)slider.Value + "%";
-            if (MediaPlay != null)
-                MediaPlay.Volume = slider.Value / 100;
+            if (BootResource.Wave != null)
+                BootResource.Wave.Volume = (float)(slider.Value / 100);
         }
         /// <summary>
         /// 播放列表
@@ -200,7 +194,7 @@ namespace CandySugar.UserControlViews.MusicViews
                 var index = 播放列表.SelectedIndex == -1 ? 0 : 播放列表.SelectedIndex;
                 Plays(ViewModel.PlayLists[index]);
                 播放列表.SelectedIndex = index;
-               
+
             }
             //随机播放
             if (播放条件.SelectedIndex == 2)
@@ -209,7 +203,7 @@ namespace CandySugar.UserControlViews.MusicViews
                 {
                     Plays(ViewModel.PlayLists.FirstOrDefault());
                     播放列表.SelectedIndex = 0;//定位
-                   
+
                 }
                 else
                 {
@@ -222,7 +216,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             Plays(ViewModel.PlayLists[i]);//播放歌曲
                             播放列表.SelectedIndex = i;//定位
                             stc = 1;//条件排除
-                           
+
                         }
                     }
                 }
@@ -234,7 +228,7 @@ namespace CandySugar.UserControlViews.MusicViews
                 {
                     Plays(ViewModel.PlayLists[播放列表.SelectedIndex + 1]);
                     播放列表.SelectedIndex += 1;
-                   
+
                 }
             }
         }
@@ -243,36 +237,13 @@ namespace CandySugar.UserControlViews.MusicViews
             CurrentPlay.Clear();
             CurrentPlay.Add(nameof(CandyPlayListDto), input);
             this.当前播放.Content = input.SongName;
-            MediaPlay.Close();
-            MediaPlay.Source = new Uri(input.CacheAddress, UriKind.Absolute);
-            MediaPlay.Play();
-            LoadTime();
+            NPlay(input);
+            this.播放条.IsEnabled = true;
             播放.Visibility = Visibility.Collapsed;
             暂停.Visibility = Visibility.Visible;
-            PlayState = true;
-            Timer.Start();
+            BootResource.Timer.Start();
         }
-        /// <summary>
-        /// 加载音频的时常
-        /// </summary>
-        private void LoadTime()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                Thread.Sleep(200);
-                var time = !MediaPlay.NaturalDuration.HasTimeSpan ? "" : MediaPlay.NaturalDuration.TimeSpan.ToString()?.Split(".")?.FirstOrDefault();
-                if (string.IsNullOrEmpty(time))
-                    LoadTime();
-                else
-                {
-                    时常.Content = time;
-                    this.播放条.IsEnabled = true;
-                    this.播放条.Maximum = int.Parse(time.Substring(3, 2)) * 60 + int.Parse(time.Substring(6, 2));
-                    this.播放条.Value = 0;
-                    return;
-                }
-            });
-        }
+
         /// <summary>
         /// 暂时没用
         /// </summary>
@@ -315,7 +286,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                 {
                                     Plays(ViewModel.PlayLists[播放列表.Items.Count - 1]);
                                     播放列表.SelectedIndex = 播放列表.Items.Count - 1;
-                                   
+
                                 }
                                 else//正常上一曲
                                 {
@@ -323,13 +294,13 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Plays(ViewModel.PlayLists[播放列表.Items.Count - 1]);
                                         播放列表.SelectedIndex = 播放列表.Items.Count - 1;
-                                       
+
                                     }
                                     else
                                     {
                                         Plays(ViewModel.PlayLists[播放列表.SelectedIndex - 1]);
                                         播放列表.SelectedIndex -= 1;
-                                       
+
                                     }
                                 }
                             }
@@ -345,20 +316,18 @@ namespace CandySugar.UserControlViews.MusicViews
                             else
                                 HandyControl.Controls.MessageBox.Info("木有任何歌曲（；´д｀）ゞ", "提示");
                         }
-                        LyricState = false;
-                        LyricHandle(null, null);
+                        LyricHandles();
                         break;
                     }
                 case MusicPlayFuncEnum.Play:
                     {
-                        if (MediaPlay.NaturalDuration.HasTimeSpan)
+                        if (BootResource.Wave.PlaybackState == PlaybackState.Paused)
                         {
-                            MediaPlay.Play();
+                            BootResource.Wave.Play();
                             this.暂停.Visibility = Visibility.Visible;
                             this.播放.Visibility = Visibility.Collapsed;
-                            this.Timer.Start();
-                            this.LyricTimer.Start();
-                            PlayState = true;
+                            BootResource.Timer.Start();
+                            BootResource.LyricTimer.Start();
                         }
                         else
                             PlayConditions();
@@ -366,12 +335,11 @@ namespace CandySugar.UserControlViews.MusicViews
                     }
                 case MusicPlayFuncEnum.Pause:
                     {
-                        this.MediaPlay.Pause();
+                        BootResource.Wave.Pause();
                         this.暂停.Visibility = Visibility.Collapsed;
                         this.播放.Visibility = Visibility.Visible;
-                        this.Timer.Stop();
-                        this.LyricTimer.Stop();
-                        PlayState = false;
+                        BootResource.Timer.Stop();
+                        BootResource.LyricTimer.Stop();
                         break;
                     }
                 case MusicPlayFuncEnum.SkipNext:
@@ -385,7 +353,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                 {
                                     Plays(ViewModel.PlayLists[播放列表.Items.Count - 1]);
                                     播放列表.SelectedIndex = 播放列表.Items.Count - 1;
-                                   
+
                                 }
                                 else//正常上一曲
                                 {
@@ -393,13 +361,13 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Plays(ViewModel.PlayLists[播放列表.Items.Count - 1]);
                                         播放列表.SelectedIndex = 播放列表.Items.Count - 1;
-                                       
+
                                     }
                                     else
                                     {
                                         Plays(ViewModel.PlayLists[播放列表.SelectedIndex - 1]);
                                         播放列表.SelectedIndex -= 1;
-                                       
+
                                     }
                                 }
                             }
@@ -418,71 +386,71 @@ namespace CandySugar.UserControlViews.MusicViews
                             else
                                 HandyControl.Controls.MessageBox.Info("木有任何歌曲（；´д｀）ゞ", "提示");
                         }
-                        LyricState = false;
-                        LyricHandle(null, null);
+                        LyricHandles();
                         break;
                     }
                 default:
                     break;
             }
         }
-        private async void LyricHandle(object sender, MouseButtonEventArgs e)
+        private void LyricHandle(object sender, MouseButtonEventArgs e)
         {
-            if (this.MediaPlay.Source != null && LyricState == false)
+            LyricStutas = BootResource.Lyric(window =>
+            {
+                window.DataContext = ViewModel.GetContainer<CandyLyricViewModel>();
+                if (BootResource.Wave.PlaybackState == PlaybackState.Playing) BootResource.LyricTimer.Start();
+                else BootResource.LyricTimer.Close();
+            }) >=1;
+        }
+        private async void LyricHandles() 
+        {
+            if (LyricStutas)
             {
                 MusicLyricResult result = await this.ViewModel.LoadLyric(CurrentPlay.Values.FirstOrDefault());
                 if (result == null && result.Lyrics == null)
                     return;
-                LyricState = true;
-                CandyLyricWin win = new();
-                win.DataContext = ViewModel.GetContainer<CandyLyricViewModel>();
-
-                LyricTimer.Elapsed += (s, e) =>
+               
+                LyricStutas = BootResource.Lyric(window =>
                 {
-                    Dispatcher.Invoke(() =>
+                    window.DataContext = ViewModel.GetContainer<CandyLyricViewModel>();
+                    if (BootResource.Wave.PlaybackState == PlaybackState.Playing) BootResource.LyricTimer.Start();
+                    else BootResource.LyricTimer.Close();
+
+                    BootResource.LyricTimer.Elapsed += (s, e) =>
                     {
-                        var Seconds = this.MediaPlay.Position.ToString().Split(".").FirstOrDefault();
-                        if (result.Lyrics != null)
+                        Dispatcher.Invoke(() =>
                         {
-                            foreach (var item in result.Lyrics)
+                            var Seconds = TimeSpan.Parse(BootResource.Reader.CurrentTime.ToString().Split(".").FirstOrDefault());
+                            if (result.Lyrics != null)
                             {
-                                var Target = "00:" + item.Time.Split(".").FirstOrDefault();
-                                if (Target == Seconds)
+                                foreach (var item in result.Lyrics)
                                 {
-                                    (win.DataContext as CandyLyricViewModel).Lyric = item.Lyric;
+                                    var Target = TimeSpan.Parse("00:" + item.Time.Split(".").FirstOrDefault());
+                                    if (Target == Seconds)
+                                    {
+                                        (window.DataContext as CandyLyricViewModel).Lyric = item.Lyric;
+                                    }
                                 }
                             }
-                        }
-
-                    });
-                };
-
-                win.WindowStartupLocation = WindowStartupLocation.Manual;
-                win.Top = (SystemParameters.PrimaryScreenHeight / 10) * 7.5;
-                win.Left = (SystemParameters.PrimaryScreenWidth / 10) * 1.9;
-                win.Topmost = true;
-                win.Show();
-                if (LryicWin.Count != 0)
-                {
-                    LryicWin.Values.FirstOrDefault().Close();
-                    LryicWin.Clear();
-                }
-                LryicWin.Add(nameof(CandyLyricWin), win);
-                LyricTimer.Start();
-                return;
-            }
-            if (this.MediaPlay.Source == null || LyricState == true)
-            {
-                var win = LryicWin.Values.FirstOrDefault();
-                if (win == null)
-                    return;
-                (win.DataContext as CandyLyricViewModel).Lyric = String.Empty;
-                win.Close();
-                LyricTimer.Close();
-                LyricState = false;
+                        });
+                    };
+                }, 3) >= 1;
             }
         }
         #endregion
 
+        #region NAudio
+        protected void NPlay(CandyPlayListDto input)
+        {
+            BootResource.Wave.Dispose();
+            BootResource.Wave = new WaveOutEvent();
+            BootResource.Reader = new MediaFoundationReader(input.CacheAddress);
+            时常.Content = BootResource.Reader.TotalTime.ToString().Split(".").FirstOrDefault();
+            this.播放条.Maximum = BootResource.Reader.TotalTime.TotalSeconds;
+            this.播放条.Value = 0;
+            BootResource.Wave.Init(BootResource.Reader);
+            BootResource.Wave.Play();
+        }
+        #endregion
     }
 }
