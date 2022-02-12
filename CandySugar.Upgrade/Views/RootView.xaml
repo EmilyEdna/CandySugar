@@ -9,8 +9,10 @@
            d:DataContext="{d:DesignInstance Type=viewModels:RootViewModel}"
            Title="{Binding Title}" 
            WindowStartupLocation="CenterScreen"
-           ShowTitle="True"
-           Height="450" 
-           Width="800">
+           Height="110" 
+           Width="500" 
+           ResizeMode="NoResize" 
+           BorderThickness="0"
+           WindowStyle="None">
     <TextBlock Text="Hello World" HorizontalAlignment="Center" VerticalAlignment="Center" />
 </hc:Window>
