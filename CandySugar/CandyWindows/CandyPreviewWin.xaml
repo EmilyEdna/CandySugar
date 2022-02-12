@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CandySugar.CandyWindows"
+        xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Height="800" 
@@ -25,7 +26,9 @@
             <Image Stretch="UniformToFill" Width="1200"
                    RenderOptions.BitmapScalingMode="HighQuality"  
                    SnapsToDevicePixels="True"  
-                   Source="{Binding FileURL}"/>
+                   Source="{Binding FileURL,IsAsync=True,
+                                    Converter={StaticResource ImageSouceConverter},
+                                    ConverterParameter={x:Static Enum:ImageConvertFuncEnum.Konachan}}"/>
         </hc:ScrollViewer>
     </Grid>
 </Ctrl:CandyWindow>

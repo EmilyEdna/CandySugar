@@ -20,15 +20,15 @@ namespace CandySugar.Controls.Converters
     /// </summary>
     public class ImageSouceConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public  object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var type = (ImageConvertFuncEnum)parameter;
             switch (type)
             {
                 case ImageConvertFuncEnum.Konachan:
-                    return SyncStatic.TryCatch(() =>
+                    try
                     {
-                        var WallpaperDown = WallpaperFactory.Wallpaper(opt =>
+                        var WallpaperDown =WallpaperFactory.Wallpaper(opt =>
                         {
                             opt.RequestParam = new WallpaperRequestInput
                             {
@@ -42,7 +42,11 @@ namespace CandySugar.Controls.Converters
                             };
                         }).Runs();
                         return ImageHelper.BitmapToBitmapImage(WallpaperDown.DownloadResult.Bytes);
-                    }, ex => value);
+                    }
+                    catch
+                    {
+                        return value;
+                    }
                 case ImageConvertFuncEnum.Manga:
                     return null;
                 default:

@@ -1,4 +1,6 @@
 ﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common.DTO;
+using CandySugar.Core.Service;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using Manga.SDK;
@@ -118,10 +120,10 @@ namespace CandySugar.UserControlViews.MangaViews
                         window.DataContext = vm;
                     });
 
-                    //LoteMangaHistoryDTO DTO = input.ToMapest<LoteMangaHistoryDTO>();
-                    //DTO.Chapters = Chapters.ToJson();
-                    //DTO.Index = Chapters.IndexOf(input);
-                    //container.Get<IHistoryService>().AddMangaHistory(DTO);
+                    CandyMangaHistoryDto DTO = input.ToMapest<CandyMangaHistoryDto>();
+                    DTO.Chapters = Chapters.ToJson();
+                    DTO.Index = Chapters.IndexOf(input);
+                    Container.Get<ILiShi>().AddMangaHistory(DTO);
                 }
             }
         }

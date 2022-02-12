@@ -83,10 +83,15 @@ namespace CandySugar.UserControlViews.WallpaperViews
             InitFavorite(string.Empty);
         }
 
-        public void UnCheck()
+        public async void UnCheck()
         {
             WatchFavorite = false;
-            InitAll();
+
+            var favoriteId = await BiZhi.GetAllFavorite();
+
+            PageIndex = 1;
+
+            InitAll(favoriteId);
         }
 
         public async void Search(string input)
@@ -101,36 +106,9 @@ namespace CandySugar.UserControlViews.WallpaperViews
 
                 KeyWord = input;
 
-                try
-                {
-                    var WallpaperSearch = await WallpaperFactory.Wallpaper(opt =>
-                    {
-                        opt.RequestParam = new WallpaperRequestInput
-                        {
-                            CacheSpan = Soft.Default.CacheTime,
-                            WallpaperType = WallpaperEnum.Search,
-                            Search = new WallpaperSearch
-                            {
-                                Limit = Limit,
-                                KeyWord = KeyWord
-                            },
-                            Proxy = this.Proxy
-                        };
-                    }).RunsAsync();
+                PageIndex = 1;
 
-                    if (favoriteId.Count > 0)
-                        WallpaperSearch.GlobalResult.Result.ForEach(t =>
-                        {
-                            if (favoriteId.Contains(t.Id))
-                                t.IsFavorite = true;
-                        });
-                    this.Total = (WallpaperSearch.GlobalResult.Total + Limit - 1) / Limit;
-                    this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperSearch.GlobalResult.Result);
-                }
-                catch
-                {
-                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                }
+                SearchBasic(favoriteId);
             }
         }
 
@@ -138,78 +116,14 @@ namespace CandySugar.UserControlViews.WallpaperViews
         {
             PageIndex = args.Info;
             if (WatchFavorite)
-            {
-
                 InitFavorite(KeyWord);
-            }
             else
             {
                 var favoriteId = await BiZhi.GetAllFavorite();
                 if (KeyWord.IsNullOrEmpty())
-                {
-                    try
-                    {
-                        var WallpaperInit =await WallpaperFactory.Wallpaper(opt =>
-                        {
-                            opt.RequestParam = new WallpaperRequestInput
-                            {
-                                CacheSpan = Soft.Default.CacheTime,
-                                WallpaperType = WallpaperEnum.Init,
-                                Init = new WallpaperInit
-                                {
-                                    Page = PageIndex,
-                                    Limit = Limit,
-                                        Tag=Soft.Default.SafeModule?Soft.Default.Safe:String.Empty
-                                },
-                                Proxy = this.Proxy
-                            };
-                        }).RunsAsync();
-                        if (favoriteId.Count > 0)
-                            WallpaperInit.GlobalResult.Result.ForEach(t =>
-                            {
-                                if (favoriteId.Contains(t.Id))
-                                    t.IsFavorite = true;
-                            });
-                        this.Total = (WallpaperInit.GlobalResult.Total + Limit - 1) / Limit;
-                        this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperInit.GlobalResult.Result);
-                    }
-                    catch {
-                        MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                    }
-                }
+                    InitAll(favoriteId);
                 else
-                {
-                    try
-                    {
-                        var WallpaperSearch =await WallpaperFactory.Wallpaper(opt =>
-                        {
-                            opt.RequestParam = new WallpaperRequestInput
-                            {
-                                CacheSpan = Soft.Default.CacheTime,
-                                WallpaperType = WallpaperEnum.Search,
-                                Search = new WallpaperSearch
-                                {
-                                    Page = PageIndex,
-                                    Limit = Limit,
-                                    KeyWord = KeyWord
-                                },
-                                Proxy = this.Proxy
-                            };
-                        }).RunsAsync();
-                        if (favoriteId.Count > 0)
-                            WallpaperSearch.GlobalResult.Result.ForEach(t =>
-                            {
-                                if (favoriteId.Contains(t.Id))
-                                    t.IsFavorite = true;
-                            });
-                        this.Total = (WallpaperSearch.GlobalResult.Total + Limit - 1) / Limit;
-                        this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperSearch.GlobalResult.Result);
-                    }
-                    catch
-                    {
-                        MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
-                    }
-                }
+                    SearchBasic(favoriteId);
             }
         }
 
@@ -276,15 +190,18 @@ namespace CandySugar.UserControlViews.WallpaperViews
         #endregion
 
         #region Init
-        protected override void OnViewLoaded()
+        protected override async void OnViewLoaded()
         {
-            InitAll();
+            var favoriteId = await BiZhi.GetAllFavorite();
+
+            PageIndex = 1;
+
+            InitAll(favoriteId);
         }
-        protected async void InitAll()
+        protected async void InitAll(List<long> favoriteId)
         {
             try
             {
-                var favoriteId = await BiZhi.GetAllFavorite();
                 var WallpaperInit = await WallpaperFactory.Wallpaper(opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
@@ -293,6 +210,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
                         WallpaperType = WallpaperEnum.Init,
                         Init = new WallpaperInit
                         {
+                            Page=PageIndex,
                             Limit = Limit,
                             Tag=Soft.Default.SafeModule?Soft.Default.Safe:String.Empty
                         },
@@ -319,6 +237,40 @@ namespace CandySugar.UserControlViews.WallpaperViews
             var data = await BiZhi.GetFavorite(input, PageIndex);
             this.Total = data.Total;
             this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(data.Result.ToMapest<List<WallpaperResultDetail>>());
+        }
+        protected async void SearchBasic(List<long> favoriteId) 
+        {
+            try
+            {
+                var WallpaperSearch = await WallpaperFactory.Wallpaper(opt =>
+                {
+                    opt.RequestParam = new WallpaperRequestInput
+                    {
+                        CacheSpan = Soft.Default.CacheTime,
+                        WallpaperType = WallpaperEnum.Search,
+                        Search = new WallpaperSearch
+                        {
+                            Limit = Limit,
+                            Page=PageIndex,
+                            KeyWord =  Soft.Default.SafeModule ? $"{Soft.Default.Safe} {KeyWord}" : KeyWord
+                        },
+                        Proxy = this.Proxy
+                    };
+                }).RunsAsync();
+
+                if (favoriteId.Count > 0)
+                    WallpaperSearch.GlobalResult.Result.ForEach(t =>
+                    {
+                        if (favoriteId.Contains(t.Id))
+                            t.IsFavorite = true;
+                    });
+                this.Total = (WallpaperSearch.GlobalResult.Total + Limit - 1) / Limit;
+                this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperSearch.GlobalResult.Result);
+            }
+            catch
+            {
+                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+            }
         }
         #endregion
     }

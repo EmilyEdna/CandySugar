@@ -1,4 +1,6 @@
 ﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common.DTO;
+using CandySugar.Core.Service;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using HandyControl.Data;
@@ -14,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using SDKRequest = Novel.SDK.ViewModel.Request;
 
@@ -114,15 +117,16 @@ namespace CandySugar.UserControlViews.NovelViews
                 {
                     window.DataContext = vm;
                 });
+                CandyNovelHistoryDto DTO = NovelContent.Contents.ToMapest<CandyNovelHistoryDto>();
+                DTO.BookName = this.NovelDetail.BookName;
+                Container.Get<ILiShi>().AddNovelHistory(DTO);
             }
             catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
 
-            //LoteNovelHistoryDTO DTO = NovelContent.Contents.ToMapest<LoteNovelHistoryDTO>();
-            //DTO.BookName = this.NovelDetail.BookName;
-            //container.Get<IHistoryService>().AddNovelHistory(DTO);
+          
         }
         #endregion
     }

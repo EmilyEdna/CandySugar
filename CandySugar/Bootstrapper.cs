@@ -69,12 +69,7 @@ namespace CandySugar
             builder.RegistControlViewModule();
             builder.Bind<IYinYue>().To<YinYue>();
             builder.Bind<IBiZhi>().To<BiZhi>();
-            /* builder.Bind<IOptionService>().To<OptionService>();
-             builder.Bind<IWallpaperService>().To<WallpaperService>();
-             builder.Bind<IMusicPlayService>().To<MusicPlayService>();
-             builder.Bind<IHistoryService>().To<HistoryService>();*/
-
-
+            builder.Bind<ILiShi>().To<LiShi>();
             builder.Bind<NavigationController>().And<INavigationController>().To<NavigationController>().InSingletonScope();
         }
 

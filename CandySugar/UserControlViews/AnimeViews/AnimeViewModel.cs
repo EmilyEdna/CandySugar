@@ -4,6 +4,8 @@ using Anime.SDK.ViewModel.Enums;
 using Anime.SDK.ViewModel.Request;
 using Anime.SDK.ViewModel.Response;
 using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common.DTO;
+using CandySugar.Core.Service;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using HandyControl.Data;
@@ -264,26 +266,26 @@ namespace CandySugar.UserControlViews.AnimeViews
                     var vm = Container.Get<CandyVLCViewModel>();
                     vm.WatchResult = AnimeWath.PlayResult;
                     vm.Loading = System.Windows.Visibility.Hidden;
-                    //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
-                    //DTO.PlayMode = false;
+                    CandyAnimeHistoryDto DTO = AnimeWath.PlayResult.ToMapest<CandyAnimeHistoryDto>();
+                    DTO.PlayMode = false;
                     BootResource.AnimeVLC(window =>
                     {
                         window.DataContext = vm;
                     });
-                    //container.Get<IHistoryService>().AddAnimeHistory(DTO);
+                    Container.Get<ILiShi>().AddAnimeHistory(DTO);
                 }
                 if (Soft.Default.PlayBox == 1)
                 {
                     var vm = Container.Get<CandyDPlayViewModel>();
                     vm.WatchResult = AnimeWath.PlayResult;
                     vm.Loading = System.Windows.Visibility.Hidden;
-                    //LoteAnimeHistoryDTO DTO = AnimeWath.PlayResult.ToMapest<LoteAnimeHistoryDTO>();
-                    //DTO.PlayMode = true;
+                    CandyAnimeHistoryDto DTO = AnimeWath.PlayResult.ToMapest<CandyAnimeHistoryDto>();
+                    DTO.PlayMode = true;
                     BootResource.AnimeWEB(window =>
                     {
                         window.DataContext = vm;
                     });
-                    //container.Get<IHistoryService>().AddAnimeHistory(DTO);
+                    Container.Get<ILiShi>().AddAnimeHistory(DTO);
                 }
             }
             catch
