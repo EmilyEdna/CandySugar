@@ -5,8 +5,150 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CandySugar.UserControlViews.UserViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:Opt="clr-namespace:CandySugar.Properties"
+             xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+             xmlns:Cmd="https://github.com/canton7/Stylet"
+             Width="960"
+             Height="728">
+    <TabControl Width="960" Height="728" 
+                Style="{StaticResource TabControlInLine}" 
+                Background="Transparent" >
+        <TabItem Header="小说阅读记录" 
+                 Background="Transparent" 
+                 BorderThickness="1"
+                 BorderBrush="Transparent">
+            <Canvas>
+                <Rectangle Height="680" Width="940"  RadiusY="10" RadiusX="10"  VerticalAlignment="Top" Margin="0,5,0,0" Canvas.Left="10">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFC4F8FF" Opacity="0.5"/>
+                    </Rectangle.Fill>
+                    <Rectangle.Effect>
+                        <DropShadowEffect BlurRadius="15" Opacity="0.3" Direction="300" Color="#FFED556A"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <WrapPanel HorizontalAlignment="Center" 
+                           Canvas.Left="10"
+                           VerticalAlignment="Top" 
+                           Height="680"  
+                           Width="940">
+                    <ListView ItemsSource="{Binding NovelHistories}" 
+                              ScrollViewer.CanContentScroll="True"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="书名" DisplayMemberBinding="{Binding BookName}" Width="235"/>
+                                <GridViewColumn Header="章节" DisplayMemberBinding="{Binding ChapterName}" Width="235"/>
+                                <GridViewColumn Header="浏览时间" DisplayMemberBinding="{Binding Time,StringFormat={}{0:yyyy年MM月dd日 HH:mm:ss}}" Width="235"/>
+                                <GridViewColumn Header="操作"  Width="235">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="继续阅读" 
+                                                Style="{StaticResource ButtonDashedDanger.Small}" 
+                                                BorderThickness="0" 
+                                                Command="{Cmd:Action Reader}"
+                                                CommandParameter="{Binding .}"
+                                                HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </WrapPanel>
+            </Canvas>
+        </TabItem>
+        <TabItem Header="漫画阅读记录" 
+                 Background="Transparent" 
+                 BorderThickness="1"
+                 BorderBrush="Transparent">
+            <Canvas>
+                <Rectangle Height="680" Width="940"  RadiusY="10" RadiusX="10"  VerticalAlignment="Top" Margin="0,5,0,0" Canvas.Left="10">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFFFE0FB" Opacity="0.5"/>
+                    </Rectangle.Fill>
+                    <Rectangle.Effect>
+                        <DropShadowEffect BlurRadius="15" Opacity="0.3" Direction="300" Color="#FFED556A"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <WrapPanel HorizontalAlignment="Center" 
+                           Canvas.Left="10"
+                           VerticalAlignment="Top" 
+                           Height="680"  
+                           Width="940">
+                    <ListView ItemsSource="{Binding MangaHistories}" 
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="名称" DisplayMemberBinding="{Binding Name}" Width="235"/>
+                                <GridViewColumn Header="章节" DisplayMemberBinding="{Binding Title}" Width="235"/>
+                                <GridViewColumn Header="浏览时间" DisplayMemberBinding="{Binding Time,StringFormat={}{0:yyyy年MM月dd日 HH:mm:ss}}" Width="235"/>
+                                <GridViewColumn Header="操作"  Width="235">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="继续观阅" 
+                                                Style="{StaticResource ButtonDashedDanger.Small}" 
+                                                BorderThickness="0" 
+                                                Command="{Cmd:Action Watch}"
+                                                CommandParameter="{Binding .}"
+                                                HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </WrapPanel>
+            </Canvas>
+        </TabItem>
+        <TabItem Header="动漫观看记录" 
+                 Background="Transparent" 
+                 BorderThickness="1"
+                 BorderBrush="Transparent">
+            <Canvas>
+                <Rectangle Height="680" Width="940"  RadiusY="10" RadiusX="10"  VerticalAlignment="Top" Margin="0,5,0,0" Canvas.Left="10">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFFFF9CC" Opacity="0.5"/>
+                    </Rectangle.Fill>
+                    <Rectangle.Effect>
+                        <DropShadowEffect BlurRadius="15" Opacity="0.3" Direction="300" Color="#FFED556A"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <WrapPanel HorizontalAlignment="Center" 
+                           Canvas.Left="10"
+                           VerticalAlignment="Top" 
+                           Height="680"  
+                           Width="940">
+                    <ListView ItemsSource="{Binding AnimeHistories}" 
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="名称" DisplayMemberBinding="{Binding AnimeName}" Width="188"/>
+                                <GridViewColumn Header="集数" DisplayMemberBinding="{Binding CollectName}" Width="188"/>
+                                <GridViewColumn Header="播放器" DisplayMemberBinding="{Binding PlayModelDes}" Width="188"/>
+                                <GridViewColumn Header="浏览时间" DisplayMemberBinding="{Binding Time,StringFormat={}{0:yyyy年MM月dd日 HH:mm:ss}}" Width="188"/>
+                                <GridViewColumn Header="操作"  Width="188">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="继续播放" 
+                                                Style="{StaticResource ButtonDashedDanger.Small}" 
+                                                BorderThickness="0" 
+                                                Command="{Cmd:Action Play}"
+                                                CommandParameter="{Binding .}"
+                                                HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </WrapPanel>
+            </Canvas>
+        </TabItem>
+    </TabControl>
 </UserControl>

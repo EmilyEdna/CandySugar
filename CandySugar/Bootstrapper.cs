@@ -60,7 +60,7 @@ namespace CandySugar
             //日志
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .WriteTo.File("Logs/Lote.log", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("Logs/Candy.log", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
         }
 

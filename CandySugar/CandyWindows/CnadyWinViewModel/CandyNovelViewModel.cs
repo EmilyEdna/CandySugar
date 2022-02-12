@@ -1,4 +1,6 @@
-﻿using CandySugar.Controls.Commands;
+﻿using CandySugar.Common.DTO;
+using CandySugar.Controls.Commands;
+using CandySugar.Core.Service;
 using CandySugar.Properties;
 using Novel.SDK;
 using Novel.SDK.ViewModel;
@@ -9,6 +11,7 @@ using Stylet;
 using StyletIoC;
 using System.Windows;
 using System.Windows.Input;
+using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using MessageBox = HandyControl.Controls.MessageBox;
 
@@ -86,10 +89,11 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
                 }).RunsAsync();
                 this.NovelContent = NovelContent.Contents;
 
-                //LoteNovelHistoryDTO DTO = NovelContent.Contents.ToMapest<LoteNovelHistoryDTO>();
-                //DTO.BookName = this.BookName;
-                //container.Get<IHistoryService>().AddNovelHistory(DTO);
-            }catch
+                CandyNovelHistoryDto DTO = NovelContent.Contents.ToMapest<CandyNovelHistoryDto>();
+                DTO.BookName = this.BookName;
+                Container.Get<ILiShi>().AddNovelHistory(DTO);
+            }
+            catch
             {
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
