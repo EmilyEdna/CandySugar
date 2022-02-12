@@ -92,6 +92,15 @@ namespace CandySugar
                 CandyPreviewWindow.Clear();
                 windows = new CandyPreviewWin();
                 action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content).FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 CandyPreviewWindow.TryAdd(nameof(CandyPreviewWin), windows);
                 windows.Show();
             }
@@ -100,6 +109,15 @@ namespace CandySugar
                 CandyPreviewWindow.Clear();
                 windows = new CandyPreviewWin();
                 action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content).FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 CandyPreviewWindow.TryAdd(nameof(CandyPreviewWin), windows);
                 windows.Show();
             }

@@ -25,7 +25,6 @@
     <ImageSource x:Key="PayCode">/CandySugar.Controls;component/Assets/PayCode.png</ImageSource>
     <FontFamily x:Key="FontStyle">/CandySugar.Controls;component/Assets/#HappyZcool-2016</FontFamily>
 
-
     <sys:String x:Key="PortStr">端口</sys:String>
     <sys:String x:Key="IPStr">IP地址</sys:String>
     <sys:String x:Key="AccountStr">账号</sys:String>
@@ -42,4 +41,5 @@
     <Cv:ButtonContentConverter x:Key="ButtonContentConverter"/>
     <Cv:TextConverter x:Key="TextConverter"/>
     <Cv:VisibleConverter x:Key="VisibleConverter"/>
+    <Cv:RadioConverter x:Key="RadioConverter"/>
 </ResourceDictionary>

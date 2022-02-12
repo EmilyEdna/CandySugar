@@ -40,7 +40,7 @@
             <WrapPanel Orientation="Vertical">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="400"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <hc:ScrollViewer>

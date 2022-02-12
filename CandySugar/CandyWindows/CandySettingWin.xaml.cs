@@ -77,5 +77,12 @@ namespace CandySugar.CandyWindows
             var vm =  (this.DataContext as CandySettingViewModel);
             vm.Root.PlayBox= rb.CommandParameter.ToString().AsInt();
         }
+
+        private void ModuleChecked(object sender, RoutedEventArgs e)
+        {
+            var rb = (sender as RadioButton);
+            var vm = (this.DataContext as CandySettingViewModel);
+            vm.Root.Module = rb.CommandParameter.ToString().AsInt();
+        }
     }
 }

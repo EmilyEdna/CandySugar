@@ -42,7 +42,6 @@
                 <ComboBoxItem Content="墨鱼黑" TabIndex="4"/>
                 <ComboBoxItem Content="紫薯红" TabIndex="5"/>
             </ComboBox>
-            <hc:LoadingLine Grid.Column="1" Style="{StaticResource LoadingLineLargeLight}" />
             <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
                 <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding Handler}">

@@ -37,7 +37,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="0,0,0,1" BorderBrush="DeepPink" Width="1200">
-                            <Image Source="{Binding .}" Stretch="Uniform" Width="1200"/>
+                            <Image Source="{Binding .,IsAsync=True}" Stretch="Uniform" Width="1200"/>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -18,6 +18,6 @@ namespace CandySugar.Common.WinDTO
         public bool DefaultNovel { get; set; }
         public int CacheTime { get; set; }
         public int PlayBox { get; set; }
-        public bool SafeModule { get; set; }
+        public int Module { get; set; }
     }
 }

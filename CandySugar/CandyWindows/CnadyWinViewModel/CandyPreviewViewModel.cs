@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 
 namespace CandySugar.CandyWindows.CnadyWinViewModel
 {
@@ -16,6 +16,13 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
         {
             get { return _FileURL; }
             set { SetAndNotify(ref _FileURL, value); }
+        }
+
+        private Visibility _Loading;
+        public Visibility Loading
+        {
+            get { return _Loading; }
+            set { SetAndNotify(ref _Loading, value); }
         }
         #endregion
     }

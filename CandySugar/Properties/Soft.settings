@@ -32,11 +32,17 @@
     <Setting Name="Theme" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFF9999</Value>
     </Setting>
-    <Setting Name="Safe" Type="System.String" Scope="User">
+    <Setting Name="S12X" Type="System.String" Scope="User">
       <Value Profile="(Default)">rating:safe</Value>
     </Setting>
-    <Setting Name="SafeModule" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="S15X" Type="System.String" Scope="User">
+      <Value Profile="(Default)">rating:questionable</Value>
+    </Setting>
+    <Setting Name="S18X" Type="System.String" Scope="User">
+      <Value Profile="(Default)">rating:explicit</Value>
+    </Setting>
+    <Setting Name="Module" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
     </Setting>
   </Settings>
 </SettingsFile>

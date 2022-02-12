@@ -64,7 +64,7 @@
                         <WrapPanel Orientation="Horizontal" Margin="2,1,0,20">
                             <StackPanel>
                                 <Border BorderThickness="1" BorderBrush="{StaticResource RedPink}" Width="180">
-                                    <Image Source="{C:Binding Cover}"  Stretch="UniformToFill" Width="180" Height="180"/>
+                                    <Image Source="{Binding Cover ,IsAsync=True}"  Stretch="UniformToFill" Width="180" Height="180"/>
                                 </Border>
                                 <Button Content="{Binding MangaName,Converter={StaticResource ButtonContentConverter},ConverterParameter=2}" 
                                     Style="{StaticResource ButtonDashedInfo.Small}"

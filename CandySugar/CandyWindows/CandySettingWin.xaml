@@ -127,23 +127,23 @@
                        Width="100"/>
             </Canvas>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="30"  Width="340">
-                <RadioButton Content="DPlayer" 
+                <RadioButton Content="VLC" 
                              HorizontalAlignment="Left"
+                             Checked="PlayBoxChecked"
+                             CommandParameter="0"
+                             IsChecked="{Binding Root.PlayBox,Converter={StaticResource RadioConverter},ConverterParameter=0}"
+                             GroupName="PlayBox"
+                             BorderBrush="Transparent"
+                             Height="20" 
+                             Width="50"/>
+                <RadioButton Content="DPlayer" 
                              GroupName="PlayBox"
                              BorderBrush="Transparent"
                              Height="20" 
                              Checked="PlayBoxChecked"
                              CommandParameter="1"
-                             IsChecked="{C:Binding 'Root.PlayBox == 1'}"
+                             IsChecked="{Binding Root.PlayBox,Converter={StaticResource RadioConverter},ConverterParameter=1}"
                              Width="110"/>
-                <RadioButton Content="VLC" 
-                             Checked="PlayBoxChecked"
-                             CommandParameter="0"
-                             IsChecked="{C:Binding 'Root.PlayBox == 0'}"
-                             GroupName="PlayBox"
-                             BorderBrush="Transparent"
-                             Height="20" 
-                             Width="50"/>
             </Grid>
             <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Width="340" Height="30">
                 <Label Content="代理设置：" 
@@ -220,7 +220,42 @@
                        Width="100"/>
             </Canvas>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="40"  Width="340">
-                <CheckBox Content="一般模式" IsChecked="{Binding Root.SafeModule ,Mode=TwoWay}"/>
+                <RadioButton Content="12X" 
+                             HorizontalAlignment="Left"
+                             GroupName="Module"
+                             BorderBrush="Transparent"
+                             Height="20" 
+                             Checked="ModuleChecked"
+                             CommandParameter="2"
+                             IsChecked="{Binding Root.Module,Converter={StaticResource RadioConverter},ConverterParameter=2}"
+                             Width="50"/>
+                <RadioButton Content="15X" 
+                             Margin="0,0,160,0"
+                             Checked="ModuleChecked"
+                             CommandParameter="3"
+                             IsChecked="{Binding Root.Module,Converter={StaticResource RadioConverter},ConverterParameter=3}"
+                             GroupName="Module"
+                             BorderBrush="Transparent"
+                             Height="20" 
+                             Width="50"/>
+                <RadioButton Content="18X" 
+                             Checked="ModuleChecked"
+                             Margin="0,0,35,0"
+                             CommandParameter="4"
+                             IsChecked="{Binding Root.Module,Converter={StaticResource RadioConverter},ConverterParameter=4}"
+                             GroupName="Module"
+                             BorderBrush="Transparent"
+                             Height="20" 
+                             Width="50"/>
+                <RadioButton Content="All" 
+                             Checked="ModuleChecked"
+                             CommandParameter="5"
+                             IsChecked="{Binding Root.Module,Converter={StaticResource RadioConverter},ConverterParameter=5}"
+                             GroupName="Module"
+                             Margin="90,0,0,0"
+                             BorderBrush="Transparent"
+                             Height="20" 
+                             Width="50"/>
             </Grid>
         </ListBox>
         <TextBlock Canvas.Left="80" Canvas.Top="580">

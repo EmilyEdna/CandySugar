@@ -25,7 +25,7 @@
             <hc:SearchBar TextWrapping="Wrap" 
                           BorderThickness="0,0,0,1"
                           Style="{StaticResource SearchBarBaseStyle}"
-                          dp:SearchBarDependencyProperty.Placeholder="{StaticResource NovelSearchKey}"
+                          dp:SearchBarDependencyProperty.Placeholder="{StaticResource TagSearchKey}"
                           Width="890"
                           ShowClearButton="True"
                           Command="{Cmd:Action Search}"
@@ -95,6 +95,7 @@
                                                     <DataTemplate>
                                                         <WrapPanel>
                                                             <Button Content="{Binding .}" 
+                                                                    Cursor="Hand"
                                                                     Foreground="{StaticResource TeaRed}"
                                                                     BorderThickness="0"
                                                                     Background="Transparent" 
@@ -109,6 +110,7 @@
                                         <WrapPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
                                             <Ctrl:CandyButton Shape="{StaticResource PreviewEye}" 
                                                           Style="{StaticResource Shape}" 
+                                                          ShapeHeight="12" ShapeWidth="16"
                                                           Command="{Cmd:Action Preview}"  
                                                           CommandParameter="{Binding Id}"/>
                                             <Ctrl:CandyButton Shape="{StaticResource Download}" 

@@ -146,24 +146,48 @@ namespace CandySugar.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("rating:safe")]
-        public string Safe {
+        public string S12X {
             get {
-                return ((string)(this["Safe"]));
+                return ((string)(this["S12X"]));
             }
             set {
-                this["Safe"] = value;
+                this["S12X"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool SafeModule {
+        [global::System.Configuration.DefaultSettingValueAttribute("rating:questionable")]
+        public string S15X {
             get {
-                return ((bool)(this["SafeModule"]));
+                return ((string)(this["S15X"]));
             }
             set {
-                this["SafeModule"] = value;
+                this["S15X"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("rating:explicit")]
+        public string S18X {
+            get {
+                return ((string)(this["S18X"]));
+            }
+            set {
+                this["S18X"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int Module {
+            get {
+                return ((int)(this["Module"]));
+            }
+            set {
+                this["Module"] = value;
             }
         }
     }

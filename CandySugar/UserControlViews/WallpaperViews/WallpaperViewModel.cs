@@ -181,7 +181,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
             var vm = Container.Get<CandyPreviewViewModel>();
             var wallpaper = Wallpaper.FirstOrDefault(t => t.Id == Id);
             vm.FileURL = wallpaper.OriginalPng.IsNullOrEmpty() ? wallpaper.FileSizeJepg : wallpaper.OriginalPng;
-
+            vm.Loading = System.Windows.Visibility.Hidden;
             BootResource.View(window =>
             {
                 window.DataContext = vm;
@@ -190,6 +190,22 @@ namespace CandySugar.UserControlViews.WallpaperViews
         #endregion
 
         #region Init
+
+        protected string InitTag(bool Type=true) 
+        { 
+            string Tag =string.Empty;
+            if (Soft.Default.Module == 2)
+                Tag = Soft.Default.S12X;
+            else if (Soft.Default.Module == 3)
+                Tag = Soft.Default.S15X;
+            else if (Soft.Default.Module == 4)
+                Tag = Soft.Default.S18X;
+            else
+                Tag = string.Empty;
+
+                return Type? Tag: $"{Tag} {KeyWord}";
+        }
+
         protected override async void OnViewLoaded()
         {
             var favoriteId = await BiZhi.GetAllFavorite();
@@ -212,7 +228,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
                         {
                             Page=PageIndex,
                             Limit = Limit,
-                            Tag=Soft.Default.SafeModule?Soft.Default.Safe:String.Empty
+                            Tag= InitTag()
                         },
                         Proxy = this.Proxy
                     };
@@ -251,8 +267,8 @@ namespace CandySugar.UserControlViews.WallpaperViews
                         Search = new WallpaperSearch
                         {
                             Limit = Limit,
-                            Page=PageIndex,
-                            KeyWord =  Soft.Default.SafeModule ? $"{Soft.Default.Safe} {KeyWord}" : KeyWord
+                            Page = PageIndex,
+                            KeyWord = InitTag(false)
                         },
                         Proxy = this.Proxy
                     };

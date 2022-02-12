@@ -36,7 +36,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Ctrl:CandyButton">
                     <Grid Width="22" Height="22" Background="Transparent">
-                        <Path x:Name="Content" Width="14" Height="14"
+                        <Path x:Name="Content" Width="{TemplateBinding ShapeWidth}" Height="{TemplateBinding ShapeHeight}"
                                 Data="{TemplateBinding Shape}" Fill="Black" Stretch="Fill" UseLayoutRounding="True"/>
                     </Grid>
                     <ControlTemplate.Triggers>
