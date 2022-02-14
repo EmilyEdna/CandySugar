@@ -68,17 +68,17 @@ namespace CandySugar
             RootOption root = Soft.Default.ToJson().ToModel<RootOption>();
             
             var XmlData = Encoding.UTF8.GetBytes(SyncStatic.XmlSerializer(root));
-            SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "Setting"));
-            var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "Setting"));
-            var File = SyncStatic.CreateFile(Path.Combine(Dir, "Setting.xml"));
+            SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "UserSetting"));
+            var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "UserSetting"));
+            var File = SyncStatic.CreateFile(Path.Combine(Dir, "UserSetting.xml"));
 
             SyncStatic.WriteFile(XmlData, File);
         }
 
         internal static void ReadUserSetting()
         {
-            var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "Setting"));
-            var Xml = SyncStatic.ReadFile(Path.Combine(Dir, "Setting.xml"));
+            var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "UserSetting"));
+            var Xml = SyncStatic.ReadFile(Path.Combine(Dir, "UserSetting.xml"));
             if (Xml != null)
             {
                 var setting = SyncStatic.XmlDeserialize<RootOption>(Xml);
