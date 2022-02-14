@@ -217,22 +217,22 @@
                                                Foreground="White"/>
                                 </WrapPanel>
                                 <WrapPanel Orientation="Horizontal" Grid.Column="1">
-                                    <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                    <Button  Style="{StaticResource MaterialDesignIconForegroundButton}"
                                                     Design:ShadowAssist.ShadowDepth="Depth2" 
                                                     Width="17" Height="17" ToolTip="播放"
                                                     Margin="0,0,5,0"
                                                     Command="{Cmd:Action AddPlayList}"
                                                     CommandParameter="{Binding .}"
-                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                                                     BorderBrush="{x:Null}">
                                         <Design:PackIcon Kind="PlayOutline"  Width="14" Height="14"/>
                                     </Button>
-                                    <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                    <Button  Style="{StaticResource MaterialDesignIconForegroundButton}"
                                                     Design:ShadowAssist.ShadowDepth="Depth2" 
                                                     Width="17" Height="17" ToolTip="专辑"
                                                     CommandParameter="{Binding SongAlbumId}"
                                                     Command="{Cmd:Action ShowAlbum}"
-                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                                                     BorderBrush="{x:Null}">
                                         <Design:PackIcon Kind="Album"  Width="14" Height="14"/>
                                     </Button>

@@ -186,6 +186,8 @@ namespace CandySugar.UserControlViews.MusicViews
                 return;
             try
             {
+                Tab.SelectedIndex = 2;
+
                 var SheetDetail = await MusicFactory.Music(opt =>
                 {
                     opt.RequestParam = new MusicRequestInput
@@ -200,8 +202,6 @@ namespace CandySugar.UserControlViews.MusicViews
                         }
                     };
                 }).RunsAsync();
-
-                Tab.SelectedIndex = 2;
 
                 this.SheetDetail = SheetDetail.SongSheetDetailResult;
             }
@@ -350,7 +350,7 @@ namespace CandySugar.UserControlViews.MusicViews
         #endregion
 
         #region Function
-        private async Task SearchBasic(int type = 1)
+        private async void SearchBasic(int type = 1)
         {
             ShowType = type;
             switch (Platform)

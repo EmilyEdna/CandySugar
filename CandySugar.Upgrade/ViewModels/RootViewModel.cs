@@ -10,7 +10,7 @@ namespace CandySugar.Upgrade.ViewModels
             get { return _title; }
             set { SetAndNotify(ref _title, value); }
         }
-
+        //https://gitee.com/Mefelia/CandySugar/raw/master/File.zip
         public RootViewModel()
         {
 

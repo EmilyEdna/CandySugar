@@ -33,29 +33,29 @@
 		<PackageReference Include="NAudio" Version="2.0.1" />
 		<PackageReference Include="Stylet" Version="1.3.6" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="Anime.SDK">
-			<HintPath>..\Lib\Anime.SDK.dll</HintPath>
-		</Reference>
-		<Reference Include="LightNovel.SDK">
-			<HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
-		</Reference>
-		<Reference Include="Manga.SDK">
-			<HintPath>..\Lib\Manga.SDK.dll</HintPath>
-		</Reference>
-		<Reference Include="Music.SDK">
-			<HintPath>..\Lib\Music.SDK.dll</HintPath>
-		</Reference>
-		<Reference Include="Novel.SDK">
-			<HintPath>..\Lib\Novel.SDK.dll</HintPath>
-		</Reference>
-		<Reference Include="Wallpaper.SDK">
-			<HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
-		</Reference>
-	</ItemGroup>
 	
 	<ItemGroup>
 	  <ProjectReference Include="..\CandySugar.Core\CandySugar.Core.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Reference Include="Anime.SDK">
+	    <HintPath>..\Lib\Anime.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="LightNovel.SDK">
+	    <HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Manga.SDK">
+	    <HintPath>..\Lib\Manga.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Music.SDK">
+	    <HintPath>..\Lib\Music.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Novel.SDK">
+	    <HintPath>..\Lib\Novel.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Wallpaper.SDK">
+	    <HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 </Project>

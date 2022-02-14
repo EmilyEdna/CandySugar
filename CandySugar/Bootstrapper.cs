@@ -29,7 +29,7 @@ namespace CandySugar
             var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             var serverVersion = IHttpMultiClient.HttpMulti.AddNode(opt =>
             {
-                opt.NodePath = "https://gitee.com/Mefelia/KilyCore.WebSite/raw/master/LoteOption";
+                opt.NodePath = "https://gitee.com/Mefelia/CandySugar/raw/master/CandySugarOption";
             }).Build().RunStringFirst();
             if (!currentVersion.Equals(serverVersion))
             {
