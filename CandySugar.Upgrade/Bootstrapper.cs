@@ -70,7 +70,7 @@ namespace CandySugar.Upgrade
         /// <param name="e"></param>
         protected override void OnUnhandledException(DispatcherUnhandledExceptionEventArgs e)
         {
-            HandyControl.Controls.MessageBox.Error("服务异常，程序将自动关闭。", "错误");
+            HandyControl.Controls.MessageBox.Info("已是最新版本!", "通知");
             GC.Collect();
             Application.Current.Shutdown();
         }
