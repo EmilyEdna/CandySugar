@@ -23,9 +23,12 @@
         <WrapPanel>
             <hc:SearchBar TextWrapping="Wrap" 
                           BorderThickness="0,0,0,1"
-                          Style="{StaticResource SearchBarBaseStyle}"
+                          Style="{StaticResource SearchBarBaseStyle}"  
+                          hc:BorderElement.CornerRadius="0"
+                          BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           dp:SearchBarDependencyProperty.Placeholder="{StaticResource NovelSearchKey}"
                           Width="960"
+                          Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           ShowClearButton="True"
                           Command="{Cmd:Action SearchBook}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />

@@ -9,6 +9,7 @@
              xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
              xmlns:Behavior="clr-namespace:CandySugar.Controls.Behaviors;assembly=CandySugar.Controls"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:Opt="clr-namespace:CandySugar.Properties"
              xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
              xmlns:Cmd="https://github.com/canton7/Stylet"
              Width="960"
@@ -26,6 +27,9 @@
                           VerticalAlignment="Center"
                           dp:SearchBarDependencyProperty.Placeholder="{StaticResource MangaSearchKey}"
                           Width="960"
+                          hc:BorderElement.CornerRadius="0"
+                          BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
+                          Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           ShowClearButton="True"
                           Command="{Cmd:Action Search}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />

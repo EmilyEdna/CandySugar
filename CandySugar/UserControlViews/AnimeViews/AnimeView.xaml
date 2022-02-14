@@ -26,8 +26,10 @@
                           BorderThickness="0,0,0,1"
                           Style="{StaticResource SearchBarBaseStyle}"
                           dp:SearchBarDependencyProperty.Placeholder="{StaticResource AnimeSearchKey}"
-                          Width="960"
+                          Width="960" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           ShowClearButton="True"
+                          hc:BorderElement.CornerRadius="0"
+                          BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           Command="{Cmd:Action SearchAnime}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />
         <ListBox ItemsSource="{C:Binding LetterCate}"  

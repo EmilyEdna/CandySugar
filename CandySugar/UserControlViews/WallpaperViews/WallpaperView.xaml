@@ -27,6 +27,9 @@
                           Style="{StaticResource SearchBarBaseStyle}"
                           dp:SearchBarDependencyProperty.Placeholder="{StaticResource TagSearchKey}"
                           Width="890"
+                          Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
+                          hc:BorderElement.CornerRadius="0"
+                          BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           ShowClearButton="True"
                           Command="{Cmd:Action Search}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}" />

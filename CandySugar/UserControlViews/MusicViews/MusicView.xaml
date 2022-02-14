@@ -148,9 +148,11 @@
         <!--#region 头部-->
         <WrapPanel>
             <ComboBox x:Name="box"  
-                      HorizontalContentAlignment="Center"
+                      HorizontalContentAlignment="Center" 
+                      Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       Width="50"
+                      BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                       SelectedIndex="1">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -167,6 +169,9 @@
             <hc:SearchBar TextWrapping="Wrap" 
                           BorderThickness="0,0,0,1"
                           Style="{StaticResource SearchBarBaseStyle}"
+                          hc:BorderElement.CornerRadius="0"
+                          BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
+                          Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           VerticalAlignment="Center"
                           dp:SearchBarDependencyProperty.Placeholder="{StaticResource MusicSearchKey}"
                           Width="910"
@@ -334,21 +339,21 @@
                                                Foreground="White"/>
                                     </WrapPanel>
                                     <WrapPanel Orientation="Horizontal" Grid.Column="1">
-                                        <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                        <Button  Style="{DynamicResource MaterialDesignIconForegroundButton}"
                                                     Design:ShadowAssist.ShadowDepth="Depth2" 
                                                     Width="17" Height="17" ToolTip="播放"
                                                     Margin="0,0,5,0"
                                                     CommandParameter="{Binding .}"
-                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
                                                     BorderBrush="{x:Null}">
                                             <Design:PackIcon Kind="PlayOutline"  Width="14" Height="14"/>
                                         </Button>
-                                        <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                        <Button  Style="{DynamicResource MaterialDesignIconForegroundButton}"
                                                     Design:ShadowAssist.ShadowDepth="Depth2" 
                                                     Width="17" Height="17" ToolTip="专辑"
                                                     CommandParameter="{Binding SongAlbumId}" 
                                                     Command="{Cmd:Action ShowAlbum}"
-                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
                                                     BorderBrush="{x:Null}">
                                             <Design:PackIcon Kind="Album"  Width="14" Height="14"/>
                                         </Button>
@@ -397,11 +402,11 @@
                                                Foreground="White"/>
                                     </WrapPanel>
                                     <WrapPanel Orientation="Horizontal" Grid.Column="1">
-                                        <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                        <Button  Style="{DynamicResource MaterialDesignIconForegroundButton}"
                                                     Design:ShadowAssist.ShadowDepth="Depth2" 
                                                     Width="17" Height="17" ToolTip="播放"
                                                     CommandParameter="{Binding .}"
-                                                    Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                    Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
                                                     BorderBrush="{x:Null}">
                                             <Design:PackIcon Kind="PlayOutline"  Width="14" Height="14"/>
                                         </Button>

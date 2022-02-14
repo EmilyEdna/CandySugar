@@ -22,8 +22,9 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <WrapPanel>
-            <ComboBox  x:Name="box"
-                       Width="60"
+            <ComboBox  x:Name="box"  
+                       BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
+                       Width="60"  Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                        HorizontalContentAlignment="Center"
                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                        SelectedIndex="0">
@@ -36,7 +37,10 @@
                 </i:Interaction.Triggers>
             </ComboBox>
             <hc:SearchBar TextWrapping="Wrap" 
-                          BorderThickness="0,0,0,1"
+                          BorderThickness="0,0,0,1" 
+                          hc:BorderElement.CornerRadius="0"
+                          BorderBrush="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
+                          Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                           Style="{StaticResource SearchBarBaseStyle}"
                           dp:SearchBarDependencyProperty.Placeholder="{StaticResource NovelSearchKey}"
                           Width="900"
