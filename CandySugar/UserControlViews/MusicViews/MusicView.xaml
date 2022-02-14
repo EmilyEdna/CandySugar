@@ -497,6 +497,7 @@
                       Width="200" 
                       Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
                       SelectedIndex="0" 
+                      Foreground="White"
                       VerticalAlignment="Bottom" 
                       Canvas.Left="92"
                       Canvas.Top="63" 
@@ -520,6 +521,7 @@
                      HorizontalContentAlignment="Center"  
                      Height="34" 
                      Canvas.Left="775" 
+                     Foreground="White"
                      Canvas.Top="60">
                 <ListBoxItem  ToolTip="播放列表" 
                              Width="50" 

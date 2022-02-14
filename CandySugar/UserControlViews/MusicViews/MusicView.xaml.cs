@@ -448,14 +448,22 @@ namespace CandySugar.UserControlViews.MusicViews
         #region NAudio
         protected void NPlay(CandyPlayListDto input)
         {
-            BootResource.Wave.Dispose();
-            BootResource.Wave = new WaveOutEvent();
-            BootResource.Reader = new MediaFoundationReader(input.CacheAddress);
-            时常.Content = BootResource.Reader.TotalTime.ToString().Split(".").FirstOrDefault();
-            this.播放条.Maximum = BootResource.Reader.TotalTime.TotalSeconds;
-            this.播放条.Value = 0;
-            BootResource.Wave.Init(BootResource.Reader);
-            BootResource.Wave.Play();
+            try
+            {
+                BootResource.Wave.Dispose();
+                BootResource.Wave = new WaveOutEvent();
+                BootResource.Reader = new MediaFoundationReader(input.CacheAddress);
+                时常.Content = BootResource.Reader.TotalTime.ToString().Split(".").FirstOrDefault();
+                this.播放条.Maximum = BootResource.Reader.TotalTime.TotalSeconds;
+                this.播放条.Value = 0;
+                BootResource.Wave.Init(BootResource.Reader);
+                BootResource.Wave.Play();
+            }
+            catch
+            {
+                HandyControl.Controls.MessageBox.Info("播放失败，未检测到音频设备，请检查设备驱动", "提示");
+            }
+           
         }
         #endregion
     }
