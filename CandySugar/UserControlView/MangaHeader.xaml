@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="1.8*"/>
                 <ColumnDefinition Width="0.275*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox SelectedIndex="1" 
+            <ComboBox x:Name="ThemeBox"
                           Margin="8 0 0 0"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"

@@ -22,6 +22,7 @@ namespace CandySugar.UserControlView
         public MangaHeader()
         {
             InitializeComponent();
+            ThemeCombox(ThemeBox);
         }
     }
 }

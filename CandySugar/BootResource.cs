@@ -65,14 +65,13 @@ namespace CandySugar
 
         internal static void SaveUserSetting()
         {
-            ReadUserSetting();
-
             RootOption root = Soft.Default.ToJson().ToModel<RootOption>();
             
             var XmlData = Encoding.UTF8.GetBytes(SyncStatic.XmlSerializer(root));
             SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "Setting"));
             var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "Setting"));
             var File = SyncStatic.CreateFile(Path.Combine(Dir, "Setting.xml"));
+
             SyncStatic.WriteFile(XmlData, File);
         }
 
@@ -85,9 +84,9 @@ namespace CandySugar
                 var setting = SyncStatic.XmlDeserialize<RootOption>(Xml);
                 setting.GetType().GetProperties().ForEnumerEach(t =>
                 {
-                    var Type = Soft.Default.GetType().GetProperty(t.Name);
-                    Type.SetValue(Soft.Default, t.GetValue(setting));
+                    Soft.Default.GetType().GetProperty(t.Name).SetValue(Soft.Default, t.GetValue(setting));
                 });
+                Soft.Default.Save();
             }
         }
         #endregion

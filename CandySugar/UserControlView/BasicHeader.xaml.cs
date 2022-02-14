@@ -18,6 +18,7 @@ namespace CandySugar.UserControlView
         public BasicHeader()
         {
             InitializeComponent();
+            ThemeCombox(ThemeBox);
         }   
     }
 }

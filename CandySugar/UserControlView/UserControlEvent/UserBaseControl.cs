@@ -148,6 +148,21 @@ namespace CandySugar.UserControlView.UserControlEvent
                     break;
             }
         }
+        public virtual void ThemeCombox(ComboBox ThemeBox) 
+        {
+            if (Soft.Default.Theme == "#FF2CCFA0")
+                ThemeBox.SelectedIndex = 0;
+            if (Soft.Default.Theme == "#FFFF9999")
+                ThemeBox.SelectedIndex = 1;
+            if (Soft.Default.Theme == "#FF10AEC2")
+                ThemeBox.SelectedIndex = 2;
+            if (Soft.Default.Theme == "#FFED556A")
+                ThemeBox.SelectedIndex = 3;
+            if (Soft.Default.Theme == "#FF000000")
+                ThemeBox.SelectedIndex = 4;
+            if (Soft.Default.Theme == "#FFEF4289")
+                ThemeBox.SelectedIndex = 5;
+        }
         private void SetTheme(string Colors)
         {
             Soft.Default.Theme = Colors;
