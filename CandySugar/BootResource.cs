@@ -1,12 +1,15 @@
 ﻿using CandySugar.CandyWindows;
+using CandySugar.Common.WinDTO;
 using CandySugar.Controls.UIElementHelper;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using MaterialDesignThemes.Wpf;
 using NAudio.Wave;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,60 +18,79 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using XExten.Advance.LinqFramework;
-
+using XExten.Advance.StaticFramework;
 
 namespace CandySugar
 {
     public class BootResource
     {
+        #region Property
         /// <summary>
         /// 播放定时器
         /// </summary>
-        public static Timer Timer
-        {
-            get; set;
-        }
+        public static Timer Timer { get; set; }
+
         /// <summary>
         /// 歌词定时器
         /// </summary>
-        public static Timer LyricTimer
-        {
-            get; set;
-        }
+        public static Timer LyricTimer { get; set; }
+
         /// <summary>
         /// NAudio
         /// </summary>
-        public static WaveOutEvent Wave
-        {
-            get; set;
-        }
+        public static WaveOutEvent Wave { get; set; }
+
         /// <summary>
         /// Reader
         /// </summary>
-        public static MediaFoundationReader Reader
-        {
-            get; set;
-        }
+        public static MediaFoundationReader Reader { get; set; }
 
+        #endregion
 
+        #region 保存配置
         /// <summary>
         /// 设置全局用户配置的值
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="param"></param>
-        public static void SetSettingPropertyValue<T>(T param)
+        internal static void SetSettingPropertyValue<T>(T param)
         {
             param.GetType().GetProperties().ForEnumerEach(t =>
             {
                 Soft.Default.GetType().GetProperty(t.Name).SetValue(Soft.Default, t.GetValue(param));
             });
             Soft.Default.Save();
+            SaveUserSetting();
         }
 
-        public static void SaveSettingProerty()
+        internal static void SaveUserSetting()
         {
-            Soft.Default.Save();
+            ReadUserSetting();
+
+            RootOption root = Soft.Default.ToJson().ToModel<RootOption>();
+            
+            var XmlData = Encoding.UTF8.GetBytes(SyncStatic.XmlSerializer(root));
+            SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "Setting"));
+            var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "Setting"));
+            var File = SyncStatic.CreateFile(Path.Combine(Dir, "Setting.xml"));
+            SyncStatic.WriteFile(XmlData, File);
         }
+
+        internal static void ReadUserSetting()
+        {
+            var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "Setting"));
+            var Xml = SyncStatic.ReadFile(Path.Combine(Dir, "Setting.xml"));
+            if (Xml != null)
+            {
+                var setting = SyncStatic.XmlDeserialize<RootOption>(Xml);
+                setting.GetType().GetProperties().ForEnumerEach(t =>
+                {
+                    var Type = Soft.Default.GetType().GetProperty(t.Name);
+                    Type.SetValue(Soft.Default, t.GetValue(setting));
+                });
+            }
+        }
+        #endregion
 
         private static ConcurrentDictionary<string, CandyMangaReaderWin> MangaReaderWindow = new ConcurrentDictionary<string, CandyMangaReaderWin>();
         private static ConcurrentDictionary<string, CandyVLCWin> AnimeVLCWindow = new ConcurrentDictionary<string, CandyVLCWin>();
@@ -419,6 +441,4 @@ namespace CandySugar
             LyricTimer?.Close();
         }
     }
-
-
 }

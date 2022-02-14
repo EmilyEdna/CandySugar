@@ -94,6 +94,7 @@ namespace CandySugar.ViewModels
             ActivateItem(screen);
         }
         #endregion
+
         protected override void OnViewLoaded()
         {
             Log.Logger.Information($"CandySugar【启动完成】，时间【{DateTime.Now.ToFmtDate(3,"yyyy年MM月dd日 HH时mm分ss秒")}】");

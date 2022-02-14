@@ -57,7 +57,6 @@ namespace CandySugar
                 }
             }
 
-
             //日志
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
@@ -80,6 +79,9 @@ namespace CandySugar
         protected override void Configure()
         {
             new SqlSugarDbContext().InitCandy();
+
+            BootResource.ReadUserSetting();
+
             base.Configure();
         }
 

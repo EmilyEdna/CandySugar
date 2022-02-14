@@ -152,6 +152,7 @@ namespace CandySugar.UserControlView.UserControlEvent
         {
             Soft.Default.Theme = Colors;
             Soft.Default.Save();
+            BootResource.SaveUserSetting();
         }
     }
 }
