@@ -6,22 +6,6 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Assets\Backgroud.jpg" />
-    <None Remove="Assets\BoardGirl.png" />
-    <None Remove="Assets\Icon.ico" />
-    <None Remove="Assets\PayCode.png" />
-    <None Remove="Assets\站酷快乐体2016修订版.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Assets\Backgroud.jpg" />
-    <Resource Include="Assets\BoardGirl.png" />
-    <Resource Include="Assets\Icon.ico" />
-    <Resource Include="Assets\PayCode.png" />
-    <Resource Include="Assets\站酷快乐体2016修订版.ttf" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="CalcBinding" Version="2.5.2" />
 		<PackageReference Include="HandyControls" Version="3.3.10" />
@@ -36,6 +20,7 @@
 	
 	<ItemGroup>
 	  <ProjectReference Include="..\CandySugar.Core\CandySugar.Core.csproj" />
+	  <ProjectReference Include="..\CandySugar.Resource\CandySugar.Resource.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>

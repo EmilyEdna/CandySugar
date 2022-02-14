@@ -5,14 +5,33 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:viewModels="clr-namespace:CandySugar.Upgrade.ViewModels"
            xmlns:hc="https://handyorg.github.io/handycontrol"
+           xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
            mc:Ignorable="d"
            d:DataContext="{d:DesignInstance Type=viewModels:RootViewModel}"
            Title="{Binding Title}" 
+           Loaded="OnLoad"
            WindowStartupLocation="CenterScreen"
-           Height="110" 
+           Height="80" 
            Width="500" 
            ResizeMode="NoResize" 
            BorderThickness="0"
            WindowStyle="None">
-    <TextBlock Text="Hello World" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <WrapPanel Background="Black">
+            <Button  Style="{DynamicResource MaterialDesignIconForegroundButton}"
+                     Design:ShadowAssist.ShadowDepth="Depth2" 
+                     Width="20" Height="20" Foreground="White"
+                     BorderBrush="{x:Null}">
+                <Design:PackIcon Kind="CogOutline"  Width="15" Height="15"/>
+            </Button>
+            <Label Content="CandySugar" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
+        </WrapPanel>
+        <ProgressBar Style="{StaticResource ProgressBarWarning}" Foreground="#FFEF4289" 
+                     Height="57" Value="{Binding Grade}"  Grid.Row="1"
+                     hc:BorderElement.CornerRadius="0" />
+    </Grid>
 </hc:Window>

@@ -14,7 +14,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontStyle}"/>
-        <Setter Property="Source" Value="/CandySugar.Controls;component/Assets/Backgroud.jpg" />
+        <Setter Property="Source" Value="/CandySugar.Resource;component/Assets/Backgroud.jpg" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Ctrl:CandyWindow">

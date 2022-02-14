@@ -61,7 +61,7 @@
                             </ItemsControl>
                         </WrapPanel>
                     </hc:ScrollViewer>
-                    <!--<Border Grid.Row="1"  Height="400">
+                    <Border Grid.Row="1"  Height="400">
                         <hc:Poptip.Instance>
                             <hc:Poptip Background="Transparent"
                                        BorderThickness="0"
@@ -73,18 +73,18 @@
                             </hc:Poptip>
                         </hc:Poptip.Instance>
                         <Border.Background>
-                            <ImageBrush ImageSource="/CandySugar.Controls;component/Assets/BoardGirl.png" 
+                            <ImageBrush ImageSource="/CandySugar.Resource;component/Assets/BoardGirl.png" 
                                         Stretch="UniformToFill" 
                                         Opacity="0.5"/>
                         </Border.Background>
-                    </Border>-->
+                    </Border>
                 </Grid>
             </WrapPanel>
             <WrapPanel Grid.Column="1">
                 <ContentControl  Cmd:View.Model="{Binding ActiveItem}" x:Name="Contents"/>
             </WrapPanel>
         </Grid>
-        <tb:TaskbarIcon IconSource="/CandySugar.Controls;component/Assets/Icon.ico"
+        <tb:TaskbarIcon IconSource="/CandySugar.Resource;component/Assets/Icon.ico"
                         DoubleClickCommand="{Cmd:Action ShowWindow}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu FontFamily="{StaticResource FontStyle}" Style="{DynamicResource TrayContextMenu}">

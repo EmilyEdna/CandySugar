@@ -40,7 +40,7 @@ namespace CandySugar
                     try
                     {
                         Process process = new Process();
-                        process.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, "Lote.Upgrade.exe");
+                        process.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, "CandySugar.Upgrade.exe");
                         process.StartInfo.CreateNoWindow = true;
                         process.Start();//启动
                         process.CloseMainWindow();//通过向进程的主窗口发送关闭消息来关闭拥有用户界面的进程

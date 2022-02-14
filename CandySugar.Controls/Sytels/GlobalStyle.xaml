@@ -22,8 +22,8 @@
     <SolidColorBrush x:Key="DeepBlack">#FF000000</SolidColorBrush>
     <SolidColorBrush x:Key="LightSkyBlue">#FF10AEC2</SolidColorBrush>
     <SolidColorBrush x:Key="DoneGreen">#FF2CCFA0</SolidColorBrush>
-    <ImageSource x:Key="PayCode">/CandySugar.Controls;component/Assets/PayCode.png</ImageSource>
-    <FontFamily x:Key="FontStyle">/CandySugar.Controls;component/Assets/#HappyZcool-2016</FontFamily>
+    <ImageSource x:Key="PayCode">/CandySugar.Resource;component/Assets/PayCode.png</ImageSource>
+    <FontFamily x:Key="FontStyle">/CandySugar.Resource;component/Assets/#HappyZcool-2016</FontFamily>
 
     <sys:String x:Key="PortStr">端口</sys:String>
     <sys:String x:Key="IPStr">IP地址</sys:String>

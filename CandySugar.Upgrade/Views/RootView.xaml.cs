@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using CandySugar.Upgrade.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace CandySugar.Upgrade.Views
@@ -9,6 +11,11 @@ namespace CandySugar.Upgrade.Views
         public RootView()
         {
             InitializeComponent();
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as RootViewModel).Upgrade();
         }
     }
 }
