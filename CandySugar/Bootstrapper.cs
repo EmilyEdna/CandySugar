@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using XExten.Advance.HttpFramework.MultiFactory;
+using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 
 namespace CandySugar
@@ -117,6 +118,7 @@ namespace CandySugar
         protected override void OnExit(ExitEventArgs e)
         {
             SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "Lote.exe.WebView2"));
+            Log.Logger.Information($"CandySugar【已退出】，时间【{DateTime.Now.ToFmtDate(3, "yyyy年MM月dd日 HH时mm分ss秒")}】");
             base.OnExit(e);
         }
 

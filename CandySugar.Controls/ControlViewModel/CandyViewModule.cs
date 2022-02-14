@@ -1,13 +1,11 @@
-﻿using CandySugar.Controls.Commands;
-using CandySugar.Core.CandyUtily;
+﻿using CandySugar.Core.CandyUtily;
+using Serilog;
 using Stylet;
 using StyletIoC;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XExten.Advance.StaticFramework;
+using System.Reflection;
 
 namespace CandySugar.Controls.ControlViewModel
 {
@@ -16,11 +14,13 @@ namespace CandySugar.Controls.ControlViewModel
         public static IContainer Container { get; set; }
         public static IStyletIoCBuilder RegistControlViewModule(this IStyletIoCBuilder builder)
         {
-            SyncStatic.Assembly("CandySugar.Controls")
-                .SelectMany(x => x.ExportedTypes.Where(t => t.BaseType == typeof(Screen) && t.IsClass))
-                .ToList().ForEach(item => {
-                CandyContainer.Instance.Regiest(item);
-            });
+            var Types = Assembly.LoadFrom(Path.Combine(Environment.CurrentDirectory, "CandySugar.Controls.dll"))
+                .GetTypes().Where(t => t.BaseType == typeof(Screen) && t.IsClass);
+
+            foreach (var type in Types)
+            {
+                CandyContainer.Instance.Regiest(type);
+            }
             return builder;
         }
 
