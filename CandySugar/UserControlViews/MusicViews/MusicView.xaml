@@ -677,7 +677,7 @@
                                 <Grid Margin="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="70"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" FontSize="12" 
                                                Margin="0,0,100,0" HorizontalAlignment="Left" ToolTip="{Binding SongArtist}">
@@ -688,10 +688,23 @@
                                     </TextBlock>
                                     <WrapPanel Grid.Column="1">
                                         <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                                                      Design:ShadowAssist.ShadowDepth="Depth2" 
+                                                      Design:ShadowAssist.ShadowDepth="Depth0" 
+                                                      Width="22" 
+                                                      Height="22"  
+                                                      ToolTip="搜索" 
+                                                      Command="{Cmd:Action SearchMusic}" 
+                                                      CommandParameter="{Binding SongName}"
+                                                      VerticalAlignment="Bottom" 
+                                                      Background="{Binding Theme,Source={x:Static Opt:Soft.Default}}" 
+                                                      BorderBrush="Transparent">
+                                            <Design:PackIcon Width="12" Height="12" Kind="Search"/>
+                                        </Button>
+                                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+                                                      Design:ShadowAssist.ShadowDepth="Depth0" 
                                                       Width="22" 
                                                       Height="22" 
                                                       ToolTip="下载"
+                                                      Margin="2,0,0,0"
                                                       Command="{Cmd:Action DownMusic}" 
                                                       CommandParameter="{Binding .}"
                                                       VerticalAlignment="Bottom" 
@@ -700,7 +713,7 @@
                                             <Design:PackIcon Width="12" Height="12" Kind="DownloadCircle"/>
                                         </Button>
                                         <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                                                      Design:ShadowAssist.ShadowDepth="Depth2" 
+                                                      Design:ShadowAssist.ShadowDepth="Depth0" 
                                                       Width="22" 
                                                       Height="22"  
                                                       Margin="2,0,0,0"

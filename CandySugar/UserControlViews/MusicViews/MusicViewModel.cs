@@ -259,7 +259,10 @@ namespace CandySugar.UserControlViews.MusicViews
                 }).RunsAsync();
 
                 if (SongURL.SongPlayAddressResult.CanPlay == false)
+                {
                     MessageBox.Info("当前歌曲已下架，请切换到其他其他平台搜索");
+                    return;
+                }
 
                 var tuple = MusicCache(input, SongURL.SongPlayAddressResult);
 

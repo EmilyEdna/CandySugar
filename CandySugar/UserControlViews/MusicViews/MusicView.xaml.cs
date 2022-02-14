@@ -1,4 +1,5 @@
-﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+﻿using CandySugar.CandyWindows;
+using CandySugar.CandyWindows.CnadyWinViewModel;
 using CandySugar.Common.DTO;
 using CandySugar.Common.Enum;
 using Music.SDK.ViewModel.Response;
@@ -6,6 +7,7 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +22,8 @@ namespace CandySugar.UserControlViews.MusicViews
     /// </summary>
     public partial class MusicView : UserControl
     {
+        private MusicLyricResult LyricResult;
+        private CandyLyricWin CandyLyric;
         /// <summary>
         /// 歌词状态
         /// </summary>
@@ -50,10 +54,14 @@ namespace CandySugar.UserControlViews.MusicViews
                 Enabled = true
             };
 
+            BootResource.LyricTimer.Elapsed += LyricTimer_Elapsed;
+
             BootResource.Wave.PlaybackStopped += Wave_PlaybackStopped;
 
             InitMedia();
         }
+
+
 
         #region 初始化
         protected void InitMedia()
@@ -72,7 +80,24 @@ namespace CandySugar.UserControlViews.MusicViews
             this.播放条.Value = 0;
             this.播放条.IsEnabled = false;
         }
-
+        private void LyricTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var Seconds = TimeSpan.Parse(BootResource.Reader.CurrentTime.ToString().Split(".").FirstOrDefault());
+                if (LyricResult.Lyrics != null)
+                {
+                    foreach (var item in LyricResult.Lyrics)
+                    {
+                        var Target = TimeSpan.Parse("00:" + item.Time.Split(".").FirstOrDefault());
+                        if (Target == Seconds)
+                        {
+                            (CandyLyric.DataContext as CandyLyricViewModel).Lyric = item.Lyric;
+                        }
+                    }
+                }
+            });
+        }
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -97,6 +122,14 @@ namespace CandySugar.UserControlViews.MusicViews
         private void Wave_PlaybackStopped(object sender, StoppedEventArgs e)
         {
             BootResource.Wave.Stop();
+        }
+
+        public async Task LyricData()
+        {
+            MusicLyricResult result =await  this.ViewModel.LoadLyric(CurrentPlay.Values.FirstOrDefault());
+            if (result == null && result.Lyrics == null)
+                return;
+            LyricResult = result;
         }
 
         private MusicViewModel ViewModel => this.DataContext as MusicViewModel;
@@ -383,47 +416,30 @@ namespace CandySugar.UserControlViews.MusicViews
                     break;
             }
         }
-        private void LyricHandle(object sender, MouseButtonEventArgs e)
+        private async void LyricHandle(object sender, MouseButtonEventArgs e)
         {
+           await LyricData();
             LyricStutas = BootResource.Lyric(window =>
             {
                 window.DataContext = ViewModel.GetContainer<CandyLyricViewModel>();
                 if (BootResource.Wave.PlaybackState == PlaybackState.Playing) BootResource.LyricTimer.Start();
                 else BootResource.LyricTimer.Close();
-            }) >=1;
+
+                CandyLyric = window;
+            }) >= 1;
         }
-        private async void LyricHandles() 
+        private async void LyricHandles()
         {
             if (LyricStutas)
             {
-                MusicLyricResult result = await this.ViewModel.LoadLyric(CurrentPlay.Values.FirstOrDefault());
-                if (result == null && result.Lyrics == null)
-                    return;
-               
+               await LyricData();
+
                 LyricStutas = BootResource.Lyric(window =>
                 {
                     window.DataContext = ViewModel.GetContainer<CandyLyricViewModel>();
                     if (BootResource.Wave.PlaybackState == PlaybackState.Playing) BootResource.LyricTimer.Start();
                     else BootResource.LyricTimer.Close();
-
-                    BootResource.LyricTimer.Elapsed += (s, e) =>
-                    {
-                        Dispatcher.Invoke(() =>
-                        {
-                            var Seconds = TimeSpan.Parse(BootResource.Reader.CurrentTime.ToString().Split(".").FirstOrDefault());
-                            if (result.Lyrics != null)
-                            {
-                                foreach (var item in result.Lyrics)
-                                {
-                                    var Target = TimeSpan.Parse("00:" + item.Time.Split(".").FirstOrDefault());
-                                    if (Target == Seconds)
-                                    {
-                                        (window.DataContext as CandyLyricViewModel).Lyric = item.Lyric;
-                                    }
-                                }
-                            }
-                        });
-                    };
+                    CandyLyric = window;
                 }, 3) >= 1;
             }
         }
