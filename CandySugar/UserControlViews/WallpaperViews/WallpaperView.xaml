@@ -79,9 +79,9 @@
                                             <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
                                         <StackPanel HorizontalAlignment="Left" Margin="18,0,0,0">
-                                            <TextBlock Text="{Binding Author,StringFormat=上传:{0}}" Foreground="{StaticResource RedPink}"/>
-                                            <TextBlock Text="{Binding Created,StringFormat=时间:{0:yyyy-MM-dd}}" Foreground="{StaticResource RedPink}"/>
-                                            <TextBlock Text="{Binding Pixel,StringFormat=像素:{0}}"  Foreground="{StaticResource RedPink}"/>
+                                            <TextBlock Text="{Binding Author,StringFormat=上传:{0}}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                                            <TextBlock Text="{Binding Created,StringFormat=时间:{0:yyyy-MM-dd}}" Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
+                                            <TextBlock Text="{Binding Pixel,StringFormat=像素:{0}}"   Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"/>
                                         </StackPanel>
                                         <WrapPanel Grid.Row="1" Margin="10,0,0,0">
                                             <ListBox Style="{StaticResource WrapPanelHorizontalListBox}" 
@@ -99,7 +99,7 @@
                                                         <WrapPanel>
                                                             <Button Content="{Binding .}" 
                                                                     Cursor="Hand"
-                                                                    Foreground="{StaticResource TeaRed}"
+                                                                    Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                                                                     BorderThickness="0"
                                                                     Background="Transparent" 
                                                                     Style="{StaticResource ButtonDanger.Small}"

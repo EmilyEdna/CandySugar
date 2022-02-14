@@ -72,7 +72,7 @@
                                 </Border>
                                 <Button Content="{Binding MangaName,Converter={StaticResource ButtonContentConverter},ConverterParameter=2}" 
                                     Style="{StaticResource ButtonDashedInfo.Small}"
-                                    Foreground="{StaticResource RedPink}"
+                                    Foreground="{Binding Theme,Source={x:Static Opt:Soft.Default}}"
                                     BorderThickness="0"
                                     Command="{Cmd:Action MangaDetailSort}"
                                     CommandParameter="{C:Binding Address}" 
