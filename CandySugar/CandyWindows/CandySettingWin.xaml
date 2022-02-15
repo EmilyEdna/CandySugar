@@ -257,6 +257,17 @@
                              Height="20" 
                              Width="50"/>
             </Grid>
+            <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Width="340" Height="30">
+                <Label Content="首页显示：" 
+                       FontFamily="{StaticResource FontStyle}"
+                       VerticalContentAlignment="Center" 
+                       FontSize="14" 
+                       Height="29.333"
+                       Width="100"/>
+            </Canvas>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="40"  Width="340">
+                <CheckBox Content="是否显示看板娘" IsChecked="{Binding Root.GrilShow ,Mode=TwoWay}"/>
+            </Grid>
         </ListBox>
         <TextBlock Canvas.Left="80" Canvas.Top="580">
             <Run Text="Copyright ©EmilyEdna  2022 " 

@@ -65,5 +65,9 @@ namespace CandySugar.Common.WinDTO
         /// 
         /// </summary>
         public int Module { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool GrilShow { get; set; }
     }
 }

@@ -19,5 +19,6 @@ namespace CandySugar.Common.WinDTO
         public int CacheTime { get; set; }
         public int PlayBox { get; set; }
         public int Module { get; set; }
+        public bool GrilShow { get; set; }
     }
 }

@@ -190,5 +190,17 @@ namespace CandySugar.Properties {
                 this["Module"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool GrilShow {
+            get {
+                return ((bool)(this["GrilShow"]));
+            }
+            set {
+                this["GrilShow"] = value;
+            }
+        }
     }
 }

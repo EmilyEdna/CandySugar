@@ -78,6 +78,7 @@ namespace CandySugar
         /// </summary>
         protected override void Configure()
         {
+
             new SqlSugarDbContext().InitCandy();
 
             BootResource.ReadUserSetting();
@@ -90,6 +91,8 @@ namespace CandySugar
         /// </summary>
         protected override void Launch()
         {
+
+
             base.Launch();
         }
 
@@ -107,6 +110,14 @@ namespace CandySugar
         /// </summary>
         protected override void OnLaunch()
         {
+            #if !DEBUG
+            if (!HelpUtilty.CheckIntegrity())
+            {
+                var handle = HandyControl.Controls.MessageBox.Error("文件损坏，请重新下载！", "错误");
+                if (handle == MessageBoxResult.OK)
+                    Application.Current.Shutdown();
+            }
+            #endif
             var navigationController = this.Container.Get<NavigationController>();
             navigationController.Delegate = this.RootViewModel;
             CandyViewModule.Container = this.Container;
