@@ -110,27 +110,31 @@
                                                 </ListBox.ItemTemplate>
                                             </ListBox>
                                         </WrapPanel>
-                                        <WrapPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Canvas Grid.Row="2">
                                             <Ctrl:CandyButton Shape="{StaticResource PreviewEye}" 
-                                                          Style="{StaticResource Shape}" 
-                                                          ShapeHeight="12" ShapeWidth="16"
-                                                          Command="{Cmd:Action Preview}"  
-                                                          CommandParameter="{Binding Id}"/>
+                                                              Canvas.Left="160"
+                                                              Style="{StaticResource Shape}" 
+                                                              ShapeHeight="12" ShapeWidth="16"
+                                                              Command="{Cmd:Action Preview}"  
+                                                              CommandParameter="{Binding Id}"/>
                                             <Ctrl:CandyButton Shape="{StaticResource Download}" 
-                                                          Style="{StaticResource Shape}" 
-                                                          Command="{Cmd:Action Download}"  
-                                                          CommandParameter="{Binding Id}"/>
+                                                              Style="{StaticResource Shape}" 
+                                                              Canvas.Left="180"
+                                                              Command="{Cmd:Action Download}"  
+                                                              CommandParameter="{Binding Id}"/>
                                             <Ctrl:CandyButton Shape="{StaticResource NoFavorite}" 
-                                                          Visibility="{C:Binding !IsFavorite,FalseToVisibility=Hidden}"
-                                                          Style="{StaticResource Shape}" 
-                                                          Command="{Cmd:Action NoFavorite}"
-                                                          CommandParameter="{Binding Id}"/>
+                                                              Visibility="{C:Binding !IsFavorite,FalseToVisibility=Hidden}"
+                                                              Style="{StaticResource Shape}" 
+                                                              Canvas.Left="200"
+                                                              Command="{Cmd:Action NoFavorite}"
+                                                              CommandParameter="{Binding Id}"/>
                                             <Ctrl:CandyButton Shape="{StaticResource Favorite}" 
-                                                          Visibility="{C:Binding IsFavorite,FalseToVisibility=Hidden}"
-                                                          Style="{StaticResource Shape}" 
-                                                          Command="{Cmd:Action Favorite}"
-                                                          CommandParameter="{Binding Id}"/>
-                                        </WrapPanel>
+                                                              Canvas.Left="200"
+                                                              Visibility="{C:Binding IsFavorite,FalseToVisibility=Hidden}"
+                                                              Style="{StaticResource Shape}" 
+                                                              Command="{Cmd:Action Favorite}"
+                                                              CommandParameter="{Binding Id}"/>
+                                        </Canvas>
                                     </Grid>
                                 </WrapPanel>
                             </Grid>

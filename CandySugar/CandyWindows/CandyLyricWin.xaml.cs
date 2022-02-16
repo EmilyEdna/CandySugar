@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CandySugar.Controls.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace CandySugar.CandyWindows
     /// <summary>
     /// CandyLyricWin.xaml 的交互逻辑
     /// </summary>
-    public partial class CandyLyricWin : Window
+    public partial class CandyLyricWin : CandyWindow
     {
         public CandyLyricWin()
         {

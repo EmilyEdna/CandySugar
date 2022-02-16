@@ -58,6 +58,7 @@ namespace CandySugar.UserControlViews.UserViews
             {
                 var vm = Container.Get<CandyDPlayViewModel>();
                 vm.WatchResult = input.ToMapest<AnimePlayResult>();
+                vm.Loading = System.Windows.Visibility.Hidden;
                 //Open
                 BootResource.AnimeWEB(window =>
                 {
@@ -68,6 +69,7 @@ namespace CandySugar.UserControlViews.UserViews
             {
                 var vm = Container.Get<CandyVLCViewModel>();
                 vm.WatchResult = input.ToMapest<AnimePlayResult>();
+                vm.Loading = System.Windows.Visibility.Hidden;
                 //Open
                 BootResource.AnimeVLC(window =>
                 {
@@ -97,6 +99,7 @@ namespace CandySugar.UserControlViews.UserViews
             var vm = Container.Get<CandyNovelViewModel>();
             vm.NovelContent = input.ToMapest<NovelContentResult>();
             vm.BookName = input.BookName;
+            vm.Loading = System.Windows.Visibility.Hidden;
             //Open
             BootResource.Novel(window =>
             {

@@ -33,7 +33,7 @@ namespace CandySugar.Controls.Converters
                             opt.RequestParam = new WallpaperRequestInput
                             {
                                 WallpaperType = WallpaperEnum.Download,
-                                CacheSpan = 60,
+                                CacheSpan = 180,
                                 Download = new WallpaperDownload()
                                 {
                                     Route = value.ToString()

@@ -127,24 +127,30 @@ namespace CandySugar.UserControlViews.WallpaperViews
             }
         }
 
-        public async void Download(long Id)
+        public async Task Download(long Id)
         {
             var result = Wallpaper.FirstOrDefault(t => t.Id == Id);
             try
             {
-                var bytes = (await IHttpMultiClient.HttpMulti
-                    .InitWebProxy(this.Proxy.ToMapest<MultiProxy>())
-                    .AddNode(t =>
+                var WallpaperDown = await WallpaperFactory.Wallpaper(opt =>
+                {
+                    opt.RequestParam = new WallpaperRequestInput
                     {
-                        t.NodePath = !result.OriginalPng.IsNullOrEmpty() ? result.OriginalPng : result.OriginalJepg;
-                        t.ReqType = MultiType.GET;
-                    }).Build().RunBytesAsync()).FirstOrDefault();
+                        WallpaperType = WallpaperEnum.Download,
+                        CacheSpan = Soft.Default.CacheTime,
+                        Download = new WallpaperDownload()
+                        {
+                            Route = !result.OriginalPng.IsNullOrEmpty() ? result.OriginalPng : result.OriginalJepg
+                        },
+                        Proxy = this.Proxy
+                    };
+                }).RunsAsync();
 
                 var FileName = (!result.OriginalPng.IsNullOrEmpty() ? result.OriginalPng : result.OriginalJepg).Split("/").LastOrDefault();
 
                 var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandyDown", "Wallpaper", $"{result.Author}"));
                 var fn = SyncStatic.CreateFile(Path.Combine(dir, FileName));
-                SyncStatic.WriteFile(bytes, fn);
+                SyncStatic.WriteFile(WallpaperDown.DownloadResult.Bytes, fn);
                 Process.Start("explorer.exe", dir);
             }
             catch
@@ -191,9 +197,9 @@ namespace CandySugar.UserControlViews.WallpaperViews
 
         #region Init
 
-        protected string InitTag(bool Type=true) 
-        { 
-            string Tag =string.Empty;
+        protected string InitTag(bool Type = true)
+        {
+            string Tag = string.Empty;
             if (Soft.Default.Module == 2)
                 Tag = Soft.Default.S12X;
             else if (Soft.Default.Module == 3)
@@ -203,7 +209,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
             else
                 Tag = string.Empty;
 
-                return Type? Tag: $"{Tag} {KeyWord}";
+            return Type ? Tag : $"{Tag} {KeyWord}";
         }
 
         protected override async void OnViewLoaded()
@@ -226,9 +232,9 @@ namespace CandySugar.UserControlViews.WallpaperViews
                         WallpaperType = WallpaperEnum.Init,
                         Init = new WallpaperInit
                         {
-                            Page=PageIndex,
+                            Page = PageIndex,
                             Limit = Limit,
-                            Tag= InitTag()
+                            Tag = InitTag()
                         },
                         Proxy = this.Proxy
                     };
@@ -254,7 +260,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
             this.Total = data.Total;
             this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(data.Result.ToMapest<List<WallpaperResultDetail>>());
         }
-        protected async void SearchBasic(List<long> favoriteId) 
+        protected async void SearchBasic(List<long> favoriteId)
         {
             try
             {

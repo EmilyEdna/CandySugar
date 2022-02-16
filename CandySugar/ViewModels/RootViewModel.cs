@@ -1,6 +1,7 @@
 ﻿using CandySugar.Common.Enum;
 using CandySugar.Common.Navigations;
 using CandySugar.Common.WinDTO;
+using CandySugar.Controls.UserControls;
 using CandySugar.UserControlViews.AnimeViews;
 using CandySugar.UserControlViews.LigthNovelViews;
 using CandySugar.UserControlViews.MangaViews;
@@ -86,6 +87,11 @@ namespace CandySugar.ViewModels
             if (Application.Current.MainWindow != null)
             {
                 Application.Current.MainWindow.Visibility = Visibility.Visible;
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.GetType().BaseType == typeof(CandyWindow) && window.Visibility == Visibility.Collapsed)
+                        window.Visibility = Visibility.Visible;
+                }
             }
         }
 
