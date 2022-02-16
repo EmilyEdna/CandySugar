@@ -16,6 +16,18 @@
         xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
         xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
         xmlns:web="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
+    <Ctrl:CandyWindow.Resources>
+        <Storyboard x:Key="OpenWindow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="window" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1200"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="window" Storyboard.TargetProperty="(FrameworkElement.Height)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="800"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Ctrl:CandyWindow.Resources>
     <Grid HorizontalAlignment="Center" Width="1200" Height="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="72"/>
