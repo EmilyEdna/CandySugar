@@ -21,6 +21,14 @@
         xmlns:Behavior="clr-namespace:CandySugar.Controls.Behaviors;assembly=CandySugar.Controls"
         xmlns:Cv="clr-namespace:CandySugar.Controls.Converters;assembly=CandySugar.Controls"
         xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls">
+    <Ctrl:CandyWindow.Resources>
+        <Storyboard x:Key="OpenWindow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Ctrl:CandyWindow.Resources>
     <Ctrl:CandyWindow.InputBindings>
         <KeyBinding Key="A" Command="{Binding ShowContent}" CommandParameter="{Binding NovelContent.PreviousPage}"/>
         <KeyBinding Key="D" Command="{Binding ShowContent}" CommandParameter="{Binding NovelContent.NextPage}"/>

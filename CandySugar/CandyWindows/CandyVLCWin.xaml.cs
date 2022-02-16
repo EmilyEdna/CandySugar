@@ -53,6 +53,8 @@ namespace CandySugar.CandyWindows
             };
             Timer.Tick += Timer_Tick;
             Timer.Start();
+
+            BeginAnime(OpenWindow);
         }
 
 

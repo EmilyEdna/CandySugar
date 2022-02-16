@@ -26,6 +26,7 @@ namespace CandySugar.CandyWindows
         {
             InitializeComponent();
             Header.DataContext = CandyContainer.Instance.Resolves<MangaHeaderViewModel>().Basic();
+            BeginAnime(OpenWindow);
         }
 
         private void WindowMove(object sender, MouseEventArgs e)

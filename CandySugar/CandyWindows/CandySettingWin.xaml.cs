@@ -24,9 +24,7 @@ namespace CandySugar.CandyWindows
     /// </summary>
     public partial class CandySettingWin : CandyWindow
     {
-        private string OpenWindow = "OpenWindow";
-        private string GiftClose = "GiftClose";
-        private string GiftOpen = "GiftOpen";
+
 
         public CandySettingWin()
         {
@@ -40,11 +38,6 @@ namespace CandySugar.CandyWindows
             {
                 DragMove();
             }
-        }
-
-        private void BeginAnime(string key)
-        {
-            BeginStoryboard((Storyboard)FindResource(key));
         }
 
         private void GiftCloseClick(object sender, RoutedEventArgs e)

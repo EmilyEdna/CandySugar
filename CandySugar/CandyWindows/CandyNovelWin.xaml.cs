@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -26,6 +27,7 @@ namespace CandySugar.CandyWindows
         {
             InitializeComponent();
             Header.DataContext = CandyContainer.Instance.Resolves<NormalHeaderViewModel>().Basic();
+            BeginAnime(OpenWindow);
         }
 
         private void WindowMove(object sender, MouseEventArgs e)

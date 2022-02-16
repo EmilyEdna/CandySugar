@@ -16,6 +16,14 @@
         xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
         xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
         xmlns:hc="https://handyorg.github.io/handycontrol">
+    <Ctrl:CandyWindow.Resources>
+        <Storyboard x:Key="OpenWindow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Ctrl:CandyWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="72"/>

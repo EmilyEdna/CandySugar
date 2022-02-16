@@ -20,6 +20,14 @@
         xmlns:Cmd="https://github.com/canton7/Stylet"
         xmlns:Cv="clr-namespace:CandySugar.Controls.Converters;assembly=CandySugar.Controls"
         xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls">
+    <Ctrl:CandyWindow.Resources>
+        <Storyboard x:Key="OpenWindow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Ctrl:CandyWindow.Resources>
     <Grid HorizontalAlignment="Center" Width="1200">
         <Grid.RowDefinitions>
             <RowDefinition Height="72"/>

@@ -5,11 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace CandySugar.Controls.UserControls
 {
     public class CandyWindow : Window
     {
+
+        public string OpenWindow = "OpenWindow";
+        public string CloseWindow = "CloseWindow";
+        public string GiftClose = "GiftClose";
+        public string GiftOpen = "GiftOpen";
+
         public ImageSource Source
         {
             get { return (ImageSource)GetValue(SourceProperty); }
@@ -27,5 +34,10 @@ namespace CandySugar.Controls.UserControls
 
         public static readonly DependencyProperty LoadingProperty =
             DependencyProperty.Register("Loading", typeof(bool), typeof(CandyWindow), new PropertyMetadata(false));
+
+        public void BeginAnime(string Key)
+        {
+            BeginStoryboard((Storyboard)FindResource(Key));
+        }
     }
 }

@@ -28,8 +28,9 @@ namespace CandySugar.CandyWindows
         {
             InitializeComponent();
             Header.DataContext = CandyContainer.Instance.Resolves<AnimeHeaderViewModel>().Basic();
-            BeginStoryboard((Storyboard)FindResource("OpenWindow"));
+            BeginAnime(OpenWindow);
         }
+
 
         private void WindowMove(object sender, MouseEventArgs e)
         {
