@@ -36,7 +36,8 @@ namespace CandySugar.Common
             var files = Directory.GetFiles(Environment.CurrentDirectory)
                  .Select(t => t.Split("\\").LastOrDefault())
                  .Where(t => t.Contains("CandySugar"))
-                 .Select(t => Regex.Match(t, ".*[dll|exe]+").Value).ToList();
+                 .Where(t=>Path.GetExtension(t).Contains("exe")|| Path.GetExtension(t).Contains("dll"))
+                 .Select(t => t).ToList();
 
             foreach (var item in files)
             {
