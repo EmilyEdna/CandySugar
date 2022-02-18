@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
 		<SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
 		<UseWPF>true</UseWPF>
 		<AssemblyName>CandySugar.Upgrade</AssemblyName>
@@ -15,6 +15,7 @@
 		<FileVersion>1.0.0.0</FileVersion>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
+		<Nullable>disable</Nullable>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<DefineConstants>TRACE;Core</DefineConstants>

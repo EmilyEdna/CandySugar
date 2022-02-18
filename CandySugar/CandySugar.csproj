@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
 		<SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
 		<UseWPF>true</UseWPF>
 		<AssemblyName>CandySugar</AssemblyName>
@@ -15,6 +15,8 @@
 		<Company>EmilyEdna</Company>
 		<Authors>EmilyEdna</Authors>
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
+		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+		<Nullable>disable</Nullable>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<DefineConstants>TRACE;Core</DefineConstants>

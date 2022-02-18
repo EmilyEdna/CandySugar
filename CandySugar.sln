@@ -13,12 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Common", "CandyS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Controls", "CandySugar.Controls\CandySugar.Controls.csproj", "{6AA55027-58BD-458C-8DBA-8191EF975EC3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A803EE8C-57C2-4EB0-8377-8596521D37D2}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandySugar.Resource", "CandySugar.Resource\CandySugar.Resource.csproj", "{715C4906-45E9-4984-9CF6-6DB4DF787EE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Resource", "CandySugar.Resource\CandySugar.Resource.csproj", "{715C4906-45E9-4984-9CF6-6DB4DF787EE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
