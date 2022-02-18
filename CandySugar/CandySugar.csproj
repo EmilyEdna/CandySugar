@@ -61,6 +61,9 @@
 		<Reference Include="Anime.SDK">
 			<HintPath>..\Lib\Anime.SDK.dll</HintPath>
 		</Reference>
+		<Reference Include="GalActor.SDK">
+		  <HintPath>..\Lib\GalActor.SDK.dll</HintPath>
+		</Reference>
 		<Reference Include="LightNovel.SDK">
 			<HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
 		</Reference>
