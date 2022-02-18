@@ -1,52 +1,65 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls">
 
-    <Style x:Key="Menu" TargetType="Button" BasedOn="{StaticResource ButtonPrimary}">
-        <Setter Property="BorderBrush" Value="#FF10AEC2"/>
-        <Setter Property="Foreground" Value="{DynamicResource SukuraPink}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    <Style
+        x:Key="Menu"
+        BasedOn="{StaticResource ButtonPrimary}"
+        TargetType="Button">
+        <Setter Property="BorderBrush" Value="#FF10AEC2" />
+        <Setter Property="Foreground" Value="{DynamicResource SukuraPink}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
     </Style>
 
     <Style x:Key="Colorful" TargetType="Button">
-        <Setter Property="Width" Value="15"/>
-        <Setter Property="Height" Value="15"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Margin" Value="2,0,2,0"/>
-        <Setter Property="Foreground" Value="{x:Null}"/>
-        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Width" Value="15" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="2,0,2,0" />
+        <Setter Property="Foreground" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
     </Style>
 
     <Style x:Key="Powerful" TargetType="Button">
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Margin" Value="2,0,2,0"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="2,0,2,0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="Shape" TargetType="Ctrl:CandyButton">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Ctrl:CandyButton">
-                    <Grid Width="22" Height="22" Background="Transparent">
-                        <Path x:Name="Content" Width="{TemplateBinding ShapeWidth}" Height="{TemplateBinding ShapeHeight}"
-                                Data="{TemplateBinding Shape}" Fill="Black" Stretch="Fill" UseLayoutRounding="True"/>
+                    <Grid
+                        Width="22"
+                        Height="22"
+                        Background="Transparent">
+                        <Path
+                            x:Name="Content"
+                            Width="{TemplateBinding ShapeWidth}"
+                            Height="{TemplateBinding ShapeHeight}"
+                            Data="{TemplateBinding Shape}"
+                            Fill="Black"
+                            Stretch="Fill"
+                            UseLayoutRounding="True" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Fill" TargetName="Content" Value="DeepPink"/>
+                            <Setter TargetName="Content" Property="Fill" Value="DeepPink" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

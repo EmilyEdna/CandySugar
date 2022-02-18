@@ -1,81 +1,106 @@
-﻿<Ctrl:CandyWindow x:Class="CandySugar.CandyWindows.CandyMangaReaderWin"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CandySugar.CandyWindows"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Height="800" 
-        Width="1200"
-        x:Name="window"
-        xmlns:vm ="clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
-        Style="{StaticResource WinStyle}"
-        d:DataContext="{d:DesignInstance Type=vm:CandyMangaReaderViewModel}"
-        xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
-        xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
-        xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
-        xmlns:Cmd="https://github.com/canton7/Stylet"
-        xmlns:Cv="clr-namespace:CandySugar.Controls.Converters;assembly=CandySugar.Controls"
-        xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls">
+﻿<Ctrl:CandyWindow
+    x:Class="CandySugar.CandyWindows.CandyMangaReaderWin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Cmd="https://github.com/canton7/Stylet"
+    xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
+    xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
+    xmlns:Cv="clr-namespace:CandySugar.Controls.Converters;assembly=CandySugar.Controls"
+    xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:CandySugar.CandyWindows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="[vm ]clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
+    x:Name="window"
+    Width="1200"
+    Height="800"
+    d:DataContext="{d:DesignInstance Type=vm:CandyMangaReaderViewModel}"
+    Style="{StaticResource WinStyle}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Ctrl:CandyWindow.Resources>
         <Storyboard x:Key="OpenWindow">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="window" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Ctrl:CandyWindow.Resources>
-    <Grid HorizontalAlignment="Center" Width="1200">
+    <Grid Width="1200" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="72"/>
-            <RowDefinition Height="680"/>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="72" />
+            <RowDefinition Height="680" />
+            <RowDefinition Height="48" />
         </Grid.RowDefinitions>
-        <CtrlView:MangaHeader Width="1200" MouseMove="WindowMove" x:Name="Header"/>
+        <CtrlView:MangaHeader
+            x:Name="Header"
+            Width="1200"
+            MouseMove="WindowMove" />
         <Ctrl:CandyScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewerNativeBaseStyle}">
             <ItemsControl ItemsSource="{Binding Bit}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
+                        <StackPanel Orientation="Vertical" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="0,0,0,1" BorderBrush="DeepPink" Width="1200">
-                            <Image Source="{Binding .,IsAsync=True}" Stretch="Uniform" Width="1200"/>
+                        <Border
+                            Width="1200"
+                            BorderBrush="DeepPink"
+                            BorderThickness="0,0,0,1">
+                            <Image
+                                Width="1200"
+                                Source="{Binding ., IsAsync=True}"
+                                Stretch="Uniform" />
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Ctrl:CandyScrollViewer>
-        <WrapPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                     Margin="2"
-                     Design:ShadowAssist.ShadowDepth="Depth2"
-                     FontSize="22" 
-                     Command="{Binding GoChapter}"
-                     CommandParameter="0"
-                     Background="{StaticResource SukuraPink}" 
-                     BorderBrush="{x:Null}">
-                <Design:PackIcon Kind="ArrowLeftBoldOutline" Height="30" Width="30"/>
+        <WrapPanel
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Margin="2"
+                Design:ShadowAssist.ShadowDepth="Depth2"
+                Background="{StaticResource SukuraPink}"
+                BorderBrush="{x:Null}"
+                Command="{Binding GoChapter}"
+                CommandParameter="0"
+                FontSize="22"
+                Style="{DynamicResource MaterialDesignFloatingActionMiniButton}">
+                <Design:PackIcon
+                    Width="30"
+                    Height="30"
+                    Kind="ArrowLeftBoldOutline" />
             </Button>
-            <TextBlock Style="{StaticResource TextBlockDefaultPrimary}" Background="Transparent" Foreground="White">
-                 <Run Text="{Binding Index}"/>
-                 <Run Text="/"/>
-                 <Run Text="{Binding Total}"/>
+            <TextBlock
+                Background="Transparent"
+                Foreground="White"
+                Style="{StaticResource TextBlockDefaultPrimary}">
+                <Run Text="{Binding Index}" />
+                <Run Text="/" />
+                <Run Text="{Binding Total}" />
             </TextBlock>
-            <Button  Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                     Margin="2"
-                     Design:ShadowAssist.ShadowDepth="Depth2"
-                     FontSize="22" 
-                     Command="{Binding GoChapter}"
-                     CommandParameter="1"
-                     Background="{StaticResource SukuraPink}" 
-                     BorderBrush="{x:Null}">
-                <Design:PackIcon Kind="ArrowRightBoldOutline" Height="30" Width="30"/>
+            <Button
+                Margin="2"
+                Design:ShadowAssist.ShadowDepth="Depth2"
+                Background="{StaticResource SukuraPink}"
+                BorderBrush="{x:Null}"
+                Command="{Binding GoChapter}"
+                CommandParameter="1"
+                FontSize="22"
+                Style="{DynamicResource MaterialDesignFloatingActionMiniButton}">
+                <Design:PackIcon
+                    Width="30"
+                    Height="30"
+                    Kind="ArrowRightBoldOutline" />
             </Button>
         </WrapPanel>
     </Grid>

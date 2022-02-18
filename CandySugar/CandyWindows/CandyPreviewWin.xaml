@@ -1,42 +1,46 @@
-﻿<Ctrl:CandyWindow x:Class="CandySugar.CandyWindows.CandyPreviewWin"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CandySugar.CandyWindows"
-        xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Height="800" 
-        Width="1200"
-        x:Name="window"
-        xmlns:vm ="clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
-        Style="{StaticResource WinStyle}"
-        d:DataContext="{d:DesignInstance Type=vm:CandyPreviewViewModel}"
-        xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
-        xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
-        xmlns:hc="https://handyorg.github.io/handycontrol">
+﻿<Ctrl:CandyWindow
+    x:Class="CandySugar.CandyWindows.CandyPreviewWin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
+    xmlns:CtrlView="clr-namespace:CandySugar.UserControlView"
+    xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:CandySugar.CandyWindows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="[vm ]clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
+    x:Name="window"
+    Width="1200"
+    Height="800"
+    d:DataContext="{d:DesignInstance Type=vm:CandyPreviewViewModel}"
+    Style="{StaticResource WinStyle}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Ctrl:CandyWindow.Resources>
         <Storyboard x:Key="OpenWindow">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="window" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Ctrl:CandyWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="72"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="72" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <CtrlView:NormalHeader Width="1200" MouseMove="WindowMove" x:Name="Header"/>
+        <CtrlView:NormalHeader
+            x:Name="Header"
+            Width="1200"
+            MouseMove="WindowMove" />
         <hc:ScrollViewer Grid.Row="1">
-            <Image Stretch="UniformToFill" Width="1200"
-                   RenderOptions.BitmapScalingMode="HighQuality"  
-                   SnapsToDevicePixels="True"  
-                   Source="{Binding FileURL,IsAsync=True,
-                                    Converter={StaticResource ImageSouceConverter},
-                                    ConverterParameter={x:Static Enum:ImageConvertFuncEnum.Konachan}}"/>
+            <Image
+                Width="1200"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                SnapsToDevicePixels="True"
+                Source="{Binding FileURL, IsAsync=True, Converter={StaticResource ImageSouceConverter}, ConverterParameter={x:Static Enum:ImageConvertFuncEnum.Konachan}}"
+                Stretch="UniformToFill" />
         </hc:ScrollViewer>
     </Grid>
 </Ctrl:CandyWindow>
