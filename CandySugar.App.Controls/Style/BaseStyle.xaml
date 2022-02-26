@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    x:Class="CandySugar.App.Controls.Style.BaseStyle"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <OnPlatform x:Key="FontAwesomeBrands" x:TypeArguments="x:String">
+        <On Platform="Android" Value="FontAwesome6Brands#Regular.otf" />
+    </OnPlatform>
+    <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
+        <On Platform="Android" Value="FontAwesome6Solid#Regular.otf" />
+    </OnPlatform>
+    <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
+        <On Platform="Android" Value="FontAwesome6Regular#Regular.otf" />
+    </OnPlatform>
+</ResourceDictionary>

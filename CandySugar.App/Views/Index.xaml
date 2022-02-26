@@ -1,0 +1,10 @@
+﻿<ContentPage
+    x:Class="CandySugar.App.Views.Index"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Title}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
