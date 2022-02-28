@@ -1,10 +1,56 @@
 ﻿<ContentPage
     x:Class="CandySugar.App.Views.Index"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:sf="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Title}" />
-        </StackLayout>
+        <sf:SfNavigationDrawer x:Name="drawer" DrawerWidth="200">
+            <sf:SfNavigationDrawer.DrawerContentView>
+                <ListView BackgroundColor="#FFFF" ItemsSource="{Binding Menu}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout HeightRequest="40">
+                                    <Label
+                                        Margin="10,7,0,0"
+                                        FontSize="16"
+                                        Text="{Binding FuncName}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </sf:SfNavigationDrawer.DrawerContentView>
+            <sf:SfNavigationDrawer.ContentView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackLayout BackgroundColor="{DynamicResource Sakura}" Orientation="Horizontal">
+                        <Button
+                            BackgroundColor="{DynamicResource Sakura}"
+                            Clicked="OpenSlider"
+                            FontFamily="{DynamicResource FontAwesomeSolid}"
+                            FontSize="16"
+                            HeightRequest="50"
+                            HorizontalOptions="Start"
+                            Text="{Static fontawesome:FontAwesomeIcons.Bars}"
+                            TextColor="White"
+                            WidthRequest="50" />
+                        <Label
+                            BackgroundColor="{DynamicResource Sakura}"
+                            FontSize="16"
+                            HeightRequest="50"
+                            HorizontalTextAlignment="Center"
+                            Text="首页"
+                            TextColor="White"
+                            VerticalTextAlignment="Center" />
+                    </StackLayout>
+                </Grid>
+            </sf:SfNavigationDrawer.ContentView>
+        </sf:SfNavigationDrawer>
     </ContentPage.Content>
 </ContentPage>

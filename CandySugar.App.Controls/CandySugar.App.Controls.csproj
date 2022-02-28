@@ -9,9 +9,15 @@
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
 		<PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.7.1" />
 		<PackageReference Include="Prism.DryIoc.Forms" Version="8.1.97" />
+		<PackageReference Include="Xamarin.Forms.FontAwesome.Brand" Version="1.0.0" />
+		<PackageReference Include="Xamarin.Forms.FontAwesome.Regular" Version="1.0.0" />
+		<PackageReference Include="Xamarin.Forms.FontAwesome.Solid" Version="1.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\CandySugar.Xam.Common\CandySugar.Xam.Common.csproj" />
 	</ItemGroup>
 </Project>
