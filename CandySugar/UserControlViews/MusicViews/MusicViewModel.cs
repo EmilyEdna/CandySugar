@@ -314,6 +314,10 @@ namespace CandySugar.UserControlViews.MusicViews
         }
         public async Task<MusicLyricResult> LoadLyric(CandyPlayListDto input)
         {
+            if (input == null)
+            {
+                MessageBox.Info("当前没有歌曲在播放中~~~", "提示"); return null;
+            }
             var data = await this.YinYue.GetLyrics(input.SongId, input.Platform);
             if (data != null)
             {

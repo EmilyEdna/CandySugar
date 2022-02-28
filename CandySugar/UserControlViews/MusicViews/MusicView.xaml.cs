@@ -127,7 +127,7 @@ namespace CandySugar.UserControlViews.MusicViews
         public async Task LyricData()
         {
             MusicLyricResult result =await  this.ViewModel.LoadLyric(CurrentPlay.Values.FirstOrDefault());
-            if (result == null && result.Lyrics == null)
+            if (result == null)
                 return;
             LyricResult = result;
         }
