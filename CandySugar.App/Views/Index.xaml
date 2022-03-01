@@ -2,11 +2,16 @@
     x:Class="CandySugar.App.Views.Index"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffload="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffloadtrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     xmlns:sf="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <sf:SfNavigationDrawer x:Name="drawer" DrawerWidth="200">
+        <sf:SfNavigationDrawer
+            x:Name="drawer"
+            DrawerHeaderHeight="0"
+            DrawerWidth="200">
             <sf:SfNavigationDrawer.DrawerContentView>
                 <ListView BackgroundColor="#FFFF" ItemsSource="{Binding Menu}">
                     <ListView.ItemTemplate>
@@ -45,7 +50,7 @@
                             FontSize="16"
                             HeightRequest="50"
                             HorizontalTextAlignment="Center"
-                            Text="首页"
+                            Text="{Binding Title}"
                             TextColor="White"
                             VerticalTextAlignment="Center" />
                     </StackLayout>

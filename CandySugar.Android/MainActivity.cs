@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using CandySugar.App;
+using FFImageLoading.Forms.Platform;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms.Platform.Android;
@@ -20,8 +21,8 @@ namespace CandySugar.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
             Forms.Init(this, savedInstanceState);
+            CachedImageRenderer.Init(true);
             LoadApplication(new Root(new AndroidInitializer()));
         }
 

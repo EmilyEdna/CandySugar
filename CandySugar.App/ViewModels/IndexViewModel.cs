@@ -12,7 +12,7 @@ namespace CandySugar.App.ViewModels
     {
         public IndexViewModel(INavigationService navigationService) : base(navigationService)
         {
-            base.Title = "测试";
+            base.Title = "首页";
             this.Menu = MenuOption.InitMenu();
         }
 

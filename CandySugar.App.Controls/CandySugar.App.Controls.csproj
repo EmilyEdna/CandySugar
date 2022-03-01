@@ -6,6 +6,8 @@
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="19.4.0.53" />
+		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+		<PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
 		<PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.7.1" />
 		<PackageReference Include="Prism.DryIoc.Forms" Version="8.1.97" />
