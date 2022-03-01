@@ -2,6 +2,7 @@
     x:Class="CandySugar.App.Views.Index"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:enum="clr-namespace:CandySugar.Xam.Common.Enum;assembly=CandySugar.Xam.Common"
     xmlns:ffload="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffloadtrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
@@ -13,7 +14,7 @@
             DrawerHeaderHeight="0"
             DrawerWidth="200">
             <sf:SfNavigationDrawer.DrawerContentView>
-                <ListView BackgroundColor="#FFFF" ItemsSource="{Binding Menu}">
+                <ListView BackgroundColor="Black" ItemsSource="{Binding Menu}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -21,7 +22,13 @@
                                     <Label
                                         Margin="10,7,0,0"
                                         FontSize="16"
-                                        Text="{Binding FuncName}" />
+                                        Text="{Binding FuncName}"
+                                        TextColor="White"
+                                        VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ContentCommand}" CommandParameter="{Binding CommandParam}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

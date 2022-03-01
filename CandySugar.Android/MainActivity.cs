@@ -6,6 +6,7 @@ using FFImageLoading.Forms.Platform;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms.Platform.Android;
+using XF.Material.Droid;
 using Forms = Xamarin.Forms.Forms;
 using Platform = Xamarin.Essentials.Platform;
 
@@ -23,6 +24,7 @@ namespace CandySugar.Droid
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
             CachedImageRenderer.Init(true);
+            Material.Init(this, savedInstanceState);
             LoadApplication(new Root(new AndroidInitializer()));
         }
 

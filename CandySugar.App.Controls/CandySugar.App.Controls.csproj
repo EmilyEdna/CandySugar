@@ -14,6 +14,8 @@
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Brand" Version="1.0.0" />
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Regular" Version="1.0.0" />
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Solid" Version="1.0.0" />
+		<!--<PackageReference Include="XExten.Advance" Version="1.1.2.5-beta" />-->
+		<PackageReference Include="XF.Material" Version="1.8.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
@@ -21,5 +23,28 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\CandySugar.Xam.Common\CandySugar.Xam.Common.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="Anime.SDK">
+	    <HintPath>..\Lib\Anime.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="GalActor.SDK">
+	    <HintPath>..\Lib\GalActor.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="LightNovel.SDK">
+	    <HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Manga.SDK">
+	    <HintPath>..\Lib\Manga.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Music.SDK">
+	    <HintPath>..\Lib\Music.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Novel.SDK">
+	    <HintPath>..\Lib\Novel.SDK.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Wallpaper.SDK">
+	    <HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 </Project>

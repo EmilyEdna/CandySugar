@@ -1,5 +1,7 @@
 ﻿using CandySugar.App.Controls;
 using CandySugar.Xam.Common.AppDTO;
+using CandySugar.Xam.Common.Enum;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,11 @@ namespace CandySugar.App.ViewModels
             get { return _Menu; }
             set { SetProperty(ref _Menu, value); }
         }
+
+        public DelegateCommand<MenuFuncEunm> ContentCommand => new DelegateCommand<MenuFuncEunm>((obj) =>
+        {
+            var xx = obj;
+        });
 
     }
 }

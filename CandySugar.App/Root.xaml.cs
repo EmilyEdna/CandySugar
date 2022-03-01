@@ -3,13 +3,11 @@ using CandySugar.App.Views;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
-using Prism.Mvvm;
 using Syncfusion.Licensing;
-using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
+using XF.Material.Forms;
 
 namespace CandySugar.App
 {
@@ -23,6 +21,7 @@ namespace CandySugar.App
         protected async override void OnInitialized()
         {
             InitializeComponent();
+            Material.Init(this);
             SyncfusionLicenseProvider.RegisterLicense("NTg3MTY3QDMxMzkyZTM0MmUzMFdjM01jRGZXbDIxZ1AxVGNkSlluNndGb0d4OFJLd1dzcFJpZVdYc0VQSnM9");
             await NavigationService.NavigateAsync("NavigationPage/Index");
         }
