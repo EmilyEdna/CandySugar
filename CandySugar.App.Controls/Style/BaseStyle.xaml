@@ -2,6 +2,7 @@
     x:Class="CandySugar.App.Controls.Style.BaseStyle"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Converter="clr-namespace:CandySugar.App.Controls.Converters"
     xmlns:Sys="clr-namespace:System;assembly=mscorlib">
 
     <OnPlatform x:Key="FontAwesomeBrands" x:TypeArguments="x:String">
@@ -16,4 +17,6 @@
 
     <Sys:String x:Key="LightSkyBlue">#FF10AEC2</Sys:String>
     <Sys:String x:Key="Sakura">#FFFF9999</Sys:String>
+
+    <Converter:ListViewConverter x:Key="ListViewConverter" />
 </ResourceDictionary>

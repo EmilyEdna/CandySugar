@@ -14,7 +14,7 @@
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Brand" Version="1.0.0" />
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Regular" Version="1.0.0" />
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Solid" Version="1.0.0" />
-		<!--<PackageReference Include="XExten.Advance" Version="1.1.2.5-beta" />-->
+		<PackageReference Include="XExten.Advance" Version="1.1.2.5-beta" />
 		<PackageReference Include="XF.Material" Version="1.8.0" />
 	</ItemGroup>
 	<ItemGroup>

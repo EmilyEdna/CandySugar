@@ -2,7 +2,7 @@
     x:Class="CandySugar.App.Views.Index"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:enum="clr-namespace:CandySugar.Xam.Common.Enum;assembly=CandySugar.Xam.Common"
+    xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors;assembly=CandySugar.App.Controls"
     xmlns:ffload="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffloadtrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
@@ -14,7 +14,7 @@
             DrawerHeaderHeight="0"
             DrawerWidth="200">
             <sf:SfNavigationDrawer.DrawerContentView>
-                <ListView BackgroundColor="Black" ItemsSource="{Binding Menu}">
+                <ListView BackgroundColor="White" ItemsSource="{Binding Menu}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -23,16 +23,18 @@
                                         Margin="10,7,0,0"
                                         FontSize="16"
                                         Text="{Binding FuncName}"
-                                        TextColor="White"
-                                        VerticalOptions="Center">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ContentCommand}" CommandParameter="{Binding CommandParam}" />
-                                        </Label.GestureRecognizers>
-                                    </Label>
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            Command="{Binding ContentCommand}"
+                            Converter="{StaticResource ListViewConverter}"
+                            EventName="ItemSelected" />
+                    </ListView.Behaviors>
                 </ListView>
             </sf:SfNavigationDrawer.DrawerContentView>
             <sf:SfNavigationDrawer.ContentView>
