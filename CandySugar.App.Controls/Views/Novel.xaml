@@ -6,8 +6,13 @@
     xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
-        </StackLayout>
+        <tabview:SfTabView
+            OverflowMode="DropDown"
+            TabHeaderPosition="Bottom"
+            VisibleHeaderCount="{Binding TabCount}">
+            <tabview:TabItemCollection />
+        </tabview:SfTabView>
+
+
     </ContentView.Content>
 </ContentView>

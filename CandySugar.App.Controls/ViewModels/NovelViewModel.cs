@@ -16,8 +16,8 @@ namespace CandySugar.App.Controls.ViewModels
 {
     public class NovelViewModel : ViewModelBase
     {
-        private readonly  NovelProxy Proxy;
-        public NovelViewModel()
+        private readonly NovelProxy Proxy;
+        public NovelViewModel() : base()
         {
             Proxy = new NovelProxy
             {
@@ -26,9 +26,9 @@ namespace CandySugar.App.Controls.ViewModels
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
-            Init();
         }
 
+        #region Property
         private ObservableCollection<NovelCategoryResult> _NovelCategory;
         public ObservableCollection<NovelCategoryResult> NovelCategory
         {
@@ -36,8 +36,15 @@ namespace CandySugar.App.Controls.ViewModels
             set { SetProperty(ref _NovelCategory, value); }
         }
 
+        private int _TabCount;
+        public int TabCount
+        {
+            get { return _TabCount; }
+            set { SetProperty(ref _TabCount, value); }
+        }
+        #endregion
 
-        private async void Init()
+        protected override async void OnViewLaunch()
         {
             try
             {
@@ -51,10 +58,10 @@ namespace CandySugar.App.Controls.ViewModels
                     };
                 }).RunsAsync();
                 this.NovelCategory = new ObservableCollection<NovelCategoryResult>(NovelInit.IndexCategories);
+                this.TabCount = this.NovelCategory.Count;
                 //this.NovelRecommend = new ObservableCollection<NovelRecommendResult>(NovelInit.IndexRecommends);
-                throw new Exception();
             }
-            catch(Exception ex)
+            catch
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {

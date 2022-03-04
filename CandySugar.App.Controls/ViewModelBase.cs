@@ -7,11 +7,20 @@ namespace CandySugar.App.Controls
 {
     public class ViewModelBase: BindableBase
     {
+        public ViewModelBase()
+        {
+            OnViewLaunch();
+        }
         private string _title;
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+
+        protected virtual void OnViewLaunch() 
+        { 
+        
         }
     }
 }
