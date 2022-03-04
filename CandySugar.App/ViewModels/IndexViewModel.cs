@@ -1,4 +1,5 @@
 ﻿using CandySugar.App.Controls;
+using CandySugar.App.Controls.Views;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Common.Enum;
 using Prism.Commands;
@@ -27,15 +28,21 @@ namespace CandySugar.App.ViewModels
             get { return _Menu; }
             set { SetProperty(ref _Menu, value); }
         }
-        private void ContentEvent(MenuOption obj)
+
+        private View _View;
+        public View Views
         {
-            
+            get { return _View; }
+            set { SetProperty(ref _View, value); }
         }
-        public ICommand ContentCommand => new Command<MenuOption>(input => {
+
+        public ICommand ContentCommand => new Command<MenuOption>(input =>
+        {
             switch (input.CommandParam)
             {
                 case MenuFuncEunm.Novel:
                     base.Title = input.CommandParam.ToDes();
+                    Views = new Novel();
                     break;
                 case MenuFuncEunm.LightNovel:
                     base.Title = input.CommandParam.ToDes();

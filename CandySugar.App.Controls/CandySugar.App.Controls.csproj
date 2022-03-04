@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -6,6 +6,7 @@
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="19.4.0.53" />
+		<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.4.0.53" />
 		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
@@ -16,10 +17,6 @@
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Solid" Version="1.0.0" />
 		<PackageReference Include="XExten.Advance" Version="1.1.2.5-beta" />
 		<PackageReference Include="XF.Material" Version="1.8.0" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	  <Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\CandySugar.Xam.Common\CandySugar.Xam.Common.csproj" />
@@ -46,5 +43,15 @@
 	  <Reference Include="Wallpaper.SDK">
 	    <HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Views\Novel.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Views\Novel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 </Project>

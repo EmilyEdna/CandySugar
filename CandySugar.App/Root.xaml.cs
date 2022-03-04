@@ -1,8 +1,11 @@
+using CandySugar.App.Controls.ViewModels;
+using CandySugar.App.Controls.Views;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Mvvm;
 using Syncfusion.Licensing;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
@@ -11,7 +14,7 @@ using XF.Material.Forms;
 
 namespace CandySugar.App
 {
-    public partial class Root: PrismApplication
+    public partial class Root : PrismApplication
     {
         public Root(IPlatformInitializer initializer)
             : base(initializer)
@@ -32,6 +35,14 @@ namespace CandySugar.App
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<Index, IndexViewModel>();
 
+            
+        }
+
+        protected override void ConfigureViewModelLocator()
+        {
+            base.ConfigureViewModelLocator();
+
+            ViewModelLocationProvider.Register<Novel>(() => Container.Resolve<NovelViewModel>());
         }
     }
 }

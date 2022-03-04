@@ -1,0 +1,12 @@
+﻿<ContentView
+    x:Class="CandySugar.App.Controls.Views.Novel"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentView.Content>
+        <StackLayout>
+            <Label Text="Hello Xamarin.Forms!" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

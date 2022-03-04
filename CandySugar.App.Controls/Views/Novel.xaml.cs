@@ -1,17 +1,18 @@
-﻿using FFImageLoading;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CandySugar.App.Controls.Style
+namespace CandySugar.App.Controls.Views
 {
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BaseStyle
+    public partial class Novel : ContentView
     {
-        public BaseStyle()
+        public Novel()
         {
             InitializeComponent();
         }
