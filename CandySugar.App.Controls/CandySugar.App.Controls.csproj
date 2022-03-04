@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
 		<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="19.4.0.53" />
 		<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.4.0.53" />
 		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -23,25 +24,25 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="Anime.SDK">
-	    <HintPath>..\Lib\Anime.SDK.dll</HintPath>
+	    <HintPath>..\AppLib\Anime.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="GalActor.SDK">
-	    <HintPath>..\Lib\GalActor.SDK.dll</HintPath>
+	    <HintPath>..\AppLib\GalActor.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="LightNovel.SDK">
-	    <HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
+	    <HintPath>..\AppLib\LightNovel.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Manga.SDK">
-	    <HintPath>..\Lib\Manga.SDK.dll</HintPath>
+	    <HintPath>..\AppLib\Manga.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Music.SDK">
-	    <HintPath>..\Lib\Music.SDK.dll</HintPath>
+	    <HintPath>..\AppLib\Music.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Novel.SDK">
-	    <HintPath>..\Lib\Novel.SDK.dll</HintPath>
+	    <HintPath>..\AppLib\Novel.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Wallpaper.SDK">
-	    <HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
+	    <HintPath>..\AppLib\Wallpaper.SDK.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
@@ -53,5 +54,8 @@
 	  <None Update="Views\Novel.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="PropertyAttach\" />
 	</ItemGroup>
 </Project>
