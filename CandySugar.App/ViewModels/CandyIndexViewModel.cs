@@ -1,13 +1,9 @@
 ﻿using CandySugar.App.Controls;
-using CandySugar.App.Controls.Views;
+using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Common.Enum;
-using Prism.Commands;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XExten.Advance.LinqFramework;

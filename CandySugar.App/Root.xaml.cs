@@ -1,4 +1,4 @@
-using CandySugar.App.Controls.ViewModels.Novel;
+using CandySugar.App.Controls.ViewModels.NovelModel;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;

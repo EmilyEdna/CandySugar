@@ -4,15 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     xmlns:prism="http://prismlibrary.com"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     x:Name="NovelView"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ContentView.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
+                <RowDefinition Height="25" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <local:ItemsControl ItemsSource="{Binding NovelCategory}">
+            <local:ItemsControl Margin="0,0,0,5" ItemsSource="{Binding NovelCategory}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Label Text="{Binding CategoryName}">
@@ -33,6 +34,43 @@
                     </DataTemplate>
                 </local:ItemsControl.ItemsLayout>
             </local:ItemsControl>
+            <syncfusion:SfListView
+                x:Name="ListViews"
+                Grid.Row="1"
+                IsScrollBarVisible="False"
+                ItemSize="40"
+                ItemsSource="{Binding NovelSearch}"
+                SelectionBackgroundColor="Transparent">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Frame
+                                Margin="2"
+                                Padding="2"
+                                CornerRadius="15"
+                                HasShadow="True"
+                                VerticalOptions="Center">
+                                <Label VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span FontSize="16" Text="{Binding BookName}" />
+                                            <Span
+                                                FontSize="12"
+                                                Text="{Binding UpdateDate, StringFormat=(\{0\})}"
+                                                TextColor="DimGray" />
+                                            <Span Text="—" />
+                                            <Span
+                                                FontSize="12"
+                                                Text="{Binding Author}"
+                                                TextColor="DimGray" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
         </Grid>
     </ContentView.Content>
 </ContentView>

@@ -6,8 +6,8 @@
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
+		<PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="19.4.0.53" />
-		<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.4.0.53" />
 		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
@@ -46,7 +46,7 @@
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Update="Views\CandyNovelView.xaml">
+	  <EmbeddedResource Update="Views\Novel\CandyNovelView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	</ItemGroup>
