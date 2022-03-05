@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CandySugar.App.Controls.Views
+namespace CandySugar.App.Controls.Views.Novel
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CandyNovelView : ContentView

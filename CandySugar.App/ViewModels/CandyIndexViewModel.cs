@@ -73,6 +73,5 @@ namespace CandySugar.App.ViewModels
             }
         });
 
-
     }
 }

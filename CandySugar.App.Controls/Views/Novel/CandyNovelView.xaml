@@ -1,9 +1,10 @@
 ﻿<ContentView
-    x:Class="CandySugar.App.Controls.Views.CandyNovelView"
+    x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     xmlns:prism="http://prismlibrary.com"
+    x:Name="NovelView"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ContentView.Content>
         <Grid>
@@ -11,15 +12,19 @@
                 <RowDefinition Height="20" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <local:ItemsControl Command="{Binding}" ItemsSource="{Binding NovelCategory}">
+            <local:ItemsControl ItemsSource="{Binding NovelCategory}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding CategoryName}" />
+                        <Label Text="{Binding CategoryName}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.ItemCommand, Source={x:Reference NovelView}}" CommandParameter="{Binding CollectAddress}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </DataTemplate>
                 </local:ItemsControl.ItemTemplate>
                 <local:ItemsControl.ItemsLayout>
                     <DataTemplate>
-                        <ScrollView Orientation="Horizontal">
+                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                             <local:WrapLayout
                                 local:LayoutEx.IsItemsHost="True"
                                 IsSquare="True"

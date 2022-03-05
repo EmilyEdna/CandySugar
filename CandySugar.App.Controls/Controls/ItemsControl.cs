@@ -20,15 +20,7 @@ namespace CandySugar.App.Controls.Controls
         public static readonly BindableProperty ItemsLayoutProperty =
             BindableProperty.Create(nameof(ItemsLayout), typeof(DataTemplate), typeof(ItemsControl), propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemsLayoutPropertyChanged());
 
-        public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create(nameof(Command), typeof(DataTemplate), typeof(ItemsControl), null, BindingMode.OneWay, null, (s, o, n) => ((ItemsControl)s).ItemSelected((ItemsControl)s, o, n));
-
-        public ICommand Command
-        {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
-        }
-
+        #region Property
         public IEnumerable ItemsSource
         {
             get => (IEnumerable)GetValue(ItemsSourceProperty);
@@ -46,6 +38,8 @@ namespace CandySugar.App.Controls.Controls
             get => (DataTemplate)GetValue(ItemsLayoutProperty);
             set => SetValue(ItemsLayoutProperty, value);
         }
+
+        #endregion
 
         protected virtual View CreateItem(object item)
         {
@@ -82,6 +76,7 @@ namespace CandySugar.App.Controls.Controls
 
         protected void OnItemsSourcePropertyChanged()
         {
+
             if (_itemsLayout == null)
             {
                 CreateItemsLayout();
@@ -95,12 +90,9 @@ namespace CandySugar.App.Controls.Controls
                 {
                     _itemsLayout.Children.Add(CreateItem(item));
                 }
+                
             }
-        }
-
-        protected void ItemSelected(ItemsControl bindable, object oldValue, object newValue)
-        {
-            var x = oldValue;
+            
         }
 
         protected void OnItemTemplatePropertyChanged()
@@ -111,6 +103,7 @@ namespace CandySugar.App.Controls.Controls
             }
 
             OnItemsSourcePropertyChanged();
+
         }
 
         protected void OnItemsLayoutPropertyChanged()

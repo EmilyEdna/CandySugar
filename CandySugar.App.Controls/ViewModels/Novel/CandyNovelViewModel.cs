@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XF.Material.Forms.UI.Dialogs;
 
-namespace CandySugar.App.Controls.ViewModels
+namespace CandySugar.App.Controls.ViewModels.Novel
 {
     public class CandyNovelViewModel : ViewModelBase
     {
@@ -30,6 +30,8 @@ namespace CandySugar.App.Controls.ViewModels
             };
         }
 
+        
+
         #region Property
         private ObservableCollection<NovelCategoryResult> _NovelCategory;
         public ObservableCollection<NovelCategoryResult> NovelCategory
@@ -40,9 +42,9 @@ namespace CandySugar.App.Controls.ViewModels
         #endregion
 
         #region Command
-        public ICommand ItemCommand => new DelegateCommand(() => {
-
-
+        public ICommand ItemCommand => new DelegateCommand<string>(obj =>
+        {
+            Title = obj;
         });
         #endregion
 

@@ -16,5 +16,10 @@ namespace CandySugar.App.Views
         {
             InitializeComponent();
         }
+
+        private void OpenSlider(object sender, EventArgs e)
+        {
+            drawer.ToggleDrawer();
+        }
     }
 }

@@ -1,5 +1,5 @@
-using CandySugar.App.Controls.ViewModels;
-using CandySugar.App.Controls.Views;
+using CandySugar.App.Controls.ViewModels.Novel;
+using CandySugar.App.Controls.Views.Novel;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
 using Prism;
@@ -26,7 +26,7 @@ namespace CandySugar.App
             InitializeComponent();
             Material.Init(this);
             SyncfusionLicenseProvider.RegisterLicense("NTg3MTY3QDMxMzkyZTM0MmUzMFdjM01jRGZXbDIxZ1AxVGNkSlluNndGb0d4OFJLd1dzcFJpZVdYc0VQSnM9");
-            await NavigationService.NavigateAsync("NavigationPage/Index");
+            await NavigationService.NavigateAsync("NavigationPage/CandyIndexView");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
