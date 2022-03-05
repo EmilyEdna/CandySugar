@@ -10,16 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace CandySugar.App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Index : ContentPage
+    public partial class CandyIndexView : ContentPage
     {
-        public Index()
+        public CandyIndexView()
         {
             InitializeComponent();
-        }
-
-        private void OpenSlider(object sender, EventArgs e)
-        {
-            drawer.ToggleDrawer();
         }
     }
 }

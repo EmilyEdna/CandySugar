@@ -14,9 +14,9 @@ using XExten.Advance.LinqFramework;
 
 namespace CandySugar.App.ViewModels
 {
-    public class IndexViewModel : ViewModelNavigatBase
+    public class CandyIndexViewModel : ViewModelNavigatBase
     {
-        public IndexViewModel(INavigationService navigationService) : base(navigationService)
+        public CandyIndexViewModel(INavigationService navigationService) : base(navigationService)
         {
             base.Title = "首页";
             this.Menu = MenuOption.InitMenu();
@@ -42,7 +42,7 @@ namespace CandySugar.App.ViewModels
             {
                 case MenuFuncEunm.Novel:
                     base.Title = input.CommandParam.ToDes();
-                    Views = new Novel();
+                    Views = new CandyNovelView();
                     break;
                 case MenuFuncEunm.LightNovel:
                     base.Title = input.CommandParam.ToDes();

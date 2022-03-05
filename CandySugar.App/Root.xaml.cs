@@ -33,7 +33,7 @@ namespace CandySugar.App
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<Index, IndexViewModel>();
+            containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();
 
             
         }
@@ -42,7 +42,7 @@ namespace CandySugar.App
         {
             base.ConfigureViewModelLocator();
 
-            ViewModelLocationProvider.Register<Novel>(() => Container.Resolve<NovelViewModel>());
+            ViewModelLocationProvider.Register<CandyNovelView>(() => Container.Resolve<CandyNovelViewModel>());
         }
     }
 }

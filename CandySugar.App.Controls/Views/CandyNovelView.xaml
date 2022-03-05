@@ -1,0 +1,33 @@
+﻿<ContentView
+    x:Class="CandySugar.App.Controls.Views.CandyNovelView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <local:ItemsControl Command="{Binding}" ItemsSource="{Binding NovelCategory}">
+                <local:ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding CategoryName}" />
+                    </DataTemplate>
+                </local:ItemsControl.ItemTemplate>
+                <local:ItemsControl.ItemsLayout>
+                    <DataTemplate>
+                        <ScrollView Orientation="Horizontal">
+                            <local:WrapLayout
+                                local:LayoutEx.IsItemsHost="True"
+                                IsSquare="True"
+                                Spacing="10" />
+                        </ScrollView>
+                    </DataTemplate>
+                </local:ItemsControl.ItemsLayout>
+            </local:ItemsControl>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
