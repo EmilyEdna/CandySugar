@@ -11,5 +11,17 @@ namespace CandySugar.Xam.Common
         public static string ProxyPwd { get; set; }
         public static string ProxyAccount { get; set; }
         public static int CacheTime { get; set; } = 60;
+        /// <summary>
+        /// 屏幕宽度
+        /// </summary>
+        public static double ScreenWidth { get; set; }
+        /// <summary>
+        /// 屏幕高度
+        /// </summary>
+        public static double ScreenHeight { get; set; }
+        /// <summary>
+        /// LoadMore加载更多
+        /// </summary>
+        public static int WaitSpan { get; set; } = 2000;
     }
 }

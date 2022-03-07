@@ -5,12 +5,14 @@ using Novel.SDK.ViewModel.Enums;
 using Novel.SDK.ViewModel.Request;
 using Novel.SDK.ViewModel.Response;
 using Prism.Commands;
+using Syncfusion.ListView.XForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 
@@ -74,35 +76,82 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             get { return _PageIndex; }
             set { SetProperty(ref _PageIndex, value); }
         }
+
+        private int _Total;
+        public int Total
+        {
+            get { return _Total; }
+            set { SetProperty(ref _Total, value); }
+        }
+
+        private bool _IsBusy;
+        public bool IsBusy
+        {
+            get { return _IsBusy; }
+            set { SetProperty(ref _IsBusy, value); }
+        }
+        #endregion
+
+        #region 
+        private string CategoryType;
         #endregion
 
         #region Command
         public ICommand ItemCommand => new DelegateCommand<string>(input =>
         {
             PageIndex = 1;
-            Category(input);
+            Category(input, false);
+        });
+
+        public ICommand ShowMoreCommand => new DelegateCommand(() =>
+        {
+            PageIndex += 1;
+            if (PageIndex <= Total)
+                Category(CategoryType, true);
         });
         #endregion
 
         #region Method
-        private async void Category(string input)
+        private async void Category(string input, bool IsLoadMore = false)
         {
-            var NovelCate = await NovelFactory.Novel(opt =>
+
+            this.IsBusy = true;
+            CategoryType = input;
+            try
             {
-                opt.RequestParam = new NovelRequestInput
+                await Task.Delay(Soft.WaitSpan);
+                var NovelCate = await NovelFactory.Novel(opt =>
                 {
-                    CacheSpan = Soft.CacheTime,
-                    NovelType = NovelEnum.Category,
-                    Proxy = this.Proxy,
-                    Category = new NovelCategory
+                    opt.RequestParam = new NovelRequestInput
                     {
-                        Page = this.PageIndex,
-                        NovelCategoryAddress = input
-                    }
-                };
-            }).RunsAsync();
-            //this.Total = NovelCate.SingleCategories.TotalPage;
-            this.NovelSearch = new ObservableCollection<NovelSearchResult>(NovelCate.SingleCategories.NovelSingles.ToMapest<List<NovelSearchResult>>());
+                        CacheSpan = Soft.CacheTime,
+                        NovelType = NovelEnum.Category,
+                        Proxy = this.Proxy,
+                        Category = new NovelCategory
+                        {
+                            Page = this.PageIndex,
+                            NovelCategoryAddress = input
+                        }
+                    };
+                }).RunsAsync();
+                this.Total = NovelCate.SingleCategories.TotalPage;
+                if (IsLoadMore)
+                    NovelCate.SingleCategories.NovelSingles.ToMapest<List<NovelSearchResult>>().ForEach(item =>
+                    {
+                        this.NovelSearch.Add(item);
+                    });
+                else
+                    this.NovelSearch = new ObservableCollection<NovelSearchResult>(NovelCate.SingleCategories.NovelSingles.ToMapest<List<NovelSearchResult>>());
+                this.IsBusy = false;
+            }
+            catch
+            {
+                this.IsBusy = false;
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                {
+                    await Task.Delay(3000);
+                }
+            }
         }
         #endregion
 

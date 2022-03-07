@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using CandySugar.App;
+using CandySugar.Xam.Common;
 using FFImageLoading.Forms.Platform;
 using Prism;
 using Prism.Ioc;
@@ -26,6 +27,9 @@ namespace CandySugar.Droid
             CachedImageRenderer.Init(true);
             Material.Init(this, savedInstanceState);
             LoadApplication(new Root(new AndroidInitializer()));
+
+            Soft.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
+            Soft.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)

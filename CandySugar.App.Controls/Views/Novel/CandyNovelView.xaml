@@ -37,9 +37,12 @@
             <syncfusion:SfListView
                 x:Name="ListViews"
                 Grid.Row="1"
+                IsBusy="{Binding IsBusy}"
                 IsScrollBarVisible="False"
-                ItemSize="40"
+                ItemSize="45"
                 ItemsSource="{Binding NovelSearch}"
+                LoadMoreCommand="{Binding ShowMoreCommand}"
+                LoadMoreOption="AutoOnScroll"
                 SelectionBackgroundColor="Transparent">
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
@@ -47,25 +50,29 @@
                             <Frame
                                 Margin="2"
                                 Padding="2"
-                                CornerRadius="15"
+                                BorderColor="{DynamicResource Sakura}"
+                                CornerRadius="10"
                                 HasShadow="True"
                                 VerticalOptions="Center">
-                                <Label VerticalOptions="Center">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span FontSize="16" Text="{Binding BookName}" />
-                                            <Span
-                                                FontSize="12"
-                                                Text="{Binding UpdateDate, StringFormat=(\{0\})}"
-                                                TextColor="DimGray" />
-                                            <Span Text="—" />
-                                            <Span
-                                                FontSize="12"
-                                                Text="{Binding Author}"
-                                                TextColor="DimGray" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
+                                <RelativeLayout>
+                                    <Label
+                                        FontSize="16"
+                                        Text="{Binding BookName}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontSize="13"
+                                        RelativeLayout.YConstraint="20"
+                                        Text="{Binding UpdateDate, StringFormat=(\{0\})}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontSize="13"
+                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                          Property=Width,
+                                                                                          Constant=-90}"
+                                        RelativeLayout.YConstraint="10"
+                                        Text="{Binding Author}"
+                                        VerticalOptions="Center" />
+                                </RelativeLayout>
                             </Frame>
                         </Grid>
                     </DataTemplate>
