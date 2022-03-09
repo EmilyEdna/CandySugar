@@ -28,6 +28,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 UserName = Soft.ProxyAccount
             };
         }
+
+        #region Override
         protected override async void OnViewLaunch()
         {
             try
@@ -51,6 +53,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 }
             }
         }
+        #endregion
 
         #region Property
         private ObservableCollection<NovelCategoryResult> _NovelCategory;

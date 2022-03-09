@@ -21,6 +21,13 @@ namespace CandySugar.App.Controls
         public ViewModelNavigatBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
+
+            OnViewLaunch();
+        }
+
+        protected virtual void OnViewLaunch()
+        {
+
         }
 
         public virtual void Initialize(INavigationParameters parameters)

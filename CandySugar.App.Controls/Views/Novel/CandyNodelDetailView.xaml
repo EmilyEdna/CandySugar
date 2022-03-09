@@ -2,13 +2,138 @@
     x:Class="CandySugar.App.Controls.Views.Novel.CandyNodelDetailView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    x:Name="NovelDetailView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Command="{Binding GoBackCommand}" Direction="Left,Right" />
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <RelativeLayout>
+                <Frame BorderColor="{DynamicResource TeaRed}">
+                    <FFImg:CachedImage
+                        HeightRequest="150"
+                        Source="{Binding NovelDetail.Cover}"
+                        WidthRequest="90" />
+                </Frame>
+                <Label RelativeLayout.XConstraint="135" TextColor="{DynamicResource Sakura}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="书名：" />
+                            <Span Text="{Binding NovelDetail.BookName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.YConstraint="20"
+                    TextColor="{DynamicResource Sakura}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="作者：" />
+                            <Span Text="{Binding NovelDetail.Author}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.YConstraint="40"
+                    TextColor="{DynamicResource Sakura}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="类型：" />
+                            <Span Text="{Binding NovelDetail.BookType}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.YConstraint="60"
+                    TextColor="{DynamicResource Sakura}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="状态：" />
+                            <Span Text="{Binding NovelDetail.Status}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.YConstraint="80"
+                    TextColor="{DynamicResource Sakura}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="时间：" />
+                            <Span Text="{Binding NovelDetail.LastUpdateTime, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    LineBreakMode="TailTruncation"
+                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.YConstraint="100"
+                    TextColor="{DynamicResource Sakura}"
+                    WidthRequest="230">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="简介：" />
+                            <Span Text="{Binding NovelDetail.Description}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </RelativeLayout>
+            <SfRefresh:SfPullToRefresh
+                Grid.Row="1"
+                IsRefreshing="{Binding Refresh}"
+                ProgressBackgroundColor="Transparent"
+                ProgressStrokeColor="{DynamicResource Sakura}"
+                RefreshCommand="{Binding RefreshsCommand}"
+                RefreshContentHeight="50"
+                RefreshContentWidth="50"
+                TransitionMode="Push">
+                <SfRefresh:SfPullToRefresh.PullableContent>
+                    <SfList:SfListView
+                        x:Name="ListViews"
+                        AllowSwiping="True"
+                        IsBusy="{Binding IsBusy}"
+                        IsScrollBarVisible="False"
+                        ItemSize="50"
+                        ItemsSource="{Binding Chapter}"
+                        LoadMoreCommand="{Binding ShowMoreCommand}"
+                        LoadMoreOption="AutoOnScroll"
+                        SelectionBackgroundColor="Transparent"
+                        SelectionChangedCommand="{Binding ItemSelectedCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:RelativeSource Self}}">
+                        <SfList:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="1"
+                                    Padding="15"
+                                    BorderColor="{DynamicResource Sakura}"
+                                    CornerRadius="10"
+                                    HasShadow="True">
+                                    <RelativeLayout>
+                                        <Label
+                                            FontSize="14"
+                                            RelativeLayout.XConstraint="-5"
+                                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                              Property=Height,
+                                                                                              Constant=-20}"
+                                            Text="{Binding ChapterName}" />
+                                    </RelativeLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </SfList:SfListView.ItemTemplate>
+                    </SfList:SfListView>
+                </SfRefresh:SfPullToRefresh.PullableContent>
+            </SfRefresh:SfPullToRefresh>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

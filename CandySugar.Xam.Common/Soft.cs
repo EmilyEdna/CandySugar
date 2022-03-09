@@ -22,6 +22,6 @@ namespace CandySugar.Xam.Common
         /// <summary>
         /// LoadMore加载更多
         /// </summary>
-        public static int WaitSpan { get; set; } = 2000;
+        public static int WaitSpan { get; set; } = 100;
     }
 }
