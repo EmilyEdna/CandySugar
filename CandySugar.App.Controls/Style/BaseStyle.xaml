@@ -17,6 +17,7 @@
 
     <Sys:String x:Key="LightSkyBlue">#FF10AEC2</Sys:String>
     <Sys:String x:Key="Sakura">#FFFF9999</Sys:String>
+    <Sys:String x:Key="TeaRed">#FFED556A</Sys:String>
 
     <Converter:ListViewConverter x:Key="ListViewConverter" />
 </ResourceDictionary>

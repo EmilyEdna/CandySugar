@@ -2,9 +2,12 @@
     x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     xmlns:prism="http://prismlibrary.com"
-    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     x:Name="NovelView"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ContentView.Content>
@@ -34,50 +37,111 @@
                     </DataTemplate>
                 </local:ItemsControl.ItemsLayout>
             </local:ItemsControl>
-            <syncfusion:SfListView
-                x:Name="ListViews"
+            <SfRefresh:SfPullToRefresh
                 Grid.Row="1"
-                IsBusy="{Binding IsBusy}"
-                IsScrollBarVisible="False"
-                ItemSize="45"
-                ItemsSource="{Binding NovelSearch}"
-                LoadMoreCommand="{Binding ShowMoreCommand}"
-                LoadMoreOption="AutoOnScroll"
-                SelectionBackgroundColor="Transparent">
-                <syncfusion:SfListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Frame
-                                Margin="2"
-                                Padding="2"
-                                BorderColor="{DynamicResource Sakura}"
-                                CornerRadius="10"
-                                HasShadow="True"
-                                VerticalOptions="Center">
-                                <RelativeLayout>
-                                    <Label
-                                        FontSize="16"
-                                        Text="{Binding BookName}"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        FontSize="13"
-                                        RelativeLayout.YConstraint="20"
-                                        Text="{Binding UpdateDate, StringFormat=(\{0\})}"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        FontSize="13"
-                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                                          Property=Width,
-                                                                                          Constant=-90}"
-                                        RelativeLayout.YConstraint="10"
-                                        Text="{Binding Author}"
-                                        VerticalOptions="Center" />
-                                </RelativeLayout>
-                            </Frame>
-                        </Grid>
-                    </DataTemplate>
-                </syncfusion:SfListView.ItemTemplate>
-            </syncfusion:SfListView>
+                IsRefreshing="{Binding Refresh}"
+                ProgressBackgroundColor="Transparent"
+                ProgressStrokeColor="{DynamicResource Sakura}"
+                RefreshCommand="{Binding RefreshsCommand}"
+                RefreshContentHeight="50"
+                RefreshContentWidth="50"
+                TransitionMode="Push">
+                <SfRefresh:SfPullToRefresh.PullableContent>
+                    <SfList:SfListView
+                        x:Name="ListViews"
+                        AllowSwiping="True"
+                        IsBusy="{Binding IsBusy}"
+                        IsScrollBarVisible="False"
+                        ItemSize="100"
+                        ItemsSource="{Binding NovelSearch}"
+                        LoadMoreCommand="{Binding ShowMoreCommand}"
+                        LoadMoreOption="AutoOnScroll"
+                        SelectionBackgroundColor="Khaki">
+                        <SfList:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="2"
+                                    BorderColor="{DynamicResource Sakura}"
+                                    CornerRadius="1"
+                                    HasShadow="True">
+                                    <RelativeLayout>
+                                        <FFImg:CachedImage
+                                            Margin="0,-2,0,0"
+                                            HeightRequest="98"
+                                            RelativeLayout.XConstraint="-18"
+                                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                              Property=Height,
+                                                                                              Constant=-75}"
+                                            Source="Cover.jpg"
+                                            WidthRequest="68" />
+                                        <Label
+                                            FontSize="18"
+                                            RelativeLayout.XConstraint="70"
+                                            Text="{Binding BookName}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            FontSize="14"
+                                            RelativeLayout.XConstraint="70"
+                                            RelativeLayout.YConstraint="20"
+                                            Text="{Binding UpdateDate, StringFormat=(\{0\})}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            FontSize="14"
+                                            RelativeLayout.XConstraint="70"
+                                            RelativeLayout.YConstraint="35"
+                                            Text="{Binding Author}"
+                                            VerticalOptions="Center" />
+                                    </RelativeLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </SfList:SfListView.ItemTemplate>
+                        <SfList:SfListView.RightSwipeTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Frame
+                                        Margin="0"
+                                        Padding="0"
+                                        BorderColor="{DynamicResource Sakura}"
+                                        CornerRadius="10">
+                                        <Label
+                                            FontSize="12"
+                                            HorizontalOptions="Center"
+                                            Text="搜作者"
+                                            TextColor="{DynamicResource TeaRed}"
+                                            VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.SearchCommand, Source={x:Reference NovelView}}" CommandParameter="{Binding SelectedItem, Source={x:Reference ListViews}}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Frame>
+                                    <Grid Grid.Row="1">
+                                        <Frame
+                                            Margin="0"
+                                            Padding="0"
+                                            BorderColor="{DynamicResource Sakura}"
+                                            CornerRadius="10">
+                                            <Label
+                                                FontSize="12"
+                                                HorizontalOptions="Center"
+                                                Text="详情"
+                                                TextColor="{DynamicResource TeaRed}"
+                                                VerticalOptions="Center">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference NovelView}}" CommandParameter="{Binding SelectedItem, Source={x:Reference ListViews}}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Frame>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </SfList:SfListView.RightSwipeTemplate>
+                    </SfList:SfListView>
+                </SfRefresh:SfPullToRefresh.PullableContent>
+            </SfRefresh:SfPullToRefresh>
         </Grid>
     </ContentView.Content>
 </ContentView>
