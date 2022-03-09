@@ -1,0 +1,14 @@
+﻿<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelContentView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:SFList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <SFList:SfListView>
+            <SFList:ListViewItem>
+                <Label Text="{Binding NovelContentResult.Content}" />
+            </SFList:ListViewItem>
+        </SFList:SfListView>
+    </ContentPage.Content>
+</ContentPage>

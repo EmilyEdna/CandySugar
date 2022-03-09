@@ -1,5 +1,5 @@
 ﻿<ContentPage
-    x:Class="CandySugar.App.Controls.Views.Novel.CandyNodelDetailView"
+    x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelDetailView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"

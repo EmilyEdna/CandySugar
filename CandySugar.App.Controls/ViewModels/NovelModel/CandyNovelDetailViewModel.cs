@@ -16,11 +16,11 @@ using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
-    public class CandyNodelDetailViewModel : ViewModelNavigatBase
+    public class CandyNovelDetailViewModel : ViewModelNavigatBase
     {
 
         private readonly NovelProxy Proxy;
-        public CandyNodelDetailViewModel(INavigationService navigationService) : base(navigationService)
+        public CandyNovelDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new NovelProxy
             {
@@ -104,7 +104,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
 
         public ICommand ItemSelectedCommand => new DelegateCommand<NovelDetailResults>(async input =>
         {
-            await NavigationService.NavigateAsync($"CandyNodelDetailView/CandyNodelContentView?Route={input.ChapterURL}");
+            await NavigationService.NavigateAsync($"CandyIndexView/CandyNodelDetailView/CandyNodelContentView?Route={input.ChapterURL}");
         });
         #endregion
 

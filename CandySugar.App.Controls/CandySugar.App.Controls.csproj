@@ -46,7 +46,10 @@
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Update="Views\Novel\CandyNodelDetailView.xaml">
+	  <EmbeddedResource Update="Views\Novel\CandyNovelContentView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Views\Novel\CandyNovelDetailView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Novel\CandyNovelView.xaml">
@@ -60,5 +63,10 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="PropertyAttach\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\Novel\CandyNovelDetailView.xaml.cs">
+	    <DependentUpon>CandyNovelDetailView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>

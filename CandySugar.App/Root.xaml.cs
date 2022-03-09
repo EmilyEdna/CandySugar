@@ -33,8 +33,13 @@ namespace CandySugar.App
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
+
+            #region Novel
             containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();
-            containerRegistry.RegisterForNavigation<CandyNodelDetailView, CandyNodelDetailViewModel>();
+            containerRegistry.RegisterForNavigation<CandyNovelDetailView, CandyNovelDetailViewModel>();
+            containerRegistry.RegisterForNavigation<CandyNovelContentView, CandyNovelContentViewModel>();
+            #endregion
+
         }
 
         protected override void ConfigureViewModelLocator()
