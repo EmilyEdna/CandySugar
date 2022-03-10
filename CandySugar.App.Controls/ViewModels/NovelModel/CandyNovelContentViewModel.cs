@@ -15,6 +15,7 @@ using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
@@ -30,6 +31,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
+            this.TextTheme = Color.Black;
+            this.Theme = Color.FromHex("DDCDA1");
         }
 
         #region Filed
@@ -70,12 +73,36 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             get { return _IsBusy; }
             set { SetProperty(ref _IsBusy, value); }
         }
+        private Color _Theme;
+        public Color Theme
+        {
+            get { return _Theme; }
+            set { SetProperty(ref _Theme, value); }
+        }
+        private Color _TextTheme;
+        public Color TextTheme
+        {
+            get { return _TextTheme; }
+            set { SetProperty(ref _TextTheme, value); }
+        }
         #endregion
 
         #region Command
         public ICommand ShowMoreCommand => new DelegateCommand(() =>
         {
             Contents(Next);
+        });
+
+        public ICommand ThemeCommand => new DelegateCommand<dynamic>(input =>
+        {
+            if (input != null)
+            {
+                if ((Color)input == Color.Black)
+                    this.TextTheme = Color.White;
+                else
+                    this.TextTheme = Color.Black;
+                this.Theme = (Color)input;
+            }
         });
         #endregion
 
@@ -95,7 +122,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                         Proxy = this.Proxy,
                         View = new NovelView
                         {
-                            NovelViewAddress = input.ToString()
+                            NovelViewAddress = input
                         }
                     };
                 }).RunsAsync();
