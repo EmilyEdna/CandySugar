@@ -128,7 +128,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 Category(CategoryType, true);
         });
 
-        public ICommand DetailCommand => new DelegateCommand<dynamic>(input => {
+        public ICommand DetailCommand => new DelegateCommand<dynamic>(input =>
+        {
             Navigation(input);
         });
         #endregion
@@ -250,7 +251,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 }
             }
         }
-        private async void Navigation(dynamic input) 
+        private async void Navigation(dynamic input)
         {
             try
             {
@@ -262,11 +263,11 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
 
                 NovelSearchResult? inputKey = (input as NovelSearchResult);
 
-                var NavigationService = Prism.Ioc.ContainerLocator.Container.Resolve(typeof(INavigationService)) as INavigationService;
+                var NavigationService = (INavigationService)Prism.Ioc.ContainerLocator.Container.Resolve(typeof(INavigationService));
 
-                var Param =  new NavigationParameters();
+                var Param = new NavigationParameters();
                 Param.Add(nameof(NovelSearchResult), inputKey);
-                await NavigationService.NavigateAsync("CandyIndexView/CandyNodelDetailView", Param);
+                await NavigationService.NavigateAsync("CandyIndexView/CandyNovelDetailView", Param);
 
             }
             catch

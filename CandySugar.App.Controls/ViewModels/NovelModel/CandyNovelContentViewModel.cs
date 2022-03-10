@@ -4,12 +4,17 @@ using Novel.SDK.ViewModel;
 using Novel.SDK.ViewModel.Enums;
 using Novel.SDK.ViewModel.Request;
 using Novel.SDK.ViewModel.Response;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
+using System.Linq;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
@@ -27,21 +32,25 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             };
         }
 
+        #region Filed
+        private string Next;
+        #endregion
+
         #region Overrive
 
         public override void Initialize(INavigationParameters parameters)
         {
-            var route = parameters.GetValue<string>("Url");
+            var route = parameters.GetValue<string>("Route");
             Contents(route);
         }
         #endregion
 
         #region Property
-        private NovelContentResult _NovelContent;
-        public NovelContentResult NovelContent
+        private ObservableCollection<string> _Content;
+        public ObservableCollection<string> Content
         {
-            get { return _NovelContent; }
-            set { SetProperty(ref _NovelContent, value); }
+            get { return _Content; }
+            set { SetProperty(ref _Content, value); }
         }
         private int _FontSize;
         public int FontSize
@@ -49,19 +58,34 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             get { return _FontSize; }
             set { SetProperty(ref _FontSize, value); }
         }
-        private string _BookName;
-        public string BookName
+        private string _ChapterName;
+        public string ChapterName
         {
-            get { return _BookName; }
-            set { SetProperty(ref _BookName, value); }
+            get { return _ChapterName; }
+            set { SetProperty(ref _ChapterName, value); }
+        }
+        private bool _IsBusy;
+        public bool IsBusy
+        {
+            get { return _IsBusy; }
+            set { SetProperty(ref _IsBusy, value); }
         }
         #endregion
 
+        #region Command
+        public ICommand ShowMoreCommand => new DelegateCommand(() =>
+        {
+            Contents(Next);
+        });
+        #endregion
+
         #region Method
-        public async void Contents(string input) 
+        public async void Contents(string input)
         {
             try
             {
+                IsBusy = true;
+                await Task.Delay(500);
                 var NovelContent = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -75,8 +99,20 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                         }
                     };
                 }).RunsAsync();
-                this.NovelContent = NovelContent.Contents;
 
+                this.ChapterName = NovelContent.Contents.ChapterName;
+
+                Next = NovelContent.Contents.NextPage.IsNullOrEmpty() ? NovelContent.Contents.NextChapter : NovelContent.Contents.NextPage;
+                NovelContent.Contents.Content = NovelContent.Contents.Content.Replace("　", "\t");
+
+                if (this.Content == null)
+                    this.Content = new ObservableCollection<string>(new List<string>());
+
+                NovelContent.Contents.Content.Split("\t", StringSplitOptions.RemoveEmptyEntries).ForEnumerEach(t =>
+                {
+                    this.Content.Add("\t\t\t\t\t" + t + "\r\n");
+                });
+                IsBusy = false;
             }
             catch
             {

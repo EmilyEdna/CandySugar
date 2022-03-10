@@ -104,7 +104,9 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
 
         public ICommand ItemSelectedCommand => new DelegateCommand<NovelDetailResults>(async input =>
         {
-            await NavigationService.NavigateAsync($"CandyIndexView/CandyNodelDetailView/CandyNodelContentView?Route={input.ChapterURL}");
+            NavigationParameters param = new NavigationParameters();
+            param.Add("Route", input.ChapterURL);
+            await NavigationService.NavigateAsync("CandyIndexView/CandyNovelDetailView/CandyNovelContentView", param);
         });
         #endregion
 
