@@ -9,21 +9,22 @@
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
-            <Grid.GestureRecognizers>
+            <!--<Grid.GestureRecognizers>
                 <SwipeGestureRecognizer Command="{Binding GoBackCommand}" Direction="Left,Right" />
-            </Grid.GestureRecognizers>
+            </Grid.GestureRecognizers>-->
             <Grid.RowDefinitions>
-                <RowDefinition Height="200" />
+
+                <RowDefinition Height="175" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <RelativeLayout>
-                <Frame BorderColor="{DynamicResource TeaRed}">
-                    <FFImg:CachedImage
-                        HeightRequest="150"
-                        Source="{Binding NovelDetail.Cover}"
-                        WidthRequest="90" />
-                </Frame>
-                <Label RelativeLayout.XConstraint="135" TextColor="{DynamicResource Sakura}">
+                <FFImg:CachedImage
+                    HeightRequest="200"
+                    RelativeLayout.XConstraint="2"
+                    RelativeLayout.YConstraint="-12"
+                    Source="Cover.gif"
+                    WidthRequest="130" />
+                <Label RelativeLayout.XConstraint="138" TextColor="{DynamicResource Sakura}">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="书名：" />
@@ -32,7 +33,7 @@
                     </Label.FormattedText>
                 </Label>
                 <Label
-                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.XConstraint="138"
                     RelativeLayout.YConstraint="20"
                     TextColor="{DynamicResource Sakura}">
                     <Label.FormattedText>
@@ -43,7 +44,7 @@
                     </Label.FormattedText>
                 </Label>
                 <Label
-                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.XConstraint="138"
                     RelativeLayout.YConstraint="40"
                     TextColor="{DynamicResource Sakura}">
                     <Label.FormattedText>
@@ -54,7 +55,7 @@
                     </Label.FormattedText>
                 </Label>
                 <Label
-                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.XConstraint="138"
                     RelativeLayout.YConstraint="60"
                     TextColor="{DynamicResource Sakura}">
                     <Label.FormattedText>
@@ -65,7 +66,7 @@
                     </Label.FormattedText>
                 </Label>
                 <Label
-                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.XConstraint="138"
                     RelativeLayout.YConstraint="80"
                     TextColor="{DynamicResource Sakura}">
                     <Label.FormattedText>
@@ -77,7 +78,7 @@
                 </Label>
                 <Label
                     LineBreakMode="TailTruncation"
-                    RelativeLayout.XConstraint="135"
+                    RelativeLayout.XConstraint="138"
                     RelativeLayout.YConstraint="100"
                     TextColor="{DynamicResource Sakura}"
                     WidthRequest="230">

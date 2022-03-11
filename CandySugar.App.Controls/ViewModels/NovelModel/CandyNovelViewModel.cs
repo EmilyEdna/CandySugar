@@ -6,19 +6,21 @@ using Novel.SDK.ViewModel.Request;
 using Novel.SDK.ViewModel.Response;
 using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
+using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
-    public class CandyNovelViewModel : ViewModelBase
+    public class CandyNovelViewModel : ViewModelNavigatBase
     {
         private readonly NovelProxy Proxy;
-        public CandyNovelViewModel() : base()
+        public CandyNovelViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new NovelProxy
             {
@@ -29,29 +31,14 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             };
         }
 
+        #region Field
+        private string CategoryType;
+        #endregion
+
         #region Override
-        protected override async void OnViewLaunch()
+        protected override void OnViewLaunch()
         {
-            try
-            {
-                var NovelInit = await NovelFactory.Novel(opt =>
-                {
-                    opt.RequestParam = new NovelRequestInput
-                    {
-                        CacheSpan = Soft.CacheTime,
-                        NovelType = NovelEnum.Init,
-                        Proxy = this.Proxy
-                    };
-                }).RunsAsync();
-                this.NovelCategory = new ObservableCollection<NovelCategoryResult>(NovelInit.IndexCategories);
-            }
-            catch
-            {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
-                {
-                    await Task.Delay(3000);
-                }
-            }
+            Init();
         }
         #endregion
 
@@ -99,10 +86,6 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         }
         #endregion
 
-        #region Field
-        private string CategoryType;
-        #endregion
-
         #region Command
         public ICommand RefreshsCommand => new DelegateCommand(() =>
         {
@@ -135,6 +118,29 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #endregion
 
         #region Method
+        private async void Init()
+        {
+            try
+            {
+                var NovelInit = await NovelFactory.Novel(opt =>
+                {
+                    opt.RequestParam = new NovelRequestInput
+                    {
+                        CacheSpan = Soft.CacheTime,
+                        NovelType = NovelEnum.Init,
+                        Proxy = this.Proxy
+                    };
+                }).RunsAsync();
+                this.NovelCategory = new ObservableCollection<NovelCategoryResult>(NovelInit.IndexCategories);
+            }
+            catch
+            {
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                {
+                    await Task.Delay(3000);
+                }
+            }
+        }
         private async void Category(string input, bool IsLoadMore = false)
         {
             this.Refresh = false;
@@ -219,8 +225,11 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                     {
                         await Task.Delay(3000);
                     }
-
-                NovelSearchResult? inputKey = (input as NovelSearchResult);
+                NovelSearchResult inputKey = null;
+                if (input is NovelSearchResult)
+                {
+                     inputKey = (input as NovelSearchResult);
+                }
                 this.Refresh = true;
                 await Task.Delay(Soft.WaitSpan);
 
@@ -233,7 +242,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                         Proxy = this.Proxy,
                         Search = new NovelSearch
                         {
-                            NovelSearchKeyWord = inputKey?.Author
+                            NovelSearchKeyWord = inputKey==null?input:inputKey?.Author
                         }
                     };
                 }).RunsAsync();
@@ -267,7 +276,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
 
                 var Param = new NavigationParameters();
                 Param.Add(nameof(NovelSearchResult), inputKey);
-                await NavigationService.NavigateAsync("CandyIndexView/CandyNovelDetailView", Param);
+                await NavigationService.NavigateAsync(new Uri("CandyNovelDetailView", UriKind.Relative), Param);
 
             }
             catch

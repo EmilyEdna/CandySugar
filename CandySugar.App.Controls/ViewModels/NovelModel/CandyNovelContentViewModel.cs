@@ -16,6 +16,7 @@ using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 using System.Linq;
 using Xamarin.Forms;
+using XExten.Advance.StaticFramework;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {

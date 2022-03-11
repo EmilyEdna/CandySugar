@@ -63,7 +63,7 @@
                             TextColor="White"
                             VerticalTextAlignment="Center" />
                     </StackLayout>
-                    <ContentView Grid.Row="1" Content="{Binding Views}" />
+                    <Label Grid.Row="1" Text="测试" />
                 </Grid>
             </sf:SfNavigationDrawer.ContentView>
         </sf:SfNavigationDrawer>

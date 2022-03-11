@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
@@ -46,6 +47,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             var Param = parameters.GetValue<NovelSearchResult>(nameof(NovelSearchResult));
 
             Details(Param.DetailAddress, false, true);
+
+
         }
         #endregion
 
@@ -100,13 +103,13 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 Details(Route, false, true);
         });
 
-        public ICommand GoBackCommand => new DelegateCommand(async () => await NavigationService.GoBackAsync());
+        //public ICommand GoBackCommand => new DelegateCommand(async () => await NavigationService.GoBackAsync());
 
         public ICommand ItemSelectedCommand => new DelegateCommand<NovelDetailResults>(async input =>
         {
             NavigationParameters param = new NavigationParameters();
             param.Add("Route", input.ChapterURL);
-            await NavigationService.NavigateAsync("CandyIndexView/CandyNovelDetailView/CandyNovelContentView", param);
+            await NavigationService.NavigateAsync(new Uri("CandyNovelContentView",UriKind.Relative), param);
         });
         #endregion
 

@@ -1,4 +1,4 @@
-﻿<ContentView
+﻿<ContentPage
     x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,16 +7,25 @@
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
-    xmlns:prism="http://prismlibrary.com"
     x:Name="NovelView"
-    prism:ViewModelLocator.AutowireViewModel="True">
-    <ContentView.Content>
+    NavigationPage.HasNavigationBar="False">
+    <!--
+        xmlns:prism="http://prismlibrary.com"
+        prism:ViewModelLocator.AutowireViewModel="True"
+    -->
+    <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
                 <RowDefinition Height="25" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <local:ItemsControl Margin="0,0,0,5" ItemsSource="{Binding NovelCategory}">
+            <SearchBar
+                BackgroundColor="#FFFF9999"
+                Placeholder="请输入小说或作者"
+                SearchCommand="{Binding SearchCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
+            <local:ItemsControl Grid.Row="1" ItemsSource="{Binding NovelCategory}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Label Text="{Binding CategoryName}">
@@ -38,7 +47,7 @@
                 </local:ItemsControl.ItemsLayout>
             </local:ItemsControl>
             <SfRefresh:SfPullToRefresh
-                Grid.Row="1"
+                Grid.Row="2"
                 IsRefreshing="{Binding Refresh}"
                 ProgressBackgroundColor="Transparent"
                 ProgressStrokeColor="{DynamicResource Sakura}"
@@ -72,7 +81,7 @@
                                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                                               Property=Height,
                                                                                               Constant=-75}"
-                                            Source="Cover.jpg"
+                                            Source="Cover.gif"
                                             WidthRequest="68" />
                                         <Label
                                             FontSize="18"
@@ -143,5 +152,5 @@
                 </SfRefresh:SfPullToRefresh.PullableContent>
             </SfRefresh:SfPullToRefresh>
         </Grid>
-    </ContentView.Content>
-</ContentView>
+    </ContentPage.Content>
+</ContentPage>

@@ -36,6 +36,7 @@ namespace CandySugar.App
 
             #region Novel
             containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();
+            containerRegistry.RegisterForNavigation<CandyNovelView, CandyNovelViewModel>();
             containerRegistry.RegisterForNavigation<CandyNovelDetailView, CandyNovelDetailViewModel>();
             containerRegistry.RegisterForNavigation<CandyNovelContentView, CandyNovelContentViewModel>();
             #endregion
@@ -46,7 +47,7 @@ namespace CandySugar.App
         {
             base.ConfigureViewModelLocator();
 
-            ViewModelLocationProvider.Register<CandyNovelView>(() => Container.Resolve<CandyNovelViewModel>());
+            //ViewModelLocationProvider.Register<CandyNovelView>(() => Container.Resolve<CandyNovelViewModel>());
         }
     }
 }

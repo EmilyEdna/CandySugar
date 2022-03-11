@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace CandySugar.App.Controls.Views.Novel
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CandyNovelView : ContentView
+    public partial class CandyNovelView : ContentPage
     {
         public CandyNovelView()
         {

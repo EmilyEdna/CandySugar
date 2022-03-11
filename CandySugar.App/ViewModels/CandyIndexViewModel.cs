@@ -3,6 +3,7 @@ using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Common.Enum;
 using Prism.Navigation;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -25,12 +26,6 @@ namespace CandySugar.App.ViewModels
             set { SetProperty(ref _Menu, value); }
         }
 
-        private View _View;
-        public View Views
-        {
-            get { return _View; }
-            set { SetProperty(ref _View, value); }
-        }
 
         public ICommand ContentCommand => new Command<MenuOption>(input =>
         {
@@ -38,7 +33,7 @@ namespace CandySugar.App.ViewModels
             {
                 case MenuFuncEunm.Novel:
                     base.Title = input.CommandParam.ToDes();
-                    Views = new CandyNovelView();
+                    Arrived(nameof(CandyNovelView));
                     break;
                 case MenuFuncEunm.LightNovel:
                     base.Title = input.CommandParam.ToDes();
@@ -68,6 +63,11 @@ namespace CandySugar.App.ViewModels
                     break;
             }
         });
+
+        private async void Arrived(string input) 
+        {
+            await NavigationService.NavigateAsync(new Uri(input,UriKind.Relative));
+        }
 
     }
 }
