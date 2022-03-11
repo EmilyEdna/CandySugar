@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CandySugar.Xam.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,16 @@ namespace CandySugar.App.Controls.Views.Novel
         public CandyNovelContentView()
         {
             InitializeComponent();
+
+            AbsoluteLayout.SetLayoutBounds(Ctrls, new Rectangle(Soft.ScreenWidth / 4, Soft.ScreenHeight-70, 1, 0.2));
+        }
+
+        private void Tapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        {
+            if(!Ctrls.IsVisible)
+                Ctrls.IsVisible=true;
+            else
+                Ctrls.IsVisible=false;
         }
     }
 }

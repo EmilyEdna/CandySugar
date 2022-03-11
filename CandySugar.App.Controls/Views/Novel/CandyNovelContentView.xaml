@@ -7,78 +7,83 @@
     x:Name="NovelContents"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <SFList:SfListView
-            x:Name="ListViews"
-            AutoFitMode="Height"
-            BackgroundColor="{Binding Theme}"
-            HeaderSize="30"
-            IsBusy="{Binding IsBusy}"
-            IsScrollBarVisible="False"
-            IsStickyFooter="True"
-            IsStickyHeader="True"
-            ItemsSource="{Binding Content}"
-            LoadMoreCommand="{Binding ShowMoreCommand}"
-            LoadMoreOption="AutoOnScroll"
-            SelectionBackgroundColor="Transparent">
-            <SFList:SfListView.HeaderTemplate>
-                <DataTemplate>
-                    <StackLayout HorizontalOptions="Center">
-                        <Label
-                            FontSize="22"
-                            Text="{Binding ChapterName}"
-                            TextColor="{Binding BindingContext.TextTheme, Source={x:Reference NovelContents}}" />
-                    </StackLayout>
-                </DataTemplate>
-            </SFList:SfListView.HeaderTemplate>
-            <SFList:SfListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Label
-                            FontSize="18"
-                            LineBreakMode="CharacterWrap"
-                            Text="{Binding .}"
-                            TextColor="{Binding BindingContext.TextTheme, Source={x:Reference NovelContents}}" />
-                    </Grid>
-                </DataTemplate>
-            </SFList:SfListView.ItemTemplate>
-            <SFList:SfListView.FooterTemplate>
-                <DataTemplate>
-                    <FlexLayout HorizontalOptions="Center">
-                        <XFDes:MaterialButton
-                            BackgroundColor="#D0E2D0"
-                            Command="{Binding ThemeCommand}"
-                            CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            PressedBackgroundColor="Transparent"
-                            WidthRequest="40" />
-                        <XFDes:MaterialButton
-                            BackgroundColor="#FFDDCDA1"
-                            Command="{Binding ThemeCommand}"
-                            CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            PressedBackgroundColor="Transparent"
-                            WidthRequest="40" />
-                        <XFDes:MaterialButton
-                            BackgroundColor="#F5E4E4"
-                            Command="{Binding ThemeCommand}"
-                            CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            PressedBackgroundColor="Transparent"
-                            WidthRequest="40" />
-                        <XFDes:MaterialButton
-                            BackgroundColor="Black"
-                            Command="{Binding ThemeCommand}"
-                            CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            PressedBackgroundColor="Transparent"
-                            WidthRequest="40" />
-                    </FlexLayout>
-                </DataTemplate>
-            </SFList:SfListView.FooterTemplate>
-        </SFList:SfListView>
+        <AbsoluteLayout>
+            <SFList:SfListView
+                x:Name="ListViews"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                AutoFitMode="Height"
+                BackgroundColor="{Binding Theme}"
+                HeaderSize="30"
+                IsBusy="{Binding IsBusy}"
+                IsScrollBarVisible="False"
+                IsStickyHeader="True"
+                ItemTapped="Tapped"
+                ItemsSource="{Binding Content}"
+                LoadMoreCommand="{Binding ShowMoreCommand}"
+                LoadMoreOption="AutoOnScroll"
+                SelectionBackgroundColor="Transparent">
+                <SFList:SfListView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="Center">
+                            <Label
+                                FontSize="22"
+                                Text="{Binding ChapterName}"
+                                TextColor="{Binding BindingContext.TextTheme, Source={x:Reference NovelContents}}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </SFList:SfListView.HeaderTemplate>
+                <SFList:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Label
+                                FontSize="18"
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding .}"
+                                TextColor="{Binding BindingContext.TextTheme, Source={x:Reference NovelContents}}" />
+                        </Grid>
+                    </DataTemplate>
+                </SFList:SfListView.ItemTemplate>
+            </SFList:SfListView>
+            <FlexLayout
+                x:Name="Ctrls"
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                HorizontalOptions="Center"
+                IsVisible="False">
+                <XFDes:MaterialButton
+                    BackgroundColor="#D0E2D0"
+                    Command="{Binding ThemeCommand}"
+                    CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
+                    CornerRadius="20"
+                    HeightRequest="40"
+                    PressedBackgroundColor="Transparent"
+                    WidthRequest="40" />
+                <XFDes:MaterialButton
+                    BackgroundColor="#FFDDCDA1"
+                    Command="{Binding ThemeCommand}"
+                    CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
+                    CornerRadius="20"
+                    HeightRequest="40"
+                    PressedBackgroundColor="Transparent"
+                    WidthRequest="40" />
+                <XFDes:MaterialButton
+                    BackgroundColor="#F5E4E4"
+                    Command="{Binding ThemeCommand}"
+                    CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
+                    CornerRadius="20"
+                    HeightRequest="40"
+                    PressedBackgroundColor="Transparent"
+                    WidthRequest="40" />
+                <XFDes:MaterialButton
+                    BackgroundColor="Black"
+                    Command="{Binding ThemeCommand}"
+                    CommandParameter="{Binding BackgroundColor, Source={x:RelativeSource Self}}"
+                    CornerRadius="20"
+                    HeightRequest="40"
+                    PressedBackgroundColor="Transparent"
+                    WidthRequest="40" />
+            </FlexLayout>
+        </AbsoluteLayout>
+
     </ContentPage.Content>
 </ContentPage>
