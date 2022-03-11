@@ -20,4 +20,5 @@
     <Sys:String x:Key="TeaRed">#FFED556A</Sys:String>
 
     <Converter:ListViewConverter x:Key="ListViewConverter" />
+    <Converter:LabelConverter x:Key="LabelConverter" />
 </ResourceDictionary>

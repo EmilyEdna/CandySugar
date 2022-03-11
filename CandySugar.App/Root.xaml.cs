@@ -1,4 +1,6 @@
+using CandySugar.App.Controls.ViewModels;
 using CandySugar.App.Controls.ViewModels.NovelModel;
+using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
@@ -53,7 +55,7 @@ namespace CandySugar.App
         {
             base.ConfigureViewModelLocator();
 
-            //ViewModelLocationProvider.Register<CandyNovelView>(() => Container.Resolve<CandyNovelViewModel>());
+            ViewModelLocationProvider.Register<CandyContentIndexView>(() => Container.Resolve<CandyContentIndexViewModel>());
         }
     }
 }

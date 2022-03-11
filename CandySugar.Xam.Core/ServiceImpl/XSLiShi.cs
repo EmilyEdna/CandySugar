@@ -23,7 +23,7 @@ namespace CandySugar.Xam.Core.ServiceImpl
             if (await CheckFirst(input))
                 await Insert(input);
             else
-               await Update(input);
+                await Update(input);
         }
 
         public async Task<bool> CheckFirst(XS_LiShi input)
@@ -38,12 +38,15 @@ namespace CandySugar.Xam.Core.ServiceImpl
 
             var entity = await db.Table<XS_LiShi>().Where(t => t.BookName == input.BookName).FirstOrDefaultAsync();
             entity.Span = DateTime.Now.Ticks;
-            entity.ChapterName=input.ChapterName;
-            entity.ChapeterAddress=input.ChapeterAddress;
+            entity.ChapterName = input.ChapterName;
+            entity.ChapeterAddress = input.ChapeterAddress;
             await db.UpdateAsync(entity);
             await db.CloseAsync();
         }
 
-
+        public async Task<List<XS_LiShi>> Query()
+        {
+            return await SqliteDbContext.Instance.SqlDb.Table<XS_LiShi>().OrderByDescending(t => t.Span).ToListAsync();
+        }
     }
 }

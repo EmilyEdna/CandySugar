@@ -9,10 +9,6 @@
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     x:Name="NovelView"
     NavigationPage.HasNavigationBar="False">
-    <!--
-        xmlns:prism="http://prismlibrary.com"
-        prism:ViewModelLocator.AutowireViewModel="True"
-    -->
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>

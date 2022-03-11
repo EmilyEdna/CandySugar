@@ -1,0 +1,57 @@
+﻿<ContentView
+    x:Class="CandySugar.App.Controls.Views.CandyContentIndexView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:prism="http://prismlibrary.com"
+    x:Name="XS"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentView.Content>
+        <StackLayout>
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <local:ItemsControl ItemsSource="{Binding XSLiShi}">
+                        <local:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Image
+                                        HeightRequest="70"
+                                        Source="Cover.gif"
+                                        WidthRequest="50" />
+                                    <Label
+                                        Margin="2,0,0,0"
+                                        FontSize="10"
+                                        Text="{Binding BookName, Converter={x:StaticResource LabelConverter}}" />
+                                    <Label
+                                        Margin="2,0,0,0"
+                                        FontSize="10"
+                                        Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.ClickCommand, Source={x:Reference XS}}" CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </DataTemplate>
+                        </local:ItemsControl.ItemTemplate>
+                        <local:ItemsControl.ItemsLayout>
+                            <DataTemplate>
+                                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                                    <local:WrapLayout
+                                        local:LayoutEx.IsItemsHost="True"
+                                        IsSquare="True"
+                                        Spacing="10" />
+                                </ScrollView>
+                            </DataTemplate>
+                        </local:ItemsControl.ItemsLayout>
+                    </local:ItemsControl>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

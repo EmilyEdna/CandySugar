@@ -2,6 +2,7 @@
     x:Class="CandySugar.App.Views.CandyIndexView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:IndexView="clr-namespace:CandySugar.App.Controls.Views;assembly=CandySugar.App.Controls"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors;assembly=CandySugar.App.Controls"
     xmlns:ffload="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffloadtrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
@@ -63,7 +64,11 @@
                             TextColor="White"
                             VerticalTextAlignment="Center" />
                     </StackLayout>
-                    <Label Grid.Row="1" Text="测试" />
+                    <ContentView Grid.Row="1">
+                        <ContentView.Content>
+                            <IndexView:CandyContentIndexView />
+                        </ContentView.Content>
+                    </ContentView>
                 </Grid>
             </sf:SfNavigationDrawer.ContentView>
         </sf:SfNavigationDrawer>

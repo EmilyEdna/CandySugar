@@ -43,6 +43,9 @@
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
+	  <EmbeddedResource Update="Views\CandyContentIndexView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Novel\CandyNovelContentView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>

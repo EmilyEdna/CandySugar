@@ -15,5 +15,7 @@ namespace CandySugar.Xam.Core.Service
         Task InsertOrUpdate(XS_LiShi input);
 
         Task<bool> CheckFirst(XS_LiShi input);
+
+        Task<List<XS_LiShi>> Query();
     }
 }
