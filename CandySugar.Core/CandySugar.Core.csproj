@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="XExten.Advance" Version="1.1.2.5-beta" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CandySugar.Common\CandySugar.Common.csproj" />
   </ItemGroup>
 

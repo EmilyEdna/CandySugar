@@ -99,6 +99,10 @@
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CandySugar.App.Controls\CandySugar.App.Controls.csproj">
+      <Project>{398ffa84-db18-493a-87ea-b2568c91dee3}</Project>
+      <Name>CandySugar.App.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CandySugar.App\CandySugar.App.csproj">
       <Project>{b10dff88-e7df-4f18-81ee-6d2eaaba30a4}</Project>
       <Name>CandySugar.App</Name>
@@ -106,6 +110,10 @@
     <ProjectReference Include="..\CandySugar.Xam.Common\CandySugar.Xam.Common.csproj">
       <Project>{1C538EF6-5D46-4183-AB85-DAA1573D3051}</Project>
       <Name>CandySugar.Xam.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj">
+      <Project>{eb741a7b-fada-4353-99f0-be0bf1df8677}</Project>
+      <Name>CandySugar.Xam.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

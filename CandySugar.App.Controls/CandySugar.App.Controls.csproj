@@ -20,9 +20,6 @@
 		<PackageReference Include="XF.Material" Version="1.8.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\CandySugar.Xam.Common\CandySugar.Xam.Common.csproj" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Reference Include="Anime.SDK">
 	    <HintPath>..\AppLib\Anime.SDK.dll</HintPath>
 	  </Reference>
@@ -63,6 +60,9 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="PropertyAttach\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Views\Novel\CandyNovelDetailView.xaml.cs">

@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-    <PackageReference Include="XExten.Advance" Version="1.1.2.5-beta" />
+    <ProjectReference Include="..\CandySugar.Xam.Common\CandySugar.Xam.Common.csproj" />
   </ItemGroup>
 
 </Project>

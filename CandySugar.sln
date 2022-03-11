@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.App.Controls", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandySugar.Android", "CandySugar.Android\CandySugar.Android.csproj", "{AB171EBA-5E4D-422D-AF8C-1A1ED60F6B1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandySugar.Xam.Common", "CandySugar.Xam.Common\CandySugar.Xam.Common.csproj", "{1C538EF6-5D46-4183-AB85-DAA1573D3051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Xam.Common", "CandySugar.Xam.Common\CandySugar.Xam.Common.csproj", "{1C538EF6-5D46-4183-AB85-DAA1573D3051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandySugar.Xam.Core", "CandySugar.Xam.Core\CandySugar.Xam.Core.csproj", "{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{1C538EF6-5D46-4183-AB85-DAA1573D3051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C538EF6-5D46-4183-AB85-DAA1573D3051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C538EF6-5D46-4183-AB85-DAA1573D3051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{398FFA84-DB18-493A-87EA-B2568C91DEE3} = {2D5894D9-498B-46C6-A34E-462C55BC0932}
 		{AB171EBA-5E4D-422D-AF8C-1A1ED60F6B1A} = {2D5894D9-498B-46C6-A34E-462C55BC0932}
 		{1C538EF6-5D46-4183-AB85-DAA1573D3051} = {5B756473-DC9E-4CF6-A72B-EBCD34B936B6}
+		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677} = {5B756473-DC9E-4CF6-A72B-EBCD34B936B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBDAE5C3-9B93-4701-ADAB-60C595626BE6}

@@ -2,6 +2,9 @@ using CandySugar.App.Controls.ViewModels.NovelModel;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
+using CandySugar.Xam.Common.CandyUtily;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Core.ServiceImpl;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
@@ -31,8 +34,11 @@ namespace CandySugar.App
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
+
+            containerRegistry.Register<IXSLiShi, XSLiShi>();
 
             #region Novel
             containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();

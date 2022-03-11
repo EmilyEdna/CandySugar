@@ -34,13 +34,16 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         }
         #region Field
         private string Route;
+        private string BookName;
         #endregion
 
         #region Overrive
 
         public override void Initialize(INavigationParameters parameters)
         {
-            Route = parameters.GetValue<NovelSearchResult>(nameof(NovelSearchResult)).DetailAddress;
+            var Param = parameters.GetValue<NovelSearchResult>(nameof(NovelSearchResult));
+            Route = Param.DetailAddress;
+            BookName = Param.BookName;
         }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -108,7 +111,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         public ICommand ItemSelectedCommand => new DelegateCommand<NovelDetailResults>(async input =>
         {
             NavigationParameters param = new NavigationParameters();
-            param.Add("Route", input.ChapterURL);
+            param.Add("ChapterURL", input.ChapterURL);
+            param.Add("BookName", BookName);
             await NavigationService.NavigateAsync(new Uri("CandyNovelContentView",UriKind.Relative), param);
         });
         #endregion

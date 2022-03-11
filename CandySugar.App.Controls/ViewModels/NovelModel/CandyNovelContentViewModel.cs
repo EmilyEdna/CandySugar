@@ -17,12 +17,16 @@ using XF.Material.Forms.UI.Dialogs;
 using System.Linq;
 using Xamarin.Forms;
 using XExten.Advance.StaticFramework;
+using CandySugar.Xam.Core.Service;
+using Prism.Ioc;
+using CandySugar.Xam.Common.Entity.Model;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
     public class CandyNovelContentViewModel : ViewModelNavigatBase
     {
         private readonly NovelProxy Proxy;
+        private readonly IXSLiShi Candy;
         public CandyNovelContentViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new NovelProxy
@@ -32,20 +36,25 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
+            Candy = ContainerLocator.Container.Resolve<IXSLiShi>();
             this.TextTheme = Color.Black;
             this.Theme = Color.FromHex("DDCDA1");
+
         }
 
         #region Filed
         private string Next;
+        private string BookName;
         #endregion
 
         #region Overrive
 
         public override void Initialize(INavigationParameters parameters)
         {
-            var route = parameters.GetValue<string>("Route");
-            Contents(route);
+            var ChapterURL = parameters.GetValue<string>("ChapterURL");
+            BookName = parameters.GetValue<string>("BookName");
+
+            Contents(ChapterURL);
         }
         #endregion
 
@@ -92,6 +101,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         public ICommand ShowMoreCommand => new DelegateCommand(() =>
         {
             Contents(Next);
+
         });
 
         public ICommand ThemeCommand => new DelegateCommand<dynamic>(input =>
@@ -139,6 +149,13 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 NovelContent.Contents.Content.Split("\t", StringSplitOptions.RemoveEmptyEntries).ForEnumerEach(t =>
                 {
                     this.Content.Add("\t\t\t\t\t" + t + "\r\n");
+                });
+
+                await Candy.InsertOrUpdate(new XS_LiShi
+                {
+                    BookName = BookName,
+                    ChapeterAddress = input,
+                    ChapterName = ChapterName,
                 });
                 IsBusy = false;
             }
