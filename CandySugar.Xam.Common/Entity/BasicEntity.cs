@@ -8,11 +8,11 @@ namespace CandySugar.Xam.Common.Entity
     public class BasicEntity
     {
         [PrimaryKey]
-        public Guid PId { get; set; }
+        public string PId { get; set; }
         public long Span { get; set; }
         public void InitProperty()
         {
-            this.PId = Guid.NewGuid();
+            this.PId = Guid.NewGuid().ToString();
             this.Span = DateTime.Now.Ticks;
         }
     }
