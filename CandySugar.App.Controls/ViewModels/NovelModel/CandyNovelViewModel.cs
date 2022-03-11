@@ -184,8 +184,13 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         }
         private async void Refreshs(string input)
         {
-            this.Refresh = true;
+            if (input.IsNullOrEmpty())
+            {
+                this.Refresh = false;
+                return;
+            }
             CategoryType = input;
+            this.Refresh = true;
             try
             {
                 await Task.Delay(Soft.WaitSpan);
