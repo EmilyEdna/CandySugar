@@ -48,5 +48,10 @@ namespace CandySugar.Xam.Core.ServiceImpl
         {
             return await SqliteDbContext.Instance.SqlDb.Table<XS_LiShi>().OrderByDescending(t => t.Span).ToListAsync();
         }
+
+        public async Task<bool> Remove(XS_LiShi input) 
+        {
+            return await SqliteDbContext.Instance.SqlDb.Table<XS_LiShi>().DeleteAsync(t => t.PId == input.PId) > 0;
+        }
     }
 }

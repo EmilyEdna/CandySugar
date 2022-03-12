@@ -17,5 +17,7 @@ namespace CandySugar.Xam.Core.Service
         Task<bool> CheckFirst(XS_LiShi input);
 
         Task<List<XS_LiShi>> Query();
+
+        Task<bool> Remove(XS_LiShi input);
     }
 }

@@ -23,18 +23,24 @@
                                     <Image
                                         HeightRequest="70"
                                         Source="Cover.gif"
-                                        WidthRequest="50" />
-                                    <Label
-                                        Margin="2,0,0,0"
-                                        FontSize="10"
-                                        Text="{Binding BookName, Converter={x:StaticResource LabelConverter}}" />
-                                    <Label
-                                        Margin="2,0,0,0"
-                                        FontSize="10"
-                                        Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding BindingContext.ClickCommand, Source={x:Reference XS}}" CommandParameter="{Binding .}" />
-                                    </StackLayout.GestureRecognizers>
+                                        WidthRequest="50">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.ClickCommand, Source={x:Reference XS}}" CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <StackLayout>
+                                        <Label
+                                            Margin="2,0,0,0"
+                                            FontSize="10"
+                                            Text="{Binding BookName, Converter={x:StaticResource LabelConverter}}" />
+                                        <Label
+                                            Margin="2,0,0,0"
+                                            FontSize="10"
+                                            Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.DeleteCommand, Source={x:Reference XS}}" CommandParameter="{Binding .}" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
                                 </StackLayout>
                             </DataTemplate>
                         </local:ItemsControl.ItemTemplate>
@@ -52,6 +58,5 @@
                 </Grid>
             </ScrollView>
         </StackLayout>
-
     </ContentView.Content>
 </ContentView>
