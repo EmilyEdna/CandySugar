@@ -1,4 +1,5 @@
 ﻿using CandySugar.App.Controls;
+using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Common.Enum;
@@ -26,6 +27,12 @@ namespace CandySugar.App.ViewModels
             set { SetProperty(ref _Menu, value); }
         }
 
+        private View _Views;
+        public View Views
+        {
+            get { return _Views; }
+            set { SetProperty(ref _Views, value); }
+        }
 
         public ICommand ContentCommand => new Command<MenuOption>(input =>
         {
@@ -64,10 +71,19 @@ namespace CandySugar.App.ViewModels
             }
         });
 
-        private async void Arrived(string input) 
+        private async void Arrived(string input)
         {
-            await NavigationService.NavigateAsync(new Uri(input,UriKind.Relative));
+            await NavigationService.NavigateAsync(new Uri(input, UriKind.Relative));
         }
 
+        protected override void OnViewLaunch()
+        {
+            RefreshView();
+        }
+
+        public void RefreshView()
+        {
+            Views = new CandyContentIndexView();
+        }
     }
 }

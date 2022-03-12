@@ -6,7 +6,7 @@ namespace CandySugar.Xam.Common.DTO
 {
     public class XSLiShiDto
     {
-        public string PId { get; set; }
+        public Guid PId { get; set; }
         public string BookName { get; set; }
         public string ChapterName { get; set; }
         public string ChapeterAddress { get; set; }

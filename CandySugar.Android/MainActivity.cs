@@ -1,11 +1,17 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using AndroidX.Lifecycle;
 using CandySugar.App;
+using CandySugar.App.ViewModels;
+using CandySugar.App.Views;
 using CandySugar.Xam.Common;
 using FFImageLoading.Forms.Platform;
 using Prism;
 using Prism.Ioc;
+using System.Linq;
 using Xamarin.Forms.Platform.Android;
 using XF.Material.Droid;
 using Forms = Xamarin.Forms.Forms;
@@ -19,6 +25,8 @@ namespace CandySugar.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            SqliteDbContext.Instance.InitTabel();
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -31,7 +39,6 @@ namespace CandySugar.Droid
             Soft.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
             Soft.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
 
-            SqliteDbContext.Instance.InitTabel();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
@@ -39,6 +46,21 @@ namespace CandySugar.Droid
             Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            if (keyCode == Keycode.Back)
+            {
+                var page = Xamarin.Forms.Application.Current.MainPage.Navigation.NavigationStack.FirstOrDefault();
+                if (page is CandyIndexView)
+                {
+                    var view = (CandyIndexViewModel)((CandyIndexView)page).BindingContext;
+                    view.RefreshView();
+
+                }
+            }
+
+            return base.OnKeyDown(keyCode, e);
         }
     }
 

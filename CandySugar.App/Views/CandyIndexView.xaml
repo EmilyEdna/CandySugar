@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:IndexView="clr-namespace:CandySugar.App.Controls.Views;assembly=CandySugar.App.Controls"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors;assembly=CandySugar.App.Controls"
+    xmlns:ctrl="clr-namespace:CandySugar.App.Controls.Controls;assembly=CandySugar.App.Controls"
     xmlns:ffload="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffloadtrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
@@ -64,11 +65,7 @@
                             TextColor="White"
                             VerticalTextAlignment="Center" />
                     </StackLayout>
-                    <ContentView Grid.Row="1">
-                        <ContentView.Content>
-                            <IndexView:CandyContentIndexView />
-                        </ContentView.Content>
-                    </ContentView>
+                    <ContentView Grid.Row="1" Content="{Binding Views}" />
                 </Grid>
             </sf:SfNavigationDrawer.ContentView>
         </sf:SfNavigationDrawer>
