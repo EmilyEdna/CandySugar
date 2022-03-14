@@ -10,11 +10,7 @@
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
-            <!--<Grid.GestureRecognizers>
-                <SwipeGestureRecognizer Command="{Binding GoBackCommand}" Direction="Left,Right" />
-            </Grid.GestureRecognizers>-->
             <Grid.RowDefinitions>
-
                 <RowDefinition Height="175" />
                 <RowDefinition />
             </Grid.RowDefinitions>
