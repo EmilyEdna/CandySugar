@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 
@@ -31,6 +32,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 UserName = Soft.ProxyAccount
             };
             this.PageIndex = 1;
+            this.Asc = true;
         }
         #region Field
         private string Route;
@@ -77,6 +79,12 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             set { SetProperty(ref _PageIndex, value); }
         }
 
+        private int _TotalPage;
+        public int TotalPage
+        {
+            get { return _TotalPage; }
+            set { SetProperty(ref _TotalPage, value); }
+        }
         private bool _IsBusy;
         public bool IsBusy
         {
@@ -90,30 +98,56 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             get { return _Refresh; }
             set { SetProperty(ref _Refresh, value); }
         }
+        private bool _Asc;
+        public bool Asc
+        {
+            get { return _Asc; }
+            set { SetProperty(ref _Asc, value); }
+        }
         #endregion
 
         #region Command
         public ICommand RefreshsCommand => new DelegateCommand(() =>
         {
-            PageIndex = 1;
-            Details(Route, true);
+            if (this.Asc)
+            {
+                PageIndex = 1;
+                Details(Route, true);
+            }
+            else {
+                this.TotalPage = NovelDetail.TotalPage;
+                Details(Route, true);
+            }
         });
 
         public ICommand ShowMoreCommand => new DelegateCommand(() =>
         {
-            PageIndex += 1;
-            if (PageIndex <= NovelDetail.TotalPage)
-                Details(Route, false, true);
+            if (this.Asc)
+            {
+                this.PageIndex += 1;
+                if (this.PageIndex <= this.NovelDetail.TotalPage)
+                    Details(Route, false, true);
+            }
+            else {
+                this.TotalPage -= 1;
+                if(this.TotalPage>=1)
+                    Details(Route, false, true);
+            }
         });
 
-        //public ICommand GoBackCommand => new DelegateCommand(async () => await NavigationService.GoBackAsync());
+        public ICommand SortTypeCommand => new DelegateCommand<string>(input =>
+        {
+            this.Asc = bool.Parse(input);
+            this.TotalPage = NovelDetail.TotalPage;
+            Details(Route, true);
+        });
 
         public ICommand ItemSelectedCommand => new DelegateCommand<NovelDetailResults>(async input =>
         {
             NavigationParameters param = new NavigationParameters();
             param.Add("ChapterURL", input.ChapterURL);
             param.Add("BookName", BookName);
-            await NavigationService.NavigateAsync(new Uri("CandyNovelContentView",UriKind.Relative), param);
+            await NavigationService.NavigateAsync(new Uri("CandyNovelContentView", UriKind.Relative), param);
         });
         #endregion
 
@@ -136,7 +170,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                         Proxy = this.Proxy,
                         Detail = new NovelDetail
                         {
-                            Page = this.PageIndex,
+                            Page =this.Asc?this.PageIndex: this.TotalPage,
                             NovelDetailAddress = input
                         }
                     };
@@ -149,6 +183,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                     if (Chapter == null)
                     {
                         Chapter = new ObservableCollection<NovelDetailResults>();
+                        if (!this.Asc)
+                            NovelDetail.Details.Details.Reverse();
                         NovelDetail.Details.Details.ForEach(t =>
                         {
                             Chapter.Add(t);
@@ -156,6 +192,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                     }
                     else
                     {
+                        if (!this.Asc)
+                            NovelDetail.Details.Details.Reverse();
                         NovelDetail.Details.Details.ForEach(t =>
                         {
                             Chapter.Add(t);
@@ -167,6 +205,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 {
                     Chapter.Clear();
                     this.Refresh = false;
+                    if(!this.Asc)
+                         NovelDetail.Details.Details.Reverse();
                     Chapter = new ObservableCollection<NovelDetailResults>(NovelDetail.Details.Details);
                 }
                 else

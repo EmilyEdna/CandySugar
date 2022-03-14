@@ -5,6 +5,7 @@
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     x:Name="NovelDetailView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -89,6 +90,24 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <FlexLayout RelativeLayout.XConstraint="138" RelativeLayout.YConstraint="120">
+                    <XFMaterial:MaterialButton
+                        BackgroundColor="Transparent"
+                        Command="{Binding SortTypeCommand}"
+                        CommandParameter="{x:Static x:Boolean.FalseString}"
+                        FontSize="12"
+                        PressedBackgroundColor="{DynamicResource Sakura}"
+                        Text="倒叙"
+                        TextColor="{DynamicResource Sakura}" />
+                    <XFMaterial:MaterialButton
+                        BackgroundColor="Transparent"
+                        Command="{Binding SortTypeCommand}"
+                        CommandParameter="{x:Static x:Boolean.TrueString}"
+                        FontSize="12"
+                        PressedBackgroundColor="{DynamicResource Sakura}"
+                        Text="正序"
+                        TextColor="{DynamicResource Sakura}" />
+                </FlexLayout>
             </RelativeLayout>
             <SfRefresh:SfPullToRefresh
                 Grid.Row="1"
