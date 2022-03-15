@@ -24,7 +24,7 @@
             <local:ItemsControl Grid.Row="1" ItemsSource="{Binding NovelCategory}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding CategoryName}">
+                        <Label Text="{Binding CategoryName}" TextColor="{DynamicResource Sakura}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding BindingContext.ItemCommand, Source={x:Reference NovelView}}" CommandParameter="{Binding CollectAddress}" />
                             </Label.GestureRecognizers>

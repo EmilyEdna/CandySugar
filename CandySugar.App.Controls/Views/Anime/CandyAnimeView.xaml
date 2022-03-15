@@ -1,0 +1,166 @@
+﻿<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Anime.CandyAnimeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
+    x:Name="CandyAnime"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="25" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <SearchBar
+                BackgroundColor="#FFFF9999"
+                Placeholder="请输入动漫名称"
+                SearchCommand="{Binding SearchCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
+            <local:ItemsControl Grid.Row="1" ItemsSource="{Binding RecommendCategory}">
+                <local:ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Key}" TextColor="{DynamicResource Sakura}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.CateCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding Value}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </DataTemplate>
+                </local:ItemsControl.ItemTemplate>
+                <local:ItemsControl.ItemsLayout>
+                    <DataTemplate>
+                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                            <local:WrapLayout
+                                local:LayoutEx.IsItemsHost="True"
+                                IsSquare="True"
+                                Spacing="10" />
+                        </ScrollView>
+                    </DataTemplate>
+                </local:ItemsControl.ItemsLayout>
+            </local:ItemsControl>
+            <local:ItemsControl Grid.Row="2" ItemsSource="{Binding LetterCate}">
+                <local:ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding .}" TextColor="{DynamicResource Sakura}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.LettCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </DataTemplate>
+                </local:ItemsControl.ItemTemplate>
+                <local:ItemsControl.ItemsLayout>
+                    <DataTemplate>
+                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                            <local:WrapLayout
+                                local:LayoutEx.IsItemsHost="True"
+                                IsSquare="True"
+                                Spacing="10" />
+                        </ScrollView>
+                    </DataTemplate>
+                </local:ItemsControl.ItemsLayout>
+            </local:ItemsControl>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Text="今日更新：" TextColor="{DynamicResource Sakura}" />
+                <local:ItemsControl Grid.Column="1" ItemsSource="{Binding WeekDay}">
+                    <local:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding AnimeName}" TextColor="{DynamicResource Sakura}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding AnimeURL}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </DataTemplate>
+                    </local:ItemsControl.ItemTemplate>
+                    <local:ItemsControl.ItemsLayout>
+                        <DataTemplate>
+                            <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                                <local:WrapLayout
+                                    local:LayoutEx.IsItemsHost="True"
+                                    IsSquare="True"
+                                    Spacing="10" />
+                            </ScrollView>
+                        </DataTemplate>
+                    </local:ItemsControl.ItemsLayout>
+                </local:ItemsControl>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <SfRefresh:SfPullToRefresh
+                    IsRefreshing="{Binding Refresh}"
+                    ProgressBackgroundColor="Transparent"
+                    ProgressStrokeColor="{DynamicResource Sakura}"
+                    RefreshCommand="{Binding RefreshsCommand}"
+                    RefreshContentHeight="50"
+                    RefreshContentWidth="50"
+                    TransitionMode="Push">
+                    <SfRefresh:SfPullToRefresh.PullableContent>
+                        <SfList:SfListView
+                            x:Name="ListViews"
+                            IsBusy="{Binding IsBusy}"
+                            IsScrollBarVisible="False"
+                            ItemSize="130"
+                            ItemsSource="{Binding Result}"
+                            LoadMoreCommand="{Binding ShowMoreCommand}"
+                            LoadMoreOption="AutoOnScroll"
+                            SelectionBackgroundColor="Transparent">
+                            <SfList:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Margin="2"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        CornerRadius="15"
+                                        HasShadow="True">
+                                        <StackLayout HorizontalOptions="Center">
+                                            <FFImg:CachedImage
+                                                Margin="0,-20,0,0"
+                                                HeightRequest="100"
+                                                Source="{Binding AnimeCover}"
+                                                WidthRequest="70" />
+                                            <Label
+                                                HorizontalOptions="Center"
+                                                Text="{Binding AnimeName}"
+                                                VerticalOptions="Center" />
+                                        </StackLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding DetailAddress}" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </DataTemplate>
+                            </SfList:SfListView.ItemTemplate>
+                        </SfList:SfListView>
+                    </SfRefresh:SfPullToRefresh.PullableContent>
+                </SfRefresh:SfPullToRefresh>
+                <SfList:SfListView
+                    Grid.Column="1"
+                    AutoFitMode="Height"
+                    IsScrollBarVisible="False"
+                    ItemsSource="{Binding Detail}"
+                    SelectionBackgroundColor="Transparent">
+                    <SfList:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <XFMaterial:MaterialButton BackgroundColor="{DynamicResource Sakura}" Text="{Binding CollectName}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </SfList:SfListView.ItemTemplate>
+                </SfList:SfListView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

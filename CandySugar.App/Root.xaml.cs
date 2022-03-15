@@ -1,6 +1,8 @@
 using CandySugar.App.Controls.ViewModels;
+using CandySugar.App.Controls.ViewModels.AnimeModel;
 using CandySugar.App.Controls.ViewModels.NovelModel;
 using CandySugar.App.Controls.Views;
+using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
@@ -42,6 +44,10 @@ namespace CandySugar.App
 
             containerRegistry.Register<IXSLiShi, XSLiShi>();
 
+            #region Anime
+            containerRegistry.RegisterForNavigation<CandyAnimeView, CandyAnimeViewModel>();
+            #endregion
+
             #region Novel
             containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();
             containerRegistry.RegisterForNavigation<CandyNovelView, CandyNovelViewModel>();
@@ -49,6 +55,7 @@ namespace CandySugar.App
             containerRegistry.RegisterForNavigation<CandyNovelContentView, CandyNovelContentViewModel>();
             #endregion
 
+        
         }
 
         protected override void ConfigureViewModelLocator()

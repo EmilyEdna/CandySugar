@@ -1,5 +1,6 @@
 ﻿using CandySugar.App.Controls;
 using CandySugar.App.Controls.Views;
+using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Common.Enum;
@@ -47,6 +48,7 @@ namespace CandySugar.App.ViewModels
                     break;
                 case MenuFuncEunm.Anime:
                     base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyAnimeView));
                     break;
                 case MenuFuncEunm.Manga:
                     base.Title = input.CommandParam.ToDes();
@@ -84,6 +86,7 @@ namespace CandySugar.App.ViewModels
         public void RefreshView()
         {
             Views = new CandyContentIndexView();
+            base.Title = "首页";
         }
     }
 }
