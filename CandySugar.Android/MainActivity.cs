@@ -27,8 +27,11 @@ namespace CandySugar.Droid
         {
             SqliteDbContext.Instance.InitTabel();
 
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen | WindowManagerFlags.TurnScreenOn);
 
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);

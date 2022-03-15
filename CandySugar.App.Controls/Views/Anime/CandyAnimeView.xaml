@@ -153,8 +153,13 @@
                     <SfList:SfListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout>
-                                    <XFMaterial:MaterialButton BackgroundColor="{DynamicResource Sakura}" Text="{Binding CollectName}" />
+                                <StackLayout Margin="2">
+                                    <XFMaterial:MaterialButton
+                                        BackgroundColor="{DynamicResource Sakura}"
+                                        Command="{Binding BindingContext.PlayCommand, Source={x:Reference CandyAnime}}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="15"
+                                        Text="{Binding CollectName}" />
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

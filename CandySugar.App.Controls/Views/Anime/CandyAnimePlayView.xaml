@@ -1,0 +1,16 @@
+﻿<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Anime.CandyAnimePlayView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Debbuger="clr-namespace:CandySugar.App.Controls.Controls"
+    Appearing="ContentPage_Appearing"
+    BackgroundColor="Black"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Debbuger:FullScreenEnabledWebView
+            x:Name="web"
+            Margin="-8,0,-8,0"
+            HeightRequest="400"
+            VerticalOptions="Center" />
+    </ContentPage.Content>
+</ContentPage>

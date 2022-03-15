@@ -3,6 +3,7 @@ using Anime.SDK.ViewModel;
 using Anime.SDK.ViewModel.Enums;
 using Anime.SDK.ViewModel.Request;
 using Anime.SDK.ViewModel.Response;
+using CandySugar.App.Controls.Views.Anime;
 using CandySugar.Xam.Common;
 using Prism.Commands;
 using Prism.Navigation;
@@ -13,7 +14,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using XExten.Advance.InternalFramework.Securities.Common;
 using XExten.Advance.LinqFramework;
+using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels.AnimeModel
@@ -303,7 +306,35 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                         }
                     };
                 }).RunsAsync();
-                this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults.Where(t=>t.IsDownURL==false));
+                this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults.Where(t => t.IsDownURL == false));
+            }
+            catch
+            {
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                {
+                    await Task.Delay(3000);
+                }
+            }
+        }
+        public async void Play(AnimeDetailResult input) {
+            try
+            {
+                var AnimeWath = await AnimeFactory.Anime(opt =>
+                {
+                    opt.RequestParam = new AnimeRequestInput
+                    {
+                        AnimeType = AnimeEnum.Watch,
+                        Proxy = this.Proxy,
+                        WatchPlay = new AnimeWatchPlay
+                        {
+                            DetailResult = input
+                        }
+                    };
+                }).RunsAsync();
+
+                NavigationParameters param = new NavigationParameters();
+                param.Add("WatchAddress", AnimeWath.PlayResult.PlayURL);
+                await NavigationService.NavigateAsync(new Uri(nameof(CandyAnimePlayView), UriKind.Relative), param);
             }
             catch
             {
@@ -371,7 +402,12 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 else
                     LetterCategory(Letters);
             }
+        });
 
+        public ICommand PlayCommand => new DelegateCommand<dynamic>(async input =>
+        {
+            if (input != null)
+                Play(input);
         });
         #endregion
 

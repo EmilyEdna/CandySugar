@@ -6,7 +6,6 @@ using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
-using CandySugar.Xam.Common.CandyUtily;
 using CandySugar.Xam.Core.Service;
 using CandySugar.Xam.Core.ServiceImpl;
 using Prism;
@@ -46,6 +45,7 @@ namespace CandySugar.App
 
             #region Anime
             containerRegistry.RegisterForNavigation<CandyAnimeView, CandyAnimeViewModel>();
+            containerRegistry.RegisterForNavigation<CandyAnimePlayView, CandyAnimePlayViewModel>();
             #endregion
 
             #region Novel

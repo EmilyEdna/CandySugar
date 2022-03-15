@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <script src="DPlayer.min.js"></script>
+    <script src="hls.min.js"></script>
+    <link href="DPlayer.min.css" rel="stylesheet">
+    <style type="text/css">
+        .Wpf {
+            height: 400px;
+            width: 100%;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            background-color: black;
+        }
+    </style>
+    <script type="text/javascript">
+        var dp = undefined;
+        function Play(args) {
+            dp = new DPlayer({
+                container: document.getElementById('dplayer'),
+                video: {
+                    url: args,
+                    lang: 'zh-cn',
+                    autoplay: 'true',
+                }
+            });
+            dp.play();
+            return "Ok";
+        }
+        function Destory() {
+            try {
+                if (dp != undefined)
+                {
+                    dp.destroy();
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dplayer" class="dplayer Wpf"></div>
+</body>
+</html>
