@@ -76,9 +76,6 @@
   <ItemGroup>
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Render\FullScreenEnabledWebViewRenderer.cs" />
-    <Compile Include="Render\EnterFullScreenRequestedEventArgs.cs" />
-    <Compile Include="Render\FullScreenEnabledWebChromeClient.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <LinkDescription Include="LinkerSettings.xml" />

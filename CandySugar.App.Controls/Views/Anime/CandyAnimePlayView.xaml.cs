@@ -26,7 +26,7 @@ namespace CandySugar.App.Controls.Views.Anime
             Source.Html = Extension.ReadLocalHtml();
             Source.BaseUrl = Extension.AndroidAssetsPath;
             web.Source = Source;
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             await web.EvaluateJavaScriptAsync($"Play('{PlayURL}')");
         }
     }
