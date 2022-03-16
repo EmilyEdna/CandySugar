@@ -1,5 +1,7 @@
 ﻿using CandySugar.App.Controls.ViewModels.AnimeModel;
 using CandySugar.Xam.Common;
+using Plugin.DeviceOrientation;
+using Plugin.DeviceOrientation.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +21,9 @@ namespace CandySugar.App.Controls.Views.Anime
             InitializeComponent();
         }
 
-        private async void ContentPage_Appearing(object sender, EventArgs e)
+        private async  void ContentPage_Appearing(object sender, EventArgs e)
         {
+            CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Landscape);
             var PlayURL = (this.BindingContext as CandyAnimePlayViewModel).PlayURL;
             HtmlWebViewSource Source = new HtmlWebViewSource();
             Source.Html = Extension.ReadLocalHtml();

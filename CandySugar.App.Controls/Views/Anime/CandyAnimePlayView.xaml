@@ -3,7 +3,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Appearing="ContentPage_Appearing"
-    BackgroundColor="Black"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <WebView

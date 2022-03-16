@@ -9,6 +9,7 @@ using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
 using CandySugar.Xam.Common;
 using FFImageLoading.Forms.Platform;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
 using System.Linq;
@@ -27,11 +28,12 @@ namespace CandySugar.Droid
         {
             SqliteDbContext.Instance.InitTabel();
 
-
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
-            this.Window.AddFlags(WindowManagerFlags.Fullscreen | WindowManagerFlags.TurnScreenOn);
+            this.Window.AddFlags(WindowManagerFlags.TranslucentNavigation | WindowManagerFlags.TranslucentStatus);
+    
+            CrossCurrentActivity.Current.Activity = this;
 
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
@@ -59,8 +61,10 @@ namespace CandySugar.Droid
                 {
                     var view = (CandyIndexViewModel)((CandyIndexView)page).BindingContext;
                     view.RefreshView();
-
                 }
+
+                if (this.RequestedOrientation == ScreenOrientation.Landscape)
+                    this.RequestedOrientation = ScreenOrientation.Portrait;
             }
 
             return base.OnKeyDown(keyCode, e);
