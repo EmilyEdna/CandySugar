@@ -144,27 +144,34 @@
                         </SfList:SfListView>
                     </SfRefresh:SfPullToRefresh.PullableContent>
                 </SfRefresh:SfPullToRefresh>
-                <SfList:SfListView
-                    Grid.Column="1"
-                    AutoFitMode="Height"
-                    IsScrollBarVisible="False"
-                    ItemsSource="{Binding Detail}"
-                    SelectionBackgroundColor="Transparent">
-                    <SfList:SfListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Margin="2">
-                                    <XFMaterial:MaterialButton
-                                        BackgroundColor="{DynamicResource Sakura}"
-                                        Command="{Binding BindingContext.PlayCommand, Source={x:Reference CandyAnime}}"
-                                        CommandParameter="{Binding .}"
-                                        CornerRadius="15"
-                                        Text="{Binding CollectName}" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </SfList:SfListView.ItemTemplate>
-                </SfList:SfListView>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <ActivityIndicator IsRunning="{Binding Activity}" Color="{DynamicResource Sakura}" />
+                    <SfList:SfListView
+                        Grid.Row="1"
+                        AutoFitMode="Height"
+                        IsScrollBarVisible="False"
+                        ItemsSource="{Binding Detail}"
+                        SelectionBackgroundColor="Transparent">
+                        <SfList:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Margin="2">
+                                        <XFMaterial:MaterialButton
+                                            BackgroundColor="{DynamicResource Sakura}"
+                                            Command="{Binding BindingContext.PlayCommand, Source={x:Reference CandyAnime}}"
+                                            CommandParameter="{Binding .}"
+                                            CornerRadius="15"
+                                            Text="{Binding CollectName}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </SfList:SfListView.ItemTemplate>
+                    </SfList:SfListView>
+                </Grid>
             </Grid>
         </Grid>
     </ContentPage.Content>

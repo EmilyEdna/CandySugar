@@ -3,12 +3,15 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Appearing="ContentPage_Appearing"
+    Disappearing="ContentPage_Disappearing"
+    BackgroundColor="Black"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <WebView
-            x:Name="web"
-            Margin="-8,0,-8,0"
-            HeightRequest="400"
-            VerticalOptions="Center" />
+        <Frame Margin="4.4" Padding="-6">
+            <WebView
+                x:Name="web"
+                Margin="-8,0,-8,0"
+                HeightRequest="1" />
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

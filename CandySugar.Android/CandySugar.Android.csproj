@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Platforms\AndroidPlatform.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <LinkDescription Include="LinkerSettings.xml" />
@@ -138,5 +139,6 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\DPlayer.min.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

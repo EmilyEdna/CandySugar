@@ -5,6 +5,7 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
 		<PackageReference Include="Plugin.DeviceOrientation" Version="1.0.7" />
 		<PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.4.0.54" />
@@ -64,19 +65,9 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
-	  <None Update="Views\Novel.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </None>
-	</ItemGroup>
-	<ItemGroup>
 	  <Folder Include="PropertyAttach\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="Views\Novel\CandyNovelDetailView.xaml.cs">
-	    <DependentUpon>CandyNovelDetailView.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 </Project>

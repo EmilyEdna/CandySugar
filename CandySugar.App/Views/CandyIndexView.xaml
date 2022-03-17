@@ -13,6 +13,7 @@
     <ContentPage.Content>
         <sf:SfNavigationDrawer
             x:Name="drawer"
+            x:Uid="123"
             DrawerHeaderHeight="0"
             DrawerWidth="200">
             <sf:SfNavigationDrawer.DrawerContentView>

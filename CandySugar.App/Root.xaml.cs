@@ -55,7 +55,6 @@ namespace CandySugar.App
             containerRegistry.RegisterForNavigation<CandyNovelContentView, CandyNovelContentViewModel>();
             #endregion
 
-        
         }
 
         protected override void ConfigureViewModelLocator()

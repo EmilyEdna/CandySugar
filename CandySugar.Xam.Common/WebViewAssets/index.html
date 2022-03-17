@@ -5,14 +5,7 @@
     <script src="DPlayer.min.js"></script>
     <script src="hls.min.js"></script>
     <link href="DPlayer.min.css" rel="stylesheet">
-    <style type="text/css">
-        .Wpf {
-            height: 400px;
-            width: 100%;
-            border-radius:15px;
-            background-color: black;
-        }
-    </style>
+
     <script type="text/javascript">
         var dp = undefined;
         function Play(args) {
@@ -25,7 +18,6 @@
                 }
             });
             dp.play();
-            return "Ok";
         }
         function Destory() {
             try {
@@ -40,6 +32,6 @@
     </script>
 </head>
 <body>
-    <div id="dplayer" class="dplayer Wpf"></div>
+    <div id="dplayer" class="dplayer" style="width:100%;background-color:black;border-radius:15px;height:348px;"></div>
 </body>
 </html>

@@ -35,6 +35,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
 
             this.LetterCate = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".Split(",").ToList();
             this.PageIndex = 1;
+            this.Activity = false;
         }
 
         #region Field
@@ -106,6 +107,13 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
         {
             get { return _Refresh; }
             set { SetProperty(ref _Refresh, value); }
+        }
+
+        private bool _Activity;
+        public bool Activity
+        {
+            get { return _Activity; }
+            set { SetProperty(ref _Activity, value); }
         }
         #endregion
 
@@ -293,6 +301,8 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
         {
             try
             {
+                Activity = true;
+                await Task.Delay(Soft.WaitSpan);
                 var AnimeDetail = await AnimeFactory.Anime(opt =>
                 {
                     opt.RequestParam = new AnimeRequestInput
@@ -307,6 +317,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     };
                 }).RunsAsync();
                 this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults.Where(t => t.IsDownURL == false));
+                Activity = false;
             }
             catch
             {
