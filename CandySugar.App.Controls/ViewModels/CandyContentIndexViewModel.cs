@@ -19,11 +19,13 @@ namespace CandySugar.App.Controls.ViewModels
     {
         public CandyContentIndexViewModel() : base()
         {
-            Candy = ContainerLocator.Container.Resolve<IXSLiShi>();
+            XSCandy = ContainerLocator.Container.Resolve<IXSLiShi>();
+            DMCandy = ContainerLocator.Container.Resolve<IDMLiShi>();
         }
 
         #region Field
-        private readonly IXSLiShi Candy;
+        private readonly IXSLiShi XSCandy;
+        private readonly IDMLiShi DMCandy;
         #endregion
 
         #region Property
@@ -33,10 +35,16 @@ namespace CandySugar.App.Controls.ViewModels
             get { return _XSLiShi; }
             set { SetProperty(ref _XSLiShi, value); }
         }
+        private ObservableCollection<DMLiShiDto> _DMLiShi;
+        public ObservableCollection<DMLiShiDto> DMLiShi
+        {
+            get { return _DMLiShi; }
+            set { SetProperty(ref _DMLiShi, value); }
+        }
         #endregion
 
         #region Command
-        public ICommand ClickCommand => new DelegateCommand<XSLiShiDto>(async input =>
+        public ICommand XSClickCommand => new DelegateCommand<XSLiShiDto>(async input =>
         {
             NavigationParameters param = new NavigationParameters();
             param.Add("ChapterURL", input.ChapeterAddress);
@@ -44,17 +52,34 @@ namespace CandySugar.App.Controls.ViewModels
             await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri("CandyNovelContentView", UriKind.Relative), param);
         });
 
-        public ICommand DeleteCommand => new DelegateCommand<XSLiShiDto>(async input =>
+        public ICommand XSDeleteCommand => new DelegateCommand<XSLiShiDto>(async input =>
         {
-
-            if (await Candy.Remove(input.ToMapest<XS_LiShi>()))
+            if (await XSCandy.Remove(input.ToMapest<XS_LiShi>()))
             {
                 OnViewLaunch();
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从书架中移除"))
                 {
                     await Task.Delay(3000);
                 }
-               
+            }
+        });
+
+        public ICommand DMClickCommand => new DelegateCommand<DMLiShiDto>(async input => {
+
+            NavigationParameters param = new NavigationParameters();
+            param.Add("WatchAddress", input.PlayURL);
+            await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri("CandyAnimePlayView", UriKind.Relative), param);
+        });
+
+        public ICommand DMDeleteCommand => new DelegateCommand<DMLiShiDto>(async input =>
+        {
+            if (await DMCandy.Remove(input.ToMapest<DM_LiShi>()))
+            {
+                OnViewLaunch();
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从列表中移除"))
+                {
+                    await Task.Delay(3000);
+                }
             }
         });
         #endregion
@@ -63,6 +88,7 @@ namespace CandySugar.App.Controls.ViewModels
         protected override async void OnViewLaunch()
         {
             XSLiShi = new ObservableCollection<XSLiShiDto>((await ContainerLocator.Container.Resolve<IXSLiShi>().Query()).ToMapest<List<XSLiShiDto>>());
+            DMLiShi = new ObservableCollection<DMLiShiDto>((await ContainerLocator.Container.Resolve<IDMLiShi>().Query()).ToMapest <List<DMLiShiDto>>());
         }
         #endregion
     }
