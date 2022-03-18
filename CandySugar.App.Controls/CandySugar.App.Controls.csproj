@@ -23,25 +23,25 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="Anime.SDK">
-	    <HintPath>..\AppLib\Anime.SDK.dll</HintPath>
+	    <HintPath>..\Lib\Anime.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="GalActor.SDK">
-	    <HintPath>..\AppLib\GalActor.SDK.dll</HintPath>
+	    <HintPath>..\Lib\GalActor.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="LightNovel.SDK">
-	    <HintPath>..\AppLib\LightNovel.SDK.dll</HintPath>
+	    <HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Manga.SDK">
-	    <HintPath>..\AppLib\Manga.SDK.dll</HintPath>
+	    <HintPath>..\Lib\Manga.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Music.SDK">
-	    <HintPath>..\AppLib\Music.SDK.dll</HintPath>
+	    <HintPath>..\Lib\Music.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Novel.SDK">
-	    <HintPath>..\AppLib\Novel.SDK.dll</HintPath>
+	    <HintPath>..\Lib\Novel.SDK.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Wallpaper.SDK">
-	    <HintPath>..\AppLib\Wallpaper.SDK.dll</HintPath>
+	    <HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>

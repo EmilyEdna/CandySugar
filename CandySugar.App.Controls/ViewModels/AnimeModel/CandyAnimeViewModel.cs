@@ -5,6 +5,7 @@ using Anime.SDK.ViewModel.Request;
 using Anime.SDK.ViewModel.Response;
 using CandySugar.App.Controls.Views.Anime;
 using CandySugar.Xam.Common;
+using CandySugar.Xam.Core.Service;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -18,6 +19,9 @@ using XExten.Advance.InternalFramework.Securities.Common;
 using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
+using CandySugar.Xam.Common.DTO;
+using CandySugar.Xam.Common.Entity.Model;
 
 namespace CandySugar.App.Controls.ViewModels.AnimeModel
 {
@@ -36,9 +40,12 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             this.LetterCate = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".Split(",").ToList();
             this.PageIndex = 1;
             this.Activity = false;
+
+            Candy = ContainerLocator.Container.Resolve<IDMLiShi>();
         }
 
         #region Field
+        private readonly IDMLiShi Candy;
         private readonly AnimeProxy Proxy;
         private string Letters;
         private string Categorys;
@@ -327,7 +334,8 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 }
             }
         }
-        public async void Play(AnimeDetailResult input) {
+        public async void Play(AnimeDetailResult input)
+        {
             try
             {
                 var AnimeWath = await AnimeFactory.Anime(opt =>
@@ -342,6 +350,14 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                         }
                     };
                 }).RunsAsync();
+
+                await Candy.InsertOrUpdate(new DMLiShiDto
+                {
+                    AnimeName = input.AnimeName,
+                    CollectionName = input.CollectName,
+                    Cover = input.Cover,
+                    PlayURL = AnimeWath.PlayResult.PlayURL
+                }.ToMapest<DM_LiShi>());
 
                 NavigationParameters param = new NavigationParameters();
                 param.Add("WatchAddress", AnimeWath.PlayResult.PlayURL);

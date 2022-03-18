@@ -41,7 +41,10 @@ namespace CandySugar.App
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
 
+            #region Platform
             containerRegistry.Register<IXSLiShi, XSLiShi>();
+            containerRegistry.Register<IDMLiShi, DMLiShi>();
+            #endregion
 
             #region Anime
             containerRegistry.RegisterForNavigation<CandyAnimeView, CandyAnimeViewModel>();
