@@ -55,7 +55,7 @@
         <KeyBinding
             Key="D"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.Avgle}"
+            CommandParameter="{x:Static Enum:MenuFuncEunm.Axgle}"
             Modifiers="Ctrl" />
     </Ctrl:CandyWindow.InputBindings>
     <Grid>

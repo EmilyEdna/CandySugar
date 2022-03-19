@@ -10,6 +10,6 @@ namespace CandySugar.Common.Enum
     public enum ImageConvertFuncEnum
     {
         Konachan=1,
-        Manga
+        Axgle
     }
 }

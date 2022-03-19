@@ -62,4 +62,48 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ImgBtn" TargetType="Ctrl:CandyImgButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Ctrl:CandyImgButton">
+                    <Border
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        BorderThickness="0"
+                        CornerRadius="15">
+                        <Canvas Clip="{DynamicResource ClipGrid}">
+                            <Grid
+                                Canvas.Left="240"
+                                Canvas.Top="215"
+                                Panel.ZIndex="1">
+                                <TextBlock Foreground="{DynamicResource DoneGreen}" Text="{TemplateBinding Content}" />
+                            </Grid>
+                            <Grid
+                                Canvas.Left="215"
+                                Canvas.Top="230"
+                                Panel.ZIndex="1">
+                                <TextBlock Foreground="{DynamicResource DoneGreen}">
+                                    <Run Text="总数：" />
+                                    <Run Text="{TemplateBinding Total}" />
+                                </TextBlock>
+                            </Grid>
+                            <Grid Panel.ZIndex="0">
+                                <Image
+                                    Width="{TemplateBinding Width}"
+                                    Height="{TemplateBinding Height}"
+                                    SnapsToDevicePixels="True"
+                                    Source="{TemplateBinding Image}"
+                                    Stretch="Fill" />
+                                <Grid.Effect>
+                                    <BlurEffect Radius="50" />
+                                </Grid.Effect>
+                            </Grid>
+
+                        </Canvas>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

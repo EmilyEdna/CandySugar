@@ -75,7 +75,7 @@ namespace CandySugar.ViewModels
                 case MenuFuncEunm.Music:
                     ActivateItem(Container.Get<MusicViewModel>());
                     break;
-                case MenuFuncEunm.Avgle:
+                case MenuFuncEunm.Axgle:
                     ActivateItem(Container.Get<AxgleViewModel>());
                     BootResource.Lyric(null, 2);
                     break;

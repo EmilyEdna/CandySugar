@@ -1,6 +1,8 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Geometry x:Key="ClipCanvas">
         M0 15C0 6.72 6.72 0 15 0L1185 0C1193.28 0 1200 6.72 1200 15L1200 785C1200 793.28 1193.28 800 1185 800L15 800C6.72 800 0 793.28 0 785L0 15Z
+    </Geometry>
+    <Geometry x:Key="ClipGrid">
+        M0 15C0 6.72 6.72 0 15 0L285 0C293.28 0 300 6.72 300 15L300 235C300 243.28 293.28 250 285 250L15 250C6.72 250 0 243.28 0 235L0 15Z
     </Geometry>
 </ResourceDictionary>

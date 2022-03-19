@@ -36,7 +36,7 @@ namespace CandySugar.Common.Enum
         /// <summary>
         /// 茶杯
         /// </summary>
-        Avgle,
+        Axgle,
         /// <summary>
         /// 用户中心
         /// </summary>

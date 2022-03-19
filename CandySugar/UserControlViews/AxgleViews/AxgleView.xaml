@@ -4,10 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
     xmlns:Cmd="https://github.com/canton7/Stylet"
+    xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
+    xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
     xmlns:Opt="clr-namespace:CandySugar.Properties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
     xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:CandySugar.UserControlViews.AxgleViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="960"
@@ -17,8 +20,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
-            <RowDefinition />
-            <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
         <hc:SearchBar
@@ -33,16 +34,58 @@
             ShowClearButton="True"
             Style="{StaticResource SearchBarBaseStyle}"
             TextWrapping="Wrap" />
-        <hc:ButtonGroup Grid.Row="1" ItemsSource="{C:Binding RecommendCategory}">
-            <hc:ButtonGroup.ItemTemplate>
-                <DataTemplate>
-                    <Button
-                        Command="{Cmd:Action Category}"
-                        CommandParameter="{C:Binding Value}"
-                        Content="{C:Binding Key}"
-                        Style="{StaticResource ButtonDashedDanger}" />
-                </DataTemplate>
-            </hc:ButtonGroup.ItemTemplate>
-        </hc:ButtonGroup>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="310" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ListBox
+                Background="Transparent"
+                BorderBrush="Transparent"
+                ItemsSource="{C:Binding Categories}"
+                Style="{StaticResource WrapPanelVerticalListBox}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Ctrl:CandyImgButton
+                            Width="300"
+                            Height="250"
+                            Margin="5"
+                            Command="{Cmd:Action CategoryCommand}"
+                            CommandParameter="{Binding AId}"
+                            Content="{Binding ShortName}"
+                            Image="{Binding Cover, Converter={StaticResource ImageSouceConverter}, ConverterParameter={x:Static Enum:ImageConvertFuncEnum.Axgle}}"
+                            Style="{StaticResource ImgBtn}"
+                            Total="{Binding Total}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <ComboBox
+                    x:Name="box"
+                    HorizontalContentAlignment="Left"
+                    BorderBrush="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                    Foreground="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                    SelectedIndex="1"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Cmd:Action DescCommand}" CommandParameter="{Binding SelectedItem, ElementName=box}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="上次观看" TabIndex="0" />
+                    <ComboBoxItem Content="最新的" TabIndex="1" />
+                    <ComboBoxItem Content="最多观看" TabIndex="2" />
+                    <ComboBoxItem Content="高评分" TabIndex="3" />
+                    <ComboBoxItem Content="B最多收藏" TabIndex="4" />
+                    <ComboBoxItem Content="长时常" TabIndex="5" />
+                </ComboBox>
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>

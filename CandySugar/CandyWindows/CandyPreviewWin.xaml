@@ -9,7 +9,7 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:CandySugar.CandyWindows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="[vm ]clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
+    xmlns:vm="clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
     x:Name="window"
     Width="1200"
     Height="800"
