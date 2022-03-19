@@ -1,8 +1,10 @@
-﻿using CandySugar.Common.Enum;
+﻿using CandySugar.Common;
+using CandySugar.Common.Enum;
 using CandySugar.Common.Navigations;
 using CandySugar.Common.WinDTO;
 using CandySugar.Controls.UserControls;
 using CandySugar.UserControlViews.AnimeViews;
+using CandySugar.UserControlViews.AxgleViews;
 using CandySugar.UserControlViews.LigthNovelViews;
 using CandySugar.UserControlViews.MangaViews;
 using CandySugar.UserControlViews.MusicViews;
@@ -73,6 +75,10 @@ namespace CandySugar.ViewModels
                 case MenuFuncEunm.Music:
                     ActivateItem(Container.Get<MusicViewModel>());
                     break;
+                case MenuFuncEunm.Avgle:
+                    ActivateItem(Container.Get<AxgleViewModel>());
+                    BootResource.Lyric(null, 2);
+                    break;
                 case MenuFuncEunm.UserCenter:
                     ActivateItem(Container.Get<UserViewModel>());
                     BootResource.Lyric(null, 2);
@@ -103,7 +109,7 @@ namespace CandySugar.ViewModels
 
         protected override void OnViewLoaded()
         {
-            Log.Logger.Information($"CandySugar【启动完成】，时间【{DateTime.Now.ToFmtDate(3,"yyyy年MM月dd日 HH时mm分ss秒")}】");
+            HelpUtilty.WirteLog("启动完成");
         }
     }
 }

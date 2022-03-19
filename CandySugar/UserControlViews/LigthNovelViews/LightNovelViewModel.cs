@@ -101,6 +101,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
         {
             try
             {
+                HelpUtilty.WirteLog("轻小说初始化操作");
                 //初始化
                 var LightNovelInit = await LightNovelFactory.LightNovel(opt =>
                 {
@@ -147,8 +148,9 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 PageIndex = 1;
                 IsSearch = false;
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 LightNovelFactory.LightNovel(opt =>
                 {
                     opt.RequestParam = new LightNovelRequestInput
@@ -167,6 +169,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
             {
                 SearchWord = args;
                 this.PageIndex = Page == 0 ? 1 : Page;
+                HelpUtilty.WirteLog("轻小说查询操作");
                 //搜索
                 var LightNovelSearch = await LightNovelFactory.LightNovel(opt =>
                 {
@@ -198,8 +201,9 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 }
                 IsSearch = true;
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 LightNovelFactory.LightNovel(opt =>
                 {
                     opt.RequestParam = new LightNovelRequestInput
@@ -215,6 +219,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
         {
             try
             {
+                HelpUtilty.WirteLog("轻小说列表操作");
                 CategoryAddress = args;
                 this.PageIndex = Page == 0 ? 1 : Page;
                 var LightNovelCate = await LightNovelFactory.LightNovel(opt =>
@@ -242,8 +247,9 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 Total = LightNovelCate.SingleCategoryResult.TotalPage;
                 IsSearch = false;
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 LightNovelFactory.LightNovel(opt =>
                 {
                     opt.RequestParam = new LightNovelRequestInput
@@ -271,10 +277,9 @@ namespace CandySugar.UserControlViews.LigthNovelViews
 
         public async void GetBook(LightNovelSingleCategoryResults entity)
         {
-
-
             try
             {
+                HelpUtilty.WirteLog("轻小说详情操作");
                 BookName = entity.BookName;
                 var LightNovelDetail = await LightNovelFactory.LightNovel(opt =>
                 {
@@ -320,8 +325,9 @@ namespace CandySugar.UserControlViews.LigthNovelViews
 
                 LightNovelViews = new ObservableCollection<LightNovelViewResult>(LightNovelView.ViewResult);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 LightNovelFactory.LightNovel(opt =>
                 {
                     opt.RequestParam = new LightNovelRequestInput
@@ -346,6 +352,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
 
                 try
                 {
+                    HelpUtilty.WirteLog("轻小说内容下载操作");
                     var LightNovelDown = await LightNovelFactory.LightNovel(opt =>
                     {
                         opt.RequestParam = new LightNovelRequestInput
@@ -364,8 +371,9 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     SyncStatic.WriteFile(LightNovelDown.DownResult.Down, fn);
                     Process.Start("explorer.exe", dir);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    HelpUtilty.WirteLog(string.Empty, ex);
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                 }
             }
@@ -373,6 +381,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
             {
                 try
                 {
+                    HelpUtilty.WirteLog("轻小说内容操作");
                     //内容
                     var LightNovelContent = await LightNovelFactory.LightNovel(opt =>
                      {
@@ -402,8 +411,9 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     });
 
                 }
-                catch
+                catch(Exception ex)
                 {
+                    HelpUtilty.WirteLog(string.Empty, ex);
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                 }
             }

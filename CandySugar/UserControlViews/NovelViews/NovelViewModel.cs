@@ -1,4 +1,5 @@
-﻿using CandySugar.Common.Navigations;
+﻿using CandySugar.Common;
+using CandySugar.Common.Navigations;
 using CandySugar.Properties;
 using CandySugar.ViewModels;
 using HandyControl.Controls;
@@ -86,6 +87,7 @@ namespace CandySugar.UserControlViews.NovelViews
         {
             try
             {
+                HelpUtilty.WirteLog("小说初始化操作");
                 var NovelInit = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -98,8 +100,9 @@ namespace CandySugar.UserControlViews.NovelViews
                 this.NovelCategory = new ObservableCollection<NovelCategoryResult>(NovelInit.IndexCategories);
                 this.NovelRecommend = new ObservableCollection<NovelRecommendResult>(NovelInit.IndexRecommends);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -108,6 +111,7 @@ namespace CandySugar.UserControlViews.NovelViews
         {
             try
             {
+                HelpUtilty.WirteLog("小说查询操作");
                 var NovelSearch = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -126,8 +130,9 @@ namespace CandySugar.UserControlViews.NovelViews
                 this.Total = 0;
                 this.Page = 1;
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }  
         }
@@ -138,7 +143,7 @@ namespace CandySugar.UserControlViews.NovelViews
             {
                 this.DetailAddress = args;
                 this.PageIndex = Page == 0 ? 1 : Page;
-
+                HelpUtilty.WirteLog("小说分类操作");
                 var NovelCate = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -156,8 +161,9 @@ namespace CandySugar.UserControlViews.NovelViews
                 this.Total = NovelCate.SingleCategories.TotalPage;
                 this.NovelSearch = new ObservableCollection<NovelSearchResult>(NovelCate.SingleCategories.NovelSingles.ToMapest<List<NovelSearchResult>>());
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -172,6 +178,7 @@ namespace CandySugar.UserControlViews.NovelViews
         {
             try
             {
+                HelpUtilty.WirteLog("小说详情操作");
                 var NovelDetail = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -192,8 +199,9 @@ namespace CandySugar.UserControlViews.NovelViews
                 vm.Addr = entity.DetailAddress;
                 Container.Get<INavigationController>().Delegate.NavigateTo(vm);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }

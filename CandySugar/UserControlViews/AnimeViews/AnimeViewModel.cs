@@ -4,6 +4,7 @@ using Anime.SDK.ViewModel.Enums;
 using Anime.SDK.ViewModel.Request;
 using Anime.SDK.ViewModel.Response;
 using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;
 using CandySugar.Properties;
@@ -103,6 +104,8 @@ namespace CandySugar.UserControlViews.AnimeViews
         {
             try
             {
+                HelpUtilty.WirteLog("初始化动漫操作");
+
                 var AnimeInit = await AnimeFactory.Anime(opt =>
                 {
                     opt.RequestParam = new AnimeRequestInput
@@ -115,8 +118,9 @@ namespace CandySugar.UserControlViews.AnimeViews
                 this.RecommendCategory = AnimeInit.RecommendCategory;
                 this.WeekDay = new ObservableCollection<AnimeWeekDayResult>(AnimeInit.WeekDays);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -127,6 +131,7 @@ namespace CandySugar.UserControlViews.AnimeViews
         {
             try
             {
+                HelpUtilty.WirteLog("查询动漫操作");
                 SearchKey = args;
                 CategoryKey = string.Empty;
                 var AnimeSearch = await AnimeFactory.Anime(opt =>
@@ -146,8 +151,9 @@ namespace CandySugar.UserControlViews.AnimeViews
                 this.Total = AnimeSearch.SeachResults.Page;
                 this.Result = new ObservableCollection<AnimeSearchResults>(AnimeSearch.SeachResults.Searchs);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -156,6 +162,7 @@ namespace CandySugar.UserControlViews.AnimeViews
         {
             try
             {
+                HelpUtilty.WirteLog("查看动漫详情操作");
                 var AnimeDetail = await AnimeFactory.Anime(opt =>
                 {
                     opt.RequestParam = new AnimeRequestInput
@@ -171,8 +178,9 @@ namespace CandySugar.UserControlViews.AnimeViews
                 }).RunsAsync();
                 this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -185,6 +193,7 @@ namespace CandySugar.UserControlViews.AnimeViews
             {
                 try
                 {
+                    HelpUtilty.WirteLog("查询动漫字母分类操作");
                     var AnimeCate = await AnimeFactory.Anime(opt =>
                     {
                         opt.RequestParam = new AnimeRequestInput
@@ -202,8 +211,9 @@ namespace CandySugar.UserControlViews.AnimeViews
                     this.Total = AnimeCate.SeachResults.Page;
                     this.Result = new ObservableCollection<AnimeSearchResults>(AnimeCate.SeachResults.Searchs);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    HelpUtilty.WirteLog(string.Empty, ex);
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                 }
             }
@@ -211,6 +221,7 @@ namespace CandySugar.UserControlViews.AnimeViews
             {
                 try
                 {
+                    HelpUtilty.WirteLog("查询动漫分类操作");
                     var AnimeCateType = await AnimeFactory.Anime(opt =>
                     {
                         opt.RequestParam = new AnimeRequestInput
@@ -228,8 +239,9 @@ namespace CandySugar.UserControlViews.AnimeViews
                     this.Total = AnimeCateType.SeachResults.Page;
                     this.Result = new ObservableCollection<AnimeSearchResults>(AnimeCateType.SeachResults.Searchs);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    HelpUtilty.WirteLog(string.Empty, ex);
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                 }
             }
@@ -248,6 +260,7 @@ namespace CandySugar.UserControlViews.AnimeViews
         {
             try
             {
+                HelpUtilty.WirteLog("动漫播放操作");
                 var AnimeWath = await AnimeFactory.Anime(opt =>
                  {
                      opt.RequestParam = new AnimeRequestInput
@@ -288,8 +301,9 @@ namespace CandySugar.UserControlViews.AnimeViews
                     Container.Get<ILiShi>().AddAnimeHistory(DTO);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }

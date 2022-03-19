@@ -53,6 +53,12 @@ namespace CandySugar.Common.WinDTO
                 ImageRoute = "https://konachan.com/data/preview/63/38/6338577be643049d4b37882a25aec477.jpg",
                 CommandParam = MenuFuncEunm.Music
             });
+            data.Add(new MenuOption
+            {
+                FuncName = "茶杯(Ctrl+D)",
+                ImageRoute = "https://konachan.com/data/preview/d5/21/d521a54a37b255b44c63ebb3803e7710.jpg",
+                CommandParam = MenuFuncEunm.Avgle
+            });
             return data;
         }
     }

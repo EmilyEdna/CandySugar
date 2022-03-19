@@ -1,4 +1,5 @@
 ﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;
 using CandySugar.Properties;
@@ -10,6 +11,7 @@ using Manga.SDK.ViewModel.Request;
 using Manga.SDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -146,6 +148,7 @@ namespace CandySugar.UserControlViews.MangaViews
             {
                 try
                 {
+                    HelpUtilty.WirteLog("漫画查询操作");
                     var MangaSearch = await MangaFactory.Manga(opt =>
                     {
                         opt.RequestParam = new MangaRequestInput
@@ -166,8 +169,9 @@ namespace CandySugar.UserControlViews.MangaViews
                     else
                         MangaRecommend = new ObservableCollection<MangaRecommendResult>(MangaSearch.SearchResults.ToMapest<List<MangaRecommendResult>>());
                 }
-                catch
+                catch(Exception ex)
                 {
+                    HelpUtilty.WirteLog(string.Empty, ex);
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                 }
             }
@@ -175,6 +179,7 @@ namespace CandySugar.UserControlViews.MangaViews
             {
                 try
                 {
+                    HelpUtilty.WirteLog("漫画分类操作");
                     //分类
                     var MangaCate = await MangaFactory.Manga(opt =>
                     {
@@ -195,8 +200,9 @@ namespace CandySugar.UserControlViews.MangaViews
                     else
                         MangaRecommend = new ObservableCollection<MangaRecommendResult>(MangaCate.SearchResults.ToMapest<List<MangaRecommendResult>>());
                 }
-                catch
+                catch (Exception ex)
                 {
+                    HelpUtilty.WirteLog(string.Empty, ex);
                     MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                 }
             }
@@ -207,6 +213,7 @@ namespace CandySugar.UserControlViews.MangaViews
             try
             {
                 PageIndex = 1;
+                HelpUtilty.WirteLog("漫画初始化操作");
                 //初始化
                 var MangaInit = await MangaFactory.Manga(opt =>
                 {
@@ -221,8 +228,9 @@ namespace CandySugar.UserControlViews.MangaViews
                 MangaRecommend = new ObservableCollection<MangaRecommendResult>(MangaInit.IndexRecommends);
                 MangaCategory = new ObservableCollection<MangaCategoryResult>(MangaInit.IndexCategories);
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -230,6 +238,7 @@ namespace CandySugar.UserControlViews.MangaViews
         {
             try
             {
+                HelpUtilty.WirteLog("漫画详情操作");
                 //详情
                 var MangaDetail = await MangaFactory.Manga(opt =>
                 {
@@ -246,8 +255,9 @@ namespace CandySugar.UserControlViews.MangaViews
                 }).RunsAsync();
                 Chapters = new ObservableCollection<MangaChapterResult>(MangaDetail.ChapterResults);
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }

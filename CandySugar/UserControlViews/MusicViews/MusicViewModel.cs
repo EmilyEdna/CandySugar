@@ -1,4 +1,5 @@
-﻿using CandySugar.Common.DTO;
+﻿using CandySugar.Common;
+using CandySugar.Common.DTO;
 using CandySugar.Core.Service;
 using CandySugar.Properties;
 using HandyControl.Controls;
@@ -188,6 +189,7 @@ namespace CandySugar.UserControlViews.MusicViews
             {
                 Tab.SelectedIndex = 2;
 
+                HelpUtilty.WirteLog("歌单详情操作");
                 var SheetDetail = await MusicFactory.Music(opt =>
                 {
                     opt.RequestParam = new MusicRequestInput
@@ -205,8 +207,9 @@ namespace CandySugar.UserControlViews.MusicViews
 
                 this.SheetDetail = SheetDetail.SongSheetDetailResult;
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -215,6 +218,7 @@ namespace CandySugar.UserControlViews.MusicViews
         {
             try
             {
+                HelpUtilty.WirteLog("专辑详情操作");
                 var SongAlbum = await MusicFactory.Music(opt =>
                 {
                     opt.RequestParam = new MusicRequestInput
@@ -233,8 +237,9 @@ namespace CandySugar.UserControlViews.MusicViews
 
                 this.AlbumDetail = SongAlbum.SongAlbumDetailResult;
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -243,6 +248,8 @@ namespace CandySugar.UserControlViews.MusicViews
         {
             try
             {
+                HelpUtilty.WirteLog("音乐播放操作");
+
                 var SongURL = await MusicFactory.Music(opt =>
                 {
                     opt.RequestParam = new MusicRequestInput
@@ -279,8 +286,9 @@ namespace CandySugar.UserControlViews.MusicViews
 
                 Launch();
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -360,6 +368,7 @@ namespace CandySugar.UserControlViews.MusicViews
         private async void SearchBasic(int type = 1)
         {
             ShowType = type;
+            HelpUtilty.WirteLog("音乐查询操作");
             switch (Platform)
             {
                 case MusicPlatformEnum.QQMusic:
@@ -388,8 +397,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
                                 this.Total = SongItem.SongItemResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -417,8 +427,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
                                 this.Total = SongSheet.SongSheetResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -450,8 +461,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
                                 this.Total = SongItem.SongItemResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -479,8 +491,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
                                 this.Total = SongSheet.SongSheetResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -512,8 +525,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
                                 this.Total = SongItem.SongItemResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -541,8 +555,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
                                 this.Total = SongSheet.SongSheetResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -574,8 +589,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
                                 this.Total = SongItem.SongItemResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -603,8 +619,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
                                 this.Total = SongSheet.SongSheetResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -636,8 +653,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
                                 this.Total = SongItem.SongItemResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -665,8 +683,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
                                 this.Total = SongSheet.SongSheetResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -698,8 +717,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongItem.SongItemResult.MusicPlatformType.Value;
                                 this.Total = SongItem.SongItemResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }
@@ -727,8 +747,9 @@ namespace CandySugar.UserControlViews.MusicViews
                                 this.Platform = SongSheet.SongSheetResult.MusicPlatformType.Value;
                                 this.Total = SongSheet.SongSheetResult.Total.Value;
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                HelpUtilty.WirteLog(string.Empty, ex);
                                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
                             }
                         }

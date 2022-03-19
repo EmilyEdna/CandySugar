@@ -34,6 +34,10 @@ namespace CandySugar.Common.Enum
         /// </summary>
         Music,
         /// <summary>
+        /// 茶杯
+        /// </summary>
+        Avgle,
+        /// <summary>
         /// 用户中心
         /// </summary>
         UserCenter

@@ -1,4 +1,5 @@
 ﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;
 using CandySugar.Properties;
@@ -132,6 +133,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
             var result = Wallpaper.FirstOrDefault(t => t.Id == Id);
             try
             {
+                HelpUtilty.WirteLog("壁纸下载操作");
                 var WallpaperDown = await WallpaperFactory.Wallpaper(opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
@@ -153,8 +155,9 @@ namespace CandySugar.UserControlViews.WallpaperViews
                 SyncStatic.WriteFile(WallpaperDown.DownloadResult.Bytes, fn);
                 Process.Start("explorer.exe", dir);
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -224,6 +227,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
         {
             try
             {
+                HelpUtilty.WirteLog("壁纸初始化操作");
                 var WallpaperInit = await WallpaperFactory.Wallpaper(opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
@@ -249,8 +253,9 @@ namespace CandySugar.UserControlViews.WallpaperViews
                 this.Total = (WallpaperInit.GlobalResult.Total + Limit - 1) / Limit;
                 this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperInit.GlobalResult.Result);
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -264,6 +269,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
         {
             try
             {
+                HelpUtilty.WirteLog("壁纸查询操作");
                 var WallpaperSearch = await WallpaperFactory.Wallpaper(opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
@@ -289,8 +295,9 @@ namespace CandySugar.UserControlViews.WallpaperViews
                 this.Total = (WallpaperSearch.GlobalResult.Total + Limit - 1) / Limit;
                 this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperSearch.GlobalResult.Result);
             }
-            catch
+            catch (Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }

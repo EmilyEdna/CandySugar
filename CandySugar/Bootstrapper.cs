@@ -26,6 +26,14 @@ namespace CandySugar
         /// </summary>
         protected override void OnStart()
         {
+            HelpUtilty.DeleteLog();
+
+            //日志
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.File("Logs/Candy.log", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
             //校验版本
             var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             var serverVersion = IHttpMultiClient.HttpMulti.AddNode(opt =>
@@ -36,6 +44,7 @@ namespace CandySugar
             {
                 //升级
                 var result = HandyControl.Controls.MessageBox.Info("检测到新版本，即将升级", "提示");
+                HelpUtilty.WirteLog("检测到新版本");
                 if (result == MessageBoxResult.OK)
                 {
                     try
@@ -57,11 +66,7 @@ namespace CandySugar
                 }
             }
 
-            //日志
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .WriteTo.File("Logs/Candy.log", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+         
         }
 
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
@@ -91,8 +96,6 @@ namespace CandySugar
         /// </summary>
         protected override void Launch()
         {
-
-
             base.Launch();
         }
 
@@ -114,6 +117,7 @@ namespace CandySugar
             if (!HelpUtilty.CheckIntegrity())
             {
                 var handle = HandyControl.Controls.MessageBox.Error("文件损坏，请重新下载！", "错误");
+                HelpUtilty.WirteLog("文件损坏，请重新下载");
                 if (handle == MessageBoxResult.OK)
                     Application.Current.Shutdown();
             }
@@ -131,7 +135,7 @@ namespace CandySugar
         protected override void OnExit(ExitEventArgs e)
         {
             SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "Lote.exe.WebView2"));
-            Log.Logger.Information($"CandySugar【已退出】，时间【{DateTime.Now.ToFmtDate(3, "yyyy年MM月dd日 HH时mm分ss秒")}】");
+            HelpUtilty.WirteLog("已退出");
             base.OnExit(e);
         }
 
@@ -141,7 +145,7 @@ namespace CandySugar
         /// <param name="e"></param>
         protected override void OnUnhandledException(DispatcherUnhandledExceptionEventArgs e)
         {
-            Log.Error(e.Exception.InnerException ?? e.Exception, "");
+            HelpUtilty.WirteLog("", e.Exception.InnerException ?? e.Exception);
             HandyControl.Controls.MessageBox.Error("服务异常，程序将自动关闭。", "错误");
             GC.Collect();
             Application.Current.Shutdown();

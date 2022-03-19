@@ -1,4 +1,5 @@
-﻿using CandySugar.Common.DTO;
+﻿using CandySugar.Common;
+using CandySugar.Common.DTO;
 using CandySugar.Controls.Commands;
 using CandySugar.Core.Service;
 using CandySugar.Properties;
@@ -9,6 +10,7 @@ using Novel.SDK.ViewModel.Request;
 using Novel.SDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
@@ -74,6 +76,8 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
 
            try
             {
+                HelpUtilty.WirteLog("显示小说内容操作");
+
                 var NovelContent = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -93,8 +97,9 @@ namespace CandySugar.CandyWindows.CnadyWinViewModel
                 DTO.BookName = this.BookName;
                 Container.Get<ILiShi>().AddNovelHistory(DTO);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
 

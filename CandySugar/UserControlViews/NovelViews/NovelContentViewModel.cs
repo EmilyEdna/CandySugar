@@ -1,4 +1,5 @@
 ﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;
 using CandySugar.Properties;
@@ -67,6 +68,7 @@ namespace CandySugar.UserControlViews.NovelViews
             try
             {
                 PageIndex = args.Info;
+                HelpUtilty.WirteLog("小说章节列表操作");
                 var NovelDetail = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -83,8 +85,9 @@ namespace CandySugar.UserControlViews.NovelViews
                 }).RunsAsync();
                 this.NovelDetail = NovelDetail.Details;
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
@@ -95,6 +98,7 @@ namespace CandySugar.UserControlViews.NovelViews
                 return;
             try
             {
+                HelpUtilty.WirteLog("小说内容操作");
                 var NovelContent = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -121,8 +125,9 @@ namespace CandySugar.UserControlViews.NovelViews
                 DTO.BookName = this.NovelDetail.BookName;
                 Container.Get<ILiShi>().AddNovelHistory(DTO);
             }
-            catch
+            catch(Exception ex)
             {
+                HelpUtilty.WirteLog(string.Empty, ex);
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
 

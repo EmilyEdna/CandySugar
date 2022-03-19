@@ -52,6 +52,11 @@
             Command="{Cmd:Action Redirect}"
             CommandParameter="{x:Static Enum:MenuFuncEunm.Music}"
             Modifiers="Ctrl" />
+        <KeyBinding
+            Key="D"
+            Command="{Cmd:Action Redirect}"
+            CommandParameter="{x:Static Enum:MenuFuncEunm.Avgle}"
+            Modifiers="Ctrl" />
     </Ctrl:CandyWindow.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
