@@ -67,6 +67,13 @@ namespace CandySugar.UserControlView.UserControlEvent
                 webView.CoreWebView2.ExecuteScriptAsync($"Destory()");
             }
 
+            var axWebViews = win.FindName("AxWebView");
+            if (axWebViews != null)
+            {
+                webView =(WebView2)axWebViews;
+                webView.Dispose();
+            }
+
             if (win is CandyVLCWin)
             {
                 var VLCWindow = ((CandyVLCWin)win);
@@ -148,7 +155,7 @@ namespace CandySugar.UserControlView.UserControlEvent
                     break;
             }
         }
-        public virtual void ThemeCombox(ComboBox ThemeBox) 
+        public virtual void ThemeCombox(ComboBox ThemeBox)
         {
             if (Soft.Default.Theme == "#FF2CCFA0")
                 ThemeBox.SelectedIndex = 0;

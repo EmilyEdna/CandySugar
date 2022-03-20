@@ -2,6 +2,7 @@
 using CandySugar.Controls.ControlViewModel;
 using CandySugar.Controls.UserControls;
 using CandySugar.Core.CandyUtily;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,25 @@ namespace CandySugar.CandyWindows
                 DragMove();
             }
         }
+
+        private string[] ClassName = { "alert alert-dismissable alert-danger",
+            "top-nav",
+            "well well-filters",
+            "navbar navbar-inverse navbar-fixed-top",
+            "nav nav-tabs",
+            "tab-content m-b-20",
+            "pull-left user-container",
+            "pull-right big-views hidden-xs",
+            "m-t-10 overflow-hidden",
+            "col-md-4 col-sm-5",
+            "footer-container",
+            "col-lg-12",
+            "fps60-text-icon",
+            "btn btn-primary",
+            "vote-box col-xs-7 col-sm-2 col-md-2",
+            "pull-right m-t-15",
+            "video-banner"};
+
         private CandyAxViewModel ViewModel;
         private void LoadEvent(object sender, RoutedEventArgs e)
         {
@@ -48,10 +68,24 @@ namespace CandySugar.CandyWindows
         {
             await AxWebView.EnsureCoreWebView2Async(null);
 
-            AxWebView.CoreWebView2.Navigate(ViewModel.Watch);
+            AxWebView.CoreWebView2.Navigate(new Uri($"{Environment.CurrentDirectory}\\AppData\\axgle.html").AbsoluteUri);
 
-            AxWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
-            AxWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
+            AxWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = true;
+            AxWebView.CoreWebView2.Settings.AreDevToolsEnabled = true;
+            await Task.Delay(2000);
+            await AxWebView.CoreWebView2.ExecuteScriptAsync($"Init('{ViewModel.Watch}')");
+        }
+
+        private  void Button_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in ClassName)
+            {
+                sb.Append($"$(document.getElementsByClassName('{item}')).remove();");
+            }
+            sb.Append("$(document.getElementById('ps32-container')).remove();");
+            sb.Append("$(document.getElementsByTagName('iframe')).remove();");
+            AxWebView.CoreWebView2.ExecuteScriptAsync(sb.ToString());
         }
     }
 }
