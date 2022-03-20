@@ -1,5 +1,5 @@
 ﻿using CandySugar.CandyWindows;
-using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.CandyWindows.CandyWinViewModel;
 using CandySugar.Common.DTO;
 using CandySugar.Common.Enum;
 using Music.SDK.ViewModel.Response;

@@ -1,4 +1,4 @@
-﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+﻿using CandySugar.CandyWindows.CandyWinViewModel;
 using CandySugar.Common;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;

@@ -1,5 +1,5 @@
 ﻿using Anime.SDK.ViewModel.Response;
-using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.CandyWindows.CandyWinViewModel;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;
 using Manga.SDK.ViewModel.Response;

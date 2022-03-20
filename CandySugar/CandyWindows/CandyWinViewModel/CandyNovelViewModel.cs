@@ -17,7 +17,7 @@ using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using MessageBox = HandyControl.Controls.MessageBox;
 
-namespace CandySugar.CandyWindows.CnadyWinViewModel
+namespace CandySugar.CandyWindows.CandyWinViewModel
 {
     public class CandyNovelViewModel : Screen
     {

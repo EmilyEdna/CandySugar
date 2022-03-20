@@ -22,7 +22,7 @@ using System.Windows.Media.Imaging;
 using XExten.Advance.HttpFramework.MultiFactory;
 using XExten.Advance.StaticFramework;
 
-namespace CandySugar.CandyWindows.CnadyWinViewModel
+namespace CandySugar.CandyWindows.CandyWinViewModel
 {
     public class CandyMangaReaderViewModel : Screen
     {

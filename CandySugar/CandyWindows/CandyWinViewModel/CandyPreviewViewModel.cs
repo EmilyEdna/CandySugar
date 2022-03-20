@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CandySugar.CandyWindows.CnadyWinViewModel
+namespace CandySugar.CandyWindows.CandyWinViewModel
 {
     public class CandyPreviewViewModel: Screen
     {

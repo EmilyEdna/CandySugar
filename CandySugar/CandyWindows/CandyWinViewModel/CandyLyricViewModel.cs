@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace CandySugar.CandyWindows.CnadyWinViewModel
+namespace CandySugar.CandyWindows.CandyWinViewModel
 {
     public class CandyLyricViewModel:Screen
     {

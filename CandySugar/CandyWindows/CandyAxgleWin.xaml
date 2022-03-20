@@ -7,9 +7,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CandySugar.CandyWindows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:web="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
     x:Name="window"
     Width="1200"
     Height="800"
+    Loaded="LoadEvent"
     Style="{StaticResource WinStyle}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -33,5 +35,11 @@
             x:Name="Header"
             Width="1200"
             MouseMove="WindowMove" />
+        <StackPanel Grid.Row="1" Background="Transparent">
+            <web:WebView2
+                Name="AxWebView"
+                Height="728"
+                DefaultBackgroundColor="Transparent" />
+        </StackPanel>
     </Grid>
 </Ctrl:CandyWindow>

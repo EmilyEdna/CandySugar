@@ -3,7 +3,7 @@ using Anime.SDK.ViewModel;
 using Anime.SDK.ViewModel.Enums;
 using Anime.SDK.ViewModel.Request;
 using Anime.SDK.ViewModel.Response;
-using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.CandyWindows.CandyWinViewModel;
 using CandySugar.Common;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;

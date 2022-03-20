@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CandySugar.CandyWindows.CnadyWinViewModel
+namespace CandySugar.CandyWindows.CandyWinViewModel
 {
     public class CandyLightNovelViewModel: Screen
     {

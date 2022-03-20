@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XExten.Advance.LinqFramework;
 
-namespace CandySugar.CandyWindows.CnadyWinViewModel
+namespace CandySugar.CandyWindows.CandyWinViewModel
 {
     public class CandySettingViewModel : Screen
     {

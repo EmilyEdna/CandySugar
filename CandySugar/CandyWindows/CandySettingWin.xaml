@@ -10,7 +10,7 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:CandySugar.CandyWindows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
+    xmlns:viewModel="clr-namespace:CandySugar.CandyWindows.CandyWinViewModel"
     x:Name="SettingWin"
     d:DataContext="{d:DesignInstance Type=viewModel:CandySettingViewModel}"
     Style="{StaticResource SettingStyle}"

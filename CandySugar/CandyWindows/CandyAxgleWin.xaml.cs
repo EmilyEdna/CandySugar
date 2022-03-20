@@ -1,4 +1,5 @@
-﻿using CandySugar.Controls.ControlViewModel;
+﻿using CandySugar.CandyWindows.CandyWinViewModel;
+using CandySugar.Controls.ControlViewModel;
 using CandySugar.Controls.UserControls;
 using CandySugar.Core.CandyUtily;
 using System;
@@ -35,6 +36,22 @@ namespace CandySugar.CandyWindows
             {
                 DragMove();
             }
+        }
+        private CandyAxViewModel ViewModel;
+        private void LoadEvent(object sender, RoutedEventArgs e)
+        {
+            ViewModel = (this.DataContext as CandyAxViewModel);
+            InitializeAsync();
+        }
+
+        async void InitializeAsync()
+        {
+            await AxWebView.EnsureCoreWebView2Async(null);
+
+            AxWebView.CoreWebView2.Navigate(ViewModel.Watch);
+
+            AxWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+            AxWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
         }
     }
 }

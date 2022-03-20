@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CandySugar.CandyWindows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:CandySugar.CandyWindows.CnadyWinViewModel"
+    xmlns:vm="clr-namespace:CandySugar.CandyWindows.CandyWinViewModel"
     Width="1200"
     Height="130"
     d:DataContext="{d:DesignInstance Type=vm:CandyLyricViewModel}"
