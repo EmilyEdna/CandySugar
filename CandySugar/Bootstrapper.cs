@@ -75,6 +75,7 @@ namespace CandySugar
             builder.Bind<IYinYue>().To<YinYue>();
             builder.Bind<IBiZhi>().To<BiZhi>();
             builder.Bind<ILiShi>().To<LiShi>();
+            builder.Bind<IAx>().To<Ax>();
             builder.Bind<NavigationController>().And<INavigationController>().To<NavigationController>().InSingletonScope();
         }
 

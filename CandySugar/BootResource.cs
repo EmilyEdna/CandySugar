@@ -98,6 +98,7 @@ namespace CandySugar
         private static ConcurrentDictionary<string, CandyLightNovelWin> CandyLightNovelWindow = new ConcurrentDictionary<string, CandyLightNovelWin>();
         private static ConcurrentDictionary<string, CandyLyricWin> CandyLyricWindow = new ConcurrentDictionary<string, CandyLyricWin>();
         private static ConcurrentDictionary<string, CandyPreviewWin> CandyPreviewWindow = new ConcurrentDictionary<string, CandyPreviewWin>();
+        private static ConcurrentDictionary<string, CandyAxgleWin> AxgleWindow = new ConcurrentDictionary<string, CandyAxgleWin>();
 
         /// <summary>
         /// 控制预览窗体打开
@@ -373,6 +374,52 @@ namespace CandySugar
                 UlHelper.FindVisualChild<LoadingLine>(content)
                     .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
                 AnimeDPlayWindow.TryAdd(nameof(CandyDPlayWin), windows);
+                windows.Show();
+            }
+        }
+        /// <summary>
+        /// 控制Axgle窗体打开
+        /// </summary>
+        /// <param name="action"></param>
+        public static void AxgleWEB(Action<CandyAxgleWin> action)
+        {
+            CandyAxgleWin windows = null;
+            if (AxgleWindow.ContainsKey(nameof(CandyAxgleWin)))
+            {
+                var old = AxgleWindow.Values.FirstOrDefault();
+                old.Close();
+                AxgleWindow.Clear();
+                windows = new CandyAxgleWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AxgleWindow.TryAdd(nameof(CandyDPlayWin), windows);
+                windows.Show();
+            }
+            else
+            {
+                AxgleWindow.Clear();
+                windows = new CandyAxgleWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var content = (windows.Header.Content as ColorZone).Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content)
+                    .FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AxgleWindow.TryAdd(nameof(CandyDPlayWin), windows);
                 windows.Show();
             }
         }

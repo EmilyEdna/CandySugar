@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandySugar.Android", "Candy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Xam.Common", "CandySugar.Xam.Common\CandySugar.Xam.Common.csproj", "{1C538EF6-5D46-4183-AB85-DAA1573D3051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandySugar.Xam.Core", "CandySugar.Xam.Core\CandySugar.Xam.Core.csproj", "{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Xam.Core", "CandySugar.Xam.Core\CandySugar.Xam.Core.csproj", "{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -95,7 +95,7 @@
                                     Source="{TemplateBinding Image}"
                                     Stretch="Fill" />
                                 <Grid.Effect>
-                                    <BlurEffect Radius="50" />
+                                    <BlurEffect Radius="25" />
                                 </Grid.Effect>
                             </Grid>
 

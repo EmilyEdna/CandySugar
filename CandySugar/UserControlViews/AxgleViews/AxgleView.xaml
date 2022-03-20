@@ -16,7 +16,14 @@
     Width="960"
     Height="728"
     mc:Ignorable="d">
-
+    <UserControl.Resources>
+        <Style x:Key="RightContent" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{Binding Theme, Source={x:Static Opt:Soft.Default}}" />
+            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+            <Setter Property="Margin" Value="0,3" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -50,10 +57,10 @@
                             Width="300"
                             Height="250"
                             Margin="5"
+                            dp:ImageSouceDependencyProperty.SourceUri="{Binding Cover}"
                             Command="{Cmd:Action CategoryCommand}"
                             CommandParameter="{Binding AId}"
                             Content="{Binding ShortName}"
-                            Image="{Binding Cover, Converter={StaticResource ImageSouceConverter}, ConverterParameter={x:Static Enum:ImageConvertFuncEnum.Axgle}}"
                             Style="{StaticResource ImgBtn}"
                             Total="{Binding Total}" />
                     </DataTemplate>
@@ -62,8 +69,8 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
-                    <RowDefinition />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
                 <ComboBox
                     x:Name="box"
@@ -84,6 +91,66 @@
                     <ComboBoxItem Content="B最多收藏" TabIndex="4" />
                     <ComboBoxItem Content="长时常" TabIndex="5" />
                 </ComboBox>
+                <ListBox
+                    Grid.Row="1"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    ItemsSource="{C:Binding CategoryList}"
+                    Style="{StaticResource WrapPanelHorizontalListBox}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border BorderBrush="{Binding Theme, Source={x:Static Opt:Soft.Default}}" BorderThickness="1">
+                                    <WrapPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <Image
+                                            Width="220"
+                                            Height="150"
+                                            dp:ImageSouceDependencyProperty.SourceUri="{Binding Preview}"
+                                            Stretch="Fill" />
+                                        <WrapPanel.Effect>
+                                            <BlurEffect Radius="25" />
+                                        </WrapPanel.Effect>
+                                    </WrapPanel>
+                                </Border>
+                                <StackPanel Grid.Column="1" Margin="5,5,0,0">
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Title, StringFormat=标题：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding KeyWord, StringFormat=标签：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Channel, StringFormat=分类：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Duration, StringFormat=时常：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding AddTime, StringFormat=更新时间：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Views, StringFormat=浏览次数：{0}}" />
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Ctrl:CandyButton
+                                            Command="{Cmd:Action PreviewCommand}"
+                                            CommandParameter="{Binding Play}"
+                                            Shape="{StaticResource PreviewEye}"
+                                            ShapeHeight="12"
+                                            ShapeWidth="22"
+                                            Style="{StaticResource Shape}" />
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <hc:Pagination
+                    Grid.Row="2"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    IsJumpEnabled="False"
+                    MaxPageCount="{C:Binding Total}"
+                    PageIndex="{C:Binding PageIndex}">
+                    <hc:Interaction.Triggers>
+                        <hc:EventTrigger EventName="PageUpdated">
+                            <hc:EventToCommand Command="{Cmd:Action PageUpdated}" PassEventArgsToCommand="True" />
+                        </hc:EventTrigger>
+                    </hc:Interaction.Triggers>
+                </hc:Pagination>
             </Grid>
         </Grid>
 

@@ -1,4 +1,5 @@
-﻿using CandySugar.Common;
+﻿using CandySugar.CandyWindows.CnadyWinViewModel;
+using CandySugar.Common;
 using CandySugar.Properties;
 using GalActor.SDK;
 using GalActor.SDK.ViewModel;
@@ -83,6 +84,17 @@ namespace CandySugar.UserControlViews.AxgleViews
             this.PageIndex = 1;
             Category();
         }
+
+        public void PreviewCommand(string input)
+        {
+            var vm = Container.Get<CandyAxViewModel>();
+            vm.Watch = input;
+            vm.Loading = System.Windows.Visibility.Hidden;
+            BootResource.AxgleWEB(window =>
+            {
+                window.DataContext = vm;
+            });
+        }
         #endregion
 
         protected override async void OnViewLoaded()
@@ -110,7 +122,6 @@ namespace CandySugar.UserControlViews.AxgleViews
             }
 
         }
-
         private async void Category() {
             try
             {
