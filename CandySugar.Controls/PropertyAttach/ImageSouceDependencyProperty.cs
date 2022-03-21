@@ -83,7 +83,7 @@ namespace CandySugar.Controls.PropertyAttach
 
                 if (Save)
                 {
-                     service.SaveCover(new CandyGalCoverDto
+                    service.SaveCover(new CandyGalCoverDto
                     {
                         Cover = Uri,
                         Source = GalCover.Bytes

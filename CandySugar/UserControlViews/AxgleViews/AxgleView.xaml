@@ -29,18 +29,39 @@
             <RowDefinition Height="30" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <hc:SearchBar
-            Width="960"
-            dp:SearchBarDependencyProperty.Placeholder="{StaticResource AxgleSearchKey}"
-            hc:BorderElement.CornerRadius="0"
-            BorderBrush="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
-            BorderThickness="0,0,0,1"
-            Command="{Cmd:Action SearchAxgle}"
-            CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"
-            Foreground="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
-            ShowClearButton="True"
-            Style="{StaticResource SearchBarBaseStyle}"
-            TextWrapping="Wrap" />
+        <WrapPanel Orientation="Horizontal">
+            <hc:SearchBar
+                Width="890"
+                dp:SearchBarDependencyProperty.Placeholder="{StaticResource AxgleSearchKey}"
+                hc:BorderElement.CornerRadius="0"
+                BorderBrush="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                BorderThickness="0,0,0,1"
+                Command="{Cmd:Action SearchAxgle}"
+                CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"
+                Foreground="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                ShowClearButton="True"
+                Style="{StaticResource SearchBarBaseStyle}"
+                TextWrapping="Wrap" />
+            <WrapPanel
+                Width="70"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Foreground="Black"
+                    Style="{StaticResource TextBlockDefaultPrimary}"
+                    Text="只看收藏:" />
+                <CheckBox IsChecked="{C:Binding WatchFavorite}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Cmd:Action Check}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="Unchecked">
+                            <i:InvokeCommandAction Command="{Cmd:Action UnCheck}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </CheckBox>
+            </WrapPanel>
+        </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="310" />
@@ -60,7 +81,6 @@
                             dp:ImageSouceDependencyProperty.SourceUri="{Binding Cover}"
                             Command="{Cmd:Action CategoryCommand}"
                             CommandParameter="{Binding AId}"
-                            Content="{Binding ShortName}"
                             Style="{StaticResource ImgBtn}"
                             Total="{Binding Total}" />
                     </DataTemplate>
@@ -70,7 +90,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="50" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <ComboBox
                     x:Name="box"
@@ -131,6 +151,22 @@
                                             ShapeHeight="12"
                                             ShapeWidth="22"
                                             Style="{StaticResource Shape}" />
+                                        <Ctrl:CandyButton
+                                            Canvas.Left="200"
+                                            Command="{Cmd:Action NoFavorite}"
+                                            CommandParameter="{Binding .}"
+                                            Shape="{StaticResource NoFavorite}"
+                                            Style="{StaticResource Shape}"
+                                            Visibility="{C:Binding !IsFavorite,
+                                                                   FalseToVisibility=Hidden}" />
+                                        <Ctrl:CandyButton
+                                            Canvas.Left="200"
+                                            Command="{Cmd:Action Favorite}"
+                                            CommandParameter="{Binding .}"
+                                            Shape="{StaticResource Favorite}"
+                                            Style="{StaticResource Shape}"
+                                            Visibility="{C:Binding IsFavorite,
+                                                                   FalseToVisibility=Hidden}" />
                                     </WrapPanel>
                                 </StackPanel>
                             </Grid>
