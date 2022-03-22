@@ -43,8 +43,6 @@ namespace CandySugar.App.Controls.PropertyAttach
 
         private async static Task<ImageSource> Source(string route)
         {
-
-
             var WallpaperDown = await WallpaperFactory.Wallpaper(opt =>
             {
                 opt.RequestParam = new WallpaperRequestInput

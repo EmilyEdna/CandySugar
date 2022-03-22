@@ -1,4 +1,6 @@
 ﻿using CandySugar.Xam.Common;
+using CandySugar.Xam.Common.Entity.Model;
+using CandySugar.Xam.Core.Service;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -14,12 +16,14 @@ using Wallpaper.SDK.ViewModel.Request;
 using Wallpaper.SDK.ViewModel.Response;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
 
 namespace CandySugar.App.Controls.ViewModels.KonachanModel
 {
     public class CandyKonachanViewModel : ViewModelNavigatBase
     {
         private readonly WallpaperProxy Proxy;
+        private readonly IBZLiShi Candy;
         public CandyKonachanViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new WallpaperProxy
@@ -30,6 +34,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 UserName = Soft.ProxyAccount
             };
             this.PageIndex = 1;
+            Candy = ContainerLocator.Container.Resolve<IBZLiShi>();
         }
 
         #region Flied
@@ -101,6 +106,15 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     SearchBaisc(true);
             }
         });
+
+        public ICommand InsertCommand => new DelegateCommand<dynamic>(input =>
+        {
+            if (input != null)
+            {
+                Insert(input);
+            }
+
+        });
         #endregion
 
         #region Override
@@ -118,7 +132,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 if (IsLoadMore) IsBusy = true; else Refresh = true;
 
                 await Task.Delay(Soft.WaitSpan);
-                var WallpaperInit = await WallpaperFactory.Wallpaper(opt =>
+                var WallpaperInit = await WallpaperFactory.Wallpaper(async opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
                     {
@@ -128,7 +142,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                         {
                             Page = PageIndex,
                             Limit = Limit,
-                            Tag = InitTag()
+                            Tag = await InitTag()
                         },
                         Proxy = this.Proxy
                     };
@@ -149,7 +163,8 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                         });
                     }
                 }
-                else {
+                else
+                {
                     Refresh = false;
                     this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperInit.GlobalResult.Result);
                 }
@@ -167,7 +182,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             try
             {
                 if (IsLoadMore) IsBusy = true; else Refresh = true;
-                var WallpaperSearch = await WallpaperFactory.Wallpaper(opt =>
+                var WallpaperSearch = await WallpaperFactory.Wallpaper(async opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
                     {
@@ -177,7 +192,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                         {
                             Limit = Limit,
                             Page = PageIndex,
-                            KeyWord = InitTag(false)
+                            KeyWord = await InitTag(false)
                         },
                         Proxy = this.Proxy
                     };
@@ -211,7 +226,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 }
             }
         }
-        public string InitTag(bool Type = true)
+        public async Task<string> InitTag(bool Type = true)
         {
             string Tag = string.Empty;
             if (Soft.AgeModule == 1)
@@ -223,7 +238,11 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             else
                 Tag = string.Empty;
 
-            return Type ? Tag : $"{Tag} {KeyWord}";
+            return await Task.Run(() => Type ? Tag : $"{Tag} {KeyWord}");
+        }
+        public async void Insert(WallpaperResultDetail input)
+        {
+          await  Candy.Insert(input.ToMapest<BZ_LiShi>());
         }
         #endregion
     }

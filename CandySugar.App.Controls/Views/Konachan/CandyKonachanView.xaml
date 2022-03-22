@@ -138,6 +138,8 @@
                                                                         </StackLayout>
                                                                         <Button
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding InsertCommand}"
+                                                                            CommandParameter="{Binding .}"
                                                                             FontFamily="{DynamicResource FontAwesomeRegular}"
                                                                             FontSize="15"
                                                                             HeightRequest="35"
