@@ -27,25 +27,29 @@ namespace CandySugar.App.Controls.PropertyAttach
         }
 
         public static readonly BindableProperty SuperSourceProperty =
-            BindableProperty.CreateAttached("SuperSource", typeof(string), typeof(ImageSourceBindableProperty), null, BindingMode.TwoWay, null, OnImageChanged);
+            BindableProperty.CreateAttached("SuperSource", typeof(string),
+                typeof(ImageSourceBindableProperty),
+                null, BindingMode.TwoWay, null, OnImageChanged);
 
-        private static void OnImageChanged(BindableObject bindable, object oldValue, object newValue)
+        private async static void OnImageChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var FFImage = ((CachedImage)bindable);
 
             FFImage.SetBinding(CachedImage.SourceProperty, new Binding
             {
-                Source = Source(newValue.ToString())
+                Source = await Source(newValue.ToString())
             });
         }
 
-        private static ImageSource Source(string route)
+        private async static Task<ImageSource> Source(string route)
         {
-            var WallpaperDown = WallpaperFactory.Wallpaper(opt =>
+
+
+            var WallpaperDown = await WallpaperFactory.Wallpaper(opt =>
             {
                 opt.RequestParam = new WallpaperRequestInput
                 {
-                    WallpaperType = WallpaperEnum.Download,
+                    WallpaperType = WallpaperEnum.Downloads,
                     CacheSpan = 180,
                     Download = new WallpaperDownload()
                     {
@@ -53,7 +57,7 @@ namespace CandySugar.App.Controls.PropertyAttach
                     },
                     Proxy = new WallpaperProxy()
                 };
-            }).Runs();
+            }).RunsAsync();
             return ImageSource.FromStream(() => new MemoryStream(WallpaperDown.DownloadResult.Bytes));
         }
     }

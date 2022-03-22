@@ -140,7 +140,7 @@
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
                                                                             FontFamily="{DynamicResource FontAwesomeRegular}"
                                                                             FontSize="15"
-                                                                            HeightRequest="40"
+                                                                            HeightRequest="35"
                                                                             HorizontalOptions="End"
                                                                             Text="{Static fontawesome:FontAwesomeIcons.Star}"
                                                                             TextColor="{DynamicResource Gray-Black}"

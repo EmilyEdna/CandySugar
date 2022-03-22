@@ -35,7 +35,7 @@ namespace CandySugar.Controls.PropertyAttach
 
         public static readonly DependencyProperty SourceUriProperty = DependencyProperty.RegisterAttached("SourceUri", typeof(Uri), typeof(ImageSouceDependencyProperty), new PropertyMetadata(ImageChaged));
 
-        private static void ImageChaged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static async void ImageChaged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is CandyImgButton)
             {
@@ -49,13 +49,13 @@ namespace CandySugar.Controls.PropertyAttach
             {
                 ((Image)obj).SetBinding(Image.SourceProperty, new Binding()
                 {
-                    Source = Binds(e.NewValue.ToString()),
+                    Source = await Binds(e.NewValue.ToString()),
                     IsAsync = true,
                 });
             }
         }
 
-        private static  BitmapSource Binds(string Uri, bool Save = false)
+        private async static Task<BitmapSource> Binds(string Uri, bool Save = false)
         {
             try
             {
@@ -67,19 +67,18 @@ namespace CandySugar.Controls.PropertyAttach
                         return ImageHelper.BitmapToBitmapImage(bytes);
                 }
 
-                var GalCover = GalActorFactory.GalActor(opt =>
+                var GalCover = await GalActorFactory.GalActor(opt =>
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Show,
+                        Galype = GalActorEnum.Shows,
                         CacheSpan = 300,
-                        Proxy = new GalActorProxy(),
                         Show = new GalActorShow
                         {
                             KeyWord = Uri
                         }
                     };
-                }).Runs();
+                }).RunsAsync();
 
                 if (Save)
                 {
