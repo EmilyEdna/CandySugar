@@ -1,0 +1,170 @@
+﻿<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Konachan.CandyKonachanView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:Dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:Local="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <SearchBar
+                BackgroundColor="#FFFF9999"
+                Placeholder="请输入K站标签"
+                SearchCommand="{Binding SearchCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
+            <SfTab:SfTabView
+                Grid.Row="1"
+                EnableSwiping="False"
+                OverflowMode="CenterButton"
+                TabHeaderPosition="Bottom"
+                VisibleHeaderCount="2">
+                <SfTab:SfTabItem Title="主站">
+                    <SfTab:SfTabItem.Content>
+                        <Grid>
+                            <SfRefresh:SfPullToRefresh
+                                IsRefreshing="{Binding Refresh}"
+                                ProgressBackgroundColor="Transparent"
+                                ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                                RefreshCommand="{Binding RefreshsMainCommand}"
+                                RefreshContentHeight="50"
+                                RefreshContentWidth="50"
+                                TransitionMode="Push">
+                                <SfRefresh:SfPullToRefresh.PullableContent>
+                                    <SfList:SfListView
+                                        x:Name="ListViews"
+                                        AutoFitMode="Height"
+                                        IsBusy="{Binding IsBusy}"
+                                        IsScrollBarVisible="False"
+                                        ItemsSource="{Binding Wallpaper}"
+                                        LoadMoreCommand="{Binding ShowMoreMainCommand}"
+                                        LoadMoreOption="AutoOnScroll"
+                                        SelectionBackgroundColor="Transparent">
+                                        <SfList:SfListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Ctrl:ShadowFrame
+                                                        Margin="2,10,5,5"
+                                                        Padding="0"
+                                                        Background="{DynamicResource GrayShadowColor}"
+                                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                        BorderWidth="1"
+                                                        CornerRadius="4"
+                                                        HasShadow="True"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Radius="4"
+                                                        VerticalOptions="FillAndExpand">
+                                                        <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                                            <SfBorder:SfBorder
+                                                                BorderColor="Transparent"
+                                                                BorderWidth="0"
+                                                                CornerRadius="4">
+                                                                <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
+                                                                    <FFImg:CachedImage
+                                                                        Dp:ImageSourceBindableProperty.SuperSource="{Binding Preview}"
+                                                                        Aspect="AspectFill"
+                                                                        BackgroundColor="{DynamicResource Gray-200}"
+                                                                        CacheDuration="0:3:0"
+                                                                        CacheType="Disk"
+                                                                        DownsampleUseDipUnits="True"
+                                                                        HeightRequest="120"
+                                                                        WidthRequest="120" />
+                                                                    <StackLayout
+                                                                        Grid.Column="1"
+                                                                        Padding="16"
+                                                                        HorizontalOptions="FillAndExpand"
+                                                                        Spacing="0"
+                                                                        VerticalOptions="FillAndExpand">
+                                                                        <Label
+                                                                            HorizontalOptions="Start"
+                                                                            HorizontalTextAlignment="Start"
+                                                                            Style="{DynamicResource TitleLabelStyle}"
+                                                                            Text="{Binding Author, StringFormat='上传者:{0}'}" />
+                                                                        <Label
+                                                                            FontSize="12"
+                                                                            HorizontalOptions="Start"
+                                                                            HorizontalTextAlignment="Start"
+                                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                                            Text="{Binding Created, StringFormat='时间:{0:yyyy-MM-dd}'}" />
+                                                                        <Label
+                                                                            FontSize="12"
+                                                                            HorizontalOptions="Start"
+                                                                            HorizontalTextAlignment="Start"
+                                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                                            Text="{Binding Pixel, StringFormat='像素:{0}'}" />
+                                                                        <StackLayout
+                                                                            HorizontalOptions="FillAndExpand"
+                                                                            Spacing="0"
+                                                                            VerticalOptions="FillAndExpand">
+                                                                            <Local:ItemsControl ItemsSource="{Binding Labels}">
+                                                                                <Local:ItemsControl.ItemTemplate>
+                                                                                    <DataTemplate>
+                                                                                        <Label
+                                                                                            FontSize="12"
+                                                                                            HorizontalOptions="Start"
+                                                                                            HorizontalTextAlignment="Start"
+                                                                                            LineBreakMode="TailTruncation"
+                                                                                            LineHeight="{OnPlatform Android=1.25,
+                                                                                                                    Default=-1}"
+                                                                                            MaxLines="2"
+                                                                                            Style="{StaticResource DescriptionLabelStyle}"
+                                                                                            Text="{Binding .}"
+                                                                                            VerticalOptions="Center"
+                                                                                            VerticalTextAlignment="Center" />
+                                                                                    </DataTemplate>
+                                                                                </Local:ItemsControl.ItemTemplate>
+                                                                                <Local:ItemsControl.ItemsLayout>
+                                                                                    <DataTemplate>
+                                                                                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                                                                                            <Local:WrapLayout
+                                                                                                Local:LayoutEx.IsItemsHost="True"
+                                                                                                IsSquare="True"
+                                                                                                Spacing="10" />
+                                                                                        </ScrollView>
+                                                                                    </DataTemplate>
+                                                                                </Local:ItemsControl.ItemsLayout>
+                                                                            </Local:ItemsControl>
+                                                                        </StackLayout>
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="40"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static fontawesome:FontAwesomeIcons.Star}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="40" />
+                                                                    </StackLayout>
+                                                                </Grid>
+                                                            </SfBorder:SfBorder>
+                                                        </SfEffect:SfEffectsView>
+                                                    </Ctrl:ShadowFrame>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </SfList:SfListView.ItemTemplate>
+                                    </SfList:SfListView>
+                                </SfRefresh:SfPullToRefresh.PullableContent>
+                            </SfRefresh:SfPullToRefresh>
+                        </Grid>
+                    </SfTab:SfTabItem.Content>
+                </SfTab:SfTabItem>
+                <SfTab:SfTabItem Title="收藏">
+                    <SfTab:SfTabItem.Content>
+                        <StackLayout x:Name="FavoritesGrid" BackgroundColor="Blue" />
+                    </SfTab:SfTabItem.Content>
+                </SfTab:SfTabItem>
+            </SfTab:SfTabView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

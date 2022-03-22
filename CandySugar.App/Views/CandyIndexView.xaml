@@ -46,9 +46,9 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <StackLayout BackgroundColor="{DynamicResource Sakura}" Orientation="Horizontal">
+                    <StackLayout BackgroundColor="{DynamicResource PrimaryPink}" Orientation="Horizontal">
                         <Button
-                            BackgroundColor="{DynamicResource Sakura}"
+                            BackgroundColor="{DynamicResource PrimaryPink}"
                             Clicked="OpenSlider"
                             FontFamily="{DynamicResource FontAwesomeSolid}"
                             FontSize="16"
@@ -58,7 +58,7 @@
                             TextColor="White"
                             WidthRequest="50" />
                         <Label
-                            BackgroundColor="{DynamicResource Sakura}"
+                            BackgroundColor="{DynamicResource PrimaryPink}"
                             FontSize="16"
                             HeightRequest="50"
                             HorizontalTextAlignment="Center"

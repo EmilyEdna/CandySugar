@@ -1,6 +1,7 @@
 ﻿using CandySugar.App.Controls;
 using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.Anime;
+using CandySugar.App.Controls.Views.Konachan;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Common.Enum;
@@ -55,6 +56,7 @@ namespace CandySugar.App.ViewModels
                     break;
                 case MenuFuncEunm.Wallpaper:
                     base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyKonachanView));
                     break;
                 case MenuFuncEunm.Music:
                     base.Title = input.CommandParam.ToDes();

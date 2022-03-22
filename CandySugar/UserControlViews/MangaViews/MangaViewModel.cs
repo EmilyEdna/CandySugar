@@ -140,7 +140,6 @@ namespace CandySugar.UserControlViews.MangaViews
         }
         #endregion
 
-
         #region Internal
         protected async void Handle()
         {

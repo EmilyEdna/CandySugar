@@ -11,6 +11,7 @@
 		<PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="19.4.0.54" />
+		<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.4.0.54" />
 		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
@@ -54,6 +55,9 @@
 	  <EmbeddedResource Update="Views\CandyContentIndexView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
+	  <EmbeddedResource Update="Views\Konachan\CandyKonachanView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Novel\CandyNovelContentView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
@@ -65,9 +69,14 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="PropertyAttach\" />
+	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
+	  <Compile Update="Style\LightTheme.xaml.cs">
+	    <DependentUpon>LightTheme.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Style\LabelStyle.xaml.cs">
+	    <DependentUpon>LabelStyle.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>

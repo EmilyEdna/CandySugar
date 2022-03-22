@@ -1,4 +1,5 @@
-﻿<ResourceDictionary
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
     x:Class="CandySugar.App.Controls.Style.BaseStyle"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -14,10 +15,6 @@
     <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
         <On Platform="Android" Value="FontAwesome5Regular.otf#Regular" />
     </OnPlatform>
-
-    <Sys:String x:Key="LightSkyBlue">#FF10AEC2</Sys:String>
-    <Sys:String x:Key="Sakura">#FFFF9999</Sys:String>
-    <Sys:String x:Key="TeaRed">#FFED556A</Sys:String>
 
     <Converter:ListViewConverter x:Key="ListViewConverter" />
     <Converter:LabelConverter x:Key="LabelConverter" />

@@ -6,6 +6,10 @@ namespace CandySugar.Xam.Common
 {
     public class Soft
     {
+        public const string S12X = "rating:safe";
+        public const string S15X = "rating:questionable";
+        public const string S18X = "rating:explicit";
+
         public static string ProxyIP { get; set; } = "";
         public static int ProxyPort { get; set; } = -1;
         public static string ProxyPwd { get; set; }
@@ -23,5 +27,9 @@ namespace CandySugar.Xam.Common
         /// LoadMore加载更多
         /// </summary>
         public static int WaitSpan { get; set; } = 500;
+        /// <summary>
+        /// 壁纸年龄模式 [0：ALL]---[1：12]---[2：15]---[3：18]
+        /// </summary>
+        public static int AgeModule { get; set; } = 1;
     }
 }

@@ -26,7 +26,7 @@
             <local:ItemsControl Grid.Row="1" ItemsSource="{Binding RecommendCategory}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Key}" TextColor="{DynamicResource Sakura}">
+                        <Label Text="{Binding Key}" TextColor="{DynamicResource PrimaryPink}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding BindingContext.CateCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding Value}" />
                             </Label.GestureRecognizers>
@@ -47,7 +47,7 @@
             <local:ItemsControl Grid.Row="2" ItemsSource="{Binding LetterCate}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding .}" TextColor="{DynamicResource Sakura}">
+                        <Label Text="{Binding .}" TextColor="{DynamicResource PrimaryPink}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding BindingContext.LettCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding .}" />
                             </Label.GestureRecognizers>
@@ -70,11 +70,11 @@
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Label Text="今日更新：" TextColor="{DynamicResource Sakura}" />
+                <Label Text="今日更新：" TextColor="{DynamicResource PrimaryPink}" />
                 <local:ItemsControl Grid.Column="1" ItemsSource="{Binding WeekDay}">
                     <local:ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Label Text="{Binding AnimeName}" TextColor="{DynamicResource Sakura}">
+                            <Label Text="{Binding AnimeName}" TextColor="{DynamicResource PrimaryPink}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding AnimeURL}" />
                                 </Label.GestureRecognizers>
@@ -101,7 +101,7 @@
                 <SfRefresh:SfPullToRefresh
                     IsRefreshing="{Binding Refresh}"
                     ProgressBackgroundColor="Transparent"
-                    ProgressStrokeColor="{DynamicResource Sakura}"
+                    ProgressStrokeColor="{DynamicResource PrimaryPink}"
                     RefreshCommand="{Binding RefreshsCommand}"
                     RefreshContentHeight="50"
                     RefreshContentWidth="50"
@@ -109,9 +109,9 @@
                     <SfRefresh:SfPullToRefresh.PullableContent>
                         <SfList:SfListView
                             x:Name="ListViews"
+                            AutoFitMode="Height"
                             IsBusy="{Binding IsBusy}"
                             IsScrollBarVisible="False"
-                            ItemSize="130"
                             ItemsSource="{Binding Result}"
                             LoadMoreCommand="{Binding ShowMoreCommand}"
                             LoadMoreOption="AutoOnScroll"
@@ -149,7 +149,7 @@
                         <RowDefinition Height="15" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <ActivityIndicator IsRunning="{Binding Activity}" Color="{DynamicResource Sakura}" />
+                    <ActivityIndicator IsRunning="{Binding Activity}" Color="{DynamicResource PrimaryPink}" />
                     <SfList:SfListView
                         Grid.Row="1"
                         AutoFitMode="Height"
@@ -161,7 +161,7 @@
                                 <ViewCell>
                                     <StackLayout Margin="2">
                                         <XFMaterial:MaterialButton
-                                            BackgroundColor="{DynamicResource Sakura}"
+                                            BackgroundColor="{DynamicResource PrimaryPink}"
                                             Command="{Binding BindingContext.PlayCommand, Source={x:Reference CandyAnime}}"
                                             CommandParameter="{Binding .}"
                                             CornerRadius="15"
