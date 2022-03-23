@@ -50,21 +50,6 @@ namespace CandySugar.Xam.Common.Entity.Model
         /// </summary>
         public string Label { get; set; }
         /// <summary>
-        /// 标签
-        /// </summary>
-        [Ignore]
-        public List<string> Labels
-        {
-            get
-            {
-                return Label.Split("|").ToList();
-            }
-            set
-            {
-                Label = string.Join("|", value);
-            }
-        }
-        /// <summary>
         /// 时间
         /// </summary>
         public DateTime Created { get; set; }

@@ -133,7 +133,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 }).RunsAsync();
                 this.NovelCategory = new ObservableCollection<NovelCategoryResult>(NovelInit.IndexCategories);
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -173,7 +173,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                     this.NovelSearch = new ObservableCollection<NovelSearchResult>(NovelCate.SingleCategories.NovelSingles.ToMapest<List<NovelSearchResult>>());
                 this.IsBusy = false;
             }
-            catch
+            catch (Exception ex)
             {
                 this.IsBusy = false;
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
@@ -212,7 +212,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 this.NovelSearch = new ObservableCollection<NovelSearchResult>(NovelCate.SingleCategories.NovelSingles.ToMapest<List<NovelSearchResult>>());
                 this.Refresh = false;
             }
-            catch
+            catch (Exception ex)
             {
                 this.Refresh = false;
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
@@ -257,7 +257,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 this.Total = 0;
                 this.Refresh = false;
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -284,7 +284,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 await NavigationService.NavigateAsync(new Uri("CandyNovelDetailView", UriKind.Relative), Param);
 
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {

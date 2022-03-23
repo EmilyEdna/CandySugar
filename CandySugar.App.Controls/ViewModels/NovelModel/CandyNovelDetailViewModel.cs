@@ -212,7 +212,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 else
                     this.IsBusy = false;
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {

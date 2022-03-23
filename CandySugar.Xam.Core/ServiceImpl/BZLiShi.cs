@@ -1,4 +1,5 @@
 ﻿using CandySugar.Xam.Common;
+using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Common.Entity.Model;
 using CandySugar.Xam.Core.Service;
 using System;
@@ -12,19 +13,21 @@ namespace CandySugar.Xam.Core.ServiceImpl
     public class BZLiShi : IBZLiShi
     {
 
-        public async Task Insert(BZ_LiShi input)
+        public async Task Insert(BZLiShiDto input)
         {
             var db = SqliteDbContext.Instance.SqlDb;
-            var entity = await db.Table<BZ_LiShi>().Where(t => t.Id == input.Id).FirstOrDefaultAsync();
-            if (entity == null)
+            var entity = input.ToMapest<BZ_LiShi>();
+            entity.Label = string.Join("|", input.Labels);
+            var entityCheck = await db.Table<BZ_LiShi>().Where(t => t.Id == input.Id).FirstOrDefaultAsync();
+            if (entityCheck == null)
             {
-                input.InitProperty();
-                await db.InsertAsync(input);
+                entity.InitProperty();
+                await db.InsertAsync(entity);
                 await db.CloseAsync();
             }
         }
 
-        public async Task<(List<BZ_LiShi>, int)> Query(string KeyWord, int PageIndex, int PageSize)
+        public async Task<(List<BZLiShiDto>, int)> Query(string KeyWord, int PageIndex, int PageSize)
         {
             var db = SqliteDbContext.Instance.SqlDb;
             var query = db.Table<BZ_LiShi>();
@@ -32,10 +35,10 @@ namespace CandySugar.Xam.Core.ServiceImpl
                 query = query.Where(t => t.Label.Contains(KeyWord));
             var Count = await query.CountAsync();
             var Result = await query.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
-            return (Result, Count);
+            return (Result.ToMapest<List<BZLiShiDto>>(), Count);
         }
 
-        public async Task Remove(BZ_LiShi input)
+        public async Task Remove(BZLiShiDto input)
         {
             var db = SqliteDbContext.Instance.SqlDb;
             await db.Table<BZ_LiShi>().DeleteAsync(t => t.Id == input.Id);

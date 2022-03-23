@@ -1,5 +1,4 @@
 ﻿using CandySugar.Xam.Common;
-using CandySugar.Xam.Common.Entity.Model;
 using CandySugar.Xam.Core.Service;
 using Prism.Commands;
 using Prism.Navigation;
@@ -17,6 +16,7 @@ using Wallpaper.SDK.ViewModel.Response;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.KonachanModel
 {
@@ -40,6 +40,8 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         #region Flied
         private string KeyWord;
         private int Limit = 10;
+        private int PageTotal;
+        private int Page = 1;
         #endregion
 
         #region Property
@@ -76,6 +78,13 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         {
             get { return _Wallpaper; }
             set { SetProperty(ref _Wallpaper, value); }
+        }
+
+        private ObservableCollection<WallpaperResultDetail> _WallpaperLike;
+        public ObservableCollection<WallpaperResultDetail> WallpaperLike
+        {
+            get { return _WallpaperLike; }
+            set { SetProperty(ref _WallpaperLike, value); }
         }
         #endregion
 
@@ -115,6 +124,26 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
 
         });
+
+        public ICommand RefreshsLikeCommand => new DelegateCommand(() =>
+        {
+            Query();
+        });
+        public ICommand ShowMoreLikeCommand => new DelegateCommand(() =>
+        {
+            Page += 1;
+            if (Page <= PageTotal)
+                Query(Page, true);
+        });
+
+        public ICommand RemoveCommand => new DelegateCommand<dynamic>(input =>
+        {
+            if (input != null)
+            {
+                Remove(input);
+                Query(Page);
+            }
+        });
         #endregion
 
         #region Override
@@ -142,7 +171,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                         {
                             Page = PageIndex,
                             Limit = Limit,
-                            Tag = await InitTag()
+                            Tag = InitTag()
                         },
                         Proxy = this.Proxy
                     };
@@ -169,7 +198,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperInit.GlobalResult.Result);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -192,7 +221,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                         {
                             Limit = Limit,
                             Page = PageIndex,
-                            KeyWord = await InitTag(false)
+                            KeyWord =  InitTag(false)
                         },
                         Proxy = this.Proxy
                     };
@@ -218,7 +247,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperSearch.GlobalResult.Result);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -226,7 +255,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 }
             }
         }
-        public async Task<string> InitTag(bool Type = true)
+        public  string InitTag(bool Type = true)
         {
             string Tag = string.Empty;
             if (Soft.AgeModule == 1)
@@ -238,11 +267,41 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             else
                 Tag = string.Empty;
 
-            return await Task.Run(() => Type ? Tag : $"{Tag} {KeyWord}");
+            return Type ? Tag : $"{Tag} {KeyWord}";
         }
         public async void Insert(WallpaperResultDetail input)
         {
-          await  Candy.Insert(input.ToMapest<BZ_LiShi>());
+            var entity = input.ToMapest<BZLiShiDto>();
+            await Candy.Insert(entity);
+        }
+        public async void Query(int PageIndex = 1,bool IsLoadMore=false)
+        {
+            if (IsLoadMore) IsBusy = true; else Refresh = true;
+            await Task.Delay(Soft.WaitSpan);
+            var result = await Candy.Query(KeyWord, PageIndex, Limit);
+            this.PageTotal = (result.Item2 + Limit - 1) / Limit;
+            if (IsLoadMore)
+            {
+                IsBusy = false;
+                if (this.WallpaperLike == null)
+                    this.WallpaperLike = new ObservableCollection<WallpaperResultDetail>(result.Item1.ToMapest<List<WallpaperResultDetail>>());
+                else
+                {
+                    result.Item1.ToMapest<List<WallpaperResultDetail>>().ForEach(item =>
+                    {
+                        this.WallpaperLike.Add(item);
+                    });
+                }
+            }
+            else
+            {
+                Refresh = false;
+                this.WallpaperLike = new ObservableCollection<WallpaperResultDetail>(result.Item1.ToMapest<List<WallpaperResultDetail>>());
+            }
+        }
+        public async void Remove(WallpaperResultDetail input)
+        {
+            await Candy.Remove(input.ToMapest<BZLiShiDto>());
         }
         #endregion
     }

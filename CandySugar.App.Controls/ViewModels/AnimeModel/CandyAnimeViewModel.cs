@@ -142,7 +142,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
 
                 this.WeekDay = new ObservableCollection<AnimeWeekDayRecommendResult>(AnimeInit.WeekDays.FirstOrDefault(t => t.DayName.Equals(GetDayName())).DayRecommends);
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -193,7 +193,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     this.Result = new ObservableCollection<AnimeSearchResults>(AnimeCateType.SeachResults.Searchs);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -244,7 +244,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     this.Result = new ObservableCollection<AnimeSearchResults>(AnimeCate.SeachResults.Searchs);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -296,7 +296,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     this.Result = new ObservableCollection<AnimeSearchResults>(AnimeSearch.SeachResults.Searchs);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -326,7 +326,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults.Where(t => t.IsDownURL == false));
                 Activity = false;
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -363,7 +363,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 param.Add("WatchAddress", AnimeWath.PlayResult.PlayURL);
                 await NavigationService.NavigateAsync(new Uri(nameof(CandyAnimePlayView), UriKind.Relative), param);
             }
-            catch
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
