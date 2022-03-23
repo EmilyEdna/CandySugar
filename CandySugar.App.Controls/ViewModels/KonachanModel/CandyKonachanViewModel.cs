@@ -89,6 +89,22 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         #endregion
 
         #region Command
+
+        public ICommand TabChangedCommand => new DelegateCommand<dynamic>((input) =>
+        {
+
+            if (input == 0)
+            {
+                if (KeyWord.IsNullOrEmpty())
+                    Init();
+                else
+                    SearchBaisc();
+            }
+            else
+
+                Query();
+        });
+
         public ICommand RefreshsMainCommand => new DelegateCommand(() =>
         {
             PageIndex = 1;
@@ -122,7 +138,6 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             {
                 Insert(input);
             }
-
         });
 
         public ICommand RefreshsLikeCommand => new DelegateCommand(() =>
@@ -198,7 +213,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     this.Wallpaper = new ObservableCollection<WallpaperResultDetail>(WallpaperInit.GlobalResult.Result);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
                 {
@@ -221,7 +236,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                         {
                             Limit = Limit,
                             Page = PageIndex,
-                            KeyWord =  InitTag(false)
+                            KeyWord = InitTag(false)
                         },
                         Proxy = this.Proxy
                     };
@@ -255,7 +270,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 }
             }
         }
-        public  string InitTag(bool Type = true)
+        public string InitTag(bool Type = true)
         {
             string Tag = string.Empty;
             if (Soft.AgeModule == 1)
@@ -274,7 +289,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             var entity = input.ToMapest<BZLiShiDto>();
             await Candy.Insert(entity);
         }
-        public async void Query(int PageIndex = 1,bool IsLoadMore=false)
+        public async void Query(int PageIndex = 1, bool IsLoadMore = false)
         {
             if (IsLoadMore) IsBusy = true; else Refresh = true;
             await Task.Delay(Soft.WaitSpan);

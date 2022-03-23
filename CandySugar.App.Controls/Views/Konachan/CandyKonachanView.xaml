@@ -11,6 +11,7 @@
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     x:Name="KonachanView"
     NavigationPage.HasNavigationBar="False">
@@ -31,7 +32,13 @@
                 OverflowMode="CenterButton"
                 TabHeaderPosition="Bottom"
                 VisibleHeaderCount="2">
-                <SfTab:SfTabItem Title="主站">
+                <SfTab:SfTabView.Behaviors>
+                    <behavior:EventToCommandBehavior
+                        Command="{Binding TabChangedCommand}"
+                        Converter="{StaticResource TabItemConverter}"
+                        EventName="TabItemTapped" />
+                </SfTab:SfTabView.Behaviors>
+                <SfTab:SfTabItem Title="主站" TabIndex="0">
                     <SfTab:SfTabItem.Content>
                         <Grid>
                             <SfRefresh:SfPullToRefresh
@@ -161,7 +168,7 @@
                         </Grid>
                     </SfTab:SfTabItem.Content>
                 </SfTab:SfTabItem>
-                <SfTab:SfTabItem Title="收藏">
+                <SfTab:SfTabItem Title="收藏" TabIndex="1">
                     <SfTab:SfTabItem.Content>
                         <Grid>
                             <SfRefresh:SfPullToRefresh

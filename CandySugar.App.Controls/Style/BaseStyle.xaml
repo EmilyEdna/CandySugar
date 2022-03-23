@@ -16,6 +16,7 @@
         <On Platform="Android" Value="FontAwesome5Regular.otf#Regular" />
     </OnPlatform>
 
+    <Converter:TabItemConverter x:Key="TabItemConverter" />
     <Converter:ListViewConverter x:Key="ListViewConverter" />
     <Converter:LabelConverter x:Key="LabelConverter" />
 </ResourceDictionary>
