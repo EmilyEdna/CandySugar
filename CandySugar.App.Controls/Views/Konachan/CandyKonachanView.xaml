@@ -133,7 +133,7 @@
                                                                                         <XFMaterial:MaterialButton
                                                                                             Command="{Binding BindingContext.SearchCommand, Source={x:Reference KonachanView}}"
                                                                                             CommandParameter="{Binding .}"
-                                                                                            Style="{DynamicResource LabelBtn}"
+                                                                                            Style="{DynamicResource LabelBtnKonachan}"
                                                                                             Text="{Binding .}" />
                                                                                     </DataTemplate>
                                                                                 </Local:ItemsControl.ItemTemplate>
@@ -256,7 +256,7 @@
                                                                                         <XFMaterial:MaterialButton
                                                                                             Command="{Binding BindingContext.SearchCommand, Source={x:Reference KonachanView}}"
                                                                                             CommandParameter="{Binding .}"
-                                                                                            Style="{DynamicResource LabelBtn}"
+                                                                                            Style="{DynamicResource LabelBtnKonachan}"
                                                                                             Text="{Binding .}" />
                                                                                     </DataTemplate>
                                                                                 </Local:ItemsControl.ItemTemplate>

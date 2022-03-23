@@ -2,10 +2,15 @@
     x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     x:Name="NovelView"
     NavigationPage.HasNavigationBar="False">
@@ -24,11 +29,11 @@
             <local:ItemsControl Grid.Row="1" ItemsSource="{Binding NovelCategory}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding CategoryName}" TextColor="{DynamicResource PrimaryPink}">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.ItemCommand, Source={x:Reference NovelView}}" CommandParameter="{Binding CollectAddress}" />
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <XFMaterial:MaterialButton
+                            Command="{Binding BindingContext.ItemCommand, Source={x:Reference NovelView}}"
+                            CommandParameter="{Binding CollectAddress}"
+                            Style="{DynamicResource LabelBtnNovel}"
+                            Text="{Binding CategoryName}" />
                     </DataTemplate>
                 </local:ItemsControl.ItemTemplate>
                 <local:ItemsControl.ItemsLayout>
@@ -53,54 +58,96 @@
                 TransitionMode="Push">
                 <SfRefresh:SfPullToRefresh.PullableContent>
                     <SfList:SfListView
-                        x:Name="ListViews"
-                        AllowSwiping="True"
                         AutoFitMode="Height"
                         IsBusy="{Binding IsBusy}"
                         IsScrollBarVisible="False"
                         ItemsSource="{Binding NovelSearch}"
                         LoadMoreCommand="{Binding ShowMoreCommand}"
                         LoadMoreOption="AutoOnScroll"
-                        SelectionBackgroundColor="Khaki">
+                        SelectionBackgroundColor="Transparent">
                         <SfList:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <Frame
-                                    Margin="2"
-                                    BorderColor="{DynamicResource PrimaryPink}"
-                                    CornerRadius="1"
-                                    HasShadow="True">
-                                    <RelativeLayout>
-                                        <FFImg:CachedImage
-                                            Margin="0,-2,0,0"
-                                            HeightRequest="98"
-                                            RelativeLayout.XConstraint="-18"
-                                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                                              Property=Height,
-                                                                                              Constant=-75}"
-                                            Source="Cover.gif"
-                                            WidthRequest="68" />
-                                        <Label
-                                            FontSize="18"
-                                            RelativeLayout.XConstraint="70"
-                                            Text="{Binding BookName}"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            FontSize="14"
-                                            RelativeLayout.XConstraint="70"
-                                            RelativeLayout.YConstraint="20"
-                                            Text="{Binding UpdateDate, StringFormat=(\{0\})}"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            FontSize="14"
-                                            RelativeLayout.XConstraint="70"
-                                            RelativeLayout.YConstraint="35"
-                                            Text="{Binding Author}"
-                                            VerticalOptions="Center" />
-                                    </RelativeLayout>
-                                </Frame>
+                                <ViewCell>
+                                    <Ctrl:ShadowFrame
+                                        Margin="2,10,5,5"
+                                        Padding="0"
+                                        Background="{DynamicResource GrayShadowColor}"
+                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                        BorderWidth="1"
+                                        CornerRadius="4"
+                                        HasShadow="True"
+                                        HorizontalOptions="FillAndExpand"
+                                        Radius="4"
+                                        VerticalOptions="FillAndExpand">
+                                        <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                            <SfBorder:SfBorder
+                                                BorderColor="Transparent"
+                                                BorderWidth="0"
+                                                CornerRadius="4">
+                                                <Grid ColumnDefinitions="100,*" ColumnSpacing="0">
+                                                    <FFImg:CachedImage
+                                                        Aspect="AspectFit"
+                                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                        DownsampleUseDipUnits="True"
+                                                        HeightRequest="120"
+                                                        Source="Cover.gif"
+                                                        WidthRequest="80" />
+                                                    <StackLayout
+                                                        Grid.Column="1"
+                                                        Padding="16"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Spacing="0"
+                                                        VerticalOptions="FillAndExpand">
+                                                        <Label
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding BookName, StringFormat='书名:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding UpdateDate, StringFormat='更新时间:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Author, StringFormat='作者:{0}'}" />
+                                                        <FlexLayout>
+                                                            <Button
+                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                Command="{Binding BindingContext.SearchCommand, Source={x:Reference NovelView}}"
+                                                                CommandParameter="{Binding .}"
+                                                                FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                FontSize="15"
+                                                                HeightRequest="35"
+                                                                HorizontalOptions="End"
+                                                                Text="{Static fontawesome:FontAwesomeIcons.User}"
+                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                WidthRequest="40" />
+                                                            <Button
+                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                Command="{Binding BindingContext.DetailCommand, Source={x:Reference NovelView}}"
+                                                                CommandParameter="{Binding .}"
+                                                                FontFamily="{DynamicResource FontAwesomeSolid}"
+                                                                FontSize="15"
+                                                                HeightRequest="35"
+                                                                HorizontalOptions="End"
+                                                                Text="{Static fontawesome:FontAwesomeIcons.Book}"
+                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                WidthRequest="40" />
+                                                        </FlexLayout>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </SfBorder:SfBorder>
+                                        </SfEffect:SfEffectsView>
+                                    </Ctrl:ShadowFrame>
+                                </ViewCell>
                             </DataTemplate>
                         </SfList:SfListView.ItemTemplate>
-                        <SfList:SfListView.RightSwipeTemplate>
+                        <!--<SfList:SfListView.RightSwipeTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -143,7 +190,7 @@
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
-                        </SfList:SfListView.RightSwipeTemplate>
+                        </SfList:SfListView.RightSwipeTemplate>-->
                     </SfList:SfListView>
                 </SfRefresh:SfPullToRefresh.PullableContent>
             </SfRefresh:SfPullToRefresh>
