@@ -22,6 +22,8 @@ using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
 using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Common.Entity.Model;
+using XF.Material.Forms.UI.Dialogs.Configurations;
+using Xamarin.Forms;
 
 namespace CandySugar.App.Controls.ViewModels.AnimeModel
 {
@@ -323,8 +325,17 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                         }
                     };
                 }).RunsAsync();
+
                 this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults.Where(t => t.IsDownURL == false));
                 Activity = false;
+
+              var result =  await MaterialDialog.Instance.SelectActionAsync(this.Detail.Select(t => t.CollectName).ToList(), new MaterialSimpleDialogConfiguration
+                {
+                    TextColor = Color.FromRgb(255,133,133),
+                    CornerRadius = 10
+                }) ;
+
+                Play(this.Detail[result]);
             }
             catch (Exception ex)
             {
@@ -430,12 +441,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     LetterCategory(Letters);
             }
         });
-
-        public ICommand PlayCommand => new DelegateCommand<dynamic>(async input =>
-        {
-            if (input != null)
-                Play(input);
-        });
+    
         #endregion
 
         #region Override

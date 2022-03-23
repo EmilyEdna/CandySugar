@@ -23,8 +23,9 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <SearchBar
-                BackgroundColor="#FFFF9999"
+                BackgroundColor="{DynamicResource PrimaryPink}"
                 Placeholder="请输入K站标签"
+                PlaceholderColor="{DynamicResource GrayShadowColor}"
                 SearchCommand="{Binding SearchCommand}"
                 SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
             <SfTab:SfTabView

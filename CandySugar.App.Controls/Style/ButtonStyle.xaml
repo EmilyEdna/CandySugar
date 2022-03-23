@@ -27,4 +27,30 @@
         <Setter Property="CornerRadius" Value="10" />
     </Style>
 
+
+    <Style x:Key="LabelBtnAnimeCate" TargetType="XFMaterial:MaterialButton">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource GrayShadowColor}" />
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+
+
+    <Style x:Key="LabelBtnAnimeLetter" TargetType="XFMaterial:MaterialButton">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Margin" Value="-5,0,-5,0" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="WidthRequest" Value="30" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource GrayShadowColor}" />
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+
 </ResourceDictionary>

@@ -30,6 +30,6 @@ namespace CandySugar.Xam.Common
         /// <summary>
         /// 壁纸年龄模式 [0：ALL]---[1：12]---[2：15]---[3：18]
         /// </summary>
-        public static int AgeModule { get; set; } = 1;
+        public static int AgeModule { get; set; } = 0;
     }
 }

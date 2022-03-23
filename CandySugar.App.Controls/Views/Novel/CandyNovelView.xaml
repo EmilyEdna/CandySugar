@@ -22,8 +22,9 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <SearchBar
-                BackgroundColor="#FFFF9999"
+                BackgroundColor="{DynamicResource PrimaryPink}"
                 Placeholder="请输入小说或作者"
+                PlaceholderColor="{DynamicResource GrayShadowColor}"
                 SearchCommand="{Binding SearchCommand}"
                 SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
             <local:ItemsControl Grid.Row="1" ItemsSource="{Binding NovelCategory}">
@@ -33,7 +34,8 @@
                             Command="{Binding BindingContext.ItemCommand, Source={x:Reference NovelView}}"
                             CommandParameter="{Binding CollectAddress}"
                             Style="{DynamicResource LabelBtnNovel}"
-                            Text="{Binding CategoryName}" />
+                            Text="{Binding CategoryName}"
+                            TextColor="{DynamicResource PrimaryPink}" />
                     </DataTemplate>
                 </local:ItemsControl.ItemTemplate>
                 <local:ItemsControl.ItemsLayout>
@@ -102,7 +104,7 @@
                                                             HorizontalOptions="Start"
                                                             HorizontalTextAlignment="Start"
                                                             Style="{DynamicResource DescriptionLabelStyle}"
-                                                            Text="{Binding BookName, StringFormat='书名:{0}'}" />
+                                                            Text="{Binding BookName}" />
                                                         <Label
                                                             FontSize="12"
                                                             HorizontalOptions="Start"
@@ -115,29 +117,31 @@
                                                             HorizontalTextAlignment="Start"
                                                             Style="{DynamicResource DescriptionLabelStyle}"
                                                             Text="{Binding Author, StringFormat='作者:{0}'}" />
-                                                        <FlexLayout>
+                                                        <FlexLayout AlignItems="End" JustifyContent="End">
                                                             <Button
+                                                                Padding="2"
                                                                 BackgroundColor="{DynamicResource GrayShadowColor}"
                                                                 Command="{Binding BindingContext.SearchCommand, Source={x:Reference NovelView}}"
                                                                 CommandParameter="{Binding .}"
                                                                 FontFamily="{DynamicResource FontAwesomeRegular}"
                                                                 FontSize="15"
-                                                                HeightRequest="35"
+                                                                HeightRequest="30"
                                                                 HorizontalOptions="End"
                                                                 Text="{Static fontawesome:FontAwesomeIcons.User}"
                                                                 TextColor="{DynamicResource Gray-Black}"
-                                                                WidthRequest="40" />
+                                                                WidthRequest="30" />
                                                             <Button
+                                                                Padding="2"
                                                                 BackgroundColor="{DynamicResource GrayShadowColor}"
                                                                 Command="{Binding BindingContext.DetailCommand, Source={x:Reference NovelView}}"
                                                                 CommandParameter="{Binding .}"
                                                                 FontFamily="{DynamicResource FontAwesomeSolid}"
                                                                 FontSize="15"
-                                                                HeightRequest="35"
+                                                                HeightRequest="30"
                                                                 HorizontalOptions="End"
                                                                 Text="{Static fontawesome:FontAwesomeIcons.Book}"
                                                                 TextColor="{DynamicResource Gray-Black}"
-                                                                WidthRequest="40" />
+                                                                WidthRequest="30" />
                                                         </FlexLayout>
                                                     </StackLayout>
                                                 </Grid>

@@ -2,10 +2,15 @@
     x:Class="CandySugar.App.Controls.Views.Anime.CandyAnimeView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:EX="clr-namespace:Expandable;assembly=ExpandableView"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     x:Name="CandyAnime"
     NavigationPage.HasNavigationBar="False">
@@ -14,23 +19,25 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="25" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="25" />
                 <RowDefinition Height="25" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <SearchBar
-                BackgroundColor="#FFFF9999"
+                BackgroundColor="{DynamicResource PrimaryPink}"
                 Placeholder="请输入动漫名称"
+                PlaceholderColor="{DynamicResource GrayShadowColor}"
                 SearchCommand="{Binding SearchCommand}"
                 SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
             <local:ItemsControl Grid.Row="1" ItemsSource="{Binding RecommendCategory}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Key}" TextColor="{DynamicResource PrimaryPink}">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.CateCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding Value}" />
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <XFMaterial:MaterialButton
+                            Command="{Binding BindingContext.CateCommand, Source={x:Reference CandyAnime}}"
+                            CommandParameter="{Binding Value}"
+                            Style="{DynamicResource LabelBtnAnimeCate}"
+                            Text="{Binding Key}"
+                            TextColor="{DynamicResource PrimaryPink}" />
                     </DataTemplate>
                 </local:ItemsControl.ItemTemplate>
                 <local:ItemsControl.ItemsLayout>
@@ -47,11 +54,12 @@
             <local:ItemsControl Grid.Row="2" ItemsSource="{Binding LetterCate}">
                 <local:ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding .}" TextColor="{DynamicResource PrimaryPink}">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.LettCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding .}" />
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <XFMaterial:MaterialButton
+                            Command="{Binding BindingContext.LettCommand, Source={x:Reference CandyAnime}}"
+                            CommandParameter="{Binding .}"
+                            Style="{DynamicResource LabelBtnAnimeLetter}"
+                            Text="{Binding .}"
+                            TextColor="{DynamicResource PrimaryPink}" />
                     </DataTemplate>
                 </local:ItemsControl.ItemTemplate>
                 <local:ItemsControl.ItemsLayout>
@@ -94,7 +102,93 @@
                 </local:ItemsControl>
             </Grid>
             <Grid Grid.Row="4">
-                <Grid.ColumnDefinitions>
+                <SfRefresh:SfPullToRefresh
+                    IsRefreshing="{Binding Refresh}"
+                    ProgressBackgroundColor="Transparent"
+                    ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                    RefreshCommand="{Binding RefreshsCommand}"
+                    RefreshContentHeight="50"
+                    RefreshContentWidth="50"
+                    TransitionMode="Push">
+                    <SfRefresh:SfPullToRefresh.PullableContent>
+                        <SfList:SfListView
+                            AutoFitMode="Height"
+                            IsBusy="{Binding IsBusy}"
+                            IsScrollBarVisible="False"
+                            ItemsSource="{Binding Result}"
+                            LoadMoreCommand="{Binding ShowMoreCommand}"
+                            LoadMoreOption="AutoOnScroll"
+                            SelectionBackgroundColor="Transparent">
+                            <SfList:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Ctrl:ShadowFrame
+                                            Margin="2,10,5,5"
+                                            Padding="0"
+                                            Background="{DynamicResource GrayShadowColor}"
+                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                            BorderWidth="1"
+                                            CornerRadius="4"
+                                            HasShadow="True"
+                                            HorizontalOptions="FillAndExpand"
+                                            Radius="4"
+                                            VerticalOptions="FillAndExpand">
+                                            <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                                <SfBorder:SfBorder
+                                                    BorderColor="Transparent"
+                                                    BorderWidth="0"
+                                                    CornerRadius="4">
+                                                    <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
+                                                        <FFImg:CachedImage
+                                                            Aspect="AspectFill"
+                                                            BackgroundColor="{DynamicResource Gray-200}"
+                                                            CacheDuration="0:3:0"
+                                                            CacheType="Disk"
+                                                            DownsampleUseDipUnits="True"
+                                                            HeightRequest="60"
+                                                            Source="{Binding AnimeCover}"
+                                                            WidthRequest="60" />
+                                                        <StackLayout
+                                                            Grid.Column="1"
+                                                            Padding="16"
+                                                            HorizontalOptions="FillAndExpand"
+                                                            Spacing="0"
+                                                            VerticalOptions="FillAndExpand">
+                                                            <FlexLayout>
+                                                                <Label
+                                                                    FontSize="12"
+                                                                    HorizontalOptions="Start"
+                                                                    HorizontalTextAlignment="Start"
+                                                                    Style="{DynamicResource DescriptionLabelStyle}"
+                                                                    Text="{Binding AnimeName}" />
+                                                                <Button
+                                                                    Margin="0,-3,0,0"
+                                                                    Padding="2"
+                                                                    BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                    Command="{Binding BindingContext.DetailCommand, Source={x:Reference CandyAnime}}"
+                                                                    CommandParameter="{Binding DetailAddress}"
+                                                                    FlexLayout.AlignSelf="End"
+                                                                    FlexLayout.Grow="1"
+                                                                    FontFamily="{DynamicResource FontAwesomeSolid}"
+                                                                    FontSize="15"
+                                                                    HeightRequest="30"
+                                                                    HorizontalOptions="End"
+                                                                    Text="{Static fontawesome:FontAwesomeIcons.FileVideo}"
+                                                                    TextColor="{DynamicResource Gray-Black}"
+                                                                    WidthRequest="30" />
+                                                            </FlexLayout>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </SfBorder:SfBorder>
+                                            </SfEffect:SfEffectsView>
+                                        </Ctrl:ShadowFrame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </SfList:SfListView.ItemTemplate>
+                        </SfList:SfListView>
+                    </SfRefresh:SfPullToRefresh.PullableContent>
+                </SfRefresh:SfPullToRefresh>
+                <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
@@ -171,7 +265,7 @@
                             </DataTemplate>
                         </SfList:SfListView.ItemTemplate>
                     </SfList:SfListView>
-                </Grid>
+                </Grid>-->
             </Grid>
         </Grid>
     </ContentPage.Content>
