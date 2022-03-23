@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="CandySugar.App.Controls.Style.ButtonStyle"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material">
+
+    <Style x:Key="LabelBtn" TargetType="XFMaterial:MaterialButton">
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource GrayShadowColor}" />
+        <Setter Property="HeightRequest" Value="25" />
+        <Setter Property="CornerRadius" Value="5" />
+    </Style>
+
+</ResourceDictionary>

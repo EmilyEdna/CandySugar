@@ -72,6 +72,9 @@
 	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Style\ButtonStyle.xaml.cs">
+	    <DependentUpon>ButtonStyle.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Style\LightTheme.xaml.cs">
 	    <DependentUpon>LightTheme.xaml</DependentUpon>
 	  </Compile>

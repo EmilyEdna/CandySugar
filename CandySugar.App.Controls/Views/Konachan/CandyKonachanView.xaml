@@ -11,6 +11,7 @@
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     x:Name="KonachanView"
@@ -117,7 +118,7 @@
                                                                             <Local:ItemsControl ItemsSource="{Binding Labels}">
                                                                                 <Local:ItemsControl.ItemTemplate>
                                                                                     <DataTemplate>
-                                                                                        <Label
+                                                                                        <!--<Label
                                                                                             FontSize="12"
                                                                                             HorizontalOptions="Start"
                                                                                             HorizontalTextAlignment="Start"
@@ -128,7 +129,12 @@
                                                                                             Style="{StaticResource DescriptionLabelStyle}"
                                                                                             Text="{Binding .}"
                                                                                             VerticalOptions="Center"
-                                                                                            VerticalTextAlignment="Center" />
+                                                                                            VerticalTextAlignment="Center" />-->
+                                                                                        <XFMaterial:MaterialButton
+                                                                                            Command="{Binding BindingContext.SearchCommand, Source={x:Reference KonachanView}}"
+                                                                                            CommandParameter="{Binding .}"
+                                                                                            Style="{DynamicResource LabelBtn}"
+                                                                                            Text="{Binding .}" />
                                                                                     </DataTemplate>
                                                                                 </Local:ItemsControl.ItemTemplate>
                                                                                 <Local:ItemsControl.ItemsLayout>
@@ -247,18 +253,11 @@
                                                                             <Local:ItemsControl ItemsSource="{Binding Labels}">
                                                                                 <Local:ItemsControl.ItemTemplate>
                                                                                     <DataTemplate>
-                                                                                        <Label
-                                                                                            FontSize="12"
-                                                                                            HorizontalOptions="Start"
-                                                                                            HorizontalTextAlignment="Start"
-                                                                                            LineBreakMode="TailTruncation"
-                                                                                            LineHeight="{OnPlatform Android=1.25,
-                                                                                                                    Default=-1}"
-                                                                                            MaxLines="2"
-                                                                                            Style="{StaticResource DescriptionLabelStyle}"
-                                                                                            Text="{Binding .}"
-                                                                                            VerticalOptions="Center"
-                                                                                            VerticalTextAlignment="Center" />
+                                                                                        <XFMaterial:MaterialButton
+                                                                                            Command="{Binding BindingContext.SearchCommand, Source={x:Reference KonachanView}}"
+                                                                                            CommandParameter="{Binding .}"
+                                                                                            Style="{DynamicResource LabelBtn}"
+                                                                                            Text="{Binding .}" />
                                                                                     </DataTemplate>
                                                                                 </Local:ItemsControl.ItemTemplate>
                                                                                 <Local:ItemsControl.ItemsLayout>

@@ -10,6 +10,7 @@
                 <Base:LightTheme />
                 <Base:BaseStyle />
                 <Base:LabelStyle />
+                <Base:ButtonStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

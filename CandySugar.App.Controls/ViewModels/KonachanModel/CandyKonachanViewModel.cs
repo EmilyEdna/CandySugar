@@ -42,6 +42,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         private int Limit = 10;
         private int PageTotal;
         private int Page = 1;
+        private int Tab = 0;
         #endregion
 
         #region Property
@@ -89,10 +90,8 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         #endregion
 
         #region Command
-
         public ICommand TabChangedCommand => new DelegateCommand<dynamic>((input) =>
         {
-
             if (input == 0)
             {
                 if (KeyWord.IsNullOrEmpty())
@@ -101,8 +100,8 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     SearchBaisc();
             }
             else
-
                 Query();
+            Tab = input;
         });
 
         public ICommand RefreshsMainCommand => new DelegateCommand(() =>
@@ -115,10 +114,14 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         });
         public ICommand SearchCommand => new DelegateCommand<dynamic>(input =>
         {
-            PageIndex = 1;
             KeyWord = input;
-            SearchBaisc();
-
+            if (Tab == 0)
+            {
+                PageIndex = 1;
+                SearchBaisc();
+            }
+            else 
+                Query();
         });
         public ICommand ShowMoreMainCommand => new DelegateCommand(() =>
         {
@@ -132,6 +135,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
         });
 
+
         public ICommand InsertCommand => new DelegateCommand<dynamic>(input =>
         {
             if (input != null)
@@ -139,7 +143,6 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 Insert(input);
             }
         });
-
         public ICommand RefreshsLikeCommand => new DelegateCommand(() =>
         {
             Query();
@@ -150,7 +153,6 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             if (Page <= PageTotal)
                 Query(Page, true);
         });
-
         public ICommand RemoveCommand => new DelegateCommand<dynamic>(input =>
         {
             if (input != null)
