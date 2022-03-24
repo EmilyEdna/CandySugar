@@ -205,7 +205,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 
                     if (await DownNovel(entity.ChapterURL, LightNovelContent.ContentResult.Content))
                     {
-                        Navigation(LightNovelContent.ContentResult);
+                        Navigation(LightNovelContent.ContentResult, entity.ChapterName);
                     }
                 }
                 catch (Exception ex)
@@ -264,7 +264,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             return true;
         }
 
-        public async void Navigation(LightNovelContentResult input)
+        public async void Navigation(LightNovelContentResult input,string name)
         {
             var NavigationService = (INavigationService)ContainerLocator.Container.Resolve(typeof(INavigationService));
 
@@ -272,12 +272,14 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             {
                 var Param = new NavigationParameters();
                 Param.Add("Content", SyncStatic.Compress(input.Content, SecurityType.Base64));
+                Param.Add("ChapterName", name);
                 await NavigationService.NavigateAsync(new Uri("CandyLightNovelContentView", UriKind.Relative), Param);
             }
             else
             {
                 var Param = new NavigationParameters();
                 Param.Add("Image", input.Image);
+                Param.Add("ChapterName", name);
                 await NavigationService.NavigateAsync(new Uri("CandyLightNovelImageView", UriKind.Relative), Param);
             }
         }

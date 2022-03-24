@@ -1,10 +1,11 @@
-﻿<ContentPage
-    x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelContentView"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.LightNovel.CandyLightNovelContentView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:SFList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:XFDes="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-    x:Name="NovelContents"
+    x:Name="LightNovelContent"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -15,21 +16,18 @@
                 AutoFitMode="Height"
                 BackgroundColor="{Binding Theme}"
                 HeaderSize="30"
-                IsBusy="{Binding IsBusy}"
                 IsScrollBarVisible="False"
                 IsStickyHeader="True"
                 ItemTapped="Tapped"
                 ItemsSource="{Binding Content}"
-                LoadMoreCommand="{Binding ShowMoreCommand}"
-                LoadMoreOption="AutoOnScroll"
                 SelectionBackgroundColor="Transparent">
                 <SFList:SfListView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout HorizontalOptions="Center">
                             <Label
-                                FontSize="22"
+                                FontSize="18"
                                 Text="{Binding ChapterName}"
-                                TextColor="{Binding BindingContext.TextTheme, Source={x:Reference NovelContents}}" />
+                                TextColor="{Binding BindingContext.TextTheme, Source={x:Reference LightNovelContent}}" />
                         </StackLayout>
                     </DataTemplate>
                 </SFList:SfListView.HeaderTemplate>
@@ -37,10 +35,10 @@
                     <DataTemplate>
                         <Grid>
                             <Label
-                                FontSize="18"
+                                FontSize="16"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding .}"
-                                TextColor="{Binding BindingContext.TextTheme, Source={x:Reference NovelContents}}" />
+                                TextColor="{Binding BindingContext.TextTheme, Source={x:Reference LightNovelContent}}" />
                         </Grid>
                     </DataTemplate>
                 </SFList:SfListView.ItemTemplate>
