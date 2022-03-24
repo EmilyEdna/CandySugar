@@ -305,8 +305,6 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 
         public async void Navigation(LightNovelSingleCategoryResults input)
         {
-            var NavigationService = ContainerLocator.Container.Resolve<INavigationService>();
-
             var Param = new NavigationParameters();
             Param.Add("Route", input.DetailAddress);
             Param.Add("BookName", input.BookName);

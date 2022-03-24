@@ -279,8 +279,6 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
 
                 NovelSearchResult? inputKey = (input as NovelSearchResult);
 
-                var NavigationService = ContainerLocator.Container.Resolve<INavigationService>();
-
                 var Param = new NavigationParameters();
                 Param.Add(nameof(NovelSearchResult), inputKey);
                 await NavigationService.NavigateAsync(new Uri(nameof(CandyNovelDetailView), UriKind.Relative), Param);

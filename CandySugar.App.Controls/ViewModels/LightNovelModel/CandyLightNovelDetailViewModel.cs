@@ -267,7 +267,6 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 
         public async void Navigation(LightNovelContentResult input,string name)
         {
-            var NavigationService = ContainerLocator.Container.Resolve<INavigationService>();
 
             if (input.Image == null)
             {
