@@ -3,7 +3,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
-    xmlns:EX="clr-namespace:Expandable;assembly=ExpandableView"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
@@ -188,84 +187,6 @@
                         </SfList:SfListView>
                     </SfRefresh:SfPullToRefresh.PullableContent>
                 </SfRefresh:SfPullToRefresh>
-                <!--<Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <SfRefresh:SfPullToRefresh
-                    IsRefreshing="{Binding Refresh}"
-                    ProgressBackgroundColor="Transparent"
-                    ProgressStrokeColor="{DynamicResource PrimaryPink}"
-                    RefreshCommand="{Binding RefreshsCommand}"
-                    RefreshContentHeight="50"
-                    RefreshContentWidth="50"
-                    TransitionMode="Push">
-                    <SfRefresh:SfPullToRefresh.PullableContent>
-                        <SfList:SfListView
-                            x:Name="ListViews"
-                            AutoFitMode="Height"
-                            IsBusy="{Binding IsBusy}"
-                            IsScrollBarVisible="False"
-                            ItemsSource="{Binding Result}"
-                            LoadMoreCommand="{Binding ShowMoreCommand}"
-                            LoadMoreOption="AutoOnScroll"
-                            SelectionBackgroundColor="Transparent">
-                            <SfList:SfListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame
-                                        Margin="2"
-                                        BackgroundColor="Transparent"
-                                        BorderColor="Transparent"
-                                        CornerRadius="15"
-                                        HasShadow="True">
-                                        <StackLayout HorizontalOptions="Center">
-                                            <FFImg:CachedImage
-                                                Margin="0,-20,0,0"
-                                                HeightRequest="100"
-                                                Source="{Binding AnimeCover}"
-                                                WidthRequest="70" />
-                                            <Label
-                                                HorizontalOptions="Center"
-                                                Text="{Binding AnimeName}"
-                                                VerticalOptions="Center" />
-                                        </StackLayout>
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference CandyAnime}}" CommandParameter="{Binding DetailAddress}" />
-                                        </Frame.GestureRecognizers>
-                                    </Frame>
-                                </DataTemplate>
-                            </SfList:SfListView.ItemTemplate>
-                        </SfList:SfListView>
-                    </SfRefresh:SfPullToRefresh.PullableContent>
-                </SfRefresh:SfPullToRefresh>
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="15" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <ActivityIndicator IsRunning="{Binding Activity}" Color="{DynamicResource PrimaryPink}" />
-                    <SfList:SfListView
-                        Grid.Row="1"
-                        AutoFitMode="Height"
-                        IsScrollBarVisible="False"
-                        ItemsSource="{Binding Detail}"
-                        SelectionBackgroundColor="Transparent">
-                        <SfList:SfListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Margin="2">
-                                        <XFMaterial:MaterialButton
-                                            BackgroundColor="{DynamicResource PrimaryPink}"
-                                            Command="{Binding BindingContext.PlayCommand, Source={x:Reference CandyAnime}}"
-                                            CommandParameter="{Binding .}"
-                                            CornerRadius="15"
-                                            Text="{Binding CollectName}" />
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </SfList:SfListView.ItemTemplate>
-                    </SfList:SfListView>
-                </Grid>-->
             </Grid>
         </Grid>
     </ContentPage.Content>

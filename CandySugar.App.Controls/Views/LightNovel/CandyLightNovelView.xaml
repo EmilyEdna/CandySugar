@@ -60,13 +60,16 @@
                 TransitionMode="Push">
                 <SfRefresh:SfPullToRefresh.PullableContent>
                     <SfList:SfListView
+                        x:Name="ListViews"
                         AutoFitMode="Height"
                         IsBusy="{Binding IsBusy}"
                         IsScrollBarVisible="False"
                         ItemsSource="{Binding LightNovelSingleCategory}"
                         LoadMoreCommand="{Binding ShowMoreCommand}"
                         LoadMoreOption="AutoOnScroll"
-                        SelectionBackgroundColor="Transparent">
+                        SelectionBackgroundColor="Transparent"
+                        TapCommand="{Binding TapedCommand}"
+                        TapCommandParameter="{Binding .}">
                         <SfList:SfListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -142,8 +145,21 @@
                                                             FontSize="12"
                                                             HorizontalOptions="Start"
                                                             HorizontalTextAlignment="Start"
+                                                            LineBreakMode="TailTruncation"
                                                             Style="{DynamicResource DescriptionLabelStyle}"
                                                             Text="{Binding Description, StringFormat='描述:{0}'}" />
+                                                        <Button
+                                                            Padding="2"
+                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                            Command="{Binding BindingContext.DetailCommand, Source={x:Reference LightNovelView}}"
+                                                            CommandParameter="{Binding .}"
+                                                            FontFamily="{DynamicResource FontAwesomeSolid}"
+                                                            FontSize="15"
+                                                            HeightRequest="30"
+                                                            HorizontalOptions="End"
+                                                            Text="{Static fontawesome:FontAwesomeIcons.Book}"
+                                                            TextColor="{DynamicResource Gray-Black}"
+                                                            WidthRequest="30" />
                                                     </StackLayout>
                                                 </Grid>
                                             </SfBorder:SfBorder>

@@ -69,6 +69,7 @@ namespace CandySugar.App
 
             #region LightNovel
             containerRegistry.RegisterForNavigation<CandyLightNovelView, CandyLightNovelViewModel>();
+            containerRegistry.RegisterForNavigation<CandyLightNovelDetailView, CandyLightNovelDetailViewModel>();
             #endregion
         }
 

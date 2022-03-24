@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
 
 namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 {
@@ -88,7 +89,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             PageIndex = 1;
             IsSearch = true;
             KeyWrod = input;
-            Search(input,true);
+            Search(input, true);
         });
 
         public ICommand RefreshsCommand => new DelegateCommand(() =>
@@ -103,7 +104,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 if (!CategoryAddress.IsNullOrEmpty())
                 {
                     PageIndex = 1;
-                    Category(CategoryAddress,true);
+                    Category(CategoryAddress, true);
                 }
             }
         });
@@ -126,6 +127,14 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             IsSearch = false;
             KeyWrod = string.Empty;
             Category(input, true);
+        });
+
+        public ICommand DetailCommand => new DelegateCommand<dynamic>(input =>
+        {
+            if (input != null)
+            {
+                Navigation(input);
+            }
         });
         #endregion
 
@@ -291,6 +300,16 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 }
             }
 
+        }
+
+        public async void Navigation(LightNovelSingleCategoryResults input)
+        {
+            var NavigationService = (INavigationService)ContainerLocator.Container.Resolve(typeof(INavigationService));
+
+            var Param = new NavigationParameters();
+            Param.Add("Route", input.DetailAddress);
+            Param.Add("BookName", input.BookName);
+            await NavigationService.NavigateAsync(new Uri("CandyLightNovelDetailView", UriKind.Relative), Param);
         }
         #endregion
     }

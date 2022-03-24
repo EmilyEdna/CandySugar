@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.LightNovel.CandyLightNovelDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    x:Name="DetailNovel"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid RowDefinitions="20,*" RowSpacing="0">
+            <ActivityIndicator IsRunning="{Binding Refresh}" Color="{DynamicResource PrimaryPink}" />
+            <SfList:SfListView
+                Grid.Row="1"
+                AutoFitMode="Height"
+                IsScrollBarVisible="False"
+                ItemsSource="{Binding LightNovelViews}"
+                SelectionBackgroundColor="Transparent">
+                <SfList:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Ctrl:ShadowFrame
+                                Margin="2,10,5,5"
+                                Padding="0"
+                                Background="{DynamicResource GrayShadowColor}"
+                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                BorderWidth="1"
+                                CornerRadius="4"
+                                HasShadow="True"
+                                HorizontalOptions="FillAndExpand"
+                                Radius="4"
+                                VerticalOptions="FillAndExpand">
+                                <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                    <SfBorder:SfBorder
+                                        BorderColor="Transparent"
+                                        BorderWidth="0"
+                                        CornerRadius="4">
+                                        <StackLayout
+                                            Grid.Column="1"
+                                            Padding="16"
+                                            HorizontalOptions="FillAndExpand"
+                                            Spacing="0"
+                                            VerticalOptions="FillAndExpand">
+                                            <Label
+                                                FontSize="12"
+                                                HorizontalOptions="Start"
+                                                HorizontalTextAlignment="Start"
+                                                Style="{DynamicResource DescriptionLabelStyle}"
+                                                Text="{Binding ChapterName}" />
+                                        </StackLayout>
+                                        <SfBorder:SfBorder.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.SelectedCommand, Source={x:Reference DetailNovel}}" CommandParameter="{Binding .}" />
+                                        </SfBorder:SfBorder.GestureRecognizers>
+                                    </SfBorder:SfBorder>
+                                </SfEffect:SfEffectsView>
+                            </Ctrl:ShadowFrame>
+                        </ViewCell>
+                    </DataTemplate>
+                </SfList:SfListView.ItemTemplate>
+            </SfList:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

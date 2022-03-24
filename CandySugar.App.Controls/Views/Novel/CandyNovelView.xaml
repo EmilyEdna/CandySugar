@@ -151,50 +151,6 @@
                                 </ViewCell>
                             </DataTemplate>
                         </SfList:SfListView.ItemTemplate>
-                        <!--<SfList:SfListView.RightSwipeTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Frame
-                                        Margin="0"
-                                        Padding="0"
-                                        BorderColor="{DynamicResource PrimaryPink}"
-                                        CornerRadius="10">
-                                        <Label
-                                            FontSize="12"
-                                            HorizontalOptions="Center"
-                                            Text="搜作者"
-                                            TextColor="{DynamicResource PrimaryLightColor}"
-                                            VerticalOptions="Center">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.SearchCommand, Source={x:Reference NovelView}}" CommandParameter="{Binding SelectedItem, Source={x:Reference ListViews}}" />
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </Frame>
-                                    <Grid Grid.Row="1">
-                                        <Frame
-                                            Margin="0"
-                                            Padding="0"
-                                            BorderColor="{DynamicResource PrimaryPink}"
-                                            CornerRadius="10">
-                                            <Label
-                                                FontSize="12"
-                                                HorizontalOptions="Center"
-                                                Text="详情"
-                                                TextColor="{DynamicResource PrimaryLightColor}"
-                                                VerticalOptions="Center">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference NovelView}}" CommandParameter="{Binding SelectedItem, Source={x:Reference ListViews}}" />
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </Frame>
-                                    </Grid>
-                                </Grid>
-                            </DataTemplate>
-                        </SfList:SfListView.RightSwipeTemplate>-->
                     </SfList:SfListView>
                 </SfRefresh:SfPullToRefresh.PullableContent>
             </SfRefresh:SfPullToRefresh>

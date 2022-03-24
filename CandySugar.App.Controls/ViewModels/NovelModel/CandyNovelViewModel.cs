@@ -14,6 +14,7 @@ using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
@@ -277,7 +278,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
 
                 NovelSearchResult? inputKey = (input as NovelSearchResult);
 
-                var NavigationService = (INavigationService)Prism.Ioc.ContainerLocator.Container.Resolve(typeof(INavigationService));
+                var NavigationService = (INavigationService)ContainerLocator.Container.Resolve(typeof(INavigationService));
 
                 var Param = new NavigationParameters();
                 Param.Add(nameof(NovelSearchResult), inputKey);
