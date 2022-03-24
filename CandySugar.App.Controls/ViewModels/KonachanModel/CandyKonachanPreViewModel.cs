@@ -3,6 +3,9 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Prism.Ioc;
+using Plugin.DeviceOrientation;
+using Plugin.DeviceOrientation.Abstractions;
 
 namespace CandySugar.App.Controls.ViewModels.KonachanModel
 {
@@ -21,6 +24,8 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         public override void Initialize(INavigationParameters parameters)
         {
             Route = parameters.GetValue<string>("Route");
+            ContainerLocator.Container.Resolve<IAndroidPlatform>().Transparent();
+            CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Landscape);
         }
     }
 }

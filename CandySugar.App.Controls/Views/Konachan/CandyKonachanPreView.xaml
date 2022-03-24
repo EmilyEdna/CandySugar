@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
-    Appearing="Appearinged"
     Disappearing="DisAppearinged"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -15,7 +14,6 @@
                 Aspect="Fill"
                 CacheDuration="0:3:0"
                 CacheType="Disk"
-                IsLoading="True"
                 LoadingDelay="1000" />
         </StackLayout>
     </ContentPage.Content>

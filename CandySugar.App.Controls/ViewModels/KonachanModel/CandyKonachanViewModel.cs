@@ -382,8 +382,9 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
 
         public async void Navigation(WallpaperResultDetail input) 
         {
+            var data = !input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg;
             var Param = new NavigationParameters();
-            Param.Add("Route", !input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg);
+            Param.Add("Route", data);
             await NavigationService.NavigateAsync(new Uri(nameof(CandyKonachanPreView), UriKind.Relative), Param);
         }
         #endregion

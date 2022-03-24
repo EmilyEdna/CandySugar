@@ -16,22 +16,14 @@ namespace CandySugar.App.Controls.Views.Konachan
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CandyKonachanPreView : ContentPage
     {
-        private readonly IAndroidPlatform platform;
         public CandyKonachanPreView()
         {
             InitializeComponent();
-            platform = ContainerLocator.Container.Resolve<IAndroidPlatform>();
-        }
-
-        private void Appearinged(object sender, EventArgs e)
-        {
-            platform.Transparent();
-            CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Landscape);
         }
 
         private void DisAppearinged(object sender, EventArgs e)
         {
-            platform.ClearTransparent();
+            ContainerLocator.Container.Resolve<IAndroidPlatform>().ClearTransparent();
             CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Portrait);
         }
     }
