@@ -21,6 +21,7 @@ using System.Linq;
 using CandySugar.Xam.Common.Platform;
 using System.IO;
 using XExten.Advance.StaticFramework;
+using CandySugar.App.Controls.Views.Konachan;
 
 namespace CandySugar.App.Controls.ViewModels.KonachanModel
 {
@@ -111,6 +112,10 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         {
             if (input != null)
                 Down(input);
+        });
+        public ICommand WatchCommand => new DelegateCommand<dynamic>((input) => {
+            if (input != null)
+                Navigation(input);
         });
 
 
@@ -350,7 +355,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
 
                 var FileName = (!input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg).Split("/").LastOrDefault();
 
-                var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DirPath();
+                var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
 
                 AuthorizeHelper.Instance.ApplyPermission(async () =>
                 {
@@ -373,6 +378,14 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     await Task.Delay(3000);
                 }
             }
+        }
+
+        public async void Navigation(WallpaperResultDetail input) 
+        {
+            var NavigationService = ContainerLocator.Container.Resolve<INavigationService>();
+            var Param = new NavigationParameters();
+            Param.Add("Route", !input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg);
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyKonachanPreView), UriKind.Relative), Param);
         }
         #endregion
     }

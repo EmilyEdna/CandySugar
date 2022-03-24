@@ -16,6 +16,7 @@ using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
+using CandySugar.App.Controls.Views.LightNovel;
 
 namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 {
@@ -304,12 +305,12 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 
         public async void Navigation(LightNovelSingleCategoryResults input)
         {
-            var NavigationService = (INavigationService)ContainerLocator.Container.Resolve(typeof(INavigationService));
+            var NavigationService = ContainerLocator.Container.Resolve<INavigationService>();
 
             var Param = new NavigationParameters();
             Param.Add("Route", input.DetailAddress);
             Param.Add("BookName", input.BookName);
-            await NavigationService.NavigateAsync(new Uri("CandyLightNovelDetailView", UriKind.Relative), Param);
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyLightNovelDetailView), UriKind.Relative), Param);
         }
         #endregion
     }

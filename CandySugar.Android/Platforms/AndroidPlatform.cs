@@ -20,9 +20,20 @@ namespace CandySugar.Droid.Platforms
         {
             Current.Window.ClearFlags(WindowManagerFlags.Fullscreen);
         }
-        public string DirPath()
+
+        public void Transparent()
         {
-            return Env.GetExternalStoragePublicDirectory(Env.DirectoryPictures).AbsoluteFile + "";
+            Current.Window.AddFlags(WindowManagerFlags.TranslucentNavigation | WindowManagerFlags.TranslucentStatus);
+        }
+
+        public void ClearTransparent()
+        {
+            Current.Window.ClearFlags(WindowManagerFlags.TranslucentNavigation | WindowManagerFlags.TranslucentStatus);
+        }
+
+        public string DownPath()
+        {
+            return Env.GetExternalStoragePublicDirectory(Env.DirectoryDownloads).AbsoluteFile + "";
         }
     }
 }

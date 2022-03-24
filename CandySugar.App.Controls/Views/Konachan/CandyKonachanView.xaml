@@ -88,6 +88,7 @@
                                                                         CacheType="Disk"
                                                                         DownsampleUseDipUnits="True"
                                                                         HeightRequest="120"
+                                                                        LoadingDelay="1000"
                                                                         WidthRequest="120" />
                                                                     <StackLayout
                                                                         Grid.Column="1"
@@ -151,6 +152,17 @@
                                                                             </Local:ItemsControl>
                                                                         </StackLayout>
                                                                         <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                            <Button
+                                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                                Command="{Binding BindingContext.WatchCommand, Source={x:Reference KonachanView}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                                FontSize="15"
+                                                                                HeightRequest="35"
+                                                                                HorizontalOptions="End"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.Eye}"
+                                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                                WidthRequest="42" />
                                                                             <Button
                                                                                 BackgroundColor="{DynamicResource GrayShadowColor}"
                                                                                 Command="{Binding BindingContext.InsertCommand, Source={x:Reference KonachanView}}"
@@ -287,6 +299,17 @@
                                                                             </Local:ItemsControl>
                                                                         </StackLayout>
                                                                         <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                            <Button
+                                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                                Command="{Binding BindingContext.WatchCommand, Source={x:Reference KonachanView}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                                FontSize="15"
+                                                                                HeightRequest="35"
+                                                                                HorizontalOptions="End"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.Eye}"
+                                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                                WidthRequest="42" />
                                                                             <Button
                                                                                 BackgroundColor="{DynamicResource GrayShadowColor}"
                                                                                 Command="{Binding BindingContext.RemoveCommand, Source={x:Reference KonachanView}}"

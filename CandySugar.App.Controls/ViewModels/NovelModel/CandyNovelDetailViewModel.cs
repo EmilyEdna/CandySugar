@@ -1,4 +1,5 @@
-﻿using CandySugar.Xam.Common;
+﻿using CandySugar.App.Controls.Views.Novel;
+using CandySugar.Xam.Common;
 using Novel.SDK;
 using Novel.SDK.ViewModel;
 using Novel.SDK.ViewModel.Enums;
@@ -147,7 +148,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             NavigationParameters param = new NavigationParameters();
             param.Add("ChapterURL", input.ChapterURL);
             param.Add("BookName", BookName);
-            await NavigationService.NavigateAsync(new Uri("CandyNovelContentView", UriKind.Relative), param);
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyNovelContentView), UriKind.Relative), param);
         });
         #endregion
 

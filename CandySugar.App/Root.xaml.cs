@@ -65,6 +65,7 @@ namespace CandySugar.App
 
             #region Konachan
             containerRegistry.RegisterForNavigation<CandyKonachanView, CandyKonachanViewModel>();
+            containerRegistry.RegisterForNavigation<CandyKonachanPreView, CandyKonachanPreViewModel>();
             #endregion
 
             #region LightNovel

@@ -21,6 +21,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
 using XExten.Advance.InternalFramework.Securities.Common;
+using CandySugar.App.Controls.Views.LightNovel;
 
 namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 {
@@ -160,7 +161,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                         };
                     }).RunsAsync();
 
-                    var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DirPath();
+                    var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
 
                     AuthorizeHelper.Instance.ApplyPermission(async () =>
                     {
@@ -241,7 +242,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                         };
                     }).RunsAsync();
 
-                    var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DirPath();
+                    var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
 
                     AuthorizeHelper.Instance.ApplyPermission(async () =>
                     {
@@ -266,21 +267,21 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 
         public async void Navigation(LightNovelContentResult input,string name)
         {
-            var NavigationService = (INavigationService)ContainerLocator.Container.Resolve(typeof(INavigationService));
+            var NavigationService = ContainerLocator.Container.Resolve<INavigationService>();
 
             if (input.Image == null)
             {
                 var Param = new NavigationParameters();
                 Param.Add("Content", SyncStatic.Compress(input.Content, SecurityType.Base64));
                 Param.Add("ChapterName", name);
-                await NavigationService.NavigateAsync(new Uri("CandyLightNovelContentView", UriKind.Relative), Param);
+                await NavigationService.NavigateAsync(new Uri(nameof(CandyLightNovelContentView), UriKind.Relative), Param);
             }
             else
             {
                 var Param = new NavigationParameters();
                 Param.Add("Image", input.Image);
                 Param.Add("ChapterName", name);
-                await NavigationService.NavigateAsync(new Uri("CandyLightNovelImageView", UriKind.Relative), Param);
+                await NavigationService.NavigateAsync(new Uri(nameof(CandyLightNovelImageView), UriKind.Relative), Param);
             }
         }
         #endregion

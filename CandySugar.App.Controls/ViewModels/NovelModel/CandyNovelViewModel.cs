@@ -15,6 +15,7 @@ using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
+using CandySugar.App.Controls.Views.Novel;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
@@ -278,11 +279,11 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
 
                 NovelSearchResult? inputKey = (input as NovelSearchResult);
 
-                var NavigationService = (INavigationService)ContainerLocator.Container.Resolve(typeof(INavigationService));
+                var NavigationService = ContainerLocator.Container.Resolve<INavigationService>();
 
                 var Param = new NavigationParameters();
                 Param.Add(nameof(NovelSearchResult), inputKey);
-                await NavigationService.NavigateAsync(new Uri("CandyNovelDetailView", UriKind.Relative), Param);
+                await NavigationService.NavigateAsync(new Uri(nameof(CandyNovelDetailView), UriKind.Relative), Param);
 
             }
             catch (Exception ex)

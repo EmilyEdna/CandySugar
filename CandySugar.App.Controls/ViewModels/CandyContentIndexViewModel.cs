@@ -1,4 +1,6 @@
-﻿using CandySugar.Xam.Common.DTO;
+﻿using CandySugar.App.Controls.Views.Anime;
+using CandySugar.App.Controls.Views.Novel;
+using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Common.Entity.Model;
 using CandySugar.Xam.Core.Service;
 using Prism.Commands;
@@ -49,7 +51,7 @@ namespace CandySugar.App.Controls.ViewModels
             NavigationParameters param = new NavigationParameters();
             param.Add("ChapterURL", input.ChapeterAddress);
             param.Add("BookName", input.BookName);
-            await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri("CandyNovelContentView", UriKind.Relative), param);
+            await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyNovelContentView), UriKind.Relative), param);
         });
 
         public ICommand XSDeleteCommand => new DelegateCommand<XSLiShiDto>(async input =>
@@ -68,7 +70,7 @@ namespace CandySugar.App.Controls.ViewModels
 
             NavigationParameters param = new NavigationParameters();
             param.Add("WatchAddress", input.PlayURL);
-            await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri("CandyAnimePlayView", UriKind.Relative), param);
+            await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyAnimePlayView), UriKind.Relative), param);
         });
 
         public ICommand DMDeleteCommand => new DelegateCommand<DMLiShiDto>(async input =>

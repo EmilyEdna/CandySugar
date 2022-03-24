@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Konachan.CandyKonachanPreView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
+    Appearing="Appearinged"
+    Disappearing="DisAppearinged"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <FFImg:CachedImage
+                dp:ImageSourceBindableProperty.SuperSource="{Binding Route}"
+                Aspect="Fill"
+                CacheDuration="0:3:0"
+                CacheType="Disk"
+                IsLoading="True"
+                LoadingDelay="1000" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
