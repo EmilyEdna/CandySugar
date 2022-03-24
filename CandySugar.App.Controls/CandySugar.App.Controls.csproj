@@ -6,7 +6,6 @@
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
-		<PackageReference Include="ExpandableView" Version="1.0.10" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
 		<PackageReference Include="Plugin.DeviceOrientation" Version="1.0.7" />
 		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
@@ -58,6 +57,9 @@
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Konachan\CandyKonachanView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Views\LightNovel\CandyLightNovelView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Novel\CandyNovelContentView.xaml">

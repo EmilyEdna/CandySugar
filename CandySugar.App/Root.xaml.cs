@@ -1,10 +1,12 @@
 using CandySugar.App.Controls.ViewModels;
 using CandySugar.App.Controls.ViewModels.AnimeModel;
 using CandySugar.App.Controls.ViewModels.KonachanModel;
+using CandySugar.App.Controls.ViewModels.LightNovelModel;
 using CandySugar.App.Controls.ViewModels.NovelModel;
 using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Konachan;
+using CandySugar.App.Controls.Views.LightNovel;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
@@ -63,6 +65,10 @@ namespace CandySugar.App
 
             #region Konachan
             containerRegistry.RegisterForNavigation<CandyKonachanView, CandyKonachanViewModel>();
+            #endregion
+
+            #region LightNovel
+            containerRegistry.RegisterForNavigation<CandyLightNovelView, CandyLightNovelViewModel>();
             #endregion
         }
 

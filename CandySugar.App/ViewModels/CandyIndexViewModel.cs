@@ -2,6 +2,7 @@
 using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Konachan;
+using CandySugar.App.Controls.Views.LightNovel;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Common.Enum;
@@ -46,6 +47,7 @@ namespace CandySugar.App.ViewModels
                     break;
                 case MenuFuncEunm.LightNovel:
                     base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyLightNovelView));
                     break;
                 case MenuFuncEunm.Anime:
                     base.Title = input.CommandParam.ToDes();

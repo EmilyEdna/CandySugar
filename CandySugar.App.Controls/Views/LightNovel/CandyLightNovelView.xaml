@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.LightNovel.CandyLightNovelView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:Local="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    x:Name="LightNovelView"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="25" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <SearchBar
+                BackgroundColor="{DynamicResource PrimaryPink}"
+                Placeholder="请输入小说名称"
+                PlaceholderColor="{DynamicResource GrayShadowColor}"
+                SearchCommand="{Binding SearchCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
+            <Local:ItemsControl Grid.Row="1" ItemsSource="{Binding LightNovelCategory}">
+                <Local:ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <XFMaterial:MaterialButton
+                            Command="{Binding BindingContext.ItemCommand, Source={x:Reference LightNovelView}}"
+                            CommandParameter="{Binding CategoryAddress}"
+                            Style="{DynamicResource LabelBtnNovel}"
+                            Text="{Binding CategoryName}"
+                            TextColor="{DynamicResource PrimaryPink}" />
+                    </DataTemplate>
+                </Local:ItemsControl.ItemTemplate>
+                <Local:ItemsControl.ItemsLayout>
+                    <DataTemplate>
+                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                            <Local:WrapLayout
+                                Local:LayoutEx.IsItemsHost="True"
+                                IsSquare="True"
+                                Spacing="10" />
+                        </ScrollView>
+                    </DataTemplate>
+                </Local:ItemsControl.ItemsLayout>
+            </Local:ItemsControl>
+            <SfRefresh:SfPullToRefresh
+                Grid.Row="2"
+                IsRefreshing="{Binding Refresh}"
+                ProgressBackgroundColor="Transparent"
+                ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                RefreshCommand="{Binding RefreshsCommand}"
+                RefreshContentHeight="50"
+                RefreshContentWidth="50"
+                TransitionMode="Push">
+                <SfRefresh:SfPullToRefresh.PullableContent>
+                    <SfList:SfListView
+                        AutoFitMode="Height"
+                        IsBusy="{Binding IsBusy}"
+                        IsScrollBarVisible="False"
+                        ItemsSource="{Binding LightNovelSingleCategory}"
+                        LoadMoreCommand="{Binding ShowMoreCommand}"
+                        LoadMoreOption="AutoOnScroll"
+                        SelectionBackgroundColor="Transparent">
+                        <SfList:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Ctrl:ShadowFrame
+                                        Margin="2,10,5,5"
+                                        Padding="0"
+                                        Background="{DynamicResource GrayShadowColor}"
+                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                        BorderWidth="1"
+                                        CornerRadius="4"
+                                        HasShadow="True"
+                                        HorizontalOptions="FillAndExpand"
+                                        Radius="4"
+                                        VerticalOptions="FillAndExpand">
+                                        <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                            <SfBorder:SfBorder
+                                                BorderColor="Transparent"
+                                                BorderWidth="0"
+                                                CornerRadius="4">
+                                                <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
+                                                    <FFImg:CachedImage
+                                                        Aspect="AspectFill"
+                                                        BackgroundColor="{DynamicResource Gray-200}"
+                                                        CacheDuration="0:3:0"
+                                                        CacheType="Disk"
+                                                        DownsampleUseDipUnits="True"
+                                                        HeightRequest="120"
+                                                        Source="{Binding Cover}"
+                                                        WidthRequest="120" />
+                                                    <StackLayout
+                                                        Grid.Column="1"
+                                                        Padding="16"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Spacing="0"
+                                                        VerticalOptions="FillAndExpand">
+                                                        <Label
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            LineBreakMode="CharacterWrap"
+                                                            Style="{DynamicResource TitleLabelStyle}"
+                                                            Text="{Binding BookName, StringFormat='书名:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Author, StringFormat='作者:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Date, StringFormat='更新:{0:yyyy-MM-dd}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Press, StringFormat='出版:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Status, StringFormat='状态:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Category, StringFormat='分类:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Description, StringFormat='描述:{0}'}" />
+                                                    </StackLayout>
+                                                </Grid>
+                                            </SfBorder:SfBorder>
+                                        </SfEffect:SfEffectsView>
+                                    </Ctrl:ShadowFrame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </SfList:SfListView.ItemTemplate>
+                    </SfList:SfListView>
+                </SfRefresh:SfPullToRefresh.PullableContent>
+            </SfRefresh:SfPullToRefresh>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
