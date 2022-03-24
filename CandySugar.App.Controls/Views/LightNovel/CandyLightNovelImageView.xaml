@@ -2,13 +2,28 @@
 <ContentPage
     x:Class="CandySugar.App.Controls.Views.LightNovel.CandyLightNovelImageView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:SFList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        <SFList:SfListView
+            AutoFitMode="Height"
+            BackgroundColor="Transparent"
+            IsScrollBarVisible="False"
+            ItemsSource="{Binding Image}"
+            SelectionBackgroundColor="Transparent">
+            <SFList:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <FFImg:CachedImage
+                            Aspect="Fill"
+                            CacheDuration="0:3:0"
+                            CacheType="Disk"
+                            Source="{Binding .}" />
+                    </ViewCell>
+                </DataTemplate>
+            </SFList:SfListView.ItemTemplate>
+        </SFList:SfListView>
     </ContentPage.Content>
 </ContentPage>
