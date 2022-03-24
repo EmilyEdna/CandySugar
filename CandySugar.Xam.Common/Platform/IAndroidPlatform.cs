@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CandySugar.Xam.Common.Platform
 {
@@ -8,5 +9,6 @@ namespace CandySugar.Xam.Common.Platform
     {
         void HiddenStatusBar();
         void ShowStatusBar();
+        string DirPath();
     }
 }

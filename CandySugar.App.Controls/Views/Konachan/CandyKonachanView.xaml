@@ -150,17 +150,30 @@
                                                                                 </Local:ItemsControl.ItemsLayout>
                                                                             </Local:ItemsControl>
                                                                         </StackLayout>
-                                                                        <Button
-                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                                            Command="{Binding BindingContext.InsertCommand, Source={x:Reference KonachanView}}"
-                                                                            CommandParameter="{Binding .}"
-                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
-                                                                            FontSize="15"
-                                                                            HeightRequest="35"
-                                                                            HorizontalOptions="End"
-                                                                            Text="{Static fontawesome:FontAwesomeIcons.Star}"
-                                                                            TextColor="{DynamicResource Gray-Black}"
-                                                                            WidthRequest="40" />
+                                                                        <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                            <Button
+                                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                                Command="{Binding BindingContext.InsertCommand, Source={x:Reference KonachanView}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                                FontSize="15"
+                                                                                HeightRequest="35"
+                                                                                HorizontalOptions="End"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.Star}"
+                                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                                WidthRequest="40" />
+                                                                            <Button
+                                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                                Command="{Binding BindingContext.DownCommand, Source={x:Reference KonachanView}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                FontFamily="{DynamicResource FontAwesomeSolid}"
+                                                                                FontSize="15"
+                                                                                HeightRequest="35"
+                                                                                HorizontalOptions="End"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.CloudDownloadAlt}"
+                                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                                WidthRequest="45" />
+                                                                        </FlexLayout>
                                                                     </StackLayout>
                                                                 </Grid>
                                                             </SfBorder:SfBorder>
@@ -273,17 +286,30 @@
                                                                                 </Local:ItemsControl.ItemsLayout>
                                                                             </Local:ItemsControl>
                                                                         </StackLayout>
-                                                                        <Button
-                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                                            Command="{Binding BindingContext.RemoveCommand, Source={x:Reference KonachanView}}"
-                                                                            CommandParameter="{Binding .}"
-                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
-                                                                            FontSize="15"
-                                                                            HeightRequest="35"
-                                                                            HorizontalOptions="End"
-                                                                            Text="{Static fontawesome:FontAwesomeIcons.TrashAlt}"
-                                                                            TextColor="{DynamicResource Gray-Black}"
-                                                                            WidthRequest="40" />
+                                                                        <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                            <Button
+                                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                                Command="{Binding BindingContext.RemoveCommand, Source={x:Reference KonachanView}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                                FontSize="15"
+                                                                                HeightRequest="35"
+                                                                                HorizontalOptions="End"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                                WidthRequest="40" />
+                                                                            <Button
+                                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                                Command="{Binding BindingContext.DownCommand, Source={x:Reference KonachanView}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                FontFamily="{DynamicResource FontAwesomeSolid}"
+                                                                                FontSize="15"
+                                                                                HeightRequest="35"
+                                                                                HorizontalOptions="End"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.CloudDownloadAlt}"
+                                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                                WidthRequest="45" />
+                                                                        </FlexLayout>
                                                                     </StackLayout>
                                                                 </Grid>
                                                             </SfBorder:SfBorder>

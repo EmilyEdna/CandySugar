@@ -12,6 +12,7 @@ using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.Platform;
 using FFImageLoading.Forms.Platform;
 using Plugin.CurrentActivity;
+using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace CandySugar.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)

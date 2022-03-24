@@ -1,15 +1,11 @@
 ﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
 using CandySugar.Xam.Common.Platform;
 using Plugin.CurrentActivity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Env = Android.OS.Environment;
+using System.Threading.Tasks;
+using XExten.Advance.StaticFramework;
+using System.IO;
 
 namespace CandySugar.Droid.Platforms
 {
@@ -20,8 +16,13 @@ namespace CandySugar.Droid.Platforms
         {
             Current.Window.AddFlags(WindowManagerFlags.Fullscreen);
         }
-        public void ShowStatusBar() {
+        public void ShowStatusBar()
+        {
             Current.Window.ClearFlags(WindowManagerFlags.Fullscreen);
+        }
+        public string DirPath()
+        {
+            return Env.GetExternalStoragePublicDirectory(Env.DirectoryPictures).AbsoluteFile + "";
         }
     }
 }

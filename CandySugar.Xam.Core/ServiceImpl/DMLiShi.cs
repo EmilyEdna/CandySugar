@@ -41,7 +41,7 @@ namespace CandySugar.Xam.Core.ServiceImpl
 
         public async Task<bool> Remove(DM_LiShi input)
         {
-            return await SqliteDbContext.Instance.SqlDb.Table<XS_LiShi>().DeleteAsync(t => t.PId == input.PId) > 0;
+            return await SqliteDbContext.Instance.SqlDb.Table<DM_LiShi>().DeleteAsync(t => t.PId == input.PId) > 0;
         }
 
         public async Task Update(DM_LiShi input)

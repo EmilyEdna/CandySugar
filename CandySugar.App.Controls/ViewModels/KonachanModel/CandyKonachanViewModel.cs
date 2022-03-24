@@ -17,6 +17,10 @@ using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
 using CandySugar.Xam.Common.DTO;
+using System.Linq;
+using CandySugar.Xam.Common.Platform;
+using System.IO;
+using XExten.Advance.StaticFramework;
 
 namespace CandySugar.App.Controls.ViewModels.KonachanModel
 {
@@ -103,6 +107,12 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 Query();
             Tab = input;
         });
+        public ICommand DownCommand => new DelegateCommand<dynamic>((input) =>
+        {
+            if (input != null)
+                Down(input);
+        });
+
 
         public ICommand RefreshsMainCommand => new DelegateCommand(() =>
         {
@@ -120,7 +130,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 PageIndex = 1;
                 SearchBaisc();
             }
-            else 
+            else
                 Query();
         });
         public ICommand ShowMoreMainCommand => new DelegateCommand(() =>
@@ -228,7 +238,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             try
             {
                 if (IsLoadMore) IsBusy = true; else Refresh = true;
-                var WallpaperSearch = await WallpaperFactory.Wallpaper(async opt =>
+                var WallpaperSearch = await WallpaperFactory.Wallpaper(opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
                     {
@@ -319,6 +329,50 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         public async void Remove(WallpaperResultDetail input)
         {
             await Candy.Remove(input.ToMapest<BZLiShiDto>());
+        }
+        public async Task Down(WallpaperResultDetail input)
+        {
+            try
+            {
+                var WallpaperDown = await WallpaperFactory.Wallpaper(opt =>
+                {
+                    opt.RequestParam = new WallpaperRequestInput
+                    {
+                        WallpaperType = WallpaperEnum.Downloads,
+                        CacheSpan = Soft.CacheTime,
+                        Download = new WallpaperDownload()
+                        {
+                            Route = !input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg
+                        },
+                        Proxy = this.Proxy
+                    };
+                }).RunsAsync();
+
+                var FileName = (!input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg).Split("/").LastOrDefault();
+
+                var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DirPath();
+
+                AuthorizeHelper.Instance.ApplyPermission(async () =>
+                {
+                    var dir = SyncStatic.CreateDir(Path.Combine(route, "CandyDown", "Wallpaper"));
+                    var fn = SyncStatic.CreateFile(Path.Combine(dir, FileName));
+                    var ok = SyncStatic.WriteFile(WallpaperDown.DownloadResult.Bytes, fn);
+                    if (!ok.IsNullOrEmpty())
+                    {
+                        using (await MaterialDialog.Instance.LoadingSnackbarAsync("下载完成"))
+                        {
+                            await Task.Delay(1000);
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                {
+                    await Task.Delay(3000);
+                }
+            }
         }
         #endregion
     }
