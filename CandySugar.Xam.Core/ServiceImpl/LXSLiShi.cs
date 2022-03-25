@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using XExten.Advance.LinqFramework;
+using System.Linq;
+using XExten.Advance.StaticFramework;
+using XExten.Advance.InternalFramework.Securities.Common;
 
 namespace CandySugar.Xam.Core.ServiceImpl
 {
@@ -50,7 +53,19 @@ namespace CandySugar.Xam.Core.ServiceImpl
         public async Task<List<CandyLXSLiShiDto>> Query()
         {
             var data = await SqliteDbContext.Instance.SqlDb.Table<Candy_LXS_LiShi>().OrderByDescending(t => t.Span).ToListAsync();
-            return data.ToMapest<List<CandyLXSLiShiDto>>();
+
+          return  data.Select(t => new CandyLXSLiShiDto
+            {
+                Cover = t.Cover,
+                ChapeterAddress = t.ChapeterAddress,
+                BookName = t.BookName,
+                ChapterName = t.ChapterName,
+                Content = SyncStatic.Decompress(t.Content, SecurityType.Base64),
+                Image = t.Image,
+                IsBook = t.IsBook,
+                PId = t.PId,
+                Span = t.Span,
+            }).ToList();
         }
 
         public async Task<bool> Remove(CandyLXSLiShiDto input)

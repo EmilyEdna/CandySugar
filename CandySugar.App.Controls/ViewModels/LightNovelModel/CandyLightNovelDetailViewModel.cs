@@ -283,7 +283,6 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             return true;
         }
-
         public async void Navigation(LightNovelContentResult input, string name)
         {
 
