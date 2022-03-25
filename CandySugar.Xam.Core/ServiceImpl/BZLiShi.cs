@@ -13,12 +13,12 @@ namespace CandySugar.Xam.Core.ServiceImpl
     public class BZLiShi : IBZLiShi
     {
 
-        public async Task Insert(BZLiShiDto input)
+        public async Task Insert(CandyBZLiShiDto input)
         {
             var db = SqliteDbContext.Instance.SqlDb;
-            var entity = input.ToMapest<BZ_LiShi>();
+            var entity = input.ToMapest<Candy_BZ_LiShi>();
             entity.Label = string.Join("|", input.Labels);
-            var entityCheck = await db.Table<BZ_LiShi>().Where(t => t.Id == input.Id).FirstOrDefaultAsync();
+            var entityCheck = await db.Table<Candy_BZ_LiShi>().Where(t => t.Id == input.Id).FirstOrDefaultAsync();
             if (entityCheck == null)
             {
                 entity.InitProperty();
@@ -27,21 +27,21 @@ namespace CandySugar.Xam.Core.ServiceImpl
             }
         }
 
-        public async Task<(List<BZLiShiDto>, int)> Query(string KeyWord, int PageIndex, int PageSize)
+        public async Task<(List<CandyBZLiShiDto>, int)> Query(string KeyWord, int PageIndex, int PageSize)
         {
             var db = SqliteDbContext.Instance.SqlDb;
-            var query = db.Table<BZ_LiShi>();
+            var query = db.Table<Candy_BZ_LiShi>();
             if (!KeyWord.IsNullOrEmpty())
                 query = query.Where(t => t.Label.Contains(KeyWord));
             var Count = await query.CountAsync();
             var Result = await query.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
-            return (Result.ToMapest<List<BZLiShiDto>>(), Count);
+            return (Result.ToMapest<List<CandyBZLiShiDto>>(), Count);
         }
 
-        public async Task Remove(BZLiShiDto input)
+        public async Task Remove(CandyBZLiShiDto input)
         {
             var db = SqliteDbContext.Instance.SqlDb;
-            await db.Table<BZ_LiShi>().DeleteAsync(t => t.Id == input.Id);
+            await db.Table<Candy_BZ_LiShi>().DeleteAsync(t => t.Id == input.Id);
             await db.CloseAsync();
         }
     }

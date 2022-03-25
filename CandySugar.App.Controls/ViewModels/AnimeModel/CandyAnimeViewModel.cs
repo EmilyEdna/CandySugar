@@ -362,13 +362,13 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     };
                 }).RunsAsync();
 
-                await Candy.InsertOrUpdate(new DMLiShiDto
+                await Candy.InsertOrUpdate(new CandyDMLiShiDto
                 {
                     AnimeName = input.AnimeName,
                     CollectionName = input.CollectName,
                     Cover = input.Cover,
                     PlayURL = AnimeWath.PlayResult.PlayURL
-                }.ToMapest<DM_LiShi>());
+                });
 
                 NavigationParameters param = new NavigationParameters();
                 param.Add("WatchAddress", AnimeWath.PlayResult.PlayURL);

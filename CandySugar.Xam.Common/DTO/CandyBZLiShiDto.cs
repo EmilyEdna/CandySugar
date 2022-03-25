@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CandySugar.Xam.Common.DTO
 {
-    public class BZLiShiDto
+    public class CandyBZLiShiDto
     {
         public Guid PId { get; set; }
         public long Span { get; set; }

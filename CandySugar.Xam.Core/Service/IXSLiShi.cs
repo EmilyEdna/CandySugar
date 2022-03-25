@@ -1,4 +1,5 @@
-﻿using CandySugar.Xam.Common.Entity.Model;
+﻿using CandySugar.Xam.Common.DTO;
+using CandySugar.Xam.Common.Entity.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,16 +9,16 @@ namespace CandySugar.Xam.Core.Service
 {
     public interface IXSLiShi
     {
-        Task Insert(XS_LiShi input);
+        Task Insert(CandyXSLiShiDto input);
 
-        Task Update(XS_LiShi input);
+        Task Update(CandyXSLiShiDto input);
 
-        Task InsertOrUpdate(XS_LiShi input);
+        Task InsertOrUpdate(CandyXSLiShiDto input);
 
-        Task<bool> CheckFirst(XS_LiShi input);
+        Task<bool> CheckFirst(CandyXSLiShiDto input);
 
-        Task<List<XS_LiShi>> Query();
+        Task<List<CandyXSLiShiDto>> Query();
 
-        Task<bool> Remove(XS_LiShi input);
+        Task<bool> Remove(CandyXSLiShiDto input);
     }
 }

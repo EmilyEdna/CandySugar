@@ -3,23 +3,25 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using AndroidX.Lifecycle;
+using Android.Widget;
 using CandySugar.App;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
 using CandySugar.Droid.Platforms;
 using CandySugar.Xam.Common;
-using CandySugar.Xam.Common.Platform;
 using FFImageLoading.Forms.Platform;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
-using Prism;
-using Prism.Ioc;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms.Platform.Android;
 using XF.Material.Droid;
 using Forms = Xamarin.Forms.Forms;
 using Platform = Xamarin.Essentials.Platform;
+using Prism.Ioc;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.Droid
 {
@@ -34,7 +36,7 @@ namespace CandySugar.Droid
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-    
+
             CrossCurrentActivity.Current.Activity = this;
 
             base.OnCreate(savedInstanceState);
@@ -50,7 +52,38 @@ namespace CandySugar.Droid
             //屏幕的宽高
             Soft.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
             Soft.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
+
+            AndroidEnvironment.UnhandledExceptionRaiser += AndroidException;
         }
+
+        /// <summary>
+        /// 全局异常
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AndroidException(object sender, RaiseThrowableEventArgs e)
+        {
+            ContainerLocator.Container.Resolve<ILoger>().Insert(new CandyGlobalLogDto
+            {
+                ErrorMsg = e.Exception.Message,
+                ErrorStack = e.Exception.StackTrace
+            });
+
+            //提示
+            Task.Run(() =>
+            {
+                Looper.Prepare();
+                //可以换成更友好的提示
+                Toast.MakeText(this, "很抱歉,程序出现异常,即将退出.", ToastLength.Long).Show();
+                Looper.Loop();
+            });
+
+            //停一会，让前面的操作做完
+            Thread.Sleep(2000);
+
+            e.Handled = true;
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -70,14 +103,6 @@ namespace CandySugar.Droid
             }
 
             return base.OnKeyDown(keyCode, e);
-        }
-    }
-
-    public class AndroidInitializer : IPlatformInitializer
-    {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.Register<IAndroidPlatform, AndroidPlatform>();
         }
     }
 }

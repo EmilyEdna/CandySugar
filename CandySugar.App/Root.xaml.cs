@@ -49,6 +49,7 @@ namespace CandySugar.App
             containerRegistry.Register<IXSLiShi, XSLiShi>();
             containerRegistry.Register<IDMLiShi, DMLiShi>();
             containerRegistry.Register<IBZLiShi, BZLiShi>();
+            containerRegistry.Register<ILoger, Loger>();
             #endregion
 
             #region Anime

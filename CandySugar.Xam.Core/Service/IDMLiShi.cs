@@ -1,4 +1,5 @@
-﻿using CandySugar.Xam.Common.Entity.Model;
+﻿using CandySugar.Xam.Common.DTO;
+using CandySugar.Xam.Common.Entity.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,17 +9,17 @@ namespace CandySugar.Xam.Core.Service
 {
     public interface IDMLiShi
     {
-        Task Insert(DM_LiShi input);
+        Task Insert(CandyDMLiShiDto input);
 
-        Task Update(DM_LiShi input);
+        Task Update(CandyDMLiShiDto input);
 
-        Task InsertOrUpdate(DM_LiShi input);
+        Task InsertOrUpdate(CandyDMLiShiDto input);
 
-        Task<bool> CheckFirst(DM_LiShi input);
+        Task<bool> CheckFirst(CandyDMLiShiDto input);
 
-        Task<List<DM_LiShi>> Query();
+        Task<List<CandyDMLiShiDto>> Query();
 
-        Task<bool> Remove(DM_LiShi input);
+        Task<bool> Remove(CandyDMLiShiDto input);
 
     }
 }

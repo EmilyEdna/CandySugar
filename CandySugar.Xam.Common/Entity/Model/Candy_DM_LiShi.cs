@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CandySugar.Xam.Common.DTO
+namespace CandySugar.Xam.Common.Entity.Model
 {
-    public class DMLiShiDto
+    public class Candy_DM_LiShi: BasicEntity
     {
-        public Guid PId { get; set; }
-        public long Span { get; set; }
         public string AnimeName { get; set; }
         public string CollectionName { get; set; }
         public string PlayURL { get; set; }

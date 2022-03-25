@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Platforms\AndroidInitializer.cs" />
     <Compile Include="Platforms\AndroidPlatform.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

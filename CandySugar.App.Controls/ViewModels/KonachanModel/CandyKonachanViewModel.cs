@@ -193,7 +193,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 if (IsLoadMore) IsBusy = true; else Refresh = true;
 
                 await Task.Delay(Soft.WaitSpan);
-                var WallpaperInit = await WallpaperFactory.Wallpaper(async opt =>
+                var WallpaperInit = await WallpaperFactory.Wallpaper(opt =>
                 {
                     opt.RequestParam = new WallpaperRequestInput
                     {
@@ -303,7 +303,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         }
         public async void Insert(WallpaperResultDetail input)
         {
-            var entity = input.ToMapest<BZLiShiDto>();
+            var entity = input.ToMapest<CandyBZLiShiDto>();
             await Candy.Insert(entity);
         }
         public async void Query(int PageIndex = 1, bool IsLoadMore = false)
@@ -333,7 +333,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         }
         public async void Remove(WallpaperResultDetail input)
         {
-            await Candy.Remove(input.ToMapest<BZLiShiDto>());
+            await Candy.Remove(input.ToMapest<CandyBZLiShiDto>());
         }
         public async Task Down(WallpaperResultDetail input)
         {

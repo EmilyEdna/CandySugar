@@ -9,10 +9,10 @@ namespace CandySugar.Xam.Core.Service
 {
     public interface IBZLiShi
     {
-        Task Insert(BZLiShiDto input);
+        Task Insert(CandyBZLiShiDto input);
 
-        Task<(List<BZLiShiDto>, int)> Query(string KeyWord, int PageIndex, int PageSize);
+        Task<(List<CandyBZLiShiDto>, int)> Query(string KeyWord, int PageIndex, int PageSize);
 
-        Task Remove(BZLiShiDto input);
+        Task Remove(CandyBZLiShiDto input);
     }
 }

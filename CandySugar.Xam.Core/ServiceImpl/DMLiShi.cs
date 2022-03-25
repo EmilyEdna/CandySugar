@@ -1,32 +1,35 @@
 ﻿using CandySugar.Xam.Common;
+using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Common.Entity.Model;
 using CandySugar.Xam.Core.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using XExten.Advance.LinqFramework;
 
 namespace CandySugar.Xam.Core.ServiceImpl
 {
     public class DMLiShi : IDMLiShi
     {
-        public async Task<bool> CheckFirst(DM_LiShi input)
+        public async Task<bool> CheckFirst(CandyDMLiShiDto input)
         {
-            var State = await SqliteDbContext.Instance.SqlDb.Table<DM_LiShi>()
+            var State = await SqliteDbContext.Instance.SqlDb.Table<Candy_DM_LiShi>()
                 .Where(t => t.AnimeName.Equals(input.AnimeName))
                 .FirstOrDefaultAsync();
             return State == null;
         }
 
-        public async Task Insert(DM_LiShi input)
+        public async Task Insert(CandyDMLiShiDto input)
         {
-            input.InitProperty();
+            var entity = input.ToMapest<Candy_DM_LiShi>();
+            entity.InitProperty();
             var db = SqliteDbContext.Instance.SqlDb;
-            await db.InsertAsync(input);
+            await db.InsertAsync(entity);
             await db.CloseAsync();
         }
 
-        public async Task InsertOrUpdate(DM_LiShi input)
+        public async Task InsertOrUpdate(CandyDMLiShiDto input)
         {
             if (await CheckFirst(input))
                 await Insert(input);
@@ -34,21 +37,22 @@ namespace CandySugar.Xam.Core.ServiceImpl
                 await Update(input);
         }
 
-        public async Task<List<DM_LiShi>> Query()
+        public async Task<List<CandyDMLiShiDto>> Query()
         {
-           return await SqliteDbContext.Instance.SqlDb.Table<DM_LiShi>().OrderByDescending(t => t.Span).ToListAsync();
+            var data = await SqliteDbContext.Instance.SqlDb.Table<Candy_DM_LiShi>().OrderByDescending(t => t.Span).ToListAsync();
+            return data.ToMapest<List<CandyDMLiShiDto>>();
         }
 
-        public async Task<bool> Remove(DM_LiShi input)
+        public async Task<bool> Remove(CandyDMLiShiDto input)
         {
-            return await SqliteDbContext.Instance.SqlDb.Table<DM_LiShi>().DeleteAsync(t => t.PId == input.PId) > 0;
+            return await SqliteDbContext.Instance.SqlDb.Table<Candy_DM_LiShi>().DeleteAsync(t => t.PId == input.PId) > 0;
         }
 
-        public async Task Update(DM_LiShi input)
+        public async Task Update(CandyDMLiShiDto input)
         {
             var db = SqliteDbContext.Instance.SqlDb;
 
-            var entity = await db.Table<DM_LiShi>().Where(t => t.AnimeName == input.AnimeName).FirstOrDefaultAsync();
+            var entity = await db.Table<Candy_DM_LiShi>().Where(t => t.AnimeName == input.AnimeName).FirstOrDefaultAsync();
             entity.Span = DateTime.Now.Ticks;
             entity.PlayURL = input.PlayURL;
             entity.CollectionName = input.CollectionName;

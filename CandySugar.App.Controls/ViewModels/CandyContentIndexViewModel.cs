@@ -1,7 +1,6 @@
 ﻿using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.DTO;
-using CandySugar.Xam.Common.Entity.Model;
 using CandySugar.Xam.Core.Service;
 using Prism.Commands;
 using Prism.Ioc;
@@ -9,7 +8,6 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
@@ -31,14 +29,14 @@ namespace CandySugar.App.Controls.ViewModels
         #endregion
 
         #region Property
-        private ObservableCollection<XSLiShiDto> _XSLiShi;
-        public ObservableCollection<XSLiShiDto> XSLiShi
+        private ObservableCollection<CandyXSLiShiDto> _XSLiShi;
+        public ObservableCollection<CandyXSLiShiDto> XSLiShi
         {
             get { return _XSLiShi; }
             set { SetProperty(ref _XSLiShi, value); }
         }
-        private ObservableCollection<DMLiShiDto> _DMLiShi;
-        public ObservableCollection<DMLiShiDto> DMLiShi
+        private ObservableCollection<CandyDMLiShiDto> _DMLiShi;
+        public ObservableCollection<CandyDMLiShiDto> DMLiShi
         {
             get { return _DMLiShi; }
             set { SetProperty(ref _DMLiShi, value); }
@@ -46,7 +44,7 @@ namespace CandySugar.App.Controls.ViewModels
         #endregion
 
         #region Command
-        public ICommand XSClickCommand => new DelegateCommand<XSLiShiDto>(async input =>
+        public ICommand XSClickCommand => new DelegateCommand<CandyXSLiShiDto>(async input =>
         {
             NavigationParameters param = new NavigationParameters();
             param.Add("ChapterURL", input.ChapeterAddress);
@@ -54,9 +52,9 @@ namespace CandySugar.App.Controls.ViewModels
             await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyNovelContentView), UriKind.Relative), param);
         });
 
-        public ICommand XSDeleteCommand => new DelegateCommand<XSLiShiDto>(async input =>
+        public ICommand XSDeleteCommand => new DelegateCommand<CandyXSLiShiDto>(async input =>
         {
-            if (await XSCandy.Remove(input.ToMapest<XS_LiShi>()))
+            if (await XSCandy.Remove(input))
             {
                 OnViewLaunch();
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从书架中移除"))
@@ -66,16 +64,16 @@ namespace CandySugar.App.Controls.ViewModels
             }
         });
 
-        public ICommand DMClickCommand => new DelegateCommand<DMLiShiDto>(async input => {
+        public ICommand DMClickCommand => new DelegateCommand<CandyDMLiShiDto>(async input => {
 
             NavigationParameters param = new NavigationParameters();
             param.Add("WatchAddress", input.PlayURL);
             await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyAnimePlayView), UriKind.Relative), param);
         });
 
-        public ICommand DMDeleteCommand => new DelegateCommand<DMLiShiDto>(async input =>
+        public ICommand DMDeleteCommand => new DelegateCommand<CandyDMLiShiDto>(async input =>
         {
-            if (await DMCandy.Remove(input.ToMapest<DM_LiShi>()))
+            if (await DMCandy.Remove(input))
             {
                 OnViewLaunch();
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从列表中移除"))
@@ -89,8 +87,8 @@ namespace CandySugar.App.Controls.ViewModels
         #region Override
         protected override async void OnViewLaunch()
         {
-            XSLiShi = new ObservableCollection<XSLiShiDto>((await ContainerLocator.Container.Resolve<IXSLiShi>().Query()).ToMapest<List<XSLiShiDto>>());
-            DMLiShi = new ObservableCollection<DMLiShiDto>((await ContainerLocator.Container.Resolve<IDMLiShi>().Query()).ToMapest <List<DMLiShiDto>>());
+            XSLiShi = new ObservableCollection<CandyXSLiShiDto>((await ContainerLocator.Container.Resolve<IXSLiShi>().Query()).ToMapest<List<CandyXSLiShiDto>>());
+            DMLiShi = new ObservableCollection<CandyDMLiShiDto>((await ContainerLocator.Container.Resolve<IDMLiShi>().Query()).ToMapest <List<CandyDMLiShiDto>>());
         }
         #endregion
     }

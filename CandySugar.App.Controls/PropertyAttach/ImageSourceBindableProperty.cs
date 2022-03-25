@@ -11,6 +11,7 @@ using Wallpaper.SDK.ViewModel;
 using Wallpaper.SDK.ViewModel.Enums;
 using Wallpaper.SDK.ViewModel.Request;
 using Xamarin.Forms;
+using XExten.Advance.LinqFramework;
 
 namespace CandySugar.App.Controls.PropertyAttach
 {
@@ -34,11 +35,13 @@ namespace CandySugar.App.Controls.PropertyAttach
         private async static void OnImageChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var FFImage = ((CachedImage)bindable);
-
-            FFImage.SetBinding(CachedImage.SourceProperty, new Binding
+            if (newValue != null)
             {
-                Source = await Source(newValue.ToString())
-            });
+                FFImage.SetBinding(CachedImage.SourceProperty, new Binding
+                {
+                    Source = await Source(newValue.ToString())
+                });
+            }
         }
 
         private async static Task<ImageSource> Source(string route)

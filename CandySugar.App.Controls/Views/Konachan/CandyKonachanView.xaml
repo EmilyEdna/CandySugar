@@ -248,6 +248,7 @@
                                                                         CacheType="Disk"
                                                                         DownsampleUseDipUnits="True"
                                                                         HeightRequest="120"
+                                                                        LoadingDelay="1000"
                                                                         WidthRequest="120" />
                                                                     <StackLayout
                                                                         Grid.Column="1"

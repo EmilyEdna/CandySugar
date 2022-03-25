@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CandySugar.Xam.Common.Entity.Model
 {
-    public class BZ_LiShi: BasicEntity
+    public class Candy_BZ_LiShi: BasicEntity
     {
         public long Id { get; set; }
         /// <summary>

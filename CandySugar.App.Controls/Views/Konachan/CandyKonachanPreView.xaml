@@ -11,7 +11,7 @@
         <StackLayout>
             <FFImg:CachedImage
                 dp:ImageSourceBindableProperty.SuperSource="{Binding Route}"
-                Aspect="Fill"
+                Aspect="AspectFill"
                 CacheDuration="0:3:0"
                 CacheType="Disk"
                 LoadingDelay="1000" />

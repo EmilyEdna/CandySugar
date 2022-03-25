@@ -1,25 +1,21 @@
 ﻿using CandySugar.Xam.Common;
+using CandySugar.Xam.Common.DTO;
+using CandySugar.Xam.Core.Service;
 using Novel.SDK;
 using Novel.SDK.ViewModel;
 using Novel.SDK.ViewModel.Enums;
 using Novel.SDK.ViewModel.Request;
-using Novel.SDK.ViewModel.Response;
 using Prism.Commands;
+using Prism.Ioc;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
-using System.Linq;
-using Xamarin.Forms;
-using XExten.Advance.StaticFramework;
-using CandySugar.Xam.Core.Service;
-using Prism.Ioc;
-using CandySugar.Xam.Common.Entity.Model;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
@@ -151,7 +147,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                     this.Content.Add("\t\t\t\t\t" + t + "\r\n");
                 });
 
-                await Candy.InsertOrUpdate(new XS_LiShi
+                await Candy.InsertOrUpdate(new CandyXSLiShiDto
                 {
                     BookName = BookName,
                     ChapeterAddress = input,
