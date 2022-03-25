@@ -94,6 +94,45 @@
                             </DataTemplate>
                         </local:ItemsControl.ItemsLayout>
                     </local:ItemsControl>
+                    <local:ItemsControl Grid.Row="1" ItemsSource="{Binding LXSLiShi}">
+                        <local:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Image
+                                        HeightRequest="70"
+                                        Source="{Binding Cover}"
+                                        WidthRequest="50">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.LXSClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <StackLayout>
+                                        <Label
+                                            Margin="2,0,0,0"
+                                            FontSize="10"
+                                            Text="{Binding BookName, Converter={x:StaticResource LabelConverter}}" />
+                                        <Label
+                                            Margin="2,0,0,0"
+                                            FontSize="10"
+                                            Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.LXSDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </local:ItemsControl.ItemTemplate>
+                        <local:ItemsControl.ItemsLayout>
+                            <DataTemplate>
+                                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                                    <local:WrapLayout
+                                        local:LayoutEx.IsItemsHost="True"
+                                        IsSquare="True"
+                                        Spacing="10" />
+                                </ScrollView>
+                            </DataTemplate>
+                        </local:ItemsControl.ItemsLayout>
+                    </local:ItemsControl>
                 </Grid>
             </ScrollView>
         </StackLayout>

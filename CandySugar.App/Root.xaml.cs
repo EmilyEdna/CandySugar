@@ -47,6 +47,7 @@ namespace CandySugar.App
 
             #region Platform
             containerRegistry.Register<IXSLiShi, XSLiShi>();
+            containerRegistry.Register<ILXSLiShi, LXSLiShi>();
             containerRegistry.Register<IDMLiShi, DMLiShi>();
             containerRegistry.Register<IBZLiShi, BZLiShi>();
             containerRegistry.Register<ILoger, Loger>();

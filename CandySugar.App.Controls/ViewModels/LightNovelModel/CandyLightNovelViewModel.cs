@@ -172,7 +172,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -231,7 +231,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -295,7 +295,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -308,6 +308,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             var Param = new NavigationParameters();
             Param.Add("Route", input.DetailAddress);
             Param.Add("BookName", input.BookName);
+            Param.Add("Cover", input.Cover);
             await NavigationService.NavigateAsync(new Uri(nameof(CandyLightNovelDetailView), UriKind.Relative), Param);
         }
         #endregion

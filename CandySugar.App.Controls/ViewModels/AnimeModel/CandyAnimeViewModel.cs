@@ -146,7 +146,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -197,7 +197,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -248,7 +248,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -300,7 +300,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -339,7 +339,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -376,7 +376,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }

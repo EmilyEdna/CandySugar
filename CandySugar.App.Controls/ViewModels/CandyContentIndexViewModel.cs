@@ -1,4 +1,6 @@
-﻿using CandySugar.App.Controls.Views.Anime;
+﻿using CandySugar.App.Controls.ViewModels.LightNovelModel;
+using CandySugar.App.Controls.Views.Anime;
+using CandySugar.App.Controls.Views.LightNovel;
 using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Core.Service;
@@ -10,7 +12,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using XExten.Advance.InternalFramework.Securities.Common;
 using XExten.Advance.LinqFramework;
+using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels
@@ -21,10 +25,12 @@ namespace CandySugar.App.Controls.ViewModels
         {
             XSCandy = ContainerLocator.Container.Resolve<IXSLiShi>();
             DMCandy = ContainerLocator.Container.Resolve<IDMLiShi>();
+            LXSCandy = ContainerLocator.Container.Resolve<ILXSLiShi>();
         }
 
         #region Field
         private readonly IXSLiShi XSCandy;
+        private readonly ILXSLiShi LXSCandy;
         private readonly IDMLiShi DMCandy;
         #endregion
 
@@ -40,6 +46,12 @@ namespace CandySugar.App.Controls.ViewModels
         {
             get { return _DMLiShi; }
             set { SetProperty(ref _DMLiShi, value); }
+        }
+        private ObservableCollection<CandyLXSLiShiDto> _LXSLiShi;
+        public ObservableCollection<CandyLXSLiShiDto> LXSLiShi
+        {
+            get { return _LXSLiShi; }
+            set { SetProperty(ref _LXSLiShi, value); }
         }
         #endregion
 
@@ -82,13 +94,43 @@ namespace CandySugar.App.Controls.ViewModels
                 }
             }
         });
+
+        public ICommand LXSClickCommand => new DelegateCommand<CandyLXSLiShiDto>(async input => {
+            if (input.IsBook)
+            {
+                NavigationParameters param = new NavigationParameters();
+                param.Add("Content", SyncStatic.Compress(input.Content, SecurityType.Base64));
+                param.Add("ChapterName", input.ChapterName);
+                await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelContentView), UriKind.Relative), param);
+            }
+            else {
+                NavigationParameters param = new NavigationParameters();
+                param.Add("Image", input.Image);
+                param.Add("ChapterName", input.ChapterName);
+                await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelImageViewModel), UriKind.Relative), param);
+            }
+           
+        });
+
+        public ICommand LXSDeleteCommand => new DelegateCommand<CandyLXSLiShiDto>(async input =>
+        {
+            if (await LXSCandy.Remove(input))
+            {
+                OnViewLaunch();
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从列表中移除"))
+                {
+                    await Task.Delay(3000);
+                }
+            }
+        });
         #endregion
 
         #region Override
         protected override async void OnViewLaunch()
         {
-            XSLiShi = new ObservableCollection<CandyXSLiShiDto>((await ContainerLocator.Container.Resolve<IXSLiShi>().Query()).ToMapest<List<CandyXSLiShiDto>>());
-            DMLiShi = new ObservableCollection<CandyDMLiShiDto>((await ContainerLocator.Container.Resolve<IDMLiShi>().Query()).ToMapest <List<CandyDMLiShiDto>>());
+            XSLiShi = new ObservableCollection<CandyXSLiShiDto>(await ContainerLocator.Container.Resolve<IXSLiShi>().Query());
+            DMLiShi = new ObservableCollection<CandyDMLiShiDto>(await ContainerLocator.Container.Resolve<IDMLiShi>().Query());
+            LXSLiShi = new ObservableCollection<CandyLXSLiShiDto>(await ContainerLocator.Container.Resolve<ILXSLiShi>().Query());
         }
         #endregion
     }

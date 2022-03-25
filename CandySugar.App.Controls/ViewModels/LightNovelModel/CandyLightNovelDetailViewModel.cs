@@ -22,6 +22,8 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using XExten.Advance.InternalFramework.Securities.Common;
 using CandySugar.App.Controls.Views.LightNovel;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 {
@@ -29,6 +31,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
     {
         public const string Account = "kilydoll365";
         public const string Password = "sion8550";
+        private readonly ILXSLiShi Candy;
         public CandyLightNovelDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new LightNovelProxy
@@ -38,9 +41,11 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
+            Candy = ContainerLocator.Container.Resolve<ILXSLiShi>();
         }
         #region Field
         private readonly LightNovelProxy Proxy;
+        private string Cover;
         #endregion
 
         #region Property
@@ -78,6 +83,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
         {
             this.DetailAddress = parameters.GetValue<string>("Route");
             this.BookName = parameters.GetValue<string>("BookName");
+            this.Cover = parameters.GetValue<string>("Cover");
             Book();
         }
         #endregion
@@ -135,7 +141,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
                     await Task.Delay(3000);
                 }
@@ -179,7 +185,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 }
                 catch (Exception ex)
                 {
-                    using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                    using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                     {
                         await Task.Delay(3000);
                     }
@@ -206,12 +212,25 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 
                     if (await DownNovel(entity.ChapterURL, LightNovelContent.ContentResult.Content))
                     {
+                        var State = LightNovelContent.ContentResult.Image == null;
+
+                        //插入记录
+                        await Candy.InsertOrUpdate(new CandyLXSLiShiDto
+                        {
+                            BookName = BookName,
+                            ChapeterAddress = entity.ChapterURL,
+                            ChapterName = entity.ChapterName,
+                            IsBook = State,
+                            Cover=Cover,
+                            Content = State ? SyncStatic.Compress(LightNovelContent.ContentResult.Content, SecurityType.Base64) : string.Empty,
+                            Image = State ? string.Join(",", LightNovelContent.ContentResult.Image) : string.Empty
+                        });
                         Navigation(LightNovelContent.ContentResult, entity.ChapterName);
                     }
                 }
                 catch (Exception ex)
                 {
-                    using (await MaterialDialog.Instance.LoadingSnackbarAsync("网络有波动，请稍后再试~`(*>﹏<*)′"))
+                    using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                     {
                         await Task.Delay(3000);
                     }
@@ -265,7 +284,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             return true;
         }
 
-        public async void Navigation(LightNovelContentResult input,string name)
+        public async void Navigation(LightNovelContentResult input, string name)
         {
 
             if (input.Image == null)
