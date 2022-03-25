@@ -50,7 +50,7 @@ namespace CandySugar.Xam.Core.ServiceImpl
         public async Task<List<CandyLXSLiShiDto>> Query()
         {
             var data = await SqliteDbContext.Instance.SqlDb.Table<Candy_LXS_LiShi>().OrderByDescending(t => t.Span).ToListAsync();
-            return data.ToMapest<List<CandyXSLiShiDto>>();
+            return data.ToMapest<List<CandyLXSLiShiDto>>();
         }
 
         public async Task<bool> Remove(CandyLXSLiShiDto input)
