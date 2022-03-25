@@ -25,7 +25,7 @@
                                         Source="Cover.gif"
                                         WidthRequest="50">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.XSClickCommand, Source={x:Reference XS}}" CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding BindingContext.XSClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
                                         </Image.GestureRecognizers>
                                     </Image>
                                     <StackLayout>
@@ -38,7 +38,7 @@
                                             FontSize="10"
                                             Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
                                         <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.XSDeleteCommand, Source={x:Reference XS}}" CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding BindingContext.XSDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </StackLayout>
@@ -94,7 +94,7 @@
                             </DataTemplate>
                         </local:ItemsControl.ItemsLayout>
                     </local:ItemsControl>
-                    <local:ItemsControl Grid.Row="1" ItemsSource="{Binding LXSLiShi}">
+                    <local:ItemsControl Grid.Row="2" ItemsSource="{Binding LXSLiShi}">
                         <local:ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
