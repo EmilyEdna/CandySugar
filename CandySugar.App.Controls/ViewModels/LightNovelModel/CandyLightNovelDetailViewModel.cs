@@ -221,9 +221,9 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                             ChapeterAddress = entity.ChapterURL,
                             ChapterName = entity.ChapterName,
                             IsBook = State,
-                            Cover=Cover,
+                            Cover = Cover,
                             Content = State ? SyncStatic.Compress(LightNovelContent.ContentResult.Content, SecurityType.Base64) : string.Empty,
-                            Image = State ? string.Join(",", LightNovelContent.ContentResult.Image) : string.Empty
+                            Image = State ? string.Empty : string.Join(",", LightNovelContent.ContentResult.Image)
                         });
                         Navigation(LightNovelContent.ContentResult, entity.ChapterName);
                     }
