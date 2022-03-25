@@ -1,10 +1,10 @@
-﻿<ContentPage
-    x:Class="CandySugar.App.Controls.Views.Novel.CandyNovelView"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Manga.CandyMangaView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:Local="clr-namespace:CandySugar.App.Controls.Controls"
     xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
@@ -12,29 +12,24 @@
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
-    x:Name="NovelView"
+    x:Name="MangaView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="25" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+        <Grid RowDefinitions="40,25,*" RowSpacing="0">
             <SearchBar
                 BackgroundColor="{DynamicResource PrimaryPink}"
-                Placeholder="请输入小说或作者"
+                Placeholder="请输入漫画名称"
                 PlaceholderColor="{DynamicResource GrayShadowColor}"
                 SearchCommand="{Binding SearchCommand}"
                 SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
-            <Local:ItemsControl Grid.Row="1" ItemsSource="{Binding NovelCategory}">
+            <Local:ItemsControl Grid.Row="1" ItemsSource="{Binding MangaCategory}">
                 <Local:ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <XFMaterial:MaterialButton
-                            Command="{Binding BindingContext.ItemCommand, Source={x:Reference NovelView}}"
-                            CommandParameter="{Binding CollectAddress}"
+                            Command="{Binding BindingContext.ItemCommand, Source={x:Reference MangaView}}"
+                            CommandParameter="{Binding Address}"
                             Style="{DynamicResource LabelBtnNovel}"
-                            Text="{Binding CategoryName}"
+                            Text="{Binding CategoryType}"
                             TextColor="{DynamicResource PrimaryPink}" />
                     </DataTemplate>
                 </Local:ItemsControl.ItemTemplate>
@@ -63,7 +58,7 @@
                         AutoFitMode="Height"
                         IsBusy="{Binding IsBusy}"
                         IsScrollBarVisible="False"
-                        ItemsSource="{Binding NovelSearch}"
+                        ItemsSource="{Binding MangaRecommend}"
                         LoadMoreCommand="{Binding ShowMoreCommand}"
                         LoadMoreOption="AutoOnScroll"
                         SelectionBackgroundColor="Transparent">
@@ -86,60 +81,42 @@
                                                 BorderColor="Transparent"
                                                 BorderWidth="0"
                                                 CornerRadius="4">
-                                                <Grid ColumnDefinitions="100,*" ColumnSpacing="0">
+                                                <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
                                                     <FFImg:CachedImage
-                                                        Aspect="AspectFit"
-                                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                        Aspect="AspectFill"
+                                                        BackgroundColor="{DynamicResource Gray-200}"
+                                                        CacheDuration="0:3:0"
+                                                        CacheType="Disk"
                                                         DownsampleUseDipUnits="True"
-                                                        HeightRequest="120"
-                                                        Source="Cover.gif"
-                                                        WidthRequest="80" />
+                                                        HeightRequest="60"
+                                                        Source="{Binding Cover}"
+                                                        WidthRequest="60" />
                                                     <StackLayout
                                                         Grid.Column="1"
                                                         Padding="16"
                                                         HorizontalOptions="FillAndExpand"
                                                         Spacing="0"
                                                         VerticalOptions="FillAndExpand">
-                                                        <Label
-                                                            HorizontalOptions="Start"
-                                                            HorizontalTextAlignment="Start"
-                                                            Style="{DynamicResource DescriptionLabelStyle}"
-                                                            Text="{Binding BookName}" />
-                                                        <Label
-                                                            FontSize="12"
-                                                            HorizontalOptions="Start"
-                                                            HorizontalTextAlignment="Start"
-                                                            Style="{DynamicResource DescriptionLabelStyle}"
-                                                            Text="{Binding UpdateDate, StringFormat='更新时间:{0}'}" />
-                                                        <Label
-                                                            FontSize="12"
-                                                            HorizontalOptions="Start"
-                                                            HorizontalTextAlignment="Start"
-                                                            Style="{DynamicResource DescriptionLabelStyle}"
-                                                            Text="{Binding Author, StringFormat='作者:{0}'}" />
-                                                        <FlexLayout AlignItems="End" JustifyContent="End">
+                                                        <FlexLayout>
+                                                            <Label
+                                                                FontSize="12"
+                                                                HorizontalOptions="Start"
+                                                                HorizontalTextAlignment="Start"
+                                                                Style="{DynamicResource DescriptionLabelStyle}"
+                                                                Text="{Binding MangaName}" />
                                                             <Button
+                                                                Margin="0,-3,0,0"
                                                                 Padding="2"
                                                                 BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                                Command="{Binding BindingContext.SearchCommand, Source={x:Reference NovelView}}"
-                                                                CommandParameter="{Binding .}"
+                                                                Command="{Binding BindingContext.DetailCommand, Source={x:Reference MangaView}}"
+                                                                CommandParameter="{Binding Address}"
+                                                                FlexLayout.AlignSelf="End"
+                                                                FlexLayout.Grow="1"
                                                                 FontFamily="{DynamicResource FontAwesomeRegular}"
                                                                 FontSize="15"
                                                                 HeightRequest="30"
                                                                 HorizontalOptions="End"
-                                                                Text="{Static fontawesome:FontAwesomeIcons.User}"
-                                                                TextColor="{DynamicResource Gray-Black}"
-                                                                WidthRequest="30" />
-                                                            <Button
-                                                                Padding="2"
-                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                                Command="{Binding BindingContext.DetailCommand, Source={x:Reference NovelView}}"
-                                                                CommandParameter="{Binding .}"
-                                                                FontFamily="{DynamicResource FontAwesomeSolid}"
-                                                                FontSize="15"
-                                                                HeightRequest="30"
-                                                                HorizontalOptions="End"
-                                                                Text="{Static fontawesome:FontAwesomeIcons.Book}"
+                                                                Text="{Static fontawesome:FontAwesomeIcons.Eye}"
                                                                 TextColor="{DynamicResource Gray-Black}"
                                                                 WidthRequest="30" />
                                                         </FlexLayout>

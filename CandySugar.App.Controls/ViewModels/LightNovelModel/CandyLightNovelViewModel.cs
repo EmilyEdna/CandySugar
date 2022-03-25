@@ -151,6 +151,8 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
         {
             try
             {
+                this.Refresh = true;
+                await Task.Delay(Soft.WaitSpan);
                 //初始化
                 var LightNovelInit = await LightNovelFactory.LightNovel(opt =>
                 {
@@ -168,6 +170,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                         PassWord = Password
                     }, this.Proxy);
                 });
+                this.Refresh = false;
                 LightNovelCategory = new ObservableCollection<LightNovelCategoryResult>(LightNovelInit.CategoryResults);
             }
             catch (Exception ex)

@@ -131,6 +131,8 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
         {
             try
             {
+                this.Refresh = true;
+                await Task.Delay(Soft.WaitSpan);
                 var AnimeInit = await AnimeFactory.Anime(opt =>
                 {
                     opt.RequestParam = new AnimeRequestInput
@@ -140,6 +142,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                         CacheSpan = Soft.CacheTime
                     };
                 }).RunsAsync();
+                this.Refresh = false;
                 this.RecommendCategory = AnimeInit.RecommendCategory;
 
                 this.WeekDay = new ObservableCollection<AnimeWeekDayRecommendResult>(AnimeInit.WeekDays.FirstOrDefault(t => t.DayName.Equals(GetDayName())).DayRecommends);

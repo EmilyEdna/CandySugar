@@ -124,6 +124,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         {
             try
             {
+                this.Refresh = true;
+                await Task.Delay(Soft.WaitSpan);
                 var NovelInit = await NovelFactory.Novel(opt =>
                 {
                     opt.RequestParam = new NovelRequestInput
@@ -133,6 +135,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                         Proxy = this.Proxy
                     };
                 }).RunsAsync();
+                this.Refresh = false;
                 this.NovelCategory = new ObservableCollection<NovelCategoryResult>(NovelInit.IndexCategories);
             }
             catch (Exception ex)
