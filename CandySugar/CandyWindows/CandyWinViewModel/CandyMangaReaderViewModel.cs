@@ -123,18 +123,18 @@ namespace CandySugar.CandyWindows.CandyWinViewModel
                     }
                 };
             }).RunsAsync();
-            await CacheLocal(MangaContent.ContentResults.ImageURL, Chapters[Index].TagKey);
+            await CacheLocal(MangaContent.ContentResults, Chapters[Index].TagKey);
             Loading = Visibility.Hidden;
             HelpUtilty.Dispose();
         }
 
-        protected async Task CacheLocal(List<string> URL, string key)
+        protected async Task CacheLocal(MangaContentResult Result, string key)
         {
             var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandSugarResource", "MangaCaches", key));
 
             var all = Directory.GetFiles(dir).OrderBy(t => t).ToList();
-
-            if (all.Count() == URL.Count)
+            //读取本地
+            if (all.Count() == Result.ImageURL.Count)
             {
                 Bit = new ObservableCollection<BitmapSource>();
                 Names = new ArrayList();
@@ -154,23 +154,24 @@ namespace CandySugar.CandyWindows.CandyWinViewModel
 
                 var dirs = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandSugarResource", "MangaCaches", key));
 
-                var Node = IHttpMultiClient.HttpMulti.AddNode(opt =>
+                var MangaBytes = await MangaFactory.Manga(opt =>
                 {
-                    opt.NodePath = URL.FirstOrDefault();
-                });
-
-                for (int index = 1; index < URL.Count; index++)
-                {
-                    Node = Node.AddNode(opt =>
+                    opt.RequestParam = new MangaRequestInput
                     {
-                        opt.NodePath = URL[index];
-                    });
-                }
-                var data = await Node.Build().RunBytesAsync();
+                        MangaType = MangaEnum.DownLoad,
+                        Proxy = this.Proxy,
+                        CacheSpan = Soft.Default.CacheTime,
+                        ContentByte = new MangaContentByte
+                        {
+                            ImageURL = Result.ImageURL,
+                            Header = Result.MangaHeader
+                        }
+                    };
+                }).RunsAsync();
 
                 Bit = new ObservableCollection<BitmapSource>();
                 Names = new ArrayList();
-                data.ForEach(item =>
+                MangaBytes.ContentByteResults.ImageBytes.ForEach(item =>
                 {
                     var file = SyncStatic.CreateFile(Path.Combine(dirs, DateTime.Now.ToString("yyyyMMddHHmmssffff")));
                     SyncStatic.WriteFile(item, file);
