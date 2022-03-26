@@ -41,7 +41,7 @@ namespace CandySugar.Controls.PropertyAttach
             {
                 ((CandyImgButton)obj).SetBinding(CandyImgButton.ImageProperty, new Binding()
                 {
-                    Source = Binds(e.NewValue.ToString(), true),
+                    Source =await Binds(e.NewValue.ToString(), true),
                     IsAsync = true
                 });
             }

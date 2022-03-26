@@ -81,6 +81,7 @@
                             dp:ImageSouceDependencyProperty.SourceUri="{Binding Cover}"
                             Command="{Cmd:Action CategoryCommand}"
                             CommandParameter="{Binding AId}"
+                            Content="{Binding ShortName}"
                             Style="{StaticResource ImgBtn}"
                             Total="{Binding Total}" />
                     </DataTemplate>

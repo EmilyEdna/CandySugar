@@ -76,13 +76,13 @@
                                 Canvas.Left="240"
                                 Canvas.Top="215"
                                 Panel.ZIndex="1">
-                                <TextBlock Foreground="{DynamicResource DoneGreen}" Text="{TemplateBinding Content}" />
+                                <TextBlock Foreground="{DynamicResource DeepBlack}" Text="{TemplateBinding Content}" />
                             </Grid>
                             <Grid
                                 Canvas.Left="215"
                                 Canvas.Top="230"
                                 Panel.ZIndex="1">
-                                <TextBlock Foreground="{DynamicResource DoneGreen}">
+                                <TextBlock Foreground="{DynamicResource DeepBlack}">
                                     <Run Text="总数：" />
                                     <Run Text="{TemplateBinding Total}" />
                                 </TextBlock>

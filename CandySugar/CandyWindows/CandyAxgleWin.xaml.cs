@@ -40,6 +40,7 @@ namespace CandySugar.CandyWindows
         }
 
         private string[] ClassName = { "alert alert-dismissable alert-danger",
+            "hd-text-icon",
             "top-nav",
             "well well-filters",
             "navbar navbar-inverse navbar-fixed-top",
@@ -76,7 +77,7 @@ namespace CandySugar.CandyWindows
             await AxWebView.CoreWebView2.ExecuteScriptAsync($"Init('{ViewModel.Watch}')");
         }
 
-        private  void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var item in ClassName)
@@ -85,6 +86,11 @@ namespace CandySugar.CandyWindows
             }
             sb.Append("$(document.getElementById('ps32-container')).remove();");
             sb.Append("$(document.getElementsByTagName('iframe')).remove();");
+            sb.Append("$('div[style*=\"position:absolute;left:18px;display: block;font-size:10px;\"]').remove();");
+            sb.Append("$('div[style*=\"position:absolute;right:18px; display: block;font-size:10px;\"]').remove();");
+            sb.Append("$('#wrapper').css('padding-bottom','0px');");
+            sb.Append("$('body').css('padding-top','0px');");
+            sb.Append("$('#video-player').css({'max-width':'1190px','width':'1190px','margin-left':'-30px'});");
             AxWebView.CoreWebView2.ExecuteScriptAsync(sb.ToString());
         }
     }
