@@ -9,9 +9,9 @@ namespace CandySugar.Xam.Common
 {
     public class Extension
     {
-        public static string ReadLocalHtml()
+        public static string ReadLocalHtml(string input)
         {
-            var htmlst = typeof(Extension).GetTypeInfo().Assembly.GetManifestResourceStream("CandySugar.Xam.Common.WebViewAssets.index.html");
+            var htmlst = typeof(Extension).GetTypeInfo().Assembly.GetManifestResourceStream($"CandySugar.Xam.Common.WebViewAssets.{input}.html");
             using (var reader = new StreamReader(htmlst))
             {
                 return reader.ReadToEnd();

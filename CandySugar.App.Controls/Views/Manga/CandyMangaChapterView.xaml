@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="CandySugar.App.Controls.Views.LightNovel.CandyLightNovelDetailView"
+    x:Class="CandySugar.App.Controls.Views.Manga.CandyMangaChapterView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
@@ -8,10 +8,11 @@
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
-    x:Name="DetailNovel"
+    x:Name="MangaDetail"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <SfRefresh:SfPullToRefresh
+            Grid.Row="1"
             IsRefreshing="{Binding Refresh}"
             ProgressBackgroundColor="Transparent"
             ProgressStrokeColor="{DynamicResource PrimaryPink}"
@@ -23,7 +24,7 @@
                 <SfList:SfListView
                     AutoFitMode="Height"
                     IsScrollBarVisible="False"
-                    ItemsSource="{Binding LightNovelViews}"
+                    ItemsSource="{Binding Chapters}"
                     SelectionBackgroundColor="Transparent">
                     <SfList:SfListView.ItemTemplate>
                         <DataTemplate>
@@ -55,10 +56,10 @@
                                                     HorizontalOptions="Start"
                                                     HorizontalTextAlignment="Start"
                                                     Style="{DynamicResource DescriptionLabelStyle}"
-                                                    Text="{Binding ChapterName}" />
+                                                    Text="{Binding Title}" />
                                             </StackLayout>
                                             <SfBorder:SfBorder.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.SelectedCommand, Source={x:Reference DetailNovel}}" CommandParameter="{Binding .}" />
+                                                <TapGestureRecognizer Command="{Binding BindingContext.SelectedCommand, Source={x:Reference MangaDetail}}" CommandParameter="{Binding .}" />
                                             </SfBorder:SfBorder.GestureRecognizers>
                                         </SfBorder:SfBorder>
                                     </SfEffect:SfEffectsView>

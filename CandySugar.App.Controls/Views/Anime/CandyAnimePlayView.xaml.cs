@@ -30,7 +30,7 @@ namespace CandySugar.App.Controls.Views.Anime
             CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Landscape);
             var PlayURL = (this.BindingContext as CandyAnimePlayViewModel).PlayURL;
             HtmlWebViewSource Source = new HtmlWebViewSource();
-            Source.Html = Extension.ReadLocalHtml();
+            Source.Html = Extension.ReadLocalHtml("index");
             Source.BaseUrl = Extension.AndroidAssetsPath;
             web.Source = Source;
             await Task.Delay(3000);

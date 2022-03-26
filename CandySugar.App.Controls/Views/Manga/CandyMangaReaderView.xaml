@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Manga.CandyMangaReaderView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
+    x:Name="MangaReader"
+    Appearing="MangaReader_Appearing"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid RowDefinitions="1,*">
+            <WebView x:Name="web" HeightRequest="1" />
+            <SfRefresh:SfPullToRefresh
+                Grid.Row="1"
+                IsRefreshing="{Binding Refresh}"
+                ProgressBackgroundColor="Transparent"
+                ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                RefreshCommand="{Binding RefreshsCommand}"
+                RefreshContentHeight="50"
+                RefreshContentWidth="50"
+                TransitionMode="Push">
+                <SfRefresh:SfPullToRefresh.PullableContent>
+                    <SfList:SfListView
+                        AutoFitMode="Height"
+                        IsScrollBarVisible="False"
+                        ItemsSource="{Binding Source}"
+                        SelectionBackgroundColor="Transparent">
+                        <SfList:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Ctrl:ShadowFrame
+                                        Margin="2,10,5,5"
+                                        Padding="0"
+                                        Background="{DynamicResource GrayShadowColor}"
+                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                        BorderWidth="1"
+                                        CornerRadius="4"
+                                        HasShadow="True"
+                                        HorizontalOptions="FillAndExpand"
+                                        Radius="4"
+                                        VerticalOptions="FillAndExpand">
+                                        <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                            <SfBorder:SfBorder
+                                                BorderColor="Transparent"
+                                                BorderWidth="0"
+                                                CornerRadius="4">
+                                                <Grid ColumnSpacing="0">
+                                                    <FFImg:CachedImage
+                                                        dp:ImageSourceBindableProperty.SourceBytes="{Binding .}"
+                                                        Aspect="AspectFill"
+                                                        CacheDuration="0:3:0"
+                                                        CacheType="Disk"
+                                                        LoadingDelay="1000" />
+                                                </Grid>
+                                            </SfBorder:SfBorder>
+                                        </SfEffect:SfEffectsView>
+                                    </Ctrl:ShadowFrame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </SfList:SfListView.ItemTemplate>
+                    </SfList:SfListView>
+                </SfRefresh:SfPullToRefresh.PullableContent>
+            </SfRefresh:SfPullToRefresh>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

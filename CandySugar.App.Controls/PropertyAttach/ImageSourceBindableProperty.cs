@@ -32,6 +32,34 @@ namespace CandySugar.App.Controls.PropertyAttach
                 typeof(ImageSourceBindableProperty),
                 null, BindingMode.TwoWay, null, OnImageChanged);
 
+        public static byte[] GetSourceBytes(BindableObject obj)
+        {
+            return (byte[])obj.GetValue(SourceBytesProperty);
+        }
+
+        public static void SetSourceBytes(BindableObject obj, byte[] value)
+        {
+            obj.SetValue(SourceBytesProperty, value);
+        }
+
+        public static readonly BindableProperty SourceBytesProperty =
+         BindableProperty.CreateAttached("SourceBytes", typeof(byte[]),
+             typeof(ImageSourceBindableProperty),
+             null, BindingMode.TwoWay, null, OnBytesImageChanged);
+
+        private static void OnBytesImageChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var FFImage = ((CachedImage)bindable);
+            if (newValue != null)
+            {
+                var source = ImageSource.FromStream(() => new MemoryStream((byte[])newValue));
+                FFImage.SetBinding(CachedImage.SourceProperty, new Binding
+                {
+                    Source = source
+                });
+            }
+        }
+
         private async static void OnImageChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var FFImage = ((CachedImage)bindable);

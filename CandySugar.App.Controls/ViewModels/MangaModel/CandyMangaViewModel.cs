@@ -1,4 +1,5 @@
-﻿using CandySugar.Xam.Common;
+﻿using CandySugar.App.Controls.Views.Manga;
+using CandySugar.Xam.Common;
 using Manga.SDK;
 using Manga.SDK.ViewModel;
 using Manga.SDK.ViewModel.Emums;
@@ -29,6 +30,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 UserName = Soft.ProxyAccount
             };
             this.PageIndex = 1;
+            this.IsBusy = false;
         }
 
         #region Field
@@ -104,9 +106,10 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             else Search(true);
         });
 
-        public ICommand DetailCommand => new DelegateCommand<string>(input =>
+        public ICommand DetailCommand => new DelegateCommand<dynamic>(input =>
         {
-
+            if (input != null)
+                Navigation(input);
         });
 
         #endregion
@@ -256,6 +259,15 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                     await Task.Delay(3000);
                 }
             }
+        }
+
+        public async void Navigation(MangaRecommendResult input) 
+        {
+            var Param = new NavigationParameters();
+            Param.Add("Route", input.Address);
+            Param.Add("MangaName", input.MangaName);
+            Param.Add("Cover", input.Cover);
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyMangaChapterView), UriKind.Relative), Param);
         }
         #endregion
     }

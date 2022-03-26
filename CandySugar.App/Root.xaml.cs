@@ -81,6 +81,8 @@ namespace CandySugar.App
 
             #region Manga
             containerRegistry.RegisterForNavigation<CandyMangaView, CandyMangaViewModel>();
+            containerRegistry.RegisterForNavigation<CandyMangaChapterView, CandyMangaChapterViewModel>();
+            containerRegistry.RegisterForNavigation<CandyMangaReaderView, CandyMangaReaderViewModel>();
             #endregion
         }
 

@@ -309,6 +309,12 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             if (input != null)
                 Content(input);
         });
+        public ICommand RefreshsCommand => new DelegateCommand(async () =>
+        {
+            Refresh = true;
+            await Task.Delay(Soft.WaitSpan);
+            Refresh = false;
+        });
         #endregion
     }
 }
