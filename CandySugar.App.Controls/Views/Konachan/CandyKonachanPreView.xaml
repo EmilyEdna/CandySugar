@@ -9,12 +9,14 @@
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
-            <FFImg:CachedImage
-                dp:ImageSourceBindableProperty.SuperSource="{Binding Route}"
-                Aspect="AspectFill"
-                CacheDuration="0:3:0"
-                CacheType="Disk"
-                LoadingDelay="1000" />
+            <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+                <FFImg:CachedImage
+                    dp:ImageSourceBindableProperty.SuperSource="{Binding Route}"
+                    Aspect="AspectFill"
+                    CacheDuration="0:3:0"
+                    CacheType="Disk"
+                    LoadingDelay="1000" />
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

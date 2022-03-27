@@ -31,8 +31,15 @@ namespace CandySugar.Xam.Core.ServiceImpl
         {
             var db = SqliteDbContext.Instance.SqlDb;
             var query = db.Table<Candy_BZ_LiShi>();
-            if (!KeyWord.IsNullOrEmpty())
-                query = query.Where(t => t.Label.Contains(KeyWord));
+            if (!KeyWord.IsNullOrEmpty()) {
+                if (KeyWord.Contains(" "))
+                
+                    KeyWord.Split(" ").ForArrayEach<string>(item =>
+                    {
+                        query = query.Where(t => t.Label.Contains(item));
+                    });
+                else query = query.Where(t => t.Label.Contains(KeyWord));
+            }
             var Count = await query.CountAsync();
             var Result = await query.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
             return (Result.ToMapest<List<CandyBZLiShiDto>>(), Count);

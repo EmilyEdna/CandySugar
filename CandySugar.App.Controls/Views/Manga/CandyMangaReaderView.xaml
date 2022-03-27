@@ -29,7 +29,7 @@
                     <SfList:SfListView
                         AutoFitMode="Height"
                         IsScrollBarVisible="False"
-                        ItemsSource="{Binding Source}"
+                        ItemsSource="{Binding BytesSource}"
                         SelectionBackgroundColor="Transparent">
                         <SfList:SfListView.ItemTemplate>
                             <DataTemplate>
@@ -51,12 +51,11 @@
                                                 BorderWidth="0"
                                                 CornerRadius="4">
                                                 <Grid ColumnSpacing="0">
-                                                    <FFImg:CachedImage
-                                                        dp:ImageSourceBindableProperty.SourceBytes="{Binding .}"
+                                                    <Image
                                                         Aspect="AspectFill"
-                                                        CacheDuration="0:3:0"
-                                                        CacheType="Disk"
-                                                        LoadingDelay="1000" />
+                                                        HeightRequest="720"
+                                                        Source="{Binding Data, Converter={x:StaticResource BytesConverter}}"
+                                                        WidthRequest="350" />
                                                 </Grid>
                                             </SfBorder:SfBorder>
                                         </SfEffect:SfEffectsView>

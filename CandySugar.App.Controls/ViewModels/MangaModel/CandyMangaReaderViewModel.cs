@@ -1,4 +1,5 @@
 ﻿using CandySugar.Xam.Common;
+using CandySugar.Xam.Common.AppDTO;
 using Manga.SDK;
 using Manga.SDK.ViewModel;
 using Manga.SDK.ViewModel.Emums;
@@ -45,11 +46,11 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             get { return _Refresh; }
             set { SetProperty(ref _Refresh, value); }
         }
-        private ObservableCollection<byte[]> _Source;
-        public ObservableCollection<byte[]> Source
+        private ObservableCollection<MangaBytesDto> _BytesSource;
+        public ObservableCollection<MangaBytesDto> BytesSource
         {
-            get => _Source;
-            set => SetProperty(ref _Source, value);
+            get => _BytesSource;
+            set => SetProperty(ref _BytesSource, value);
         }
         private string _Url;
         public string Url
@@ -58,7 +59,8 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             set => SetProperty(ref _Url, value);
         }
         private MangaContentResult _Result;
-        public MangaContentResult Result {
+        public MangaContentResult Result
+        {
             get => _Result;
             set => SetProperty(ref _Result, value);
         }
@@ -70,10 +72,6 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             try
             {
                 this.Refresh = true;
-                var key  = Url.ToMd5();
-                var data = Caches.RunTimeCacheGet<string>(key);
-                if (!data.IsNullOrEmpty())
-                    return data;
                 var MangaContent = await MangaFactory.Manga(opt =>
                 {
                     opt.RequestParam = new MangaRequestInput
@@ -87,10 +85,9 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                         }
                     };
                 }).RunsAsync();
-                Result = MangaContent.ContentResults ;
+                Result = MangaContent.ContentResults;
                 var arr = string.Join(",", MangaContent.ContentResults.ImageURL);
                 var param = $"[{arr}]";
-                Caches.RunTimeCacheSet(key, param,900,true);
                 return param;
             }
             catch (Exception ex)
@@ -108,10 +105,6 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         {
             try
             {
-                var key =  string.Join(",", input).ToMd5();
-                var data = Caches.RunTimeCacheGet<List<byte[]>>(key);
-                if (!data.IsNullOrEmpty())
-                    Source = new ObservableCollection<byte[]>(data);
                 var MangaBytes = await MangaFactory.Manga(opt =>
                 {
                     opt.RequestParam = new MangaRequestInput
@@ -126,11 +119,16 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                         }
                     };
                 }).RunsAsync();
-                Caches.RunTimeCacheSet(key, MangaBytes.ContentByteResults.ImageBytes, 900, true);
-                Source = new ObservableCollection<byte[]>(MangaBytes.ContentByteResults.ImageBytes);
+
+                var dto = MangaBytes.ContentByteResults.ImageBytes.Select(item => new MangaBytesDto
+                {
+                    Data = item
+                }).ToList();
+
+                BytesSource = new ObservableCollection<MangaBytesDto>(dto);
                 this.Refresh = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
                 {
