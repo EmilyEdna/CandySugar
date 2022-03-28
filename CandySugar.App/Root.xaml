@@ -11,6 +11,7 @@
                 <Base:BaseStyle />
                 <Base:LabelStyle />
                 <Base:ButtonStyle />
+                <Base:EntryStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

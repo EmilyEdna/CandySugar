@@ -18,7 +18,10 @@ namespace CandySugar.Xam.Core.ServiceImpl
             var db = SqliteDbContext.Instance.SqlDb;
             var opt = await db.Table<Candy_Setting>().FirstOrDefaultAsync();
             if (opt == null)
+            {
+                entity.InitProperty();
                 await db.InsertAsync(entity);
+            }
             else
                 await db.UpdateAsync(entity);
             await db.CloseAsync();

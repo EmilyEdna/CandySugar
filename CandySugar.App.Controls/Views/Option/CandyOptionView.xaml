@@ -1,12 +1,148 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CandySugar.App.Controls.Views.Option.CandyOptionView">
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Option.CandyOptionView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="0">
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="代理IP"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <Entry
+                        x:Name="ProxyIP"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Placeholder="IP"
+                        Style="{DynamicResource BorderlessEntry}"
+                        Text="{Binding Option.ProxyIP, Mode=TwoWay}" />
+                </SfBorder:SfBorder>
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="代理端口"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <Entry
+                        x:Name="ProxyPort"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Placeholder="Port"
+                        Style="{DynamicResource BorderlessEntry}"
+                        Text="{Binding Option.ProxyPort, Mode=TwoWay}" />
+                </SfBorder:SfBorder>
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="代理账号"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <Entry
+                        x:Name="ProxyAccount"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Placeholder="Account"
+                        Style="{DynamicResource BorderlessEntry}"
+                        Text="{Binding Option.ProxyAccount, Mode=TwoWay}" />
+                </SfBorder:SfBorder>
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="代理密码"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <Entry
+                        x:Name="ProxyPwd"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        IsPassword="True"
+                        Placeholder="Password"
+                        Style="{DynamicResource BorderlessEntry}"
+                        Text="{Binding Option.ProxyPwd, Mode=TwoWay}" />
+                </SfBorder:SfBorder>
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="缓存时常"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <Entry
+                        x:Name="CacheTime"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Placeholder="CacheTime"
+                        Style="{DynamicResource BorderlessEntry}"
+                        Text="{Binding Option.CacheTime, Mode=TwoWay}" />
+                </SfBorder:SfBorder>
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="等待时间"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <Entry
+                        x:Name="WaitSpan"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Placeholder="WaitSpan"
+                        Style="{DynamicResource BorderlessEntry}"
+                        Text="{Binding Option.WaitSpan, Mode=TwoWay}" />
+                </SfBorder:SfBorder>
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="年龄"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <FlexLayout HeightRequest="50">
+                        <RadioButton
+                            CheckedChanged="RadioButton_CheckedChanged"
+                            Content="All"
+                            GroupName="Module"
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=0}"
+                            Value="0" />
+                        <RadioButton
+                            CheckedChanged="RadioButton_CheckedChanged"
+                            Content="12"
+                            GroupName="Module"
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=1}"
+                            Value="1" />
+                        <RadioButton
+                            CheckedChanged="RadioButton_CheckedChanged"
+                            Content="15"
+                            GroupName="Module"
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=2}"
+                            Value="2" />
+                        <RadioButton
+                            CheckedChanged="RadioButton_CheckedChanged"
+                            Content="18"
+                            GroupName="Module"
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=3}"
+                            Value="3" />
+                    </FlexLayout>
+                </SfBorder:SfBorder>
+                <XFMaterial:MaterialButton
+                    BackgroundColor="White"
+                    Clicked="MaterialButton_Clicked"
+                    Text="保存"
+                    TextColor="Black" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

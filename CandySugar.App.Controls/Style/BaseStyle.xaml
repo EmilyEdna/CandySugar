@@ -20,4 +20,5 @@
     <Converter:ListViewConverter x:Key="ListViewConverter" />
     <Converter:LabelConverter x:Key="LabelConverter" />
     <Converter:BytesConverter x:Key="BytesConverter" />
+    <Converter:BoolConverter x:Key="BoolConverter" />
 </ResourceDictionary>
