@@ -343,7 +343,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 {
                     opt.RequestParam = new WallpaperRequestInput
                     {
-                        WallpaperType = WallpaperEnum.Downloads,
+                        WallpaperType = WallpaperEnum.Download,
                         CacheSpan = Soft.CacheTime,
                         Download = new WallpaperDownload()
                         {
