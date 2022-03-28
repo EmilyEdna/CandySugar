@@ -13,6 +13,10 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XExten.Advance.LinqFramework;
+using Prism.Ioc;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common;
+using CandySugar.App.Controls.Views.Option;
 
 namespace CandySugar.App.ViewModels
 {
@@ -67,6 +71,7 @@ namespace CandySugar.App.ViewModels
                     break;
                 case MenuFuncEunm.Setting:
                     base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyOptionView));
                     break;
                 case MenuFuncEunm.History:
                     base.Title = input.CommandParam.ToDes();
@@ -84,8 +89,19 @@ namespace CandySugar.App.ViewModels
             await NavigationService.NavigateAsync(new Uri(input, UriKind.Relative));
         }
 
-        protected override void OnViewLaunch()
+        protected override async void OnViewLaunch()
         {
+            var option = await ContainerLocator.Container.Resolve<ISetting>().Query();
+
+            Soft.AgeModule = option==null? Soft.AgeModule: option.AgeModule;
+            Soft.CacheTime = option == null ? Soft.CacheTime : option.CacheTime;
+            Soft.WaitSpan= option == null ? Soft.WaitSpan : option.WaitSpan;
+
+            Soft.ProxyAccount = option == null ? Soft.ProxyAccount : option.ProxyAccount;
+            Soft.ProxyIP = option == null ? Soft.ProxyIP : option.ProxyIP;
+            Soft.ProxyPort= option == null ? Soft.ProxyPort : option.ProxyPort;
+            Soft.ProxyPwd =option == null ? Soft.ProxyPwd : option.ProxyPwd;
+
             RefreshView();
         }
 

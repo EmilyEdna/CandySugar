@@ -379,7 +379,6 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 }
             }
         }
-
         public async void Navigation(WallpaperResultDetail input) 
         {
             var data = !input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg;

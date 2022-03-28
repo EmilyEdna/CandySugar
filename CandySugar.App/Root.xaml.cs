@@ -4,12 +4,14 @@ using CandySugar.App.Controls.ViewModels.KonachanModel;
 using CandySugar.App.Controls.ViewModels.LightNovelModel;
 using CandySugar.App.Controls.ViewModels.MangaModel;
 using CandySugar.App.Controls.ViewModels.NovelModel;
+using CandySugar.App.Controls.ViewModels.OptionModel;
 using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Konachan;
 using CandySugar.App.Controls.Views.LightNovel;
 using CandySugar.App.Controls.Views.Manga;
 using CandySugar.App.Controls.Views.Novel;
+using CandySugar.App.Controls.Views.Option;
 using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
 using CandySugar.Xam.Core.Service;
@@ -53,6 +55,7 @@ namespace CandySugar.App
             containerRegistry.Register<IDMLiShi, DMLiShi>();
             containerRegistry.Register<IBZLiShi, BZLiShi>();
             containerRegistry.Register<ILoger, Loger>();
+            containerRegistry.Register<ISetting, Setting>();
             #endregion
 
             #region Anime
@@ -83,6 +86,10 @@ namespace CandySugar.App
             containerRegistry.RegisterForNavigation<CandyMangaView, CandyMangaViewModel>();
             containerRegistry.RegisterForNavigation<CandyMangaChapterView, CandyMangaChapterViewModel>();
             containerRegistry.RegisterForNavigation<CandyMangaReaderView, CandyMangaReaderViewModel>();
+            #endregion
+
+            #region Setting
+            containerRegistry.RegisterForNavigation<CandyOptionView, CandyOptionViewModel>();
             #endregion
         }
 
