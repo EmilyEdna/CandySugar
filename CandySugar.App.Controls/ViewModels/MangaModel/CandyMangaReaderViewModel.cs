@@ -67,6 +67,10 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         #endregion
 
         #region Mothod
+        private string Tip(string Method)
+        {
+            return String.Format(nameof(CandyMangaReaderViewModel), Method, Soft.Toast);
+        }
         public async Task<string> Content()
         {
             try
@@ -92,7 +96,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Content")))
                 {
                     await Task.Delay(3000);
                 }
@@ -130,7 +134,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("ContentBytes")))
                 {
                     await Task.Delay(3000);
                 }

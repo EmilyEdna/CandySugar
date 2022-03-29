@@ -120,6 +120,10 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #endregion
 
         #region Method
+        private string Tip(string Method)
+        {
+            return String.Format(nameof(CandyNovelViewModel), Method, Soft.Toast);
+        }
         private async void Init()
         {
             try
@@ -140,7 +144,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
                 {
                     await Task.Delay(3000);
                 }
@@ -181,7 +185,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             catch (Exception ex)
             {
                 this.IsBusy = false;
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
                 {
                     await Task.Delay(3000);
                 }
@@ -220,7 +224,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             catch (Exception ex)
             {
                 this.Refresh = false;
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Refreshs")))
                 {
                     await Task.Delay(3000);
                 }
@@ -264,7 +268,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Search")))
                 {
                     await Task.Delay(3000);
                 }
@@ -272,28 +276,17 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         }
         private async void Navigation(dynamic input)
         {
-            try
-            {
-                if (input == null)
-                    using (await MaterialDialog.Instance.LoadingSnackbarAsync("还未选择浏览的书籍~"))
-                    {
-                        await Task.Delay(3000);
-                    }
-
-                NovelSearchResult? inputKey = (input as NovelSearchResult);
-
-                var Param = new NavigationParameters();
-                Param.Add(nameof(NovelSearchResult), inputKey);
-                await NavigationService.NavigateAsync(new Uri(nameof(CandyNovelDetailView), UriKind.Relative), Param);
-
-            }
-            catch (Exception ex)
-            {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+            if (input == null)
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("还未选择浏览的书籍~"))
                 {
                     await Task.Delay(3000);
                 }
-            }
+
+            NovelSearchResult? inputKey = (input as NovelSearchResult);
+
+            var Param = new NavigationParameters();
+            Param.Add(nameof(NovelSearchResult), inputKey);
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyNovelDetailView), UriKind.Relative), Param);
         }
         #endregion
 

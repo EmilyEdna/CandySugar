@@ -89,6 +89,10 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
         #endregion
 
         #region Method
+        private string Tip(string Method)
+        {
+            return String.Format(nameof(CandyLightNovelDetailViewModel), Method, Soft.Toast);
+        }
         public async void Book()
         {
             try
@@ -141,7 +145,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Book")))
                 {
                     await Task.Delay(3000);
                 }
@@ -185,7 +189,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 }
                 catch (Exception ex)
                 {
-                    using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                    using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Content1")))
                     {
                         await Task.Delay(3000);
                     }
@@ -230,7 +234,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 }
                 catch (Exception ex)
                 {
-                    using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                    using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Content2")))
                     {
                         await Task.Delay(3000);
                     }

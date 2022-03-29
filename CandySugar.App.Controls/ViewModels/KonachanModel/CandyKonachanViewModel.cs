@@ -186,6 +186,10 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         #endregion
 
         #region Method
+        private string Tip(string Method)
+        {
+            return String.Format(nameof(CandyKonachanViewModel), Method, Soft.Toast);
+        }
         public async void Init(bool IsLoadMore = false)
         {
             try
@@ -232,7 +236,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
                 {
                     await Task.Delay(3000);
                 }
@@ -281,7 +285,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchBaisc")))
                 {
                     await Task.Delay(3000);
                 }
@@ -373,7 +377,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Down")))
                 {
                     await Task.Delay(3000);
                 }

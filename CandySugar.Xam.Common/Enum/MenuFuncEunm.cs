@@ -36,6 +36,11 @@ namespace CandySugar.Xam.Common.Enum
         [Description("画集")]
         Wallpaper,
         /// <summary>
+        /// 茶杯
+        /// </summary>
+        [Description("茶杯")]
+        Axgle,
+        /// <summary>
         /// 音乐
         /// </summary>
         [Description("音乐")]
@@ -45,11 +50,6 @@ namespace CandySugar.Xam.Common.Enum
         /// </summary>
         [Description("设置")]
         Setting,
-        /// <summary>
-        /// 历史
-        /// </summary>
-        [Description("历史")]
-        History,
         /// <summary>
         /// 关于
         /// </summary>

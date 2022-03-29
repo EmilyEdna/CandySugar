@@ -55,46 +55,7 @@
                             </DataTemplate>
                         </local:ItemsControl.ItemsLayout>
                     </local:ItemsControl>
-                    <local:ItemsControl Grid.Row="1" ItemsSource="{Binding DMLiShi}">
-                        <local:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Image
-                                        HeightRequest="70"
-                                        Source="{Binding Cover}"
-                                        WidthRequest="50">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.DMClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <StackLayout>
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding AnimeName, Converter={x:StaticResource LabelConverter}}" />
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding CollectionName, Converter={x:StaticResource LabelConverter}}" />
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.DMDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                </StackLayout>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemTemplate>
-                        <local:ItemsControl.ItemsLayout>
-                            <DataTemplate>
-                                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                                    <local:WrapLayout
-                                        local:LayoutEx.IsItemsHost="True"
-                                        IsSquare="True"
-                                        Spacing="10" />
-                                </ScrollView>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemsLayout>
-                    </local:ItemsControl>
-                    <local:ItemsControl Grid.Row="2" ItemsSource="{Binding LXSLiShi}">
+                    <local:ItemsControl Grid.Row="1" ItemsSource="{Binding LXSLiShi}">
                         <local:ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
@@ -117,6 +78,45 @@
                                             Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding BindingContext.LXSDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </local:ItemsControl.ItemTemplate>
+                        <local:ItemsControl.ItemsLayout>
+                            <DataTemplate>
+                                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                                    <local:WrapLayout
+                                        local:LayoutEx.IsItemsHost="True"
+                                        IsSquare="True"
+                                        Spacing="10" />
+                                </ScrollView>
+                            </DataTemplate>
+                        </local:ItemsControl.ItemsLayout>
+                    </local:ItemsControl>
+                    <local:ItemsControl Grid.Row="2" ItemsSource="{Binding DMLiShi}">
+                        <local:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Image
+                                        HeightRequest="70"
+                                        Source="{Binding Cover}"
+                                        WidthRequest="50">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.DMClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <StackLayout>
+                                        <Label
+                                            Margin="2,0,0,0"
+                                            FontSize="10"
+                                            Text="{Binding AnimeName, Converter={x:StaticResource LabelConverter}}" />
+                                        <Label
+                                            Margin="2,0,0,0"
+                                            FontSize="10"
+                                            Text="{Binding CollectionName, Converter={x:StaticResource LabelConverter}}" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.DMDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </StackLayout>

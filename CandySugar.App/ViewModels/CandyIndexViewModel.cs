@@ -17,6 +17,7 @@ using Prism.Ioc;
 using CandySugar.Xam.Core.Service;
 using CandySugar.Xam.Common;
 using CandySugar.App.Controls.Views.Option;
+using CandySugar.App.Controls.Views.Axgle;
 
 namespace CandySugar.App.ViewModels
 {
@@ -66,15 +67,16 @@ namespace CandySugar.App.ViewModels
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyKonachanView));
                     break;
+                case MenuFuncEunm.Axgle:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyAxgleView));
+                    break;
                 case MenuFuncEunm.Music:
                     base.Title = input.CommandParam.ToDes();
                     break;
                 case MenuFuncEunm.Setting:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyOptionView));
-                    break;
-                case MenuFuncEunm.History:
-                    base.Title = input.CommandParam.ToDes();
                     break;
                 case MenuFuncEunm.About:
                     base.Title = input.CommandParam.ToDes();

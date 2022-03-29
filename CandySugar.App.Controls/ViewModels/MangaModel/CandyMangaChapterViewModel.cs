@@ -53,6 +53,10 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         #endregion
 
         #region Method
+        private string Tip(string Method)
+        {
+            return String.Format(nameof(CandyMangaChapterViewModel), Method, Soft.Toast);
+        }
         public async void Init(string input)
         {
             try
@@ -76,7 +80,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
                 {
                     await Task.Delay(3000);
                 }

@@ -1,5 +1,6 @@
 using CandySugar.App.Controls.ViewModels;
 using CandySugar.App.Controls.ViewModels.AnimeModel;
+using CandySugar.App.Controls.ViewModels.AxgleModel;
 using CandySugar.App.Controls.ViewModels.KonachanModel;
 using CandySugar.App.Controls.ViewModels.LightNovelModel;
 using CandySugar.App.Controls.ViewModels.MangaModel;
@@ -7,6 +8,7 @@ using CandySugar.App.Controls.ViewModels.NovelModel;
 using CandySugar.App.Controls.ViewModels.OptionModel;
 using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.Anime;
+using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.App.Controls.Views.Konachan;
 using CandySugar.App.Controls.Views.LightNovel;
 using CandySugar.App.Controls.Views.Manga;
@@ -86,6 +88,10 @@ namespace CandySugar.App
             containerRegistry.RegisterForNavigation<CandyMangaView, CandyMangaViewModel>();
             containerRegistry.RegisterForNavigation<CandyMangaChapterView, CandyMangaChapterViewModel>();
             containerRegistry.RegisterForNavigation<CandyMangaReaderView, CandyMangaReaderViewModel>();
+            #endregion
+
+            #region Axgle
+            containerRegistry.RegisterForNavigation<CandyAxgleView, CandyAxgleViewModel>();
             #endregion
 
             #region Setting

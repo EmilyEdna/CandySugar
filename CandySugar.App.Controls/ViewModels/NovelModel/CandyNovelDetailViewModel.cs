@@ -153,6 +153,10 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #endregion
 
         #region Method
+        private string Tip(string Method)
+        {
+            return String.Format(nameof(CandyNovelDetailViewModel), Method, Soft.Toast);
+        }
         public async void Details(string input, bool IsRefresh = false, bool ShowMore = false)
         {
             try
@@ -215,7 +219,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Details")))
                 {
                     await Task.Delay(3000);
                 }

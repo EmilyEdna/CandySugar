@@ -127,6 +127,10 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
         #endregion
 
         #region Method
+        private string Tip(string Method) 
+        {
+            return String.Format(nameof(CandyAnimeViewModel), Method, Soft.Toast);
+        }
         public async void Init()
         {
             try
@@ -149,7 +153,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
                 {
                     await Task.Delay(3000);
                 }
@@ -200,7 +204,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
                 {
                     await Task.Delay(3000);
                 }
@@ -251,7 +255,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("LetterCategory")))
                 {
                     await Task.Delay(3000);
                 }
@@ -303,7 +307,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Search")))
                 {
                     await Task.Delay(3000);
                 }
@@ -342,7 +346,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchDetail")))
                 {
                     await Task.Delay(3000);
                 }
@@ -379,7 +383,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Soft.Toast))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Play")))
                 {
                     await Task.Delay(3000);
                 }
