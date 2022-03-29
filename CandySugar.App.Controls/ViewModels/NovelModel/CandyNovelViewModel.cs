@@ -122,7 +122,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #region Method
         private string Tip(string Method)
         {
-            return String.Format(nameof(CandyNovelViewModel), Method, Soft.Toast);
+            return String.Format(Soft.Toast,nameof(CandyNovelViewModel), Method);
         }
         private async void Init()
         {

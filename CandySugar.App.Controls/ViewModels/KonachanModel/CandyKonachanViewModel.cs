@@ -188,7 +188,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         #region Method
         private string Tip(string Method)
         {
-            return String.Format(nameof(CandyKonachanViewModel), Method, Soft.Toast);
+            return String.Format(Soft.Toast,nameof(CandyKonachanViewModel), Method);
         }
         public async void Init(bool IsLoadMore = false)
         {

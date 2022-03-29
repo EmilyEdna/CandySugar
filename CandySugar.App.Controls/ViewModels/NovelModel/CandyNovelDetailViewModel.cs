@@ -155,7 +155,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #region Method
         private string Tip(string Method)
         {
-            return String.Format(nameof(CandyNovelDetailViewModel), Method, Soft.Toast);
+            return String.Format(Soft.Toast,nameof(CandyNovelDetailViewModel), Method);
         }
         public async void Details(string input, bool IsRefresh = false, bool ShowMore = false)
         {

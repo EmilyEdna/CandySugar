@@ -69,7 +69,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         #region Mothod
         private string Tip(string Method)
         {
-            return String.Format(nameof(CandyMangaReaderViewModel), Method, Soft.Toast);
+            return String.Format(Soft.Toast,nameof(CandyMangaReaderViewModel), Method);
         }
         public async Task<string> Content()
         {

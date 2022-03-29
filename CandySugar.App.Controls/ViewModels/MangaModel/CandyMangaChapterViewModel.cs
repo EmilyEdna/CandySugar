@@ -55,7 +55,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         #region Method
         private string Tip(string Method)
         {
-            return String.Format(nameof(CandyMangaChapterViewModel), Method, Soft.Toast);
+            return String.Format(Soft.Toast,nameof(CandyMangaChapterViewModel), Method);
         }
         public async void Init(string input)
         {

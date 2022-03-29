@@ -1,15 +1,19 @@
-﻿using CandySugar.Xam.Common;
+﻿using CandySugar.App.Controls.Views.Axgle;
+using CandySugar.Xam.Common;
 using GalActor.SDK;
 using GalActor.SDK.ViewModel;
 using GalActor.SDK.ViewModel.Eunms;
 using GalActor.SDK.ViewModel.Request;
 using GalActor.SDK.ViewModel.Response;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels.AxgleModel
@@ -35,6 +39,12 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             get { return _Categories; }
             set { SetProperty(ref _Categories, value); }
         }
+        private bool _Refresh;
+        public bool Refresh
+        {
+            get { return _Refresh; }
+            set { SetProperty(ref _Refresh, value); }
+        }
         #endregion
 
         #region Override
@@ -47,11 +57,13 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         #region Methond
         private string Tip(string Method)
         {
-            return String.Format(nameof(CandyAxgleViewModel), Method, Soft.Toast);
+            return String.Format(Soft.Toast,nameof(CandyAxgleViewModel), Method);
         }
-        public async void Init() {
+        public async void Init()
+        {
             try
             {
+                this.Refresh = true;
                 var Init = await GalActorFactory.GalActor(opt =>
                 {
                     opt.RequestParam = new GalActorRequestInput
@@ -62,7 +74,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                         CacheSpan = Soft.CacheTime
                     };
                 }).RunsAsync();
-
+                this.Refresh = false;
                 Categories = new ObservableCollection<GalActorCategory>(Init.CategoryResults);
             }
             catch (Exception ex)
@@ -73,9 +85,26 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 }
             }
         }
+        public async void Navigation(string AId)
+        {
+            NavigationParameters param = new NavigationParameters();
+            param.Add("AId", AId);
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyAxgleCateView), UriKind.Relative), param);
+        }
         #endregion
 
         #region Command
+        public ICommand CategoryCommand => new DelegateCommand<string>(input =>
+        {
+            if (!input.IsNullOrEmpty())
+                Navigation(input);
+        });
+        public ICommand RefreshsCommand => new DelegateCommand(async () =>
+        {
+            this.Refresh = true;
+            await Task.Delay(Soft.WaitSpan);
+            this.Refresh = false;
+        });
         #endregion
     }
 }

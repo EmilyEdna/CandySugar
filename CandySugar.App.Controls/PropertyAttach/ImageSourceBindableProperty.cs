@@ -1,5 +1,9 @@
 ﻿using FFImageLoading;
 using FFImageLoading.Forms;
+using GalActor.SDK;
+using GalActor.SDK.ViewModel;
+using GalActor.SDK.ViewModel.Eunms;
+using GalActor.SDK.ViewModel.Request;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,41 +21,42 @@ namespace CandySugar.App.Controls.PropertyAttach
 {
     public class ImageSourceBindableProperty
     {
-        public static string GetSuperSource(BindableObject obj)
+        #region Konachan
+        public static string GetKonachanSource(BindableObject obj)
         {
-            return (string)obj.GetValue(SuperSourceProperty);
+            return (string)obj.GetValue(KonachanSourceProperty);
         }
 
-        public static void SetSuperSource(BindableObject obj, string value)
+        public static void SetKonachanSource(BindableObject obj, string value)
         {
-            obj.SetValue(SuperSourceProperty, value);
+            obj.SetValue(KonachanSourceProperty, value);
         }
-
-        public static readonly BindableProperty SuperSourceProperty =
-            BindableProperty.CreateAttached("SuperSource", typeof(string),
+     
+        public static readonly BindableProperty KonachanSourceProperty =
+            BindableProperty.CreateAttached("KonachanSource", typeof(string),
                 typeof(ImageSourceBindableProperty),
-                null, BindingMode.TwoWay, null, OnImageChanged);
+                null, BindingMode.TwoWay, null, KonachanChanged);
 
-        private async static void OnImageChanged(BindableObject bindable, object oldValue, object newValue)
+        private async static void KonachanChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var FFImage = ((CachedImage)bindable);
             if (newValue != null)
             {
                 FFImage.SetBinding(CachedImage.SourceProperty, new Binding
                 {
-                    Source = await Source(newValue.ToString())
+                    Source = await KonachanSource(newValue.ToString())
                 });
             }
         }
 
-        private async static Task<ImageSource> Source(string route)
+        private async static Task<ImageSource> KonachanSource(string route)
         {
             var WallpaperDown = await WallpaperFactory.Wallpaper(opt =>
             {
                 opt.RequestParam = new WallpaperRequestInput
                 {
                     WallpaperType = WallpaperEnum.Downloads,
-                    CacheSpan = 180,
+                    CacheSpan = 600,
                     Download = new WallpaperDownload()
                     {
                         Route = route
@@ -61,5 +66,52 @@ namespace CandySugar.App.Controls.PropertyAttach
             }).RunsAsync();
             return ImageSource.FromStream(() => new MemoryStream(WallpaperDown.DownloadResult.Bytes));
         }
+        #endregion
+
+        #region Axgle
+        public static string GetAxgleSource(BindableObject obj)
+        {
+            return (string)obj.GetValue(AxgleSourceProperty);
+        }
+
+        public static void SetAxgleSource(BindableObject obj, string value)
+        {
+            obj.SetValue(AxgleSourceProperty, value);
+        }
+
+        public static readonly BindableProperty AxgleSourceProperty =
+          BindableProperty.CreateAttached("AxgleSource", typeof(string),
+              typeof(ImageSourceBindableProperty),
+              null, BindingMode.TwoWay, null, AxgleChanged);
+        private async static void AxgleChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var FFImage = ((CachedImage)bindable);
+            if (newValue != null)
+            {
+                FFImage.SetBinding(CachedImage.SourceProperty, new Binding
+                {
+                    Source = await AxgleSource(newValue.ToString())
+                });
+            }
+        }
+
+        private async static Task<ImageSource> AxgleSource(string route)
+        {
+            var GalCover = await GalActorFactory.GalActor(opt =>
+            {
+                opt.RequestParam = new GalActorRequestInput
+                {
+                    Galype = GalActorEnum.Shows,
+                    CacheSpan = 600,
+                    Show = new GalActorShow
+                    {
+                        KeyWord = route
+                    }
+                };
+            }).RunsAsync();
+            return ImageSource.FromStream(() => new MemoryStream(GalCover.Bytes));
+        }
+
+        #endregion
     }
 }

@@ -81,7 +81,7 @@
                                                                 CornerRadius="4">
                                                                 <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
                                                                     <FFImg:CachedImage
-                                                                        Dp:ImageSourceBindableProperty.SuperSource="{Binding Preview}"
+                                                                        Dp:ImageSourceBindableProperty.KonachanSource="{Binding Preview}"
                                                                         Aspect="AspectFill"
                                                                         BackgroundColor="{DynamicResource Gray-200}"
                                                                         CacheDuration="0:3:0"
@@ -241,7 +241,7 @@
                                                                 CornerRadius="4">
                                                                 <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
                                                                     <FFImg:CachedImage
-                                                                        Dp:ImageSourceBindableProperty.SuperSource="{Binding Preview}"
+                                                                        Dp:ImageSourceBindableProperty.KonachanSource="{Binding Preview}"
                                                                         Aspect="AspectFill"
                                                                         BackgroundColor="{DynamicResource Gray-200}"
                                                                         CacheDuration="0:3:0"

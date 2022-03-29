@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Axgle.CandyAxgleCateView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:Local="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:SFCom="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
+    xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
+    x:Name="KonachanView"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid RowDefinitions="40,*">
+            <Grid ColumnDefinitions="*,0.6*">
+                <SearchBar
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    Keyboard="Default"
+                    Placeholder="请输入关键字"
+                    PlaceholderColor="{DynamicResource GrayShadowColor}"
+                    SearchCommand="{Binding SearchCommand}"
+                    SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
+                <SFCom:SfComboBox
+                    x:Name="box"
+                    Grid.Column="1"
+                    Margin="-10,0,0,0"
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    BorderColor="{DynamicResource Gray-700}"
+                    ClearButtonColor="{DynamicResource GrayShadowColor}"
+                    DataSource="{Binding Combo}"
+                    DisplayMemberPath="Name"
+                    DropDownBorderColor="{DynamicResource GrayShadowColor}"
+                    HeightRequest="40"
+                    TextColor="{DynamicResource GrayShadowColor}">
+                    <SFCom:SfComboBox.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            Command="{Binding ComboSelectCommand}"
+                            CommandParameter="{Binding SelectedIndex, Source={x:Reference box}}"
+                            EventName="SelectChanged " />
+                    </SFCom:SfComboBox.Behaviors>
+                </SFCom:SfComboBox>
+            </Grid>
+            <SfRefresh:SfPullToRefresh
+                Grid.Row="1"
+                IsRefreshing="{Binding Refresh}"
+                ProgressBackgroundColor="Transparent"
+                ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                RefreshCommand="{Binding RefreshsCommand}"
+                RefreshContentHeight="50"
+                RefreshContentWidth="50"
+                TransitionMode="Push">
+                <SfRefresh:SfPullToRefresh.PullableContent>
+                    <SfList:SfListView
+                        AutoFitMode="Height"
+                        IsScrollBarVisible="False"
+                        ItemsSource="{Binding Categories}"
+                        SelectionBackgroundColor="Transparent">
+                        <SfList:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Ctrl:ShadowFrame
+                                        Margin="2,10,5,5"
+                                        Padding="0"
+                                        Background="{DynamicResource GrayShadowColor}"
+                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                        BorderWidth="1"
+                                        CornerRadius="4"
+                                        HasShadow="True"
+                                        HorizontalOptions="FillAndExpand"
+                                        Radius="4"
+                                        VerticalOptions="FillAndExpand">
+                                        <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                            <SfBorder:SfBorder
+                                                BorderColor="Transparent"
+                                                BorderWidth="0"
+                                                CornerRadius="4">
+                                                <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
+                                                    <FFImg:CachedImage
+                                                        dp:ImageSourceBindableProperty.AxgleSource="{Binding Cover}"
+                                                        Aspect="AspectFill"
+                                                        BackgroundColor="{DynamicResource Gray-200}"
+                                                        CacheDuration="0:3:0"
+                                                        CacheType="Disk"
+                                                        DownsampleUseDipUnits="True"
+                                                        HeightRequest="60"
+                                                        WidthRequest="60">
+                                                        <FFImg:CachedImage.Transformations>
+                                                            <FFTrans:BlurredTransformation Radius="15" />
+                                                        </FFImg:CachedImage.Transformations>
+                                                    </FFImg:CachedImage>
+                                                    <StackLayout
+                                                        Grid.Column="1"
+                                                        Padding="16"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Spacing="0"
+                                                        VerticalOptions="FillAndExpand">
+                                                        <Label
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding ShortName}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Total, StringFormat='总数:{0}'}" />
+                                                        <Button
+                                                            Padding="2"
+                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                            Command="{Binding BindingContext.CategoryCommand, Source={x:Reference AxgleView}}"
+                                                            CommandParameter="{Binding AId}"
+                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                            FontSize="15"
+                                                            HeightRequest="30"
+                                                            HorizontalOptions="Start"
+                                                            Text="{Static Fontawesome:FontAwesomeIcons.Eye}"
+                                                            TextColor="{DynamicResource Gray-Black}"
+                                                            WidthRequest="30" />
+                                                    </StackLayout>
+                                                </Grid>
+                                            </SfBorder:SfBorder>
+                                        </SfEffect:SfEffectsView>
+                                    </Ctrl:ShadowFrame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </SfList:SfListView.ItemTemplate>
+                    </SfList:SfListView>
+                </SfRefresh:SfPullToRefresh.PullableContent>
+            </SfRefresh:SfPullToRefresh>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

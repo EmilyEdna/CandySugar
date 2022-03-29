@@ -49,6 +49,12 @@ namespace CandySugar.Xam.Common.AppDTO
             });
             data.Add(new MenuOption
             {
+                FuncName = "茶杯",
+                ImageRoute = "https://konachan.com/data/preview/05/77/057714f9929ac269a233a3ad843893a2.jpg",
+                CommandParam = MenuFuncEunm.Axgle
+            });
+            data.Add(new MenuOption
+            {
                 FuncName = "音乐",
                 ImageRoute = "https://konachan.com/data/preview/63/38/6338577be643049d4b37882a25aec477.jpg",
                 CommandParam = MenuFuncEunm.Music
@@ -58,12 +64,6 @@ namespace CandySugar.Xam.Common.AppDTO
                 FuncName = "设置",
                 ImageRoute = "https://konachan.com/data/preview/36/12/36125de26ea53a393ff00c48fbe2f626.jpg",
                 CommandParam = MenuFuncEunm.Setting
-            });
-            data.Add(new MenuOption
-            {
-                FuncName = "历史",
-                ImageRoute = "https://konachan.com/data/preview/05/77/057714f9929ac269a233a3ad843893a2.jpg",
-                CommandParam = MenuFuncEunm.History
             });
             data.Add(new MenuOption
             {

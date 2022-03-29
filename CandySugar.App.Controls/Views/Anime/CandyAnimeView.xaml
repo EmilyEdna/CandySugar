@@ -10,7 +10,6 @@
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
-    xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     x:Name="CandyAnime"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -28,8 +27,8 @@
                 PlaceholderColor="{DynamicResource GrayShadowColor}"
                 SearchCommand="{Binding SearchCommand}"
                 SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
-            <local:ItemsControl Grid.Row="1" ItemsSource="{Binding RecommendCategory}">
-                <local:ItemsControl.ItemTemplate>
+            <Ctrl:ItemsControl Grid.Row="1" ItemsSource="{Binding RecommendCategory}">
+                <Ctrl:ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <XFMaterial:MaterialButton
                             Command="{Binding BindingContext.CateCommand, Source={x:Reference CandyAnime}}"
@@ -38,20 +37,20 @@
                             Text="{Binding Key}"
                             TextColor="{DynamicResource PrimaryPink}" />
                     </DataTemplate>
-                </local:ItemsControl.ItemTemplate>
-                <local:ItemsControl.ItemsLayout>
+                </Ctrl:ItemsControl.ItemTemplate>
+                <Ctrl:ItemsControl.ItemsLayout>
                     <DataTemplate>
                         <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                            <local:WrapLayout
-                                local:LayoutEx.IsItemsHost="True"
+                            <Ctrl:WrapLayout
+                                Ctrl:LayoutEx.IsItemsHost="True"
                                 IsSquare="True"
                                 Spacing="10" />
                         </ScrollView>
                     </DataTemplate>
-                </local:ItemsControl.ItemsLayout>
-            </local:ItemsControl>
-            <local:ItemsControl Grid.Row="2" ItemsSource="{Binding LetterCate}">
-                <local:ItemsControl.ItemTemplate>
+                </Ctrl:ItemsControl.ItemsLayout>
+            </Ctrl:ItemsControl>
+            <Ctrl:ItemsControl Grid.Row="2" ItemsSource="{Binding LetterCate}">
+                <Ctrl:ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <XFMaterial:MaterialButton
                             Command="{Binding BindingContext.LettCommand, Source={x:Reference CandyAnime}}"
@@ -60,26 +59,26 @@
                             Text="{Binding .}"
                             TextColor="{DynamicResource PrimaryPink}" />
                     </DataTemplate>
-                </local:ItemsControl.ItemTemplate>
-                <local:ItemsControl.ItemsLayout>
+                </Ctrl:ItemsControl.ItemTemplate>
+                <Ctrl:ItemsControl.ItemsLayout>
                     <DataTemplate>
                         <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                            <local:WrapLayout
-                                local:LayoutEx.IsItemsHost="True"
+                            <Ctrl:WrapLayout
+                                Ctrl:LayoutEx.IsItemsHost="True"
                                 IsSquare="True"
                                 Spacing="10" />
                         </ScrollView>
                     </DataTemplate>
-                </local:ItemsControl.ItemsLayout>
-            </local:ItemsControl>
+                </Ctrl:ItemsControl.ItemsLayout>
+            </Ctrl:ItemsControl>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label Text="今日更新：" TextColor="{DynamicResource PrimaryPink}" />
-                <local:ItemsControl Grid.Column="1" ItemsSource="{Binding WeekDay}">
-                    <local:ItemsControl.ItemTemplate>
+                <Ctrl:ItemsControl Grid.Column="1" ItemsSource="{Binding WeekDay}">
+                    <Ctrl:ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Label Text="{Binding AnimeName}" TextColor="{DynamicResource PrimaryPink}">
                                 <Label.GestureRecognizers>
@@ -87,18 +86,18 @@
                                 </Label.GestureRecognizers>
                             </Label>
                         </DataTemplate>
-                    </local:ItemsControl.ItemTemplate>
-                    <local:ItemsControl.ItemsLayout>
+                    </Ctrl:ItemsControl.ItemTemplate>
+                    <Ctrl:ItemsControl.ItemsLayout>
                         <DataTemplate>
                             <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                                <local:WrapLayout
-                                    local:LayoutEx.IsItemsHost="True"
+                                <Ctrl:WrapLayout
+                                    Ctrl:LayoutEx.IsItemsHost="True"
                                     IsSquare="True"
                                     Spacing="10" />
                             </ScrollView>
                         </DataTemplate>
-                    </local:ItemsControl.ItemsLayout>
-                </local:ItemsControl>
+                    </Ctrl:ItemsControl.ItemsLayout>
+                </Ctrl:ItemsControl>
             </Grid>
             <Grid Grid.Row="4">
                 <SfRefresh:SfPullToRefresh

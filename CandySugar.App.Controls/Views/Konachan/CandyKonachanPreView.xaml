@@ -11,7 +11,7 @@
         <StackLayout>
             <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
                 <FFImg:CachedImage
-                    dp:ImageSourceBindableProperty.SuperSource="{Binding Route}"
+                    dp:ImageSourceBindableProperty.KonachanSource="{Binding Route}"
                     Aspect="AspectFill"
                     CacheDuration="0:3:0"
                     CacheType="Disk"

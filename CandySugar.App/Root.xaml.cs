@@ -92,6 +92,7 @@ namespace CandySugar.App
 
             #region Axgle
             containerRegistry.RegisterForNavigation<CandyAxgleView, CandyAxgleViewModel>();
+            containerRegistry.RegisterForNavigation<CandyAxgleCateView, CandyAxgleCateViewModel>();
             #endregion
 
             #region Setting
