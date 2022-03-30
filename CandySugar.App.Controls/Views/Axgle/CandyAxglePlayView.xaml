@@ -1,12 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CandySugar.App.Controls.Views.Axgle.CandyAxglePlayView">
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Axgle.CandyAxglePlayView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    Appearing="ContentPage_Appearing"
+    BackgroundColor="Black"
+    Disappearing="ContentPage_Disappearing"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Ctrl:ShadowFrame Margin="4.4" Padding="-6">
+            <WebView
+                x:Name="web"
+                Margin="-8,0,-8,0"
+                HeightRequest="1" />
+        </Ctrl:ShadowFrame>
     </ContentPage.Content>
 </ContentPage>

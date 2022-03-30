@@ -2,16 +2,17 @@
     x:Class="CandySugar.App.Controls.Views.Anime.CandyAnimePlayView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
     Appearing="ContentPage_Appearing"
-    Disappearing="ContentPage_Disappearing"
     BackgroundColor="Black"
+    Disappearing="ContentPage_Disappearing"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Frame Margin="4.4" Padding="-6">
+        <Ctrl:ShadowFrame Margin="4.4" Padding="-6">
             <WebView
                 x:Name="web"
                 Margin="-8,0,-8,0"
                 HeightRequest="1" />
-        </Frame>
+        </Ctrl:ShadowFrame>
     </ContentPage.Content>
 </ContentPage>

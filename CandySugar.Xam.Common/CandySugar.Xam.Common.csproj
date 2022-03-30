@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="WebViewAssets\axgle.html" />
     <None Remove="WebViewAssets\index.html" />
     <None Remove="WebViewAssets\manga.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="WebViewAssets\axgle.html" />
     <EmbeddedResource Include="WebViewAssets\manga.html" />
     <EmbeddedResource Include="WebViewAssets\index.html" />
   </ItemGroup>
