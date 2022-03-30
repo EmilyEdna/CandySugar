@@ -71,8 +71,8 @@ namespace CandySugar.CandyWindows
 
             AxWebView.CoreWebView2.Navigate(new Uri($"{Environment.CurrentDirectory}\\AppData\\axgle.html").AbsoluteUri);
 
-            AxWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = true;
-            AxWebView.CoreWebView2.Settings.AreDevToolsEnabled = true;
+            AxWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+            AxWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
             await Task.Delay(2000);
             await AxWebView.CoreWebView2.ExecuteScriptAsync($"Init('{ViewModel.Watch}')");
         }

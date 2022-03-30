@@ -1,5 +1,6 @@
 ﻿using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.AppDTO;
+using CandySugar.Xam.Core.Service;
 using GalActor.SDK;
 using GalActor.SDK.ViewModel;
 using GalActor.SDK.ViewModel.Eunms;
@@ -15,6 +16,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
+using CandySugar.Xam.Common.DTO;
+using CandySugar.App.Controls.Views.Axgle;
+using XF.Material.Forms.Models;
 
 namespace CandySugar.App.Controls.ViewModels.AxgleModel
 {
@@ -82,6 +87,9 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                    Name="长时常"
                 }
             };
+            Menu = new ObservableCollection<MaterialMenuItem> {
+             new MaterialMenuItem { Text ="收藏" }
+            };
         }
         #endregion
 
@@ -93,12 +101,20 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             set => SetProperty(ref _CategoryList, value);
         }
 
+        private ObservableCollection<MaterialMenuItem> _Menu;
+        public ObservableCollection<MaterialMenuItem> Menu
+        {
+            get => _Menu;
+            set => SetProperty(ref _Menu, value);
+        }
+
         private ObservableCollection<GalComboDto> _Combo;
         public ObservableCollection<GalComboDto> Combo
         {
             get => _Combo;
             set => SetProperty(ref _Combo, value);
         }
+
         private int _PageIndex;
         public int PageIndex
         {
@@ -119,6 +135,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             get { return _IsBusy; }
             set { SetProperty(ref _IsBusy, value); }
         }
+
         private bool _Refresh;
         public bool Refresh
         {
@@ -229,6 +246,16 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 }
             }
         }
+        public async void Like(CalActorCategoryList input) 
+        {
+           await ContainerLocator.Container.Resolve<IAXLiShi>().Insert(input.ToMapest<CandyAXLiShiDto>());
+        }
+        public async void Navigation(string input)
+        {
+            NavigationParameters param = new NavigationParameters();
+            param.Add("Route", input);
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyAxglePlayView), UriKind.Relative), param);
+        }
         #endregion
 
         #region Command
@@ -264,8 +291,19 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 else Category(true);
             }
         });
-        public ICommand PlayCommand => new DelegateCommand<string>(input => { });
-        public ICommand LikeCommand => new DelegateCommand<CalActorCategoryList>(input => { });
+        public ICommand PlayCommand => new DelegateCommand<string>(input => {
+            if (!input.IsNullOrEmpty())
+                Navigation(input);
+        });
+        public ICommand LikeCommand => new DelegateCommand<CalActorCategoryList>(input => 
+        {
+            if (input != null)
+                Like(input);
+        });
+        public ICommand GotoLikeCommand => new DelegateCommand(async () =>
+        {
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyAxgleLikeView), UriKind.Relative));
+        });
         #endregion
     }
 }

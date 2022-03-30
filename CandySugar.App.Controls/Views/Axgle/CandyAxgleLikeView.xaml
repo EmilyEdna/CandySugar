@@ -1,12 +1,141 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CandySugar.App.Controls.Views.Axgle.CandyAxgleLikeView">
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Axgle.CandyAxgleLikeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
+    x:Name="AxgleLikeView"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid RowDefinitions="40,*">
+            <SearchBar
+                BackgroundColor="{DynamicResource PrimaryPink}"
+                Keyboard="Default"
+                Placeholder="请输入关键字"
+                PlaceholderColor="{DynamicResource GrayShadowColor}"
+                SearchCommand="{Binding SearchCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}"
+                Text="{Binding KeyWord}" />
+            <SfList:SfListView
+                AutoFitMode="Height"
+                IsBusy="{Binding IsBusy}"
+                IsScrollBarVisible="False"
+                ItemsSource="{Binding CategoryList}"
+                LoadMoreCommand="{Binding ShowMoreCommand}"
+                LoadMoreOption="AutoOnScroll"
+                SelectionBackgroundColor="Transparent">
+                <SfList:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Ctrl:ShadowFrame
+                                Margin="2,10,5,5"
+                                Padding="0"
+                                Background="{DynamicResource GrayShadowColor}"
+                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                BorderWidth="1"
+                                CornerRadius="4"
+                                HasShadow="True"
+                                HorizontalOptions="FillAndExpand"
+                                Radius="4"
+                                VerticalOptions="FillAndExpand">
+                                <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                    <SfBorder:SfBorder
+                                        BorderColor="Transparent"
+                                        BorderWidth="0"
+                                        CornerRadius="4">
+                                        <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
+                                            <FFImg:CachedImage
+                                                dp:ImageSourceBindableProperty.AxgleSource="{Binding Preview}"
+                                                Aspect="AspectFill"
+                                                BackgroundColor="{DynamicResource Gray-200}"
+                                                CacheDuration="0:3:0"
+                                                CacheType="Disk"
+                                                DownsampleUseDipUnits="True"
+                                                HeightRequest="60"
+                                                WidthRequest="60">
+                                                <FFImg:CachedImage.Transformations>
+                                                    <FFTrans:BlurredTransformation Radius="15" />
+                                                </FFImg:CachedImage.Transformations>
+                                            </FFImg:CachedImage>
+                                            <StackLayout
+                                                Grid.Column="1"
+                                                Padding="16"
+                                                HorizontalOptions="FillAndExpand"
+                                                Spacing="0"
+                                                VerticalOptions="FillAndExpand">
+                                                <Label
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    HorizontalTextAlignment="Start"
+                                                    Style="{DynamicResource DescriptionLabelStyle}"
+                                                    Text="{Binding Title, StringFormat='标题:{0}'}" />
+                                                <Label
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    HorizontalTextAlignment="Start"
+                                                    Style="{DynamicResource DescriptionLabelStyle}"
+                                                    Text="{Binding KeyWord, StringFormat='标签:{0}'}" />
+                                                <Label
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    HorizontalTextAlignment="Start"
+                                                    Style="{DynamicResource DescriptionLabelStyle}"
+                                                    Text="{Binding Duration, StringFormat='时常:{0}'}" />
+                                                <Label
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    HorizontalTextAlignment="Start"
+                                                    Style="{DynamicResource DescriptionLabelStyle}"
+                                                    Text="{Binding AddTime, StringFormat='更新时间:{0}'}" />
+                                                <Label
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    HorizontalTextAlignment="Start"
+                                                    Style="{DynamicResource DescriptionLabelStyle}"
+                                                    Text="{Binding Views, StringFormat='浏览次数:{0}'}" />
+                                                <FlexLayout AlignItems="End" JustifyContent="End">
+                                                    <Button
+                                                        Padding="2"
+                                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                        Command="{Binding BindingContext.PlayCommand, Source={x:Reference AxgleLikeView}}"
+                                                        CommandParameter="{Binding Play}"
+                                                        CornerRadius="15"
+                                                        FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                        FontSize="15"
+                                                        HeightRequest="30"
+                                                        HorizontalOptions="End"
+                                                        Text="{Static Fontawesome:FontAwesomeIcons.Play}"
+                                                        TextColor="{DynamicResource Gray-Black}"
+                                                        WidthRequest="30" />
+                                                    <Button
+                                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                        Command="{Binding BindingContext.RemoveCommand, Source={x:Reference AxgleLikeView}}"
+                                                        CommandParameter="{Binding .}"
+                                                        CornerRadius="15"
+                                                        FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                        FontSize="15"
+                                                        HeightRequest="35"
+                                                        HorizontalOptions="End"
+                                                        Text="{Static Fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                        TextColor="{DynamicResource Gray-Black}"
+                                                        WidthRequest="40" />
+                                                </FlexLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                    </SfBorder:SfBorder>
+                                </SfEffect:SfEffectsView>
+                            </Ctrl:ShadowFrame>
+                        </ViewCell>
+                    </DataTemplate>
+                </SfList:SfListView.ItemTemplate>
+            </SfList:SfListView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

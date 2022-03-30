@@ -227,7 +227,6 @@ namespace CandySugar.UserControlViews.AxgleViews
                 MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
             }
         }
-
         private async void Search()
         {
             try
