@@ -17,7 +17,7 @@
     xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
     xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
-    x:Name="KonachanView"
+    x:Name="AxgleCateView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid RowDefinitions="40,*">
@@ -30,7 +30,6 @@
                     SearchCommand="{Binding SearchCommand}"
                     SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
                 <SFCom:SfComboBox
-                    x:Name="box"
                     Grid.Column="1"
                     Margin="-10,0,0,0"
                     BackgroundColor="{DynamicResource PrimaryPink}"
@@ -44,8 +43,8 @@
                     <SFCom:SfComboBox.Behaviors>
                         <behavior:EventToCommandBehavior
                             Command="{Binding ComboSelectCommand}"
-                            CommandParameter="{Binding SelectedIndex, Source={x:Reference box}}"
-                            EventName="SelectChanged " />
+                            Converter="{x:StaticResource ComboConverter}"
+                            EventName="SelectionChanging" />
                     </SFCom:SfComboBox.Behaviors>
                 </SFCom:SfComboBox>
             </Grid>
@@ -61,8 +60,11 @@
                 <SfRefresh:SfPullToRefresh.PullableContent>
                     <SfList:SfListView
                         AutoFitMode="Height"
+                        IsBusy="{Binding IsBusy}"
                         IsScrollBarVisible="False"
-                        ItemsSource="{Binding Categories}"
+                        ItemsSource="{Binding CategoryList}"
+                        LoadMoreCommand="{Binding ShowMoreCommand}"
+                        LoadMoreOption="AutoOnScroll"
                         SelectionBackgroundColor="Transparent">
                         <SfList:SfListView.ItemTemplate>
                             <DataTemplate>
@@ -85,7 +87,7 @@
                                                 CornerRadius="4">
                                                 <Grid ColumnDefinitions="140,*" ColumnSpacing="0">
                                                     <FFImg:CachedImage
-                                                        dp:ImageSourceBindableProperty.AxgleSource="{Binding Cover}"
+                                                        dp:ImageSourceBindableProperty.AxgleSource="{Binding Preview}"
                                                         Aspect="AspectFill"
                                                         BackgroundColor="{DynamicResource Gray-200}"
                                                         CacheDuration="0:3:0"
@@ -104,26 +106,46 @@
                                                         Spacing="0"
                                                         VerticalOptions="FillAndExpand">
                                                         <Label
+                                                            FontSize="12"
                                                             HorizontalOptions="Start"
                                                             HorizontalTextAlignment="Start"
                                                             Style="{DynamicResource DescriptionLabelStyle}"
-                                                            Text="{Binding ShortName}" />
+                                                            Text="{Binding Title, StringFormat='标题:{0}'}" />
                                                         <Label
                                                             FontSize="12"
                                                             HorizontalOptions="Start"
                                                             HorizontalTextAlignment="Start"
                                                             Style="{DynamicResource DescriptionLabelStyle}"
-                                                            Text="{Binding Total, StringFormat='总数:{0}'}" />
+                                                            Text="{Binding KeyWord, StringFormat='标签:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Duration, StringFormat='时常:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding AddTime, StringFormat='更新时间:{0}'}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            HorizontalOptions="Start"
+                                                            HorizontalTextAlignment="Start"
+                                                            Style="{DynamicResource DescriptionLabelStyle}"
+                                                            Text="{Binding Views, StringFormat='浏览次数:{0}'}" />
                                                         <Button
                                                             Padding="2"
                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                            Command="{Binding BindingContext.CategoryCommand, Source={x:Reference AxgleView}}"
-                                                            CommandParameter="{Binding AId}"
+                                                            Command="{Binding BindingContext.PlayCommand, Source={x:Reference AxgleCateView}}"
+                                                            CommandParameter="{Binding Play}"
+                                                            CornerRadius="15"
                                                             FontFamily="{DynamicResource FontAwesomeRegular}"
                                                             FontSize="15"
                                                             HeightRequest="30"
                                                             HorizontalOptions="Start"
-                                                            Text="{Static Fontawesome:FontAwesomeIcons.Eye}"
+                                                            Text="{Static Fontawesome:FontAwesomeIcons.Play}"
                                                             TextColor="{DynamicResource Gray-Black}"
                                                             WidthRequest="30" />
                                                     </StackLayout>

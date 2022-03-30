@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels.AxgleModel
@@ -31,17 +32,21 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             };
             Desc = GalActorDescEnum.Latest;
             this.PageIndex = 1;
+            this.Refresh = false;
+            this.IsBusy = false;
         }
 
         #region Field
-        public int AId;
+        private int AId;
         private GalActorDescEnum Desc;
+        private string KeyWord;
         #endregion
 
         #region Override
         public override void Initialize(INavigationParameters parameters)
         {
             AId = Convert.ToInt32(parameters.GetValue<string>("AId"));
+            Category();
         }
         protected override void OnViewLaunch()
         {
@@ -100,11 +105,25 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             get => _PageIndex;
             set => SetProperty(ref _PageIndex, value);
         }
+
         private int _Total;
         public int Total
         {
             get => _Total;
             set => SetProperty(ref _Total, value);
+        }
+
+        private bool _IsBusy;
+        public bool IsBusy
+        {
+            get { return _IsBusy; }
+            set { SetProperty(ref _IsBusy, value); }
+        }
+        private bool _Refresh;
+        public bool Refresh
+        {
+            get { return _Refresh; }
+            set { SetProperty(ref _Refresh, value); }
         }
         #endregion
 
@@ -113,10 +132,12 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         {
             return String.Format(Soft.Toast, nameof(CandyAxgleCateViewModel), Method);
         }
-        public async void Category()
+        public async void Category(bool IsLoadMore = false)
         {
             try
             {
+                if (IsLoadMore) Refresh = true; else IsBusy = true;
+                await Task.Delay(Soft.WaitSpan);
                 var Cate = await GalActorFactory.GalActor(opt =>
                 {
                     opt.RequestParam = new GalActorRequestInput
@@ -132,9 +153,25 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                         }
                     };
                 }).RunsAsync();
-
                 this.Total = Cate.CategoryListsResults.Total;
-                this.CategoryList = new ObservableCollection<CalActorCategoryList>(Cate.CategoryListsResults.CategaryList);
+                if (IsLoadMore)
+                {
+                    Refresh = false;
+                    this.CategoryList = new ObservableCollection<CalActorCategoryList>(Cate.CategoryListsResults.CategaryList);
+                }
+                else
+                {
+                    IsBusy = false;
+                    if (this.CategoryList == null)
+                        this.CategoryList = new ObservableCollection<CalActorCategoryList>(Cate.CategoryListsResults.CategaryList);
+                    else
+                    {
+                        Cate.CategoryListsResults.CategaryList.ForEach(item =>
+                        {
+                            this.CategoryList.Add(item);
+                        });
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -144,24 +181,89 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 }
             }
         }
-
-        public async void Search()
-        { 
-        
+        public async void Search(bool IsLoadMore = false)
+        {
+            try
+            {
+                if (IsLoadMore) Refresh = true; else IsBusy = true;
+                await Task.Delay(Soft.WaitSpan);
+                var Seach = await GalActorFactory.GalActor(opt =>
+                {
+                    opt.RequestParam = new GalActorRequestInput
+                    {
+                        Galype = GalActorEnum.Search,
+                        Proxy = this.Proxy,
+                        CacheSpan = Soft.CacheTime,
+                        Search = new GalActorSearch
+                        {
+                            Page = this.PageIndex,
+                            KeyWord = KeyWord
+                        }
+                    };
+                }).RunsAsync();
+                this.Total = Seach.SearchResult.Total;
+                if (IsLoadMore)
+                {
+                    Refresh = false;
+                    this.CategoryList = new ObservableCollection<CalActorCategoryList>(Seach.SearchResult.SearchList.ToMapest<List<CalActorCategoryList>>());
+                }
+                else
+                {
+                    IsBusy = false;
+                    if (this.CategoryList == null)
+                        this.CategoryList = new ObservableCollection<CalActorCategoryList>(Seach.SearchResult.SearchList.ToMapest<List<CalActorCategoryList>>());
+                    else
+                    {
+                        Seach.SearchResult.SearchList.ToMapest<List<CalActorCategoryList>>().ForEach(item =>
+                        {
+                            this.CategoryList.Add(item);
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
+                {
+                    await Task.Delay(3000);
+                }
+            }
         }
         #endregion
 
         #region Command
         public ICommand SearchCommand => new DelegateCommand<string>(input =>
         {
-
+            KeyWord = input;
+            this.PageIndex = 1;
+            Search();
         });
         public ICommand ComboSelectCommand => new DelegateCommand<dynamic>(input =>
         {
-            var x = input;
+            var box = (GalComboDto)input;
+            if (box != null && !KeyWord.IsNullOrEmpty())
+            {
+                Desc = (GalActorDescEnum)box.Description;
+                KeyWord=String.Empty;
+                PageIndex = 1;
+                Category();
+            }
         });
+        public ICommand RefreshsCommand => new DelegateCommand(() =>
+        {
+            this.PageIndex = 1;
+            if (KeyWord.IsNullOrEmpty()) Category();
+            else Search();
+        });
+        public ICommand ShowMoreCommand => new DelegateCommand(() => {
 
-        
+            PageIndex += 1;
+            if (PageIndex <= Total)
+            {
+                if (!KeyWord.IsNullOrEmpty()) Search(true);
+                else Category(true);
+            }
+        });
         #endregion
     }
 }

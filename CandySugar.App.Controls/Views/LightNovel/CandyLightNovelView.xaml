@@ -153,6 +153,7 @@
                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
                                                             Command="{Binding BindingContext.DetailCommand, Source={x:Reference LightNovelView}}"
                                                             CommandParameter="{Binding .}"
+                                                            CornerRadius="15"
                                                             FontFamily="{DynamicResource FontAwesomeSolid}"
                                                             FontSize="15"
                                                             HeightRequest="30"

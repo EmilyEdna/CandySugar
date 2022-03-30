@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.Behaviors
 {
@@ -53,7 +55,7 @@ namespace CandySugar.App.Controls.Behaviors
             base.OnDetachingFrom(bindable);
         }
 
-        private void RegisterEvent(string name)
+        private async void RegisterEvent(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -63,7 +65,11 @@ namespace CandySugar.App.Controls.Behaviors
             EventInfo eventInfo = AssociatedObject.GetType().GetRuntimeEvent(name);
             if (eventInfo == null)
             {
-                throw new ArgumentException(string.Format("EventToCommandBehavior: Can't register the '{0}' event.", EventName));
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(string.Format("EventToCommandBehavior: Can't register the '{0}' event.", EventName)))
+                {
+                    await Task.Delay(3000);
+                }
+                return;
             }
             MethodInfo methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
             eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);

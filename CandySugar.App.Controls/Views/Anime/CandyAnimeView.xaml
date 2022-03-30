@@ -165,6 +165,7 @@
                                                                     BackgroundColor="{DynamicResource GrayShadowColor}"
                                                                     Command="{Binding BindingContext.DetailCommand, Source={x:Reference CandyAnime}}"
                                                                     CommandParameter="{Binding DetailAddress}"
+                                                                    CornerRadius="15"
                                                                     FlexLayout.AlignSelf="End"
                                                                     FlexLayout.Grow="1"
                                                                     FontFamily="{DynamicResource FontAwesomeSolid}"
