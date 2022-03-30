@@ -56,6 +56,7 @@ namespace CandySugar.App
             containerRegistry.Register<ILXSLiShi, LXSLiShi>();
             containerRegistry.Register<IDMLiShi, DMLiShi>();
             containerRegistry.Register<IBZLiShi, BZLiShi>();
+            containerRegistry.Register<IAXLiShi, AXLiShi>();
             containerRegistry.Register<ILoger, Loger>();
             containerRegistry.Register<ISetting, Setting>();
             #endregion
@@ -93,6 +94,7 @@ namespace CandySugar.App
             #region Axgle
             containerRegistry.RegisterForNavigation<CandyAxgleView, CandyAxgleViewModel>();
             containerRegistry.RegisterForNavigation<CandyAxgleCateView, CandyAxgleCateViewModel>();
+            containerRegistry.RegisterForNavigation<CandyAxgleLikeView, CandyAxgleLikeViewModel>();
             #endregion
 
             #region Setting

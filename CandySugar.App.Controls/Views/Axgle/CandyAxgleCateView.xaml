@@ -135,19 +135,33 @@
                                                             HorizontalTextAlignment="Start"
                                                             Style="{DynamicResource DescriptionLabelStyle}"
                                                             Text="{Binding Views, StringFormat='浏览次数:{0}'}" />
-                                                        <Button
-                                                            Padding="2"
-                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                            Command="{Binding BindingContext.PlayCommand, Source={x:Reference AxgleCateView}}"
-                                                            CommandParameter="{Binding Play}"
-                                                            CornerRadius="15"
-                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
-                                                            FontSize="15"
-                                                            HeightRequest="30"
-                                                            HorizontalOptions="Start"
-                                                            Text="{Static Fontawesome:FontAwesomeIcons.Play}"
-                                                            TextColor="{DynamicResource Gray-Black}"
-                                                            WidthRequest="30" />
+                                                        <FlexLayout AlignItems="End" JustifyContent="End">
+                                                            <Button
+                                                                Padding="2"
+                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                Command="{Binding BindingContext.PlayCommand, Source={x:Reference AxgleCateView}}"
+                                                                CommandParameter="{Binding Play}"
+                                                                CornerRadius="15"
+                                                                FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                FontSize="15"
+                                                                HeightRequest="30"
+                                                                HorizontalOptions="End"
+                                                                Text="{Static Fontawesome:FontAwesomeIcons.Play}"
+                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                WidthRequest="30" />
+                                                            <Button
+                                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                Command="{Binding BindingContext.LikeCommand, Source={x:Reference AxgleCateView}}"
+                                                                CommandParameter="{Binding .}"
+                                                                CornerRadius="15"
+                                                                FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                FontSize="15"
+                                                                HeightRequest="35"
+                                                                HorizontalOptions="End"
+                                                                Text="{Static fontawesome:FontAwesomeIcons.Star}"
+                                                                TextColor="{DynamicResource Gray-Black}"
+                                                                WidthRequest="40" />
+                                                        </FlexLayout>
                                                     </StackLayout>
                                                 </Grid>
                                             </SfBorder:SfBorder>

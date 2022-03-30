@@ -42,6 +42,7 @@ namespace CandySugar.Xam.Core.ServiceImpl
             }
             var Count = await query.CountAsync();
             var Result = await query.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
+            await db.CloseAsync();
             return (Result.ToMapest<List<CandyBZLiShiDto>>(), Count);
         }
 

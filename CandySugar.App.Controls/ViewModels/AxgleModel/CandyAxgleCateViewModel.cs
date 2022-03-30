@@ -264,6 +264,8 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 else Category(true);
             }
         });
+        public ICommand PlayCommand => new DelegateCommand<string>(input => { });
+        public ICommand LikeCommand => new DelegateCommand<CalActorCategoryList>(input => { });
         #endregion
     }
 }
