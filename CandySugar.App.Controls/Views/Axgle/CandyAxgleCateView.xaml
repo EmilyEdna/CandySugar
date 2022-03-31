@@ -22,7 +22,6 @@
         <Grid RowDefinitions="40,*">
             <FlexLayout>
                 <SearchBar
-                    Grid.Column="1"
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     Keyboard="Default"
                     Placeholder="请输入关键字"
@@ -31,7 +30,6 @@
                     SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}"
                     WidthRequest="200" />
                 <SFCom:SfComboBox
-                    Grid.Column="2"
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     BorderColor="{DynamicResource Gray-700}"
                     ClearButtonColor="{DynamicResource GrayShadowColor}"
@@ -39,6 +37,7 @@
                     DisplayMemberPath="Name"
                     DropDownBorderColor="{DynamicResource GrayShadowColor}"
                     HeightRequest="40"
+                    SelectedIndex="2"
                     TextColor="{DynamicResource GrayShadowColor}"
                     WidthRequest="140">
                     <SFCom:SfComboBox.Behaviors>

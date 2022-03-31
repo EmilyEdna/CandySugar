@@ -9,9 +9,13 @@ using CandySugar.App.ViewModels;
 using CandySugar.App.Views;
 using CandySugar.Droid.Platforms;
 using CandySugar.Xam.Common;
+using CandySugar.Xam.Common.DTO;
+using CandySugar.Xam.Core.Service;
 using FFImageLoading.Forms.Platform;
+using MediaManager;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
+using Prism.Ioc;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,14 +23,12 @@ using Xamarin.Forms.Platform.Android;
 using XF.Material.Droid;
 using Forms = Xamarin.Forms.Forms;
 using Platform = Xamarin.Essentials.Platform;
-using Prism.Ioc;
-using CandySugar.Xam.Core.Service;
-using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.Droid
 {
-    [Activity(Theme = "@style/MainTheme",
-              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+    [Activity(Theme = "@style/MainTheme", 
+        LaunchMode = LaunchMode.SingleTop,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -38,6 +40,7 @@ namespace CandySugar.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             CrossCurrentActivity.Current.Activity = this;
+            CrossMediaManager.Current.Init();
 
             base.OnCreate(savedInstanceState);
             this.Window.AddFlags(WindowManagerFlags.KeepScreenOn);
@@ -87,6 +90,7 @@ namespace CandySugar.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            //权限检查
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

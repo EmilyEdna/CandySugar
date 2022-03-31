@@ -18,6 +18,7 @@ using CandySugar.Xam.Core.Service;
 using CandySugar.Xam.Common;
 using CandySugar.App.Controls.Views.Option;
 using CandySugar.App.Controls.Views.Axgle;
+using CandySugar.App.Controls.Views.Music;
 
 namespace CandySugar.App.ViewModels
 {
@@ -73,6 +74,7 @@ namespace CandySugar.App.ViewModels
                     break;
                 case MenuFuncEunm.Music:
                     base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyMusicView));
                     break;
                 case MenuFuncEunm.Setting:
                     base.Title = input.CommandParam.ToDes();

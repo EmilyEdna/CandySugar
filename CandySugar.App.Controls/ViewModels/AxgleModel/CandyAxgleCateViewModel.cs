@@ -35,7 +35,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 Port = Soft.ProxyPort,
                 UserName = Soft.ProxyAccount
             };
-            Desc = GalActorDescEnum.Latest;
+            Desc = GalActorDescEnum.MostViewed;
             this.PageIndex = 1;
             this.Refresh = false;
             this.IsBusy = false;

@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.Music.CandyMusicView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:SFCom="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
+    x:Name="NovelView"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid RowDefinitions="40,*">
+            <FlexLayout>
+                <SearchBar
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    Keyboard="Default"
+                    Placeholder="请输入关键字"
+                    PlaceholderColor="{DynamicResource GrayShadowColor}"
+                    SearchCommand="{Binding SearchCommand}"
+                    SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}"
+                    Text="{Binding SearchWord}"
+                    WidthRequest="260" />
+                <SFCom:SfComboBox
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    BorderColor="{DynamicResource Gray-700}"
+                    ClearButtonColor="{DynamicResource GrayShadowColor}"
+                    DataSource="{Binding Combo}"
+                    DisplayMemberPath="Name"
+                    DropDownBorderColor="{DynamicResource GrayShadowColor}"
+                    HeightRequest="40"
+                    SelectedIndex="1"
+                    TextColor="{DynamicResource GrayShadowColor}"
+                    WidthRequest="110">
+                    <SFCom:SfComboBox.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            Command="{Binding ComboSelectCommand}"
+                            Converter="{x:StaticResource ComboConverter}"
+                            EventName="SelectionChanging" />
+                    </SFCom:SfComboBox.Behaviors>
+                </SFCom:SfComboBox>
+            </FlexLayout>
+            <SfTab:SfTabView
+                Grid.Row="1"
+                BackgroundColor="Transparent"
+                EnableSwiping="False"
+                OverflowMode="CenterButton"
+                ScrollButtonBackgroundColor="Transparent"
+                ScrollButtonForegroundColor="Transparent"
+                TabHeaderBackgroundColor="Transparent"
+                TabHeaderPosition="Bottom">
+                <SfTab:SfTabView.Behaviors>
+                    <behavior:EventToCommandBehavior
+                        Command="{Binding TabChangedCommand}"
+                        Converter="{StaticResource TabItemConverter}"
+                        EventName="TabItemTapped" />
+                </SfTab:SfTabView.Behaviors>
+                <SfTab:SfTabView.CenterButtonView>
+                    <Grid WidthRequest="50">
+                        <Button
+                            Margin="0,20,0,0"
+                            BackgroundColor="Transparent"
+                            CornerRadius="35"
+                            FontFamily="{DynamicResource FontAwesomeSolid}"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Text="{Static Fontawesome:FontAwesomeIcons.Music}"
+                            TextColor="{DynamicResource PrimaryLightColor}" />
+                    </Grid>
+                </SfTab:SfTabView.CenterButtonView>
+                <SfTab:SfTabItem Title="单曲" TabIndex="0">
+                    <SfTab:SfTabItem.Content>
+                        <Grid>
+                            <SfRefresh:SfPullToRefresh
+                                IsRefreshing="{Binding Refresh}"
+                                ProgressBackgroundColor="Transparent"
+                                ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                                RefreshCommand="{Binding RefreshsCommand}"
+                                RefreshContentHeight="50"
+                                RefreshContentWidth="50"
+                                TransitionMode="Push">
+                                <SfRefresh:SfPullToRefresh.PullableContent>
+                                    <SfList:SfListView
+                                        AutoFitMode="Height"
+                                        IsBusy="{Binding IsBusy}"
+                                        IsScrollBarVisible="False"
+                                        ItemsSource="{Binding SongItems}"
+                                        LoadMoreCommand="{Binding ShowMoreCommand}"
+                                        LoadMoreOption="AutoOnScroll"
+                                        SelectionBackgroundColor="Transparent">
+                                        <SfList:SfListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Ctrl:ShadowFrame
+                                                        Margin="2,10,5,5"
+                                                        Padding="0"
+                                                        Background="{DynamicResource GrayShadowColor}"
+                                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                        BorderWidth="1"
+                                                        CornerRadius="4"
+                                                        HasShadow="True"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Radius="4"
+                                                        VerticalOptions="FillAndExpand">
+                                                        <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                                            <SfBorder:SfBorder
+                                                                BorderColor="Transparent"
+                                                                BorderWidth="0"
+                                                                CornerRadius="4">
+                                                                <Grid ColumnDefinitions="*,.3*" ColumnSpacing="0">
+                                                                    <ScrollView
+                                                                        Grid.Column="0"
+                                                                        HorizontalScrollBarVisibility="Never"
+                                                                        VerticalScrollBarVisibility="Never">
+                                                                        <StackLayout
+                                                                            Padding="10"
+                                                                            HorizontalOptions="FillAndExpand"
+                                                                            Spacing="0"
+                                                                            VerticalOptions="FillAndExpand">
+                                                                            <Label
+                                                                                FontSize="12"
+                                                                                HorizontalOptions="Start"
+                                                                                HorizontalTextAlignment="Start"
+                                                                                LineBreakMode="CharacterWrap"
+                                                                                Style="{DynamicResource TitleLabelStyle}"
+                                                                                Text="{Binding SongName}" />
+                                                                            <Label
+                                                                                FontSize="10"
+                                                                                HorizontalOptions="Start"
+                                                                                HorizontalTextAlignment="Start"
+                                                                                LineBreakMode="CharacterWrap"
+                                                                                Style="{DynamicResource DescriptionLabelStyle}">
+                                                                                <Label.FormattedText>
+                                                                                    <FormattedString>
+                                                                                        <Span Text="(" />
+                                                                                        <Span Text="{Binding SongAlbumName}" />
+                                                                                        <Span Text=")" />
+                                                                                    </FormattedString>
+                                                                                </Label.FormattedText>
+                                                                            </Label>
+                                                                            <Label
+                                                                                FontSize="10"
+                                                                                HorizontalOptions="Start"
+                                                                                HorizontalTextAlignment="Start"
+                                                                                LineBreakMode="CharacterWrap"
+                                                                                Style="{DynamicResource DescriptionLabelStyle}"
+                                                                                Text="{Binding SongArtistName, Converter={x:StaticResource ListConverter}}" />
+                                                                        </StackLayout>
+                                                                    </ScrollView>
+                                                                    <FlexLayout
+                                                                        Grid.Column="1"
+                                                                        AlignItems="Center"
+                                                                        JustifyContent="End">
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            CornerRadius="18"
+                                                                            FontFamily="{DynamicResource FontAwesomeSolid}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.Play}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="40" />
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            CornerRadius="18"
+                                                                            FontFamily="{DynamicResource FontAwesomeSolid}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.Circle}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="40" />
+                                                                    </FlexLayout>
+                                                                </Grid>
+                                                            </SfBorder:SfBorder>
+                                                        </SfEffect:SfEffectsView>
+                                                    </Ctrl:ShadowFrame>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </SfList:SfListView.ItemTemplate>
+                                    </SfList:SfListView>
+                                </SfRefresh:SfPullToRefresh.PullableContent>
+                            </SfRefresh:SfPullToRefresh>
+                        </Grid>
+                    </SfTab:SfTabItem.Content>
+                </SfTab:SfTabItem>
+                <SfTab:SfTabItem Title="歌单" TabIndex="1">
+                    <SfTab:SfTabItem.Content>
+                        <Grid />
+                    </SfTab:SfTabItem.Content>
+                </SfTab:SfTabItem>
+            </SfTab:SfTabView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -7,6 +7,7 @@
 	<ItemGroup>
 		<PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
 		<PackageReference Include="Plugin.DeviceOrientation" Version="1.0.7" />
+		<PackageReference Include="Plugin.MediaManager.Forms" Version="1.1.0" />
 		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
 		<PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.4.0.54" />
@@ -93,6 +94,9 @@
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Manga\CandyMangaView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Views\Music\CandyMusicView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Novel\CandyNovelContentView.xaml">
