@@ -294,11 +294,11 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         public string InitTag(bool Type = true)
         {
             string Tag = string.Empty;
-            if (Soft.AgeModule == 1)
+            if (Soft.AgeModule == 10)
                 Tag = Soft.S12X;
-            else if (Soft.AgeModule == 2)
+            else if (Soft.AgeModule == 15)
                 Tag = Soft.S15X;
-            else if (Soft.AgeModule == 3)
+            else if (Soft.AgeModule == 20)
                 Tag = Soft.S18X;
             else
                 Tag = string.Empty;

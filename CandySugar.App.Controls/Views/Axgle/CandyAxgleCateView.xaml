@@ -108,7 +108,7 @@
                                                         HeightRequest="60"
                                                         WidthRequest="60">
                                                         <FFImg:CachedImage.Transformations>
-                                                            <FFTrans:BlurredTransformation Radius="15" />
+                                                            <FFTrans:BlurredTransformation Radius="{x:Static opt:Soft.Blur}" />
                                                         </FFImg:CachedImage.Transformations>
                                                     </FFImg:CachedImage>
                                                     <StackLayout

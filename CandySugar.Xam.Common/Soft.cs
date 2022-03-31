@@ -32,7 +32,7 @@ namespace CandySugar.Xam.Common
         /// </summary>
         public static double Blur { get; set; } = 15;
         /// <summary>
-        /// 壁纸年龄模式 [0：ALL]---[1：12]---[2：15]---[3：18]
+        /// 壁纸年龄模式 [5：ALL]---[10：12]---[15：15]---[20：18]
         /// </summary>
         public static int AgeModule { get; set; } = 0;
     }

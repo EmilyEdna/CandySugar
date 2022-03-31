@@ -130,26 +130,26 @@
                             CheckedChanged="RadioButton_CheckedChanged"
                             Content="All"
                             GroupName="Module"
-                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=0}"
-                            Value="0" />
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=5}"
+                            Value="5" />
                         <RadioButton
                             CheckedChanged="RadioButton_CheckedChanged"
                             Content="12"
                             GroupName="Module"
-                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=1}"
-                            Value="1" />
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=10}"
+                            Value="10" />
                         <RadioButton
                             CheckedChanged="RadioButton_CheckedChanged"
                             Content="15"
                             GroupName="Module"
-                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=2}"
-                            Value="2" />
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=15}"
+                            Value="15" />
                         <RadioButton
                             CheckedChanged="RadioButton_CheckedChanged"
                             Content="18"
                             GroupName="Module"
-                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=3}"
-                            Value="3" />
+                            IsChecked="{Binding Option.AgeModule, Mode=TwoWay, Converter={x:StaticResource BoolConverter}, ConverterParameter=20}"
+                            Value="20" />
                     </FlexLayout>
                 </SfBorder:SfBorder>
                 <XFMaterial:MaterialButton

@@ -153,7 +153,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         {
             try
             {
-                if (IsLoadMore) Refresh = true; else IsBusy = true;
+                if (IsLoadMore)  IsBusy = true; else Refresh = true;
                 await Task.Delay(Soft.WaitSpan);
                 var Cate = await GalActorFactory.GalActor(opt =>
                 {
@@ -173,11 +173,6 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 this.Total = Cate.CategoryListsResults.Total;
                 if (IsLoadMore)
                 {
-                    Refresh = false;
-                    this.CategoryList = new ObservableCollection<CalActorCategoryList>(Cate.CategoryListsResults.CategaryList);
-                }
-                else
-                {
                     IsBusy = false;
                     if (this.CategoryList == null)
                         this.CategoryList = new ObservableCollection<CalActorCategoryList>(Cate.CategoryListsResults.CategaryList);
@@ -188,6 +183,11 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                             this.CategoryList.Add(item);
                         });
                     }
+                }
+                else
+                {
+                    Refresh = false;
+                    this.CategoryList = new ObservableCollection<CalActorCategoryList>(Cate.CategoryListsResults.CategaryList);
                 }
             }
             catch (Exception ex)
@@ -202,7 +202,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         {
             try
             {
-                if (IsLoadMore) Refresh = true; else IsBusy = true;
+                if (IsLoadMore) IsBusy = true; else Refresh = true;
                 await Task.Delay(Soft.WaitSpan);
                 var Seach = await GalActorFactory.GalActor(opt =>
                 {
@@ -221,11 +221,6 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 this.Total = Seach.SearchResult.Total;
                 if (IsLoadMore)
                 {
-                    Refresh = false;
-                    this.CategoryList = new ObservableCollection<CalActorCategoryList>(Seach.SearchResult.SearchList.ToMapest<List<CalActorCategoryList>>());
-                }
-                else
-                {
                     IsBusy = false;
                     if (this.CategoryList == null)
                         this.CategoryList = new ObservableCollection<CalActorCategoryList>(Seach.SearchResult.SearchList.ToMapest<List<CalActorCategoryList>>());
@@ -236,6 +231,11 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                             this.CategoryList.Add(item);
                         });
                     }
+                }
+                else
+                {
+                    Refresh = false;
+                    this.CategoryList = new ObservableCollection<CalActorCategoryList>(Seach.SearchResult.SearchList.ToMapest<List<CalActorCategoryList>>());
                 }
             }
             catch (Exception ex)
