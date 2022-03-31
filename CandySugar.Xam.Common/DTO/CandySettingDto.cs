@@ -14,6 +14,7 @@ namespace CandySugar.Xam.Common.DTO
         public string ProxyAccount { get; set; }
         public int CacheTime { get; set; }
         public int WaitSpan { get; set; }
+        public double Blur { get; set; }
         /// <summary>
         /// 壁纸年龄模式 [0：ALL]---[1：12]---[2：15]---[3：18]
         /// </summary>

@@ -84,6 +84,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Platforms\AndroidInitializer.cs" />
     <Compile Include="Platforms\AndroidPlatform.cs" />
+    <Compile Include="Renders\CandyWebView.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <LinkDescription Include="LinkerSettings.xml" />

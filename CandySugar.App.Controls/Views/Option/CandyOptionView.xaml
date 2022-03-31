@@ -107,6 +107,21 @@
                     Margin="0,0,0,4"
                     FontSize="12"
                     HeightRequest="18"
+                    Text="模糊度"
+                    TextColor="{DynamicResource Gray-800}" />
+                <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">
+                    <Entry
+                        x:Name="Blur"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Placeholder="Blur"
+                        Style="{DynamicResource BorderlessEntry}"
+                        Text="{Binding Option.Blur, Mode=TwoWay}" />
+                </SfBorder:SfBorder>
+                <Label
+                    Margin="0,0,0,4"
+                    FontSize="12"
+                    HeightRequest="18"
                     Text="年龄"
                     TextColor="{DynamicResource Gray-800}" />
                 <SfBorder:SfBorder CornerRadius="4" VerticalOptions="CenterAndExpand">

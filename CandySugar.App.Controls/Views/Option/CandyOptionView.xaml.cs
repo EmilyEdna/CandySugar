@@ -33,6 +33,7 @@ namespace CandySugar.App.Controls.Views.Option
             viewmodel.Option.WaitSpan = this.WaitSpan.Text == "0" ? 500 : Convert.ToInt32(this.WaitSpan.Text);
             viewmodel.Option.CacheTime = this.CacheTime.Text == "0" ? 60 : Convert.ToInt32(this.CacheTime.Text);
             viewmodel.Option.AgeModule = Age;
+            viewmodel.Option.Blur = this.Blur.Text == "0" ? 15 : Convert.ToDouble(this.Blur.Text);
             viewmodel.Save(viewmodel.Option);
         }
 

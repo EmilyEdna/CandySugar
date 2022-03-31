@@ -53,6 +53,13 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             set { SetProperty(ref _IsBusy, value); }
         }
 
+        private double _Blur;
+        public double Blur
+        {
+            get => _Blur;
+            set => SetProperty(ref _Blur, value);
+        }
+
         private ObservableCollection<CandyAXLiShiDto> _LikeData;
         public ObservableCollection<CandyAXLiShiDto> LikeData
         {

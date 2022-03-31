@@ -142,6 +142,12 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             get { return _Refresh; }
             set { SetProperty(ref _Refresh, value); }
         }
+        private double _Blur;
+        public double Blur
+        {
+            get => _Blur;
+            set => SetProperty(ref _Blur, value);
+        }
         #endregion
 
         #region Method

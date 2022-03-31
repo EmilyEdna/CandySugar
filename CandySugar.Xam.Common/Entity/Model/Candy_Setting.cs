@@ -16,5 +16,6 @@ namespace CandySugar.Xam.Common.Entity.Model
         /// 壁纸年龄模式 [0：ALL]---[1：12]---[2：15]---[3：18]
         /// </summary>
         public int AgeModule { get; set; }
+        public double Blur { get; set; }
     }
 }

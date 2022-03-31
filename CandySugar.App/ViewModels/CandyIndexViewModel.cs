@@ -98,7 +98,7 @@ namespace CandySugar.App.ViewModels
             Soft.AgeModule = option==null? Soft.AgeModule: option.AgeModule;
             Soft.CacheTime = option == null ? Soft.CacheTime : option.CacheTime;
             Soft.WaitSpan= option == null ? Soft.WaitSpan : option.WaitSpan;
-
+            Soft.Blur=option == null ? Soft.Blur : option.Blur;
             Soft.ProxyAccount = option == null ? Soft.ProxyAccount : option.ProxyAccount;
             Soft.ProxyIP = option == null ? Soft.ProxyIP : option.ProxyIP;
             Soft.ProxyPort= option == null ? Soft.ProxyPort : option.ProxyPort;

@@ -28,6 +28,10 @@ namespace CandySugar.Xam.Common
         /// </summary>
         public static int WaitSpan { get; set; } = 500;
         /// <summary>
+        /// 模糊度
+        /// </summary>
+        public static double Blur { get; set; } = 15;
+        /// <summary>
         /// 壁纸年龄模式 [0：ALL]---[1：12]---[2：15]---[3：18]
         /// </summary>
         public static int AgeModule { get; set; } = 0;

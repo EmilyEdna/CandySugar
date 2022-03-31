@@ -37,7 +37,7 @@ namespace CandySugar.App.Controls.ViewModels.OptionModel
             Soft.AgeModule = input.AgeModule;
             Soft.CacheTime = input.CacheTime;
             Soft.WaitSpan = input.WaitSpan;
-
+            Soft.Blur=input.Blur;
             Soft.ProxyAccount = input.ProxyAccount;
             Soft.ProxyIP = input.ProxyIP;
             Soft.ProxyPort = input.ProxyPort;

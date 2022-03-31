@@ -61,7 +61,7 @@
                                                 HeightRequest="60"
                                                 WidthRequest="60">
                                                 <FFImg:CachedImage.Transformations>
-                                                    <FFTrans:BlurredTransformation Radius="15" />
+                                                    <FFTrans:BlurredTransformation Radius="{Binding BindingContext.Blur, Source={x:Reference AxgleLikeView}}" />
                                                 </FFImg:CachedImage.Transformations>
                                             </FFImg:CachedImage>
                                             <StackLayout
