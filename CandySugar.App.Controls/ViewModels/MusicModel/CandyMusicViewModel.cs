@@ -33,7 +33,8 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                 UserName = Soft.ProxyAccount
             };
             this.Tap = 0;
-            this.PageIndex = 1;
+            this.PageSheetIndex = 1;
+            this.PageSheetIndex = 1;
             this.Platform = MusicPlatformEnum.NeteaseMusic;
         }
 
@@ -70,13 +71,18 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             get { return _SearchWord; }
             set { SetProperty(ref _SearchWord, value); }
         }
-        private int _PageIndex;
-        public int PageIndex
+        private int _PageSingleIndex;
+        public int PageSingleIndex
         {
-            get { return _PageIndex; }
-            set { SetProperty(ref _PageIndex, value); }
+            get { return _PageSingleIndex; }
+            set { SetProperty(ref _PageSingleIndex, value); }
         }
-
+        private int _PageSheetIndex;
+        public int PageSheetIndex
+        {
+            get { return _PageSheetIndex; }
+            set { SetProperty(ref _PageSheetIndex, value); }
+        }
         private int _Total;
         public int Total
         {
@@ -147,12 +153,25 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
         });
 
-        public ICommand TabChangedCommand => new DelegateCommand<dynamic>((input) => Tap = input);
+        public ICommand TabChangedCommand => new DelegateCommand<dynamic>((input) => {
+            Tap = input;
+            if (Tap == 0 && SongItems == null)
+            {
+                this.PageSingleIndex = 1;
+                SearchSingleSong();
+            }
+            if (Tap == 1 && SongSheets == null)
+            {
+                this.PageSheetIndex = 1;
+                SearchSheetSong();
+            }
+        });
 
         public ICommand SearchCommand => new DelegateCommand<string>((input) =>
         {
             this.SearchWord = input;
-            this.PageIndex = 1;
+            this.PageSingleIndex = 1;
+            this.PageSheetIndex = 1;
             if (Tap == 0)
                 SearchSingleSong();
             if (Tap == 1)
@@ -161,18 +180,25 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
 
         public ICommand RefreshsCommand => new DelegateCommand(() =>
         {
-            PageIndex = 1;
+            this.PageSingleIndex = 1;
+            this.PageSheetIndex = 1;
             if (Tap == 0 && !SearchWord.IsNullOrEmpty()) SearchSingleSong();
             if (Tap == 1 && !SearchWord.IsNullOrEmpty()) SearchSheetSong();
         });
 
         public ICommand ShowMoreCommand => new DelegateCommand(() =>
         {
-            PageIndex += 1;
-            if (PageIndex <= Total)
+            if (Tap == 0 && !SearchWord.IsNullOrEmpty())
             {
-                if (Tap == 0 && !SearchWord.IsNullOrEmpty()) SearchSingleSong(true);
-                if (Tap == 1 && !SearchWord.IsNullOrEmpty()) SearchSheetSong(true);
+                this.PageSingleIndex += 1;
+                if (PageSingleIndex <= Total)
+                    SearchSingleSong(true);
+            }
+            if (Tap == 1 && !SearchWord.IsNullOrEmpty())
+            {
+                this.PageSheetIndex += 1;
+                if (PageSheetIndex <= Total)
+                    SearchSheetSong(true);
             }
         });
         #endregion
@@ -205,7 +231,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                            MusicType = MusicTypeEnum.SongItem,
                            Search = new MusicSearch
                            {
-                               Page = PageIndex,
+                               Page = PageSingleIndex,
                                KeyWord = SearchWord
                            }
                        };
@@ -223,7 +249,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongItem,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSingleIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -241,7 +267,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongItem,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSingleIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -259,7 +285,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongItem,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSingleIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -277,7 +303,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongItem,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSingleIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -295,7 +321,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongItem,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSingleIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -353,7 +379,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongSheet,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSheetIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -371,7 +397,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongSheet,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSheetIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -389,7 +415,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongSheet,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSheetIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -407,7 +433,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongSheet,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSheetIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -425,7 +451,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongSheet,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSheetIndex,
                                 KeyWord = SearchWord
                             }
                         };
@@ -443,7 +469,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                             MusicType = MusicTypeEnum.SongSheet,
                             Search = new MusicSearch
                             {
-                                Page = PageIndex,
+                                Page = PageSheetIndex,
                                 KeyWord = SearchWord
                             }
                         };
