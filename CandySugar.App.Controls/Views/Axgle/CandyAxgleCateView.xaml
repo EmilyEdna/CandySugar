@@ -15,6 +15,7 @@
     xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
     xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
+    xmlns:opt="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     x:Name="AxgleCateView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -107,7 +108,7 @@
                                                         HeightRequest="60"
                                                         WidthRequest="60">
                                                         <FFImg:CachedImage.Transformations>
-                                                            <FFTrans:BlurredTransformation Radius="{Binding BindingContext.Blur, Source={x:Reference AxgleCateView}}" />
+                                                            <FFTrans:BlurredTransformation Radius="15" />
                                                         </FFImg:CachedImage.Transformations>
                                                     </FFImg:CachedImage>
                                                     <StackLayout

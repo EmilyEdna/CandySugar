@@ -11,6 +11,7 @@
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:dp="clr-namespace:CandySugar.App.Controls.PropertyAttach"
+    xmlns:opt="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     x:Name="AxgleLikeView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -61,7 +62,7 @@
                                                 HeightRequest="60"
                                                 WidthRequest="60">
                                                 <FFImg:CachedImage.Transformations>
-                                                    <FFTrans:BlurredTransformation Radius="{Binding BindingContext.Blur, Source={x:Reference AxgleLikeView}}" />
+                                                    <FFTrans:BlurredTransformation Radius="15" />
                                                 </FFImg:CachedImage.Transformations>
                                             </FFImg:CachedImage>
                                             <StackLayout
