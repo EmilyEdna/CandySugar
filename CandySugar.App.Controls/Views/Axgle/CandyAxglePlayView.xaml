@@ -4,16 +4,50 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
-    Appearing="ContentPage_Appearing"
     BackgroundColor="Black"
     Disappearing="ContentPage_Disappearing"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Ctrl:ShadowFrame Margin="4.4" Padding="-6">
-            <WebView
-                x:Name="web"
-                Margin="-8,0,-8,0"
-                HeightRequest="1" />
-        </Ctrl:ShadowFrame>
+        <Grid RowDefinitions="35,*">
+            <FlexLayout
+                AlignContent="Center"
+                BackgroundColor="{DynamicResource PrimaryPink}"
+                JustifyContent="Center">
+                <Button
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    Clicked="BtnClicked"
+                    CommandParameter="0"
+                    Text="全屏"
+                    TextColor="{DynamicResource Gray-Bg}" />
+                <Button
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    Clicked="BtnClicked"
+                    CommandParameter="1"
+                    Text="退出全屏"
+                    TextColor="{DynamicResource Gray-Bg}" />
+                <Button
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    Clicked="BtnClicked"
+                    CommandParameter="2"
+                    Text="去广告"
+                    TextColor="{DynamicResource Gray-Bg}" />
+                <Button
+                    BackgroundColor="{DynamicResource PrimaryPink}"
+                    Clicked="BtnClicked"
+                    CommandParameter="3"
+                    Text="从新加载"
+                    TextColor="{DynamicResource Gray-Bg}" />
+            </FlexLayout>
+            <Ctrl:ShadowFrame
+                Grid.Row="1"
+                Margin="4.4"
+                Padding="-6">
+                <WebView
+                    x:Name="web"
+                    Margin="-8,0,-8,0"
+                    HeightRequest="1"
+                    Source="{Binding PlayURL}" />
+            </Ctrl:ShadowFrame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

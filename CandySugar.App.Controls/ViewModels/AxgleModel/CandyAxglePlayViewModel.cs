@@ -1,7 +1,14 @@
-﻿using Prism.Navigation;
+﻿using CandySugar.Xam.Common;
+using GalActor.SDK;
+using GalActor.SDK.ViewModel;
+using GalActor.SDK.ViewModel.Eunms;
+using GalActor.SDK.ViewModel.Request;
+using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.Controls.ViewModels.AxgleModel
 {
@@ -23,7 +30,39 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         #region Override
         public override void Initialize(INavigationParameters parameters)
         {
-            PlayURL = parameters.GetValue<string>("Route");
+            Init(parameters.GetValue<string>("Route"));
+        }
+        #endregion
+
+        #region Method
+        private string Tip(string Method)
+        {
+            return String.Format(Soft.Toast, nameof(CandyAxglePlayViewModel), Method);
+        }
+        public async void Init(string input) {
+            try
+            {
+                var Detail = await GalActorFactory.GalActor(opt =>
+                {
+                    opt.RequestParam = new GalActorRequestInput
+                    {
+                        Galype = GalActorEnum.Detail,
+                        CacheSpan = Soft.CacheTime,
+                         Detail = new  GalActorDetail
+                        {
+                           IFrameURL= input
+                         }
+                    };
+                }).RunsAsync();
+                PlayURL = Detail.PlayResult.Play;
+            }
+            catch (Exception ex)
+            {
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                {
+                    await Task.Delay(3000);
+                }
+            }
         }
         #endregion
     }

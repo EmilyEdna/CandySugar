@@ -18,7 +18,7 @@ namespace CandySugar.Droid.Renders
     public class CandyWebView : WebViewRenderer
     {
         private readonly Context _context;
-        private string UA = "Mozilla/5.0 (Linux; U; Android 10; zh-CN; RMX1991 Build/QKQ1.191201.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/78.0.3904.108 UCBrowser/13.5.5.1135 Mobile Safari/537.36";
+        private string UA = "Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36 Edg/99.0.4844.74";
         public CandyWebView(Context context) : base(context)
         {
             _context = context;
