@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.MusicModel
 {
@@ -23,6 +26,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
 
         private readonly MusicProxy Proxy;
         private int Tap;
+        private readonly IYYLiShi Candy;
         public CandyMusicViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.Proxy = new MusicProxy
@@ -36,6 +40,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             this.PageSheetIndex = 1;
             this.PageSheetIndex = 1;
             this.Platform = MusicPlatformEnum.NeteaseMusic;
+            Candy = ContainerLocator.Container.Resolve<IYYLiShi>();
         }
 
         #region Property
@@ -201,6 +206,12 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                     SearchSheetSong(true);
             }
         });
+
+        public ICommand AddPlayListCommand = new DelegateCommand<MusicSongItem>(input => { 
+        
+        
+        
+        });
         #endregion
 
         #region Method
@@ -208,6 +219,20 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         {
             return String.Format(Soft.Toast, nameof(CandyMusicViewModel), Method);
         }
+        private async void AddMusic(string SongURL, MusicSongItem input) 
+        {
+            await Candy.AddPlayList(new  CandyYYLiShiDto
+            {
+                Address = SongURL,
+                SongAlbum = input.SongAlbumName,
+                SongName = input.SongName,
+                SongArtist =string.Join(",",input.SongArtistName),
+                SongId = input.SongId,
+                CacheAddress = null,
+                Platform = (int)this.Platform
+            });
+        }
+
         /// <summary>
         /// 查单曲
         /// </summary>
@@ -505,6 +530,46 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
 
         }
+
+        public async void LoadMusic(MusicSongItem input) 
+        {
+            try
+            {
+                var SongURL = await MusicFactory.Music(opt =>
+                {
+                    opt.RequestParam = new MusicRequestInput
+                    {
+                        Proxy = this.Proxy,
+                        MusicPlatformType = this.Platform,
+                        MusicType = MusicTypeEnum.PlayAddress,
+                        AddressSearch = new MusicPlaySearch
+                        {
+                            Dynamic = input.SongId,
+                            KuGouAlbumId = input.SongAlbumId,
+                        }
+                    };
+                }).RunsAsync();
+
+                if (SongURL.SongPlayAddressResult.CanPlay == false)
+                {
+                    using (await MaterialDialog.Instance.LoadingSnackbarAsync("当前歌曲已下架，请切换到其他其他平台搜索"))
+                    {
+                        await Task.Delay(3000);
+                    }
+                    return;
+                }
+
+                AddMusic(SongURL.SongPlayAddressResult.SongURL, input);
+            }
+            catch (Exception ex)
+            {
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchSingleSong")))
+                {
+                    await Task.Delay(3000);
+                }
+            }
+        }
+
         #endregion
     }
 }

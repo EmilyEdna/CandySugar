@@ -12,6 +12,7 @@
 		<PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="19.4.0.54" />
+		<PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="19.4.0.54" />
 		<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.4.0.54" />
 		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />

@@ -7,14 +7,14 @@
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
-    xmlns:SFCom="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfCom="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
-    x:Name="NovelView"
+    x:Name="MusicView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid RowDefinitions="40,*">
@@ -28,7 +28,7 @@
                     SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}"
                     Text="{Binding SearchWord}"
                     WidthRequest="260" />
-                <SFCom:SfComboBox
+                <SfCom:SfComboBox
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     BorderColor="{DynamicResource Gray-700}"
                     ClearButtonColor="{DynamicResource GrayShadowColor}"
@@ -39,13 +39,13 @@
                     SelectedIndex="1"
                     TextColor="{DynamicResource GrayShadowColor}"
                     WidthRequest="110">
-                    <SFCom:SfComboBox.Behaviors>
+                    <SfCom:SfComboBox.Behaviors>
                         <behavior:EventToCommandBehavior
                             Command="{Binding ComboSelectCommand}"
                             Converter="{x:StaticResource ComboConverter}"
                             EventName="SelectionChanging" />
-                    </SFCom:SfComboBox.Behaviors>
-                </SFCom:SfComboBox>
+                    </SfCom:SfComboBox.Behaviors>
+                </SfCom:SfComboBox>
             </FlexLayout>
             <SfTab:SfTabView
                 Grid.Row="1"
@@ -67,6 +67,7 @@
                         <Button
                             Margin="0,20,0,0"
                             BackgroundColor="Transparent"
+                            Clicked="PopupOpened"
                             CornerRadius="35"
                             FontFamily="{DynamicResource FontAwesomeSolid}"
                             FontSize="20"
@@ -160,6 +161,8 @@
                                                                         JustifyContent="End">
                                                                         <Button
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.AddPlayListCommand, Source={x:Reference MusicView}}"
+                                                                            CommandParameter="{Binding .}"
                                                                             CornerRadius="18"
                                                                             FontFamily="{DynamicResource FontAwesomeSolid}"
                                                                             FontSize="15"
