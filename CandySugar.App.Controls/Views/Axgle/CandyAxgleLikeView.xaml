@@ -25,10 +25,11 @@
                 SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}"
                 Text="{Binding KeyWord}" />
             <SfList:SfListView
+                Grid.Row="1"
                 AutoFitMode="Height"
                 IsBusy="{Binding IsBusy}"
                 IsScrollBarVisible="False"
-                ItemsSource="{Binding CategoryList}"
+                ItemsSource="{Binding LikeData}"
                 LoadMoreCommand="{Binding ShowMoreCommand}"
                 LoadMoreOption="AutoOnScroll"
                 SelectionBackgroundColor="Transparent">
@@ -108,7 +109,7 @@
                                                         Command="{Binding BindingContext.PlayCommand, Source={x:Reference AxgleLikeView}}"
                                                         CommandParameter="{Binding Play}"
                                                         CornerRadius="15"
-                                                        FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                        FontFamily="{DynamicResource FontAwesomeSolid}"
                                                         FontSize="15"
                                                         HeightRequest="30"
                                                         HorizontalOptions="End"
