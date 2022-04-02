@@ -68,7 +68,7 @@ namespace CandySugar.App.Controls.ViewModels
         {
             if (await XSCandy.Remove(input))
             {
-                OnViewLaunch();
+                OnViewLaunchAsync();
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从书架中移除"))
                 {
                     await Task.Delay(3000);
@@ -87,7 +87,7 @@ namespace CandySugar.App.Controls.ViewModels
         {
             if (await DMCandy.Remove(input))
             {
-                OnViewLaunch();
+                OnViewLaunchAsync();
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从列表中移除"))
                 {
                     await Task.Delay(3000);
@@ -116,7 +116,7 @@ namespace CandySugar.App.Controls.ViewModels
         {
             if (await LXSCandy.Remove(input))
             {
-                OnViewLaunch();
+                OnViewLaunchAsync();
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从列表中移除"))
                 {
                     await Task.Delay(3000);
@@ -126,7 +126,7 @@ namespace CandySugar.App.Controls.ViewModels
         #endregion
 
         #region Override
-        protected override async void OnViewLaunch()
+        protected override async void OnViewLaunchAsync()
         {
             XSLiShi = new ObservableCollection<CandyXSLiShiDto>(await ContainerLocator.Container.Resolve<IXSLiShi>().Query());
             DMLiShi = new ObservableCollection<CandyDMLiShiDto>(await ContainerLocator.Container.Resolve<IDMLiShi>().Query());

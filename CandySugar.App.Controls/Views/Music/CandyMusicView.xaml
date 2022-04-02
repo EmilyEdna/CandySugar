@@ -11,6 +11,7 @@
     xmlns:SfCom="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfPop="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
@@ -47,6 +48,7 @@
                     </SfCom:SfComboBox.Behaviors>
                 </SfCom:SfComboBox>
             </FlexLayout>
+            <SfPop:SfPopupLayout x:Name="Pop" />
             <SfTab:SfTabView
                 Grid.Row="1"
                 BackgroundColor="Transparent"

@@ -36,6 +36,11 @@ namespace CandySugar.Xam.Core.ServiceImpl
             return data.ToMapest<List<CandyYYLiShiDto>>();
         }
 
+        public async Task<int> PlayCount() 
+        {
+            return await SqliteDbContext.Instance.SqlDb.Table<Candy_YY_LiShi>().CountAsync();
+        }
+
         public async Task RemovePlayList(Guid input)
         {
             var db = SqliteDbContext.Instance.SqlDb;

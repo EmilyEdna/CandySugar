@@ -1,3 +1,5 @@
+using CandySugar.App.Controls.LayoutView;
+using CandySugar.App.Controls.LayoutView.LayoutViewModel;
 using CandySugar.App.Controls.ViewModels;
 using CandySugar.App.Controls.ViewModels.AnimeModel;
 using CandySugar.App.Controls.ViewModels.AxgleModel;
@@ -113,8 +115,9 @@ namespace CandySugar.App
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();
-
             ViewModelLocationProvider.Register<CandyContentIndexView>(() => Container.Resolve<CandyContentIndexViewModel>());
+            ViewModelLocationProvider.Register<PopHeaderView>(() => Container.Resolve<PopHeaderViewModel>());
+            ViewModelLocationProvider.Register<PopContentView>(() => Container.Resolve<PopContentViewModel>());
         }
     }
 }

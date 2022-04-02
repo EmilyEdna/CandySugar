@@ -9,7 +9,7 @@ namespace CandySugar.App.Controls
     {
         public ViewModelBase()
         {
-            OnViewLaunch();
+            OnViewLaunchAsync();
         }
         private string _title;
         public string Title
@@ -18,7 +18,7 @@ namespace CandySugar.App.Controls
             set { SetProperty(ref _title, value); }
         }
 
-        protected virtual void OnViewLaunch() 
+        protected virtual void OnViewLaunchAsync() 
         { 
         
         }

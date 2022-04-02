@@ -1,4 +1,6 @@
-﻿using Syncfusion.XForms.PopupLayout;
+﻿using CandySugar.App.Controls.LayoutView;
+using CandySugar.Xam.Common;
+using Syncfusion.XForms.PopupLayout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,22 +22,23 @@ namespace CandySugar.App.Controls.Views.Music
 
         private void PopupOpened(object sender, EventArgs e)
         {
-            Test();
+           Test();
         }
 
         private void Test() {
-            SfPopupLayout Popup= new SfPopupLayout();
-            Popup.PopupView.HeaderTitle = "播放列表";
-            Popup.PopupView.AnimationEasing = AnimationEasing.SinIn;
-            Popup.PopupView.AnimationMode = AnimationMode.SlideOnBottom;
-            Popup.PopupView.ContentTemplate = new DataTemplate(() =>
+            Pop.PopupView.PopupStyle = new PopupStyle
             {
-                return new Label()
-                {
-                    Text = "1231245"
-                };
-            });
-            Popup.IsOpen = true;
+                CornerRadius = 45,
+            };
+            Pop.PopupView.HeaderTemplate = new DataTemplate(() => new PopHeaderView());
+            Pop.PopupView.ShowCloseButton = false;
+            Pop.PopupView.ShowFooter=false;
+            Pop.PopupView.MinimumWidthRequest = Soft.ScreenWidth - 40;
+            Pop.PopupView.MinimumHeightRequest = Soft.ScreenHeight/2;
+            Pop.PopupView.AnimationEasing = AnimationEasing.SinIn;
+            Pop.PopupView.AnimationMode = AnimationMode.SlideOnBottom;
+            Pop.PopupView.ContentTemplate = new DataTemplate(() => new PopContentView());
+            Pop.Show(20,300);
         }
     }
 }

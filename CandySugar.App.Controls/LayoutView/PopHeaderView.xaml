@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CandySugar.App.Controls.LayoutView.PopHeaderView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentView.Content>
+        <Grid Padding="2">
+            <Label
+                Margin="5,0,0,0"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Start"
+                VerticalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontSize="16"
+                            Text="播放列表"
+                            TextColor="Black" />
+                        <Span
+                            FontSize="12"
+                            Text="{Binding Count, StringFormat='({0})'}"
+                            TextColor="{DynamicResource Gray-500}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
