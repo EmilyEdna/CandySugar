@@ -48,12 +48,13 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
             set { SetProperty(ref _PageIndex, value); }
         }
 
+        public MusicPlatformEnum Platform { get; set; }
         #endregion
 
         #region Commod
         public ICommand AddPlayCommand => new DelegateCommand<MusicSongItem>(input =>
         {
-            ContainerLocator.Container.Resolve<CandyMusicViewModel>().LoadMusic(input);
+            ContainerLocator.Container.Resolve<CandyMusicViewModel>().LoadMusic(input, Platform);
         });
         #endregion
 
@@ -94,6 +95,8 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
                     PageIndex++;
                     SearchSheet(input, platform);
                 }
+
+                Platform = SongSheet.SongSheetDetailResult.MusicPlatformType.Value;
             }
             catch (Exception ex)
             {

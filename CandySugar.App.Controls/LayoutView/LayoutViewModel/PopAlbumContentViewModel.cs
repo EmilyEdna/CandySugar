@@ -38,6 +38,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
             get { return _AlbumDetail; }
             set { SetProperty(ref _AlbumDetail, value); }
         }
+        public MusicPlatformEnum Platform { get; set; }
         #endregion
 
         #region Method
@@ -62,7 +63,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
                         }
                     };
                 }).RunsAsync();
-
+                Platform = SongAlbum.SongAlbumDetailResult.MusicPlatformType.Value;
                 this.AlbumDetail = new ObservableCollection<MusicSongItem>(SongAlbum.SongAlbumDetailResult.SongItems);
             }
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
         #region Commod
         public ICommand AddPlayCommand => new DelegateCommand<MusicSongItem>(input =>
         {
-            ContainerLocator.Container.Resolve<CandyMusicViewModel>().LoadMusic(input);
+            ContainerLocator.Container.Resolve<CandyMusicViewModel>().LoadMusic(input, Platform);
         });
         #endregion
     }

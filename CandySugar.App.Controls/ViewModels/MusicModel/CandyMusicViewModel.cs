@@ -211,7 +211,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         public ICommand AddPlayListCommand => new DelegateCommand<MusicSongItem>(input =>
         {
             if (input != null)
-                LoadMusic(input);
+                LoadMusic(input,this.Platform);
         });
         #endregion
 
@@ -534,7 +534,8 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         /// 加载歌曲
         /// </summary>
         /// <param name="input"></param>
-        public async void LoadMusic(MusicSongItem input)
+        /// <param name="PlatformType"></param>
+        public async void LoadMusic(MusicSongItem input, MusicPlatformEnum PlatformType)
         {
             try
             {
@@ -543,7 +544,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                     opt.RequestParam = new MusicRequestInput
                     {
                         Proxy = this.Proxy,
-                        MusicPlatformType = this.Platform,
+                        MusicPlatformType = PlatformType,
                         MusicType = MusicTypeEnum.PlayAddress,
                         AddressSearch = new MusicPlaySearch
                         {

@@ -4,48 +4,66 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:prism="http://prismlibrary.com"
     x:Name="PopContent"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ContentView.Content>
-        <SfList:SfListView
-            AutoFitMode="Height"
-            IsScrollBarVisible="False"
-            ItemsSource="{Binding Yinyue}"
-            SelectionBackgroundColor="Transparent">
-            <SfList:SfListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Margin="2" ColumnDefinitions="*,40">
-                            <StackLayout Margin="4,0,0,0">
-                                <Label
-                                    Margin="1"
-                                    FontSize="14"
-                                    Text="{Binding SongName}"
-                                    TextColor="Black" />
-                                <Label
-                                    Margin="1"
-                                    FontSize="10"
-                                    Text="{Binding SongArtist}"
-                                    TextColor="{DynamicResource Gray-500}" />
-                            </StackLayout>
-                            <StackLayout
-                                Grid.Column="1"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center">
-                                <Label
-                                    FontSize="26"
-                                    Text="×"
-                                    TextColor="{DynamicResource Gray-300}">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding BindingContext.RemoveCommand, Source={x:Reference PopContent}}" CommandParameter="{Binding .}" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </StackLayout>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </SfList:SfListView.ItemTemplate>
-        </SfList:SfListView>
+        <Grid RowDefinitions="35,*">
+            <StackLayout
+                Margin="5,0,0,0"
+                HorizontalOptions="Start"
+                WidthRequest="40">
+                <XFMaterial:MaterialIconButton
+                    x:Name="Menu"
+                    BackgroundColor="Transparent"
+                    Clicked="ChangedClick"
+                    HeightRequest="30"
+                    MinimumHeightRequest="30"
+                    MinimumWidthRequest="40"
+                    PressedBackgroundColor="Transparent"
+                    WidthRequest="40" />
+            </StackLayout>
+            <SfList:SfListView
+                Grid.Row="1"
+                AutoFitMode="Height"
+                IsScrollBarVisible="False"
+                ItemsSource="{Binding Yinyue}"
+                SelectionBackgroundColor="Transparent">
+                <SfList:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="2" ColumnDefinitions="*,40">
+                                <StackLayout Margin="4,0,0,0">
+                                    <Label
+                                        Margin="1"
+                                        FontSize="14"
+                                        Text="{Binding SongName}"
+                                        TextColor="Black" />
+                                    <Label
+                                        Margin="1"
+                                        FontSize="10"
+                                        Text="{Binding SongArtist}"
+                                        TextColor="{DynamicResource Gray-500}" />
+                                </StackLayout>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontSize="26"
+                                        Text="×"
+                                        TextColor="{DynamicResource Gray-300}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.RemoveCommand, Source={x:Reference PopContent}}" CommandParameter="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </SfList:SfListView.ItemTemplate>
+            </SfList:SfListView>
+        </Grid>
     </ContentView.Content>
 </ContentView>
