@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:prism="http://prismlibrary.com"
+    x:Name="PopContent"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ContentView.Content>
         <SfList:SfListView
@@ -35,7 +36,11 @@
                                 <Label
                                     FontSize="26"
                                     Text="×"
-                                    TextColor="{DynamicResource Gray-300}" />
+                                    TextColor="{DynamicResource Gray-300}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.RemoveCommand, Source={x:Reference PopContent}}" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                         </Grid>
                     </ViewCell>

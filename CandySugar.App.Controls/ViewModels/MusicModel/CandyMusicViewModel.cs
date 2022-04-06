@@ -158,7 +158,8 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
         });
 
-        public ICommand TabChangedCommand => new DelegateCommand<dynamic>((input) => {
+        public ICommand TabChangedCommand => new DelegateCommand<dynamic>((input) =>
+        {
             Tap = input;
             if (Tap == 0 && SongItems == null)
             {
@@ -207,10 +208,10 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
         });
 
-        public ICommand AddPlayListCommand = new DelegateCommand<MusicSongItem>(input => { 
-        
-        
-        
+        public ICommand AddPlayListCommand => new DelegateCommand<MusicSongItem>(input =>
+        {
+            if (input != null)
+                LoadMusic(input);
         });
         #endregion
 
@@ -219,20 +220,19 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         {
             return String.Format(Soft.Toast, nameof(CandyMusicViewModel), Method);
         }
-        private async void AddMusic(string SongURL, MusicSongItem input) 
+        private async void AddMusic(string SongURL, MusicSongItem input)
         {
-            await Candy.AddPlayList(new  CandyYYLiShiDto
+            await Candy.AddPlayList(new CandyYYLiShiDto
             {
                 Address = SongURL,
                 SongAlbum = input.SongAlbumName,
                 SongName = input.SongName,
-                SongArtist =string.Join(",",input.SongArtistName),
+                SongArtist = string.Join(",", input.SongArtistName),
                 SongId = input.SongId,
                 CacheAddress = null,
                 Platform = (int)this.Platform
             });
         }
-
         /// <summary>
         /// 查单曲
         /// </summary>
@@ -530,8 +530,11 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
 
         }
-
-        public async void LoadMusic(MusicSongItem input) 
+        /// <summary>
+        /// 加载歌曲
+        /// </summary>
+        /// <param name="input"></param>
+        public async void LoadMusic(MusicSongItem input)
         {
             try
             {
@@ -569,7 +572,6 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                 }
             }
         }
-
         #endregion
     }
 }

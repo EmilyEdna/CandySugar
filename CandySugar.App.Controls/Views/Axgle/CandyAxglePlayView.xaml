@@ -8,7 +8,7 @@
     Disappearing="ContentPage_Disappearing"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid RowDefinitions="35,*">
+        <Grid RowDefinitions="40,*">
             <FlexLayout
                 AlignContent="Center"
                 BackgroundColor="{DynamicResource PrimaryPink}"

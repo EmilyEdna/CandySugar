@@ -17,7 +17,9 @@ namespace CandySugar.Xam.Core.ServiceImpl
             var db = SqliteDbContext.Instance.SqlDb;
             var entity = input.ToMapest<Candy_YY_LiShi>();
             entity.InitProperty();
-            await db.InsertAsync(entity);
+            var song = await db.Table<Candy_YY_LiShi>().Where(t => t.SongId == input.SongId).FirstOrDefaultAsync();
+            if (song == null)
+                await db.InsertAsync(entity);
             await db.CloseAsync();
         }
 
@@ -36,7 +38,7 @@ namespace CandySugar.Xam.Core.ServiceImpl
             return data.ToMapest<List<CandyYYLiShiDto>>();
         }
 
-        public async Task<int> PlayCount() 
+        public async Task<int> PlayCount()
         {
             return await SqliteDbContext.Instance.SqlDb.Table<Candy_YY_LiShi>().CountAsync();
         }

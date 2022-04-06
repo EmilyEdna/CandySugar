@@ -6,6 +6,8 @@ using System.Text;
 using Prism.Ioc;
 using CandySugar.Xam.Core.Service;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Prism.Commands;
 
 namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
 {
@@ -24,31 +26,32 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
 
         #endregion
 
-        protected override  void OnViewLaunchAsync()
+        protected override void OnViewLaunch()
         {
             Candy = ContainerLocator.Container.Resolve<IYYLiShi>();
-            //await Candy.GetPlayList()
-            Yinyue = new ObservableCollection<CandyYYLiShiDto>();
-            Yinyue.Add(new CandyYYLiShiDto
-            {
-                Address = "",
-                CacheAddress = "",
-                SongAlbum = "张三",
-                SongArtist = "李四,mikejson",
-                SongName = "With Me(孤勇者翻唱版本)",
-                Platform = 1,
-                SongId = "",
-            });
-            Yinyue.Add(new CandyYYLiShiDto
-            {
-                Address = "",
-                CacheAddress = "",
-                SongAlbum = "张三",
-                SongArtist = "李四,mikejson",
-                SongName = "With Me(孤勇者翻唱版本)",
-                Platform = 1,
-                SongId = "",
-            });
+            Query();
         }
+
+        #region Command
+        public ICommand RemoveCommand => new DelegateCommand<CandyYYLiShiDto>(input =>
+        {
+            if (input != null)
+                Delete(input.PId);
+        });
+        #endregion
+
+        #region Method
+        public async void Query()
+        {
+            var data = await Candy.GetPlayList();
+            Yinyue = new ObservableCollection<CandyYYLiShiDto>(data);
+        }
+        public async void Delete(Guid Id)
+        {
+            await Candy.RemovePlayList(Id);
+            Query();
+            ContainerLocator.Container.Resolve<PopHeaderViewModel>().Refresh();
+        }
+        #endregion
     }
 }

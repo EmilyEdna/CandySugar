@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using CandySugar.Xam.Core.Service;
 using Prism.Ioc;
 
@@ -18,7 +19,12 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
         }
         #endregion
 
-        protected override async void OnViewLaunchAsync()
+        protected override void OnViewLaunch()
+        {
+            Refresh();
+        }
+
+        public async void Refresh()
         {
             Count = await ContainerLocator.Container.Resolve<IYYLiShi>().PlayCount();
         }
