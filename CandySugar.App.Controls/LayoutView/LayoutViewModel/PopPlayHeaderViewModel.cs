@@ -7,7 +7,7 @@ using Prism.Ioc;
 
 namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
 {
-    public class PopHeaderViewModel : ViewModelBase
+    public class PopPlayHeaderViewModel : ViewModelBase
     {
 
         #region Property

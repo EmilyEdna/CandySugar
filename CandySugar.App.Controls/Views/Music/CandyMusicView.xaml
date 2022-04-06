@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:Enum="clr-namespace:CandySugar.Xam.Common.Enum;assembly=CandySugar.Xam.Common"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
@@ -70,6 +71,7 @@
                             Margin="0,20,0,0"
                             BackgroundColor="Transparent"
                             Clicked="PopupOpened"
+                            CommandParameter="{x:Static Enum:PopOpenFuncEnum.PlayList}"
                             CornerRadius="35"
                             FontFamily="{DynamicResource FontAwesomeSolid}"
                             FontSize="20"
@@ -175,6 +177,8 @@
                                                                             WidthRequest="40" />
                                                                         <Button
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Clicked="PopupOpened"
+                                                                            CommandParameter="{x:Static Enum:PopOpenFuncEnum.Album}"
                                                                             CornerRadius="18"
                                                                             FontFamily="{DynamicResource FontAwesomeSolid}"
                                                                             FontSize="15"
@@ -271,6 +275,8 @@
                                                                         <Button
                                                                             Padding="2"
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Clicked="PopupOpened"
+                                                                            CommandParameter="{x:Static Enum:PopOpenFuncEnum.Sheet}"
                                                                             CornerRadius="18"
                                                                             FontFamily="{DynamicResource FontAwesomeSolid}"
                                                                             FontSize="15"

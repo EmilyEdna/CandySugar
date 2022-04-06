@@ -48,38 +48,38 @@ namespace CandySugar.ViewModels
         #endregion
 
         #region Action
-        public void Redirect(MenuFuncEunm input)
+        public void Redirect(MenuFuncEnum input)
         {
             switch (input)
             {
-                case MenuFuncEunm.Novel:
+                case MenuFuncEnum.Novel:
                     ActivateItem(Container.Get<NovelViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
-                case MenuFuncEunm.LightNovel:
+                case MenuFuncEnum.LightNovel:
                     ActivateItem(Container.Get<LightNovelViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
-                case MenuFuncEunm.Anime:
+                case MenuFuncEnum.Anime:
                     ActivateItem(Container.Get<AnimeViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
-                case MenuFuncEunm.Manga:
+                case MenuFuncEnum.Manga:
                     ActivateItem(Container.Get<MangaViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
-                case MenuFuncEunm.Wallpaper:
+                case MenuFuncEnum.Wallpaper:
                     ActivateItem(Container.Get<WallpaperViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
-                case MenuFuncEunm.Music:
+                case MenuFuncEnum.Music:
                     ActivateItem(Container.Get<MusicViewModel>());
                     break;
-                case MenuFuncEunm.Axgle:
+                case MenuFuncEnum.Axgle:
                     ActivateItem(Container.Get<AxgleViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
-                case MenuFuncEunm.UserCenter:
+                case MenuFuncEnum.UserCenter:
                     ActivateItem(Container.Get<UserViewModel>());
                     BootResource.Lyric(null, 2);
                     break;

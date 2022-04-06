@@ -48,39 +48,39 @@ namespace CandySugar.App.ViewModels
         {
             switch (input.CommandParam)
             {
-                case MenuFuncEunm.Novel:
+                case MenuFuncEnum.Novel:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyNovelView));
                     break;
-                case MenuFuncEunm.LightNovel:
+                case MenuFuncEnum.LightNovel:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyLightNovelView));
                     break;
-                case MenuFuncEunm.Anime:
+                case MenuFuncEnum.Anime:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyAnimeView));
                     break;
-                case MenuFuncEunm.Manga:
+                case MenuFuncEnum.Manga:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyMangaView));
                     break;
-                case MenuFuncEunm.Wallpaper:
+                case MenuFuncEnum.Wallpaper:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyKonachanView));
                     break;
-                case MenuFuncEunm.Axgle:
+                case MenuFuncEnum.Axgle:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyAxgleView));
                     break;
-                case MenuFuncEunm.Music:
+                case MenuFuncEnum.Music:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyMusicView));
                     break;
-                case MenuFuncEunm.Setting:
+                case MenuFuncEnum.Setting:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyOptionView));
                     break;
-                case MenuFuncEunm.About:
+                case MenuFuncEnum.About:
                     base.Title = input.CommandParam.ToDes();
                     break;
                 default:

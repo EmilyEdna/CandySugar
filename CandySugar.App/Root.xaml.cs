@@ -115,9 +115,17 @@ namespace CandySugar.App
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();
+
             ViewModelLocationProvider.Register<CandyContentIndexView>(() => Container.Resolve<CandyContentIndexViewModel>());
-            ViewModelLocationProvider.Register<PopHeaderView>(() => Container.Resolve<PopHeaderViewModel>());
-            ViewModelLocationProvider.Register<PopContentView>(() => Container.Resolve<PopContentViewModel>());
+
+            ViewModelLocationProvider.Register<PopPlayHeaderView>(() => Container.Resolve<PopPlayHeaderViewModel>());
+            ViewModelLocationProvider.Register<PopPlayContentView>(() => Container.Resolve<PopPlayContentViewModel>());
+
+            ViewModelLocationProvider.Register<PopSheetHeaderView>(() => Container.Resolve<PopSheetHeaderViewModel>());
+            ViewModelLocationProvider.Register<PopSheetContentView>(() => Container.Resolve<PopSheetContentViewModel>());
+
+            ViewModelLocationProvider.Register<PopAlbumHeaderView>(() => Container.Resolve<PopAlbumHeaderViewModel>());
+            ViewModelLocationProvider.Register<PopAlbumContentView>(() => Container.Resolve<PopAlbumContentViewModel>());
         }
     }
 }

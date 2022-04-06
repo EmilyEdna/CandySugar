@@ -49,10 +49,22 @@
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Update="LayoutView\PopContentView.xaml">
+	  <EmbeddedResource Update="LayoutView\PopAlbumContentView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="LayoutView\PopHeaderView.xaml">
+	  <EmbeddedResource Update="LayoutView\PopAlbumHeaderView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="LayoutView\PopPlayContentView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="LayoutView\PopPlayHeaderView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="LayoutView\PopSheetContentView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="LayoutView\PopSheetHeaderView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Anime\CandyAnimePlayView.xaml">
@@ -123,6 +135,12 @@
 	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="LayoutView\PopPlayHeaderView.xaml.cs">
+	    <DependentUpon>PopPlayHeaderView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="LayoutView\PopPlayContentView.xaml.cs">
+	    <DependentUpon>PopPlayContentView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Style\EntryStyle.xaml.cs">
 	    <DependentUpon>EntryStyle.xaml</DependentUpon>
 	  </Compile>

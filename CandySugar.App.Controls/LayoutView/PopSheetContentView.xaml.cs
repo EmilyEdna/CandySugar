@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace CandySugar.App.Controls.LayoutView
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PopHeaderView : ContentView
+    public partial class PopSheetContentView : ContentView
     {
-        public PopHeaderView()
+        public PopSheetContentView()
         {
             InitializeComponent();
         }

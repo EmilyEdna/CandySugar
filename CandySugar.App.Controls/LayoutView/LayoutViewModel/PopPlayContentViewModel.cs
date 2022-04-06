@@ -11,9 +11,10 @@ using Prism.Commands;
 
 namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
 {
-    public class PopContentViewModel : ViewModelBase
+    public class PopPlayContentViewModel : ViewModelBase
     {
         private IYYLiShi Candy;
+        public PopPlayHeaderView PopPlayHeaderView { get; set; }
 
         #region Property
 
@@ -50,7 +51,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
         {
             await Candy.RemovePlayList(Id);
             Query();
-            ContainerLocator.Container.Resolve<PopHeaderViewModel>().Refresh();
+            (PopPlayHeaderView.BindingContext as PopPlayHeaderViewModel).Refresh();
         }
         #endregion
     }

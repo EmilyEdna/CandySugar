@@ -25,37 +25,37 @@
         <KeyBinding
             Key="N"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.Novel}"
+            CommandParameter="{x:Static Enum:MenuFuncEnum.Novel}"
             Modifiers="Ctrl" />
         <KeyBinding
             Key="L"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.LightNovel}"
+            CommandParameter="{x:Static Enum:MenuFuncEnum.LightNovel}"
             Modifiers="Ctrl" />
         <KeyBinding
             Key="A"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.Anime}"
+            CommandParameter="{x:Static Enum:MenuFuncEnum.Anime}"
             Modifiers="Ctrl" />
         <KeyBinding
             Key="M"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.Manga}"
+            CommandParameter="{x:Static Enum:MenuFuncEnum.Manga}"
             Modifiers="Ctrl" />
         <KeyBinding
             Key="W"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.Wallpaper}"
+            CommandParameter="{x:Static Enum:MenuFuncEnum.Wallpaper}"
             Modifiers="Ctrl" />
         <KeyBinding
             Key="Y"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.Music}"
+            CommandParameter="{x:Static Enum:MenuFuncEnum.Music}"
             Modifiers="Ctrl" />
         <KeyBinding
             Key="D"
             Command="{Cmd:Action Redirect}"
-            CommandParameter="{x:Static Enum:MenuFuncEunm.Axgle}"
+            CommandParameter="{x:Static Enum:MenuFuncEnum.Axgle}"
             Modifiers="Ctrl" />
     </Ctrl:CandyWindow.InputBindings>
     <Grid>
@@ -105,7 +105,7 @@
                                                FalseToVisibility=Hidden}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseUp">
-                                <i:InvokeCommandAction Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEunm.UserCenter}" />
+                                <i:InvokeCommandAction Command="{Cmd:Action Redirect}" CommandParameter="{x:Static Enum:MenuFuncEnum.UserCenter}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <hc:Poptip.Instance>
@@ -137,7 +137,7 @@
                 <ContextMenu FontFamily="{StaticResource FontStyle}" Style="{DynamicResource TrayContextMenu}">
                     <MenuItem
                         Command="{Cmd:Action Redirect}"
-                        CommandParameter="{x:Static Enum:MenuFuncEunm.UserCenter}"
+                        CommandParameter="{x:Static Enum:MenuFuncEnum.UserCenter}"
                         Header="个人中心" />
                     <Separator />
                     <MenuItem
