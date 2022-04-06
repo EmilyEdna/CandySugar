@@ -1,10 +1,53 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CandySugar.App.Controls.LayoutView.PopAlbumContentView">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CandySugar.App.Controls.LayoutView.PopAlbumContentView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:prism="http://prismlibrary.com"
+    x:Name="PopContent"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentView.Content>
+        <SfList:SfListView
+            AutoFitMode="Height"
+            IsScrollBarVisible="False"
+            ItemsSource="{Binding AlbumDetail}"
+            SelectionBackgroundColor="Transparent">
+            <SfList:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="2" ColumnDefinitions="*,40">
+                            <StackLayout Margin="4,0,0,0">
+                                <Label
+                                    Margin="1"
+                                    FontSize="14"
+                                    Text="{Binding SongName}"
+                                    TextColor="Black" />
+                                <Label
+                                    Margin="1"
+                                    FontSize="10"
+                                    Text="{Binding SongArtist}"
+                                    TextColor="{DynamicResource Gray-500}" />
+                            </StackLayout>
+                            <StackLayout
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontFamily="{DynamicResource FontAwesomeSolid}"
+                                    FontSize="14"
+                                    Text="{Static Fontawesome:FontAwesomeIcons.Play}"
+                                    TextColor="{DynamicResource Gray-Black}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.AddPlayCommand, Source={x:Reference PopContent}}" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </SfList:SfListView.ItemTemplate>
+        </SfList:SfListView>
+    </ContentView.Content>
 </ContentView>

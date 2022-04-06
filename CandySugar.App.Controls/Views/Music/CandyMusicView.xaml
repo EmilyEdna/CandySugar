@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
-    xmlns:Enum="clr-namespace:CandySugar.Xam.Common.Enum;assembly=CandySugar.Xam.Common"
     xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:FFTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
@@ -67,11 +66,11 @@
                 </SfTab:SfTabView.Behaviors>
                 <SfTab:SfTabView.CenterButtonView>
                     <Grid WidthRequest="50">
+                        <!--  播放列表  -->
                         <Button
                             Margin="0,20,0,0"
                             BackgroundColor="Transparent"
                             Clicked="PopupOpened"
-                            CommandParameter="{x:Static Enum:PopOpenFuncEnum.PlayList}"
                             CornerRadius="35"
                             FontFamily="{DynamicResource FontAwesomeSolid}"
                             FontSize="20"
@@ -163,6 +162,7 @@
                                                                         Grid.Column="1"
                                                                         AlignItems="Center"
                                                                         JustifyContent="End">
+                                                                        <!--  添加歌曲到播放列表  -->
                                                                         <Button
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
                                                                             Command="{Binding BindingContext.AddPlayListCommand, Source={x:Reference MusicView}}"
@@ -175,10 +175,11 @@
                                                                             Text="{Static Fontawesome:FontAwesomeIcons.Play}"
                                                                             TextColor="{DynamicResource Gray-Black}"
                                                                             WidthRequest="40" />
+                                                                        <!--  查看专辑  -->
                                                                         <Button
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                                            Clicked="PopupOpened"
-                                                                            CommandParameter="{x:Static Enum:PopOpenFuncEnum.Album}"
+                                                                            Clicked="PopupAlbumOpened"
+                                                                            CommandParameter="{Binding .}"
                                                                             CornerRadius="18"
                                                                             FontFamily="{DynamicResource FontAwesomeSolid}"
                                                                             FontSize="15"
@@ -272,11 +273,12 @@
                                                                             HorizontalTextAlignment="Start"
                                                                             Style="{DynamicResource DescriptionLabelStyle}"
                                                                             Text="{Binding ListenNumber, StringFormat='播放量:{0}'}" />
+                                                                        <!--  查询歌单详情  -->
                                                                         <Button
                                                                             Padding="2"
                                                                             BackgroundColor="{DynamicResource GrayShadowColor}"
-                                                                            Clicked="PopupOpened"
-                                                                            CommandParameter="{x:Static Enum:PopOpenFuncEnum.Sheet}"
+                                                                            Clicked="PopupSheetOpened"
+                                                                            CommandParameter="{Binding .}"
                                                                             CornerRadius="18"
                                                                             FontFamily="{DynamicResource FontAwesomeSolid}"
                                                                             FontSize="15"

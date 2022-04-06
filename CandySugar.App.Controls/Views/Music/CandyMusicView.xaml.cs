@@ -1,6 +1,9 @@
 ﻿using CandySugar.App.Controls.LayoutView;
 using CandySugar.App.Controls.LayoutView.LayoutViewModel;
+using CandySugar.App.Controls.ViewModels.MusicModel;
 using CandySugar.Xam.Common;
+using CandySugar.Xam.Common.Enum;
+using Music.SDK.ViewModel.Response;
 using Syncfusion.XForms.PopupLayout;
 using System;
 using System.Collections.Generic;
@@ -23,7 +26,15 @@ namespace CandySugar.App.Controls.Views.Music
 
         private void PopupOpened(object sender, EventArgs e)
         {
-            
+            PopPlayList();
+        }
+        private void PopupSheetOpened(object sender, EventArgs e)
+        {
+            PopSheet((MusicSongSheetItem)(sender as Button).CommandParameter);
+        }
+        private void PopupAlbumOpened(object sender, EventArgs e)
+        {
+            PopAlbum((MusicSongItem)(sender as Button).CommandParameter);
         }
 
         private void PopPlayList()
@@ -34,11 +45,25 @@ namespace CandySugar.App.Controls.Views.Music
             PopCommon(HeaderView, ContentView);
             Pop.Show(20, 300);
         }
-        private void PopSheet() { 
-        
+        private void PopSheet(MusicSongSheetItem input)
+        {
+            var HeaderView = new PopSheetHeaderView();
+            ((PopSheetHeaderViewModel)HeaderView.BindingContext).Title = input.SongSheetName;
+            var ContentView = new PopSheetContentView();
+            ((PopSheetContentViewModel)ContentView.BindingContext).SearchSheet(input, ((CandyMusicViewModel)BindingContext).Platform);
+            PopCommon(HeaderView, ContentView);
+            Pop.Show(20, 300);
         }
-
-        private void PopCommon(ContentView HeaderView, ContentView ContentView) 
+        private void PopAlbum(MusicSongItem input)
+        {
+            var HeaderView = new PopAlbumHeaderView();
+            ((PopAlbumHeaderViewModel)HeaderView.BindingContext).Title = input.SongAlbumName;
+            var ContentView = new PopAlbumContentView();
+            ((PopAlbumContentViewModel)ContentView.BindingContext).SearchAlbum(input, ((CandyMusicViewModel)BindingContext).Platform);
+            PopCommon(HeaderView, ContentView);
+            Pop.Show(20, 300);
+        }
+        private void PopCommon(ContentView HeaderView, ContentView ContentView)
         {
             Pop.PopupView.PopupStyle = new PopupStyle
             {
