@@ -22,6 +22,22 @@ namespace CandySugar.App.Controls.Views.Music
         public CandyMusicView()
         {
             InitializeComponent();
+            Flag = 0;
+            Menu.Source = ImageSource.FromFile("repeat.png");
+        }
+        private int Flag;
+        private void ChangedClick(object sender, EventArgs e)
+        {
+            if (Flag == 0)
+            {
+                Menu.Source = ImageSource.FromFile("repeat2.png");
+                Flag = 1;
+            }
+            else
+            {
+                Menu.Source = ImageSource.FromFile("repeat.png");
+                Flag = 0;
+            }
         }
 
         private void PopupOpened(object sender, EventArgs e)
@@ -77,6 +93,21 @@ namespace CandySugar.App.Controls.Views.Music
             Pop.PopupView.AnimationEasing = AnimationEasing.SinIn;
             Pop.PopupView.AnimationMode = AnimationMode.SlideOnBottom;
             Pop.PopupView.ContentTemplate = new DataTemplate(() => ContentView);
+        }
+
+        private void PauseClick(object sender, EventArgs e)
+        {
+           
+        }
+
+        private async void PlayClick(object sender, EventArgs e)
+        {
+            var  data = await (this.BindingContext as CandyMusicViewModel).Query();
+
+            if (Flag == 0)
+            {
+                data.Select(t=>t.CacheAddress)
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using CandySugar.Xam.Core.Service;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
+using CandySugar.App.Controls.Views.Music;
 
 namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
 {
@@ -24,7 +25,6 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
             get => _Yinyue;
             set => SetProperty(ref _Yinyue, value);
         }
-
         #endregion
 
         protected override void OnViewLaunch()

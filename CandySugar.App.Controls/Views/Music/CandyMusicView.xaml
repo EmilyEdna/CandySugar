@@ -14,11 +14,12 @@
     xmlns:SfPop="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
     x:Name="MusicView"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid RowDefinitions="40,*">
+        <Grid RowDefinitions="40,*,0.08*">
             <FlexLayout>
                 <SearchBar
                     BackgroundColor="{DynamicResource PrimaryPink}"
@@ -53,32 +54,20 @@
                 Grid.Row="1"
                 BackgroundColor="Transparent"
                 EnableSwiping="False"
-                OverflowMode="CenterButton"
+                OverflowMode="Scroll"
                 ScrollButtonBackgroundColor="Transparent"
                 ScrollButtonForegroundColor="Transparent"
                 TabHeaderBackgroundColor="Transparent"
-                TabHeaderPosition="Bottom">
+                TabHeaderPosition="Top"
+                TabHeight="30"
+                TabWidth="180"
+                TabWidthMode="Default">
                 <SfTab:SfTabView.Behaviors>
                     <behavior:EventToCommandBehavior
                         Command="{Binding TabChangedCommand}"
                         Converter="{StaticResource TabItemConverter}"
                         EventName="TabItemTapped" />
                 </SfTab:SfTabView.Behaviors>
-                <SfTab:SfTabView.CenterButtonView>
-                    <Grid WidthRequest="50">
-                        <!--  播放列表  -->
-                        <Button
-                            Margin="0,20,0,0"
-                            BackgroundColor="Transparent"
-                            Clicked="PopupOpened"
-                            CornerRadius="35"
-                            FontFamily="{DynamicResource FontAwesomeSolid}"
-                            FontSize="20"
-                            HorizontalOptions="Center"
-                            Text="{Static Fontawesome:FontAwesomeIcons.Music}"
-                            TextColor="{DynamicResource PrimaryLightColor}" />
-                    </Grid>
-                </SfTab:SfTabView.CenterButtonView>
                 <SfTab:SfTabItem Title="单曲" TabIndex="0">
                     <SfTab:SfTabItem.Content>
                         <Grid>
@@ -302,6 +291,45 @@
                     </SfTab:SfTabItem.Content>
                 </SfTab:SfTabItem>
             </SfTab:SfTabView>
+            <RelativeLayout Grid.Row="2">
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    Clicked="PopupOpened"
+                    HeightRequest="50"
+                    RelativeLayout.XConstraint="10"
+                    Source="vinyl.png"
+                    WidthRequest="50" />
+                <Slider
+                    Maximum="100"
+                    MaximumTrackColor="{DynamicResource PrimaryLighterColor}"
+                    MinimumTrackColor="{DynamicResource Gray-Black}"
+                    RelativeLayout.XConstraint="50"
+                    RelativeLayout.YConstraint="20"
+                    ThumbColor="{DynamicResource PrimaryPink}"
+                    WidthRequest="280"
+                    Value="0" />
+                <Label x:Name="SongName" RelativeLayout.XConstraint="60" />
+                <FlexLayout RelativeLayout.XConstraint="265">
+                    <ImageButton
+                        Margin="0,0,10,0"
+                        BackgroundColor="Transparent"
+                        Clicked="PauseClick"
+                        HeightRequest="20"
+                        Source="pause.png" />
+                    <ImageButton
+                        BackgroundColor="Transparent"
+                        Clicked="PlayClick"
+                        HeightRequest="20"
+                        Source="play.png" />
+                </FlexLayout>
+                <ImageButton
+                    x:Name="Menu"
+                    BackgroundColor="Transparent"
+                    Clicked="ChangedClick"
+                    HeightRequest="30"
+                    RelativeLayout.XConstraint="320"
+                    RelativeLayout.YConstraint="10" />
+            </RelativeLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

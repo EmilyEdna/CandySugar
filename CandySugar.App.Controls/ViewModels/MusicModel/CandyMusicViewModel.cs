@@ -220,6 +220,10 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         {
             return String.Format(Soft.Toast, nameof(CandyMusicViewModel), Method);
         }
+        private async void Cache() 
+        { 
+        
+        }
         private async void AddMusic(string SongURL, MusicSongItem input)
         {
             await Candy.AddPlayList(new CandyYYLiShiDto
@@ -232,6 +236,10 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                 CacheAddress = null,
                 Platform = (int)this.Platform
             });
+        }
+        public async Task<List<CandyYYLiShiDto>> Query() 
+        {
+            return await Candy.GetPlayList();
         }
         /// <summary>
         /// 查单曲

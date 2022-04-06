@@ -31,8 +31,10 @@
             <SfTab:SfTabView
                 Grid.Row="1"
                 EnableSwiping="False"
-                OverflowMode="CenterButton"
+                OverflowMode="Scroll"
                 TabHeaderPosition="Bottom"
+                TabHeight="40"
+                TabWidth="180"
                 VisibleHeaderCount="2">
                 <SfTab:SfTabView.Behaviors>
                     <behavior:EventToCommandBehavior
@@ -120,18 +122,6 @@
                                                                             <Local:ItemsControl ItemsSource="{Binding Labels}">
                                                                                 <Local:ItemsControl.ItemTemplate>
                                                                                     <DataTemplate>
-                                                                                        <!--<Label
-                                                                                            FontSize="12"
-                                                                                            HorizontalOptions="Start"
-                                                                                            HorizontalTextAlignment="Start"
-                                                                                            LineBreakMode="TailTruncation"
-                                                                                            LineHeight="{OnPlatform Android=1.25,
-                                                                                                                    Default=-1}"
-                                                                                            MaxLines="2"
-                                                                                            Style="{StaticResource DescriptionLabelStyle}"
-                                                                                            Text="{Binding .}"
-                                                                                            VerticalOptions="Center"
-                                                                                            VerticalTextAlignment="Center" />-->
                                                                                         <XFMaterial:MaterialButton
                                                                                             Command="{Binding BindingContext.SearchCommand, Source={x:Reference KonachanView}}"
                                                                                             CommandParameter="{Binding .}"
