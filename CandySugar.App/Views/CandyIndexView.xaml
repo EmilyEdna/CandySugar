@@ -13,7 +13,7 @@
     <ContentPage.Content>
         <sf:SfNavigationDrawer
             x:Name="drawer"
-            x:Uid="123"
+            DrawerFooterHeight="30"
             DrawerHeaderHeight="0"
             DrawerWidth="200">
             <sf:SfNavigationDrawer.DrawerContentView>
@@ -69,6 +69,22 @@
                     <ContentView Grid.Row="1" Content="{Binding Views}" />
                 </Grid>
             </sf:SfNavigationDrawer.ContentView>
+            <sf:SfNavigationDrawer.DrawerFooterView>
+                <Grid BackgroundColor="White">
+                    <StackLayout
+                        BackgroundColor="White"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center">
+                        <Label
+                            Margin="10,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="Body"
+                            Text="{Binding Version}"
+                            TextColor="Black" />
+                    </StackLayout>
+                </Grid>
+
+            </sf:SfNavigationDrawer.DrawerFooterView>
         </sf:SfNavigationDrawer>
     </ContentPage.Content>
 </ContentPage>

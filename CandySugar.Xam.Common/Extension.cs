@@ -9,6 +9,7 @@ namespace CandySugar.Xam.Common
 {
     public class Extension
     {
+        public static string VersionCode { get; set; }
         public static string ReadLocalHtml(string input)
         {
             var htmlst = typeof(Extension).GetTypeInfo().Assembly.GetManifestResourceStream($"CandySugar.Xam.Common.WebViewAssets.{input}.html");
@@ -17,7 +18,6 @@ namespace CandySugar.Xam.Common
                 return reader.ReadToEnd();
             }
         }
-
         public static string FileNameFilter(string input)
         {
             string[] Filter = { ":", "\\", "/", "*", "?", "<", ">", "|", "\"" };
@@ -32,5 +32,6 @@ namespace CandySugar.Xam.Common
         }
         public static string AndroidAssetsPath => "file:///android_asset/";
         public static string IOSAssetsPath => "ms-appx-web:///";
+        
     }
 }

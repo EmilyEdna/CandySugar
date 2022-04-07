@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Controls.Views.About.CandyAboutView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*">
+            <StackLayout>
+                <FFImg:CachedImage HeightRequest="200" Source="wx.png" />
+            </StackLayout>
+            <ScrollView
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Start">
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Spacing="0"
+                    VerticalOptions="Center">
+                    <Label
+                        Margin="0,5"
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        LineHeight="1.25"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="用户协议"
+                        TextColor="Black" />
+                    <Label
+                        Margin="15,0,15,0"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="请您本产品之前，请务必仔细阅读并理解《用户许可使用协议》中规定的多有权利和限制。" />
+                    <Label
+                        Margin="0,5"
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        LineHeight="1.25"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="限制性条款"
+                        TextColor="Black" />
+                    <Label
+                        Margin="15,0,15,0"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="1.您不得对本产品进行任何形式的许可、出售、租赁、转让、发行或其他商业用途。" />
+                    <Label
+                        Margin="15,0,15,0"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="2.除非法律禁止此类限制，否则您不得对本产品的任何部分或衍生产品进行修改、翻译、改编、合并、利用、分解、改造或反向编译、反向工程等。" />
+                    <Label
+                        Margin="15,0,15,0"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="3.您不得删除或破坏包含在本产品中的任何版权声明或其他所有权标记。" />
+                    <Label
+                        Margin="0,5"
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        LineHeight="1.25"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="软件申明"
+                        TextColor="Black" />
+                    <Label
+                        Margin="15,0,15,0"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="本软件任何版本所有权归EmilyEdna所有，且禁止任何人任何组织使用本软件进行非法盈利，本软件仅是为了学习，使用者在使用过程中产生任何法律纠纷均与作者无关。" />
+                    <Label
+                        Margin="0,5"
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        LineHeight="1.25"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="联系作者"
+                        TextColor="Black" />
+                    <Label
+                        Margin="15,0,15,0"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="emilyednasion@gmail.com" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

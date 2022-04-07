@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XExten.Advance.CacheFramework.RunTimeCache;
 using XExten.Advance.LinqFramework;
 
 namespace CandySugar.App.Controls.Views.Option
@@ -41,6 +42,11 @@ namespace CandySugar.App.Controls.Views.Option
         {
             var radio = (sender as RadioButton);
             Age = radio.Value.AsString().AsInt();
+        }
+
+        private void Click_Clicked(object sender, EventArgs e)
+        {
+           MemoryCaches.RemoveAllCache();
         }
     }
 }

@@ -19,6 +19,7 @@ using CandySugar.Xam.Common;
 using CandySugar.App.Controls.Views.Option;
 using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.App.Controls.Views.Music;
+using CandySugar.App.Controls.Views.About;
 
 namespace CandySugar.App.ViewModels
 {
@@ -35,6 +36,12 @@ namespace CandySugar.App.ViewModels
         {
             get { return _Menu; }
             set { SetProperty(ref _Menu, value); }
+        }
+        private string _Version;
+        public string Version
+        {
+            get => _Version;
+            set =>SetProperty(ref _Version, value);
         }
 
         private View _Views;
@@ -82,6 +89,7 @@ namespace CandySugar.App.ViewModels
                     break;
                 case MenuFuncEnum.About:
                     base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyAboutView));
                     break;
                 default:
                     break;
@@ -105,7 +113,7 @@ namespace CandySugar.App.ViewModels
             Soft.ProxyIP = option == null ? Soft.ProxyIP : option.ProxyIP;
             Soft.ProxyPort= option == null ? Soft.ProxyPort : option.ProxyPort;
             Soft.ProxyPwd =option == null ? Soft.ProxyPwd : option.ProxyPwd;
-
+            Version = Extension.VersionCode;
             RefreshView();
         }
 

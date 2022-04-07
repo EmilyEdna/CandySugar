@@ -13,6 +13,7 @@ using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Core.Service;
 using FFImageLoading.Forms.Platform;
 using MediaManager;
+using MediaManager.Player;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
 using Prism.Ioc;
@@ -26,7 +27,7 @@ using Platform = Xamarin.Essentials.Platform;
 
 namespace CandySugar.Droid
 {
-    [Activity(Theme = "@style/MainTheme", 
+    [Activity(Theme = "@style/MainTheme",
         LaunchMode = LaunchMode.SingleTop,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : FormsAppCompatActivity
@@ -35,6 +36,8 @@ namespace CandySugar.Droid
         {
             //初始化数据库
             SqliteDbContext.Instance.InitTabel();
+            //版本号
+            Extension.VersionCode = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -58,7 +61,33 @@ namespace CandySugar.Droid
 
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidException;
         }
+        protected override void OnStop()
+        {
+            base.OnStop();
+            if(CrossMediaManager.Current.IsStopped())
+                CrossMediaManager.Current.Play();
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            //权限检查
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            if (keyCode == Keycode.Back)
+            {
+                var page = Xamarin.Forms.Application.Current.MainPage.Navigation.NavigationStack.FirstOrDefault();
+                if (page is CandyIndexView)
+                {
+                    var view = (CandyIndexViewModel)((CandyIndexView)page).BindingContext;
+                    view.RefreshView();
+                }
+            }
 
+            return base.OnKeyDown(keyCode, e);
+        }
         /// <summary>
         /// 全局异常
         /// </summary>
@@ -85,28 +114,6 @@ namespace CandySugar.Droid
             Thread.Sleep(2000);
 
             e.Handled = true;
-        }
-
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
-        {
-            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            //权限检查
-            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-        public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)
-        {
-            if (keyCode == Keycode.Back)
-            {
-                var page = Xamarin.Forms.Application.Current.MainPage.Navigation.NavigationStack.FirstOrDefault();
-                if (page is CandyIndexView)
-                {
-                    var view = (CandyIndexViewModel)((CandyIndexView)page).BindingContext;
-                    view.RefreshView();
-                }
-            }
-
-            return base.OnKeyDown(keyCode, e);
         }
     }
 }

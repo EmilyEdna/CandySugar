@@ -67,6 +67,9 @@
 	  <EmbeddedResource Update="LayoutView\PopSheetHeaderView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
+	  <EmbeddedResource Update="Views\About\CandyAboutView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\Anime\CandyAnimePlayView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>

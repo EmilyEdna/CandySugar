@@ -36,6 +36,7 @@ namespace CandySugar.App.Controls.Views.Music
             Menu.Source = ImageSource.FromFile("repeat.png");
             PlayHandler.Source = ImageSource.FromFile("play.png");
             Candy = ContainerLocator.Container.Resolve<IYYLiShi>();
+            CrossMediaManager.Current.RepeatMode = RepeatMode.All;
             MusicViewProperty = this;
         }
         private int Flag;

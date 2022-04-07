@@ -152,11 +152,18 @@
                             Value="20" />
                     </FlexLayout>
                 </SfBorder:SfBorder>
-                <XFMaterial:MaterialButton
-                    BackgroundColor="White"
-                    Clicked="MaterialButton_Clicked"
-                    Text="保存"
-                    TextColor="Black" />
+                <FlexLayout AlignItems="Center" JustifyContent="Center">
+                    <XFMaterial:MaterialButton
+                        BackgroundColor="White"
+                        Clicked="MaterialButton_Clicked"
+                        Text="保存"
+                        TextColor="Black" />
+                    <XFMaterial:MaterialButton
+                        BackgroundColor="White"
+                        Clicked="Click_Clicked"
+                        Text="清除缓存"
+                        TextColor="Black" />
+                </FlexLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
