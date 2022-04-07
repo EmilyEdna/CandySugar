@@ -17,6 +17,7 @@
     xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
     x:Name="MusicView"
+    Disappearing="MusicView_Disappearing"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid RowDefinitions="40,*,0.08*">
@@ -300,28 +301,28 @@
                     Source="vinyl.png"
                     WidthRequest="50" />
                 <Slider
-                    Maximum="100"
+                    x:Name="SliderPosition"
+                    IsEnabled="False"
+                    Maximum="0.01"
                     MaximumTrackColor="{DynamicResource PrimaryLighterColor}"
                     MinimumTrackColor="{DynamicResource Gray-Black}"
                     RelativeLayout.XConstraint="50"
-                    RelativeLayout.YConstraint="20"
+                    RelativeLayout.YConstraint="15"
                     ThumbColor="{DynamicResource PrimaryPink}"
                     WidthRequest="280"
                     Value="0" />
                 <Label x:Name="SongName" RelativeLayout.XConstraint="60" />
-                <FlexLayout RelativeLayout.XConstraint="265">
-                    <ImageButton
-                        Margin="0,0,10,0"
-                        BackgroundColor="Transparent"
-                        Clicked="PauseClick"
-                        HeightRequest="20"
-                        Source="pause.png" />
-                    <ImageButton
-                        BackgroundColor="Transparent"
-                        Clicked="PlayClick"
-                        HeightRequest="20"
-                        Source="play.png" />
+                <FlexLayout RelativeLayout.XConstraint="230" RelativeLayout.YConstraint="28">
+                    <Label x:Name="StartText" FontSize="10" />
+                    <Label x:Name="EndText" FontSize="10" />
                 </FlexLayout>
+
+                <ImageButton
+                    x:Name="PlayHandler"
+                    BackgroundColor="Transparent"
+                    Clicked="HandleClick"
+                    HeightRequest="20"
+                    RelativeLayout.XConstraint="290" />
                 <ImageButton
                     x:Name="Menu"
                     BackgroundColor="Transparent"

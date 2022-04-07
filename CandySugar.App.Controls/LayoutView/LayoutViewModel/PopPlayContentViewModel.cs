@@ -39,6 +39,14 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
             if (input != null)
                 Delete(input.PId);
         });
+        public ICommand PlayCommand => new DelegateCommand<CandyYYLiShiDto>(input =>
+        {
+            if (input != null)
+            {
+                Candy.UpdatePlayState(input.PId, true);
+                CandyMusicView.MusicViewProperty.PlayMusic();
+            }
+        });
         #endregion
 
         #region Method

@@ -13,5 +13,6 @@ namespace CandySugar.Xam.Core.Service
         Task ClearPlayList();
         Task RemovePlayList(Guid input);
         Task<int> PlayCount();
+        Task UpdatePlayState(Guid input, bool Played);
     }
 }

@@ -15,5 +15,6 @@ namespace CandySugar.Xam.Common.DTO
         public string SongId { get; set; }
         public long Span { get; set; }
         public int Platform { get; set; }
+        public bool IsPlayed { get; set; }
     }
 }

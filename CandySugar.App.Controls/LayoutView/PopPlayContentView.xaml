@@ -29,6 +29,9 @@
                                         FontSize="10"
                                         Text="{Binding SongArtist}"
                                         TextColor="{DynamicResource Gray-500}" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.PlayCommand, Source={x:Reference PopContent}}" CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
                                 </StackLayout>
                                 <StackLayout
                                     Grid.Column="1"

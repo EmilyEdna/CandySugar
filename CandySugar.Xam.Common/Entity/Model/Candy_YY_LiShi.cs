@@ -13,5 +13,6 @@ namespace CandySugar.Xam.Common.Entity.Model
         public string SongArtist { get; set; }
         public string SongId { get; set; }
         public int Platform { get; set; }
+        public bool IsPlayed { get; set; }
     }
 }

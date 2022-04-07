@@ -18,6 +18,12 @@ using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
 using CandySugar.Xam.Core.Service;
 using CandySugar.Xam.Common.DTO;
+using CandySugar.Xam.Common.Platform;
+using XExten.Advance.StaticFramework;
+using System.IO;
+using XExten.Advance.HttpFramework.MultiFactory;
+using System.Linq;
+using MediaManager.Library;
 
 namespace CandySugar.App.Controls.ViewModels.MusicModel
 {
@@ -164,12 +170,14 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             if (Tap == 0 && SongItems == null)
             {
                 this.PageSingleIndex = 1;
-                SearchSingleSong();
+                if (!SearchWord.IsNullOrEmpty())
+                    SearchSingleSong();
             }
             if (Tap == 1 && SongSheets == null)
             {
                 this.PageSheetIndex = 1;
-                SearchSheetSong();
+                if (!SearchWord.IsNullOrEmpty())
+                    SearchSheetSong();
             }
         });
 
@@ -211,7 +219,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         public ICommand AddPlayListCommand => new DelegateCommand<MusicSongItem>(input =>
         {
             if (input != null)
-                LoadMusic(input,this.Platform);
+                LoadMusic(input, this.Platform);
         });
         #endregion
 
@@ -220,26 +228,42 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         {
             return String.Format(Soft.Toast, nameof(CandyMusicViewModel), Method);
         }
-        private async void Cache() 
-        { 
-        
+        private  void Cache(MusicSongItem input, MusicSongPlayAddressResult Song)
+        {
+            var SongArtist = string.Join(",", input.SongArtistName);
+            var SongFile = $"{input.SongName}({input.SongAlbumName})-{SongArtist}_{Song.MusicPlatformType}.mp3";
+            var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
+            AuthorizeHelper.Instance.ApplyPermission(() =>
+            {
+                var dir = SyncStatic.CreateDir(Path.Combine(route, "CandyDown", "Music", $"{SongArtist}"));
+                var fn = SyncStatic.CreateFile(Path.Combine(dir, SongFile));
+
+                if (this.Platform == MusicPlatformEnum.BiliBiliMusic)
+                {
+                    var CacheAddress = SyncStatic.WriteFile(Song.BilibiliFileBytes, fn);
+                    AddMusic(input, Song, CacheAddress);
+                }
+                else
+                {
+                    var filebytes = IHttpMultiClient.HttpMulti.AddNode(opt => opt.NodePath = Song.SongURL).Build().RunBytesFirst();
+                    var CacheAddress = SyncStatic.WriteFile(filebytes, fn);
+                    AddMusic(input, Song, CacheAddress);
+                }
+            });
         }
-        private async void AddMusic(string SongURL, MusicSongItem input)
+        private async void AddMusic(MusicSongItem input, MusicSongPlayAddressResult Song, string path)
         {
             await Candy.AddPlayList(new CandyYYLiShiDto
             {
-                Address = SongURL,
+                Address = Song.SongURL,
                 SongAlbum = input.SongAlbumName,
                 SongName = input.SongName,
                 SongArtist = string.Join(",", input.SongArtistName),
                 SongId = input.SongId,
-                CacheAddress = null,
-                Platform = (int)this.Platform
+                CacheAddress = path,
+                Platform = (int)this.Platform,
+                IsPlayed = false
             });
-        }
-        public async Task<List<CandyYYLiShiDto>> Query() 
-        {
-            return await Candy.GetPlayList();
         }
         /// <summary>
         /// 查单曲
@@ -571,7 +595,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                     return;
                 }
 
-                AddMusic(SongURL.SongPlayAddressResult.SongURL, input);
+                Cache(input, SongURL.SongPlayAddressResult);
             }
             catch (Exception ex)
             {

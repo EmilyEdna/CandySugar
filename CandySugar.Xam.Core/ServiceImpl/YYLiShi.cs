@@ -4,6 +4,7 @@ using CandySugar.Xam.Common.Entity.Model;
 using CandySugar.Xam.Core.Service;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XExten.Advance.LinqFramework;
@@ -47,6 +48,23 @@ namespace CandySugar.Xam.Core.ServiceImpl
         {
             var db = SqliteDbContext.Instance.SqlDb;
             await db.DeleteAsync<Candy_YY_LiShi>(input);
+            await db.CloseAsync();
+        }
+
+        public async Task UpdatePlayState(Guid input, bool Played)
+        {
+            var db = SqliteDbContext.Instance.SqlDb;
+            var entities = await db.Table<Candy_YY_LiShi>().ToListAsync();
+            var entity = entities.FirstOrDefault(t => t.PId == input);
+            entity.IsPlayed = Played;
+            await db.UpdateAsync(entity);
+
+            entities.Where(t => t.PId != input).ForEnumerEach(async item =>
+            {
+                item.IsPlayed = !Played;
+                await db.UpdateAsync(item);
+            });
+
             await db.CloseAsync();
         }
     }
