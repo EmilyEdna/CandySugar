@@ -25,7 +25,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
 {
     public class CandyAxgleCateViewModel : ViewModelNavigatBase
     {
-        private readonly GalActorProxy Proxy;
+      
         public CandyAxgleCateViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new GalActorProxy
@@ -39,12 +39,15 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             this.PageIndex = 1;
             this.Refresh = false;
             this.IsBusy = false;
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Field
+        private readonly GalActorProxy Proxy;
         private int AId;
         private GalActorDescEnum Desc;
         private string KeyWord;
+        private readonly ILoger CandyLog;
         #endregion
 
         #region Override
@@ -145,8 +148,14 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyAxgleCateViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast, nameof(CandyAxgleCateViewModel), Method);
         }
         public async void Category(bool IsLoadMore = false)
@@ -192,7 +201,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Category",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -240,7 +249,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Search",ex)))
                 {
                     await Task.Delay(3000);
                 }

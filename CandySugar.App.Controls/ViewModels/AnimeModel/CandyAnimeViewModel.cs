@@ -15,13 +15,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using XExten.Advance.InternalFramework.Securities.Common;
 using XExten.Advance.LinqFramework;
-using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
 using CandySugar.Xam.Common.DTO;
-using CandySugar.Xam.Common.Entity.Model;
 using XF.Material.Forms.UI.Dialogs.Configurations;
 using Xamarin.Forms;
 
@@ -44,10 +41,12 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             this.Activity = false;
 
             Candy = ContainerLocator.Container.Resolve<IDMLiShi>();
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Field
         private readonly IDMLiShi Candy;
+        private readonly ILoger CandyLog;
         private readonly AnimeProxy Proxy;
         private string Letters;
         private string Categorys;
@@ -127,8 +126,14 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
         #endregion
 
         #region Method
-        private string Tip(string Method) 
+        private async Task<string> Tip(string Method,Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyAnimeViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast, nameof(CandyAnimeViewModel), Method);
         }
         public async void Init()
@@ -153,7 +158,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -204,7 +209,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Category",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -255,7 +260,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("LetterCategory")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("LetterCategory",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -307,7 +312,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Search")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Search",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -336,17 +341,17 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults.Where(t => t.IsDownURL == false));
                 Activity = false;
 
-              var result =  await MaterialDialog.Instance.SelectActionAsync(this.Detail.Select(t => t.CollectName).ToList(), new MaterialSimpleDialogConfiguration
+                var result = await MaterialDialog.Instance.SelectActionAsync(this.Detail.Select(t => t.CollectName).ToList(), new MaterialSimpleDialogConfiguration
                 {
-                    TextColor = Color.FromRgb(255,133,133),
+                    TextColor = Color.FromRgb(255, 133, 133),
                     CornerRadius = 10
-                }) ;
+                });
 
                 Play(this.Detail[result]);
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchDetail")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("SearchDetail",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -383,7 +388,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Play")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Play",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -448,7 +453,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     LetterCategory(Letters);
             }
         });
-    
+
         #endregion
 
         #region Override

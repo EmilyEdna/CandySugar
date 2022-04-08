@@ -1,5 +1,6 @@
 ﻿using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common;
+using CandySugar.Xam.Core.Service;
 using Novel.SDK;
 using Novel.SDK.ViewModel;
 using Novel.SDK.ViewModel.Enums;
@@ -16,6 +17,8 @@ using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
@@ -23,6 +26,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
     {
 
         private readonly NovelProxy Proxy;
+        private readonly ILoger CandyLog;
         public CandyNovelDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new NovelProxy
@@ -32,6 +36,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
             this.PageIndex = 1;
             this.Asc = true;
         }
@@ -153,8 +158,14 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyNovelDetailViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyNovelDetailViewModel), Method);
         }
         public async void Details(string input, bool IsRefresh = false, bool ShowMore = false)
@@ -219,7 +230,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Details")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Details",ex)))
                 {
                     await Task.Delay(3000);
                 }

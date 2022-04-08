@@ -29,6 +29,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
     {
         private readonly WallpaperProxy Proxy;
         private readonly IBZLiShi Candy;
+        private readonly ILoger CandyLog;
         public CandyKonachanViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new WallpaperProxy
@@ -40,6 +41,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             };
             this.PageIndex = 1;
             Candy = ContainerLocator.Container.Resolve<IBZLiShi>();
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Flied
@@ -186,8 +188,14 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyKonachanViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyKonachanViewModel), Method);
         }
         public async void Init(bool IsLoadMore = false)
@@ -236,7 +244,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -285,7 +293,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchBaisc")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("SearchBaisc",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -377,7 +385,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Down")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Down",ex)))
                 {
                     await Task.Delay(3000);
                 }

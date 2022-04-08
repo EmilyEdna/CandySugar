@@ -17,6 +17,8 @@ using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
 using CandySugar.App.Controls.Views.LightNovel;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.LightNovelModel
 {
@@ -24,6 +26,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
     {
         public const string Account = "kilydoll365";
         public const string Password = "sion8550";
+        private readonly ILoger CandyLog;
         public CandyLightNovelViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new LightNovelProxy
@@ -33,6 +36,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Field
@@ -147,8 +151,14 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyLightNovelViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyLightNovelViewModel), Method);
         }
         public async void Init()
@@ -179,7 +189,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -238,7 +248,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Category",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -302,7 +312,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Search")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Search",ex)))
                 {
                     await Task.Delay(3000);
                 }

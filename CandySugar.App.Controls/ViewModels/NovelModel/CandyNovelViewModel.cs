@@ -16,14 +16,18 @@ using XExten.Advance.StaticFramework;
 using XF.Material.Forms.UI.Dialogs;
 using Prism.Ioc;
 using CandySugar.App.Controls.Views.Novel;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.NovelModel
 {
     public class CandyNovelViewModel : ViewModelNavigatBase
     {
         private readonly NovelProxy Proxy;
+        private readonly ILoger CandyLog;
         public CandyNovelViewModel(INavigationService navigationService) : base(navigationService)
         {
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
             Proxy = new NovelProxy
             {
                 IP = Soft.ProxyIP,
@@ -120,8 +124,14 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyNovelViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyNovelViewModel), Method);
         }
         private async void Init()
@@ -144,7 +154,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -185,7 +195,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             catch (Exception ex)
             {
                 this.IsBusy = false;
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Category",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -224,7 +234,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             catch (Exception ex)
             {
                 this.Refresh = false;
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Refreshs")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Refreshs",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -268,7 +278,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Search")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Search",ex)))
                 {
                     await Task.Delay(3000);
                 }

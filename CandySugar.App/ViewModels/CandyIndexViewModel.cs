@@ -20,6 +20,7 @@ using CandySugar.App.Controls.Views.Option;
 using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.App.Controls.Views.Music;
 using CandySugar.App.Controls.Views.About;
+using CandySugar.App.Controls.Views.Logger;
 
 namespace CandySugar.App.ViewModels
 {
@@ -86,6 +87,10 @@ namespace CandySugar.App.ViewModels
                 case MenuFuncEnum.Setting:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyOptionView));
+                    break;
+                case MenuFuncEnum.Loger:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyLogView));
                     break;
                 case MenuFuncEnum.About:
                     base.Title = input.CommandParam.ToDes();

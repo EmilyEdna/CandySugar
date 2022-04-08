@@ -13,6 +13,13 @@ namespace CandySugar.Xam.Core.ServiceImpl
 {
     public class Loger : ILoger
     {
+        public async Task Clear()
+        {
+            var db = SqliteDbContext.Instance.SqlDb;
+            await  db.DeleteAllAsync< Candy_Global_Log>();
+            await db.CloseAsync();
+        }
+
         public async Task Delete(CandyGlobalLogDto input)
         {
             var db = SqliteDbContext.Instance.SqlDb;
@@ -31,7 +38,7 @@ namespace CandySugar.Xam.Core.ServiceImpl
         public async Task<List<CandyGlobalLogDto>> Query()
         {
             var db = SqliteDbContext.Instance.SqlDb;
-            var data = await db.Table<Candy_Global_Log>().ToListAsync();
+            var data = await db.Table<Candy_Global_Log>().OrderByDescending(t=>t.Span).ToListAsync();
             await db.CloseAsync();
             return data.ToMapest<List<CandyGlobalLogDto>>();
         }

@@ -1,5 +1,6 @@
 ﻿using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.Xam.Common;
+using CandySugar.Xam.Core.Service;
 using GalActor.SDK;
 using GalActor.SDK.ViewModel;
 using GalActor.SDK.ViewModel.Eunms;
@@ -15,12 +16,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.AxgleModel
 {
     public class CandyAxgleViewModel : ViewModelNavigatBase
     {
         private readonly GalActorProxy Proxy;
+        private readonly ILoger CandyLog;
         public CandyAxgleViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new GalActorProxy
@@ -30,6 +34,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 Port = Soft.ProxyPort,
                 UserName = Soft.ProxyAccount
             };
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Property
@@ -55,8 +60,14 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         #endregion
 
         #region Methond
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyAxgleViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyAxgleViewModel), Method);
         }
         public async void Init()
@@ -79,7 +90,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
                 {
                     await Task.Delay(3000);
                 }

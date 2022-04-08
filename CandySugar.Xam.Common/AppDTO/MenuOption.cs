@@ -67,6 +67,12 @@ namespace CandySugar.Xam.Common.AppDTO
             });
             data.Add(new MenuOption
             {
+                FuncName = "日志",
+                ImageRoute = "https://konachan.com/data/preview/36/12/36125de26ea53a393ff00c48fbe2f626.jpg",
+                CommandParam = MenuFuncEnum.Loger
+            });
+            data.Add(new MenuOption
+            {
                 FuncName = "关于",
                 ImageRoute = "https://konachan.com/data/preview/7e/c7/7ec7a41ae560f3fe70a8f5676e10d8b0.jpg",
                 CommandParam = MenuFuncEnum.About

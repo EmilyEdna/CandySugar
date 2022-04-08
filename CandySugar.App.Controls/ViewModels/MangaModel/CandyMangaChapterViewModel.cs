@@ -14,7 +14,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XF.Material.Forms.UI.Dialogs;
 using System.Linq;
+using Prism.Ioc;
 using CandySugar.App.Controls.Views.Manga;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.MangaModel
 {
@@ -30,8 +33,10 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 UserName = Soft.ProxyAccount
             };
             Refresh = false;
+            CandyLog = CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
         #region Field
+        private readonly ILoger CandyLog;
         private readonly MangaProxy Proxy;
         private string MangaName;
         private string Cover;
@@ -53,8 +58,14 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyMangaChapterViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyMangaChapterViewModel), Method);
         }
         public async void Init(string input)
@@ -80,7 +91,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
                 {
                     await Task.Delay(3000);
                 }

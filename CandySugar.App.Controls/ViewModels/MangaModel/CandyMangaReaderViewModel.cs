@@ -1,5 +1,6 @@
 ﻿using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.AppDTO;
+using CandySugar.Xam.Core.Service;
 using Manga.SDK;
 using Manga.SDK.ViewModel;
 using Manga.SDK.ViewModel.Emums;
@@ -15,18 +16,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
-using XExten.Advance.CacheFramework;
-using XExten.Advance.InternalFramework.Securities.Common;
-using XExten.Advance.LinqFramework;
-using XExten.Advance.StaticFramework;
+using Prism.Ioc;
 using XF.Material.Forms.UI.Dialogs;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.MangaModel
 {
     public class CandyMangaReaderViewModel : ViewModelNavigatBase
     {
         private readonly MangaProxy Proxy;
+        private readonly ILoger CandyLog;
         public CandyMangaReaderViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new MangaProxy
@@ -37,6 +36,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 UserName = Soft.ProxyAccount
             };
             this.Refresh = false;
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Property
@@ -67,9 +67,15 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         #endregion
 
         #region Mothod
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
-            return String.Format(Soft.Toast,nameof(CandyMangaReaderViewModel), Method);
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyMangaReaderViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
+            return String.Format(Soft.Toast, nameof(CandyMangaReaderViewModel), Method);
         }
         public async Task<string> Content()
         {
@@ -96,7 +102,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Content")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Content", ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -134,7 +140,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("ContentBytes")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("ContentBytes", ex)))
                 {
                     await Task.Delay(3000);
                 }

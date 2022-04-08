@@ -23,6 +23,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
     {
         private readonly NovelProxy Proxy;
         private readonly IXSLiShi Candy;
+        private readonly ILoger CandyLog;
         public CandyNovelContentViewModel(INavigationService navigationService) : base(navigationService)
         {
             Proxy = new NovelProxy
@@ -33,6 +34,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 UserName = Soft.ProxyAccount
             };
             Candy = ContainerLocator.Container.Resolve<IXSLiShi>();
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
             this.TextTheme = Color.Black;
             this.Theme = Color.FromHex("DDCDA1");
 
@@ -114,8 +116,14 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyNovelContentViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyNovelContentViewModel), Method);
         }
         public async void Contents(string input)
@@ -161,7 +169,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Contents")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Contents",ex)))
                 {
                     await Task.Delay(3000);
                 }

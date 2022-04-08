@@ -10,6 +10,7 @@ namespace CandySugar.Xam.Core.Service
     {
         Task Insert(CandyGlobalLogDto input);
         Task Delete(CandyGlobalLogDto input);
+        Task Clear();
         Task<List<CandyGlobalLogDto>> Query();
     }
 }

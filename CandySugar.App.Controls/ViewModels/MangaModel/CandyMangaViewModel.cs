@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
+using Prism.Ioc;
+using CandySugar.Xam.Core.Service;
+using CandySugar.Xam.Common.DTO;
 
 namespace CandySugar.App.Controls.ViewModels.MangaModel
 {
@@ -31,9 +34,11 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             };
             this.PageIndex = 1;
             this.IsBusy = false;
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Field
+        private readonly ILoger CandyLog;
         private readonly MangaProxy Proxy;
         private string KeyWord;
         private string CateWord;
@@ -122,8 +127,14 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyMangaViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast,nameof(CandyMangaViewModel), Method);
         }
         public async void Init()
@@ -147,7 +158,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Init")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -202,7 +213,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Category")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Category",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -258,7 +269,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("Search")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Search",ex)))
                 {
                     await Task.Delay(3000);
                 }

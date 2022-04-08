@@ -51,6 +51,11 @@ namespace CandySugar.Xam.Common.Enum
         [Description("设置")]
         Setting,
         /// <summary>
+        /// 日志
+        /// </summary>
+        [Description("日志")]
+        Loger,
+        /// <summary>
         /// 关于
         /// </summary>
         [Description("关于")]

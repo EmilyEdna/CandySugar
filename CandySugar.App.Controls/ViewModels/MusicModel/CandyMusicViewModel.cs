@@ -33,6 +33,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         private readonly MusicProxy Proxy;
         private int Tap;
         private readonly IYYLiShi Candy;
+        private readonly ILoger CandyLog;
         public CandyMusicViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.Proxy = new MusicProxy
@@ -47,6 +48,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             this.PageSheetIndex = 1;
             this.Platform = MusicPlatformEnum.NeteaseMusic;
             Candy = ContainerLocator.Container.Resolve<IYYLiShi>();
+            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
         }
 
         #region Property
@@ -224,8 +226,14 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         #endregion
 
         #region Method
-        private string Tip(string Method)
+        private async Task<string> Tip(string Method, Exception ex)
         {
+            await CandyLog.Insert(new CandyGlobalLogDto
+            {
+                Location = $"{nameof(CandyMusicViewModel)}_{Method}",
+                ErrorMsg = ex.Message,
+                ErrorStack = ex.StackTrace
+            });
             return String.Format(Soft.Toast, nameof(CandyMusicViewModel), Method);
         }
         private  void Cache(MusicSongItem input, MusicSongPlayAddressResult Song)
@@ -407,7 +415,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchSingleSong")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("SearchSingleSong",ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -555,7 +563,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchSingleSong")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("SearchSheetSong", ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -599,7 +607,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(Tip("SearchSingleSong")))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("LoadMusic",ex)))
                 {
                     await Task.Delay(3000);
                 }

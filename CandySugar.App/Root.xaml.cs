@@ -6,6 +6,7 @@ using CandySugar.App.Controls.ViewModels.AnimeModel;
 using CandySugar.App.Controls.ViewModels.AxgleModel;
 using CandySugar.App.Controls.ViewModels.KonachanModel;
 using CandySugar.App.Controls.ViewModels.LightNovelModel;
+using CandySugar.App.Controls.ViewModels.LoggerModel;
 using CandySugar.App.Controls.ViewModels.MangaModel;
 using CandySugar.App.Controls.ViewModels.MusicModel;
 using CandySugar.App.Controls.ViewModels.NovelModel;
@@ -16,6 +17,7 @@ using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.App.Controls.Views.Konachan;
 using CandySugar.App.Controls.Views.LightNovel;
+using CandySugar.App.Controls.Views.Logger;
 using CandySugar.App.Controls.Views.Manga;
 using CandySugar.App.Controls.Views.Music;
 using CandySugar.App.Controls.Views.Novel;
@@ -115,6 +117,11 @@ namespace CandySugar.App
 
             #region Setting
             containerRegistry.RegisterForNavigation<CandyOptionView, CandyOptionViewModel>();
+            #endregion
+
+            #region Log
+            containerRegistry.RegisterForNavigation<CandyLogView, CandyLogViewModel>();
+            
             #endregion
         }
 
