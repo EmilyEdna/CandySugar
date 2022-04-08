@@ -38,7 +38,6 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
 
             this.LetterCate = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".Split(",").ToList();
             this.PageIndex = 1;
-            this.Activity = false;
 
             Candy = ContainerLocator.Container.Resolve<IDMLiShi>();
             CandyLog = ContainerLocator.Container.Resolve<ILoger>();
@@ -115,13 +114,6 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
         {
             get { return _Refresh; }
             set { SetProperty(ref _Refresh, value); }
-        }
-
-        private bool _Activity;
-        public bool Activity
-        {
-            get { return _Activity; }
-            set { SetProperty(ref _Activity, value); }
         }
         #endregion
 
@@ -322,7 +314,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
         {
             try
             {
-                Activity = true;
+                this.Refresh = true;
                 await Task.Delay(Soft.WaitSpan);
                 var AnimeDetail = await AnimeFactory.Anime(opt =>
                 {
@@ -337,17 +329,25 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                         }
                     };
                 }).RunsAsync();
-
+                this.Refresh = false;
                 this.Detail = new ObservableCollection<AnimeDetailResult>(AnimeDetail.DetailResults.Where(t => t.IsDownURL == false));
-                Activity = false;
 
-                var result = await MaterialDialog.Instance.SelectActionAsync(this.Detail.Select(t => t.CollectName).ToList(), new MaterialSimpleDialogConfiguration
+                if (Detail.Count != 0)
                 {
-                    TextColor = Color.FromRgb(255, 133, 133),
-                    CornerRadius = 10
-                });
+                    var result = await MaterialDialog.Instance.SelectActionAsync(this.Detail.Select(t => t.CollectName).ToList(), new MaterialSimpleDialogConfiguration
+                    {
+                        TextColor = Color.FromRgb(255, 133, 133),
+                        CornerRadius = 10
+                    });
 
-                Play(this.Detail[result]);
+                    Play(this.Detail[result]);
+                }
+                else {
+                    using (await MaterialDialog.Instance.LoadingSnackbarAsync("网站数据未更新"))
+                    {
+                        await Task.Delay(3000);
+                    }
+                }
             }
             catch (Exception ex)
             {
