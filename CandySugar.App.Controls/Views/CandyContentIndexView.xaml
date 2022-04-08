@@ -22,7 +22,7 @@
                                 <StackLayout>
                                     <Image
                                         HeightRequest="70"
-                                        Source="Cover.gif"
+                                        Source="cover.gif"
                                         WidthRequest="50">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding BindingContext.XSClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />

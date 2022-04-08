@@ -92,7 +92,7 @@
                                                         BackgroundColor="{DynamicResource GrayShadowColor}"
                                                         DownsampleUseDipUnits="True"
                                                         HeightRequest="120"
-                                                        Source="Cover.gif"
+                                                        Source="cover.gif"
                                                         WidthRequest="80" />
                                                     <StackLayout
                                                         Grid.Column="1"

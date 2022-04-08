@@ -19,7 +19,7 @@
                     HeightRequest="200"
                     RelativeLayout.XConstraint="2"
                     RelativeLayout.YConstraint="-12"
-                    Source="Cover.gif"
+                    Source="cover.gif"
                     WidthRequest="130" />
                 <Label RelativeLayout.XConstraint="138" TextColor="{DynamicResource PrimaryPink}">
                     <Label.FormattedText>
