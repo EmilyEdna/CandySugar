@@ -31,6 +31,7 @@ namespace CandySugar.Xam.Core.ServiceImpl
         {
             var db = SqliteDbContext.Instance.SqlDb;
             var entity = input.ToMapest<Candy_Global_Log>();
+            entity.InitProperty();
             await db.InsertAsync(entity);
             await db.CloseAsync();
         }
