@@ -1,6 +1,7 @@
 ﻿using CandySugar.CandyWindows;
 using CandySugar.Common.WinDTO;
 using CandySugar.Controls.UIElementHelper;
+using CandySugar.Controls.UserControls;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using MaterialDesignThemes.Wpf;
@@ -24,7 +25,16 @@ namespace CandySugar
 {
     public class BootResource
     {
-        #region Property
+        private static ConcurrentDictionary<string, CandyMangaReaderWin> MangaReaderWindow = new ConcurrentDictionary<string, CandyMangaReaderWin>();
+        private static ConcurrentDictionary<string, CandyVLCWin> AnimeVLCWindow = new ConcurrentDictionary<string, CandyVLCWin>();
+        private static ConcurrentDictionary<string, CandyDPlayWin> AnimeDPlayWindow = new ConcurrentDictionary<string, CandyDPlayWin>();
+        private static ConcurrentDictionary<string, CandyNovelWin> CandyNovelWindow = new ConcurrentDictionary<string, CandyNovelWin>();
+        private static ConcurrentDictionary<string, CandyLightNovelWin> CandyLightNovelWindow = new ConcurrentDictionary<string, CandyLightNovelWin>();
+        private static ConcurrentDictionary<string, CandyLyricWin> CandyLyricWindow = new ConcurrentDictionary<string, CandyLyricWin>();
+        private static ConcurrentDictionary<string, CandyPreviewWin> CandyPreviewWindow = new ConcurrentDictionary<string, CandyPreviewWin>();
+        private static ConcurrentDictionary<string, CandyAxgleWin> AxgleWindow = new ConcurrentDictionary<string, CandyAxgleWin>();
+
+        #region 属性
         /// <summary>
         /// 播放定时器
         /// </summary>
@@ -66,7 +76,7 @@ namespace CandySugar
         internal static void SaveUserSetting()
         {
             RootOption root = Soft.Default.ToJson().ToModel<RootOption>();
-            
+
             var XmlData = Encoding.UTF8.GetBytes(SyncStatic.XmlSerializer(root));
             SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "UserSetting"));
             var Dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "UserSetting"));
@@ -91,15 +101,7 @@ namespace CandySugar
         }
         #endregion
 
-        private static ConcurrentDictionary<string, CandyMangaReaderWin> MangaReaderWindow = new ConcurrentDictionary<string, CandyMangaReaderWin>();
-        private static ConcurrentDictionary<string, CandyVLCWin> AnimeVLCWindow = new ConcurrentDictionary<string, CandyVLCWin>();
-        private static ConcurrentDictionary<string, CandyDPlayWin> AnimeDPlayWindow = new ConcurrentDictionary<string, CandyDPlayWin>();
-        private static ConcurrentDictionary<string, CandyNovelWin> CandyNovelWindow = new ConcurrentDictionary<string, CandyNovelWin>();
-        private static ConcurrentDictionary<string, CandyLightNovelWin> CandyLightNovelWindow = new ConcurrentDictionary<string, CandyLightNovelWin>();
-        private static ConcurrentDictionary<string, CandyLyricWin> CandyLyricWindow = new ConcurrentDictionary<string, CandyLyricWin>();
-        private static ConcurrentDictionary<string, CandyPreviewWin> CandyPreviewWindow = new ConcurrentDictionary<string, CandyPreviewWin>();
-        private static ConcurrentDictionary<string, CandyAxgleWin> AxgleWindow = new ConcurrentDictionary<string, CandyAxgleWin>();
-
+        #region 窗体控制
         /// <summary>
         /// 控制预览窗体打开
         /// </summary>
@@ -478,6 +480,19 @@ namespace CandySugar
 
             return CandyLyricWindow.Count;
         }
+        #endregion
+
+        #region 弹窗控制
+        public static bool Popup<T>(Action<T> action=null) where T : CandyWindow, new()
+        {
+            T popup = new T();
+            popup.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            action?.Invoke(popup);
+            return (bool)popup.ShowDialog();
+        }
+        #endregion
+
+        #region 清理
         public static void Clear()
         {
             //清理
@@ -486,5 +501,6 @@ namespace CandySugar
             Timer?.Close();
             LyricTimer?.Close();
         }
+        #endregion
     }
 }

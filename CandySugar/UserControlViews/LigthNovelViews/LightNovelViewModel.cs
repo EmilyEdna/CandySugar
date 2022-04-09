@@ -158,7 +158,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                         LightNovelType = LightNovelEnum.Refresh
                     };
                 }).Runs();
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -211,7 +211,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                         LightNovelType = LightNovelEnum.Refresh
                     };
                 }).Runs();
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -257,7 +257,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                         LightNovelType = LightNovelEnum.Refresh
                     };
                 }).Runs();
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -335,7 +335,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                         LightNovelType = LightNovelEnum.Refresh
                     };
                 }).Runs();
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
 
         }
@@ -374,7 +374,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 catch(Exception ex)
                 {
                     HelpUtilty.WirteLog(string.Empty, ex);
-                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                    Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                 }
             }
             else
@@ -414,7 +414,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 catch(Exception ex)
                 {
                     HelpUtilty.WirteLog(string.Empty, ex);
-                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                    Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                 }
             }
         }
@@ -446,7 +446,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     var dir = SyncStatic.CreateDir(Path.Combine(Environment.CurrentDirectory, "CandyDown", "LightNovel", $"{HelpUtilty.FileNameFilter(BookName)}"));
                     var fn = SyncStatic.CreateFile(Path.Combine(dir, $"{HelpUtilty.FileNameFilter(BookName)}.txt"));
                     SyncStatic.WriteFile(LightNovelDown.DownResult.Down, fn);
-                    MessageBox.Info("下载完成", "提示");
+                    Growl.Info("下载完成");
                     Process.Start("explorer.exe", dir);
                     return false;
                 }

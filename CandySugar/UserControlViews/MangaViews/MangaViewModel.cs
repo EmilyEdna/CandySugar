@@ -164,14 +164,14 @@ namespace CandySugar.UserControlViews.MangaViews
                     }).RunsAsync();
 
                     if (MangaSearch.SearchResults.Count == 0)
-                        MessageBox.Info("数据已到底~`(*>﹏<*)′", "提示");
+                        Growl.Info("数据已到底~`(*>﹏<*)′");
                     else
                         MangaRecommend = new ObservableCollection<MangaRecommendResult>(MangaSearch.SearchResults.ToMapest<List<MangaRecommendResult>>());
                 }
                 catch(Exception ex)
                 {
                     HelpUtilty.WirteLog(string.Empty, ex);
-                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                    Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                 }
             }
             else
@@ -195,14 +195,14 @@ namespace CandySugar.UserControlViews.MangaViews
                         };
                     }).RunsAsync();
                     if (MangaCate.SearchResults.Count == 0)
-                        MessageBox.Info("数据已到底~`(*>﹏<*)′", "提示");
+                        Growl.Info("数据已到底~`(*>﹏<*)′");
                     else
                         MangaRecommend = new ObservableCollection<MangaRecommendResult>(MangaCate.SearchResults.ToMapest<List<MangaRecommendResult>>());
                 }
                 catch (Exception ex)
                 {
                     HelpUtilty.WirteLog(string.Empty, ex);
-                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                    Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                 }
             }
         }
@@ -230,7 +230,7 @@ namespace CandySugar.UserControlViews.MangaViews
             catch (Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
         private async void DetailList(string input)
@@ -257,7 +257,7 @@ namespace CandySugar.UserControlViews.MangaViews
             catch (Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
         #endregion

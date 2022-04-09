@@ -3,6 +3,7 @@ using CandySugar.Common.DTO;
 using CandySugar.Controls.Commands;
 using CandySugar.Core.Service;
 using CandySugar.Properties;
+using HandyControl.Controls;
 using Novel.SDK;
 using Novel.SDK.ViewModel;
 using Novel.SDK.ViewModel.Enums;
@@ -14,8 +15,6 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
-using XExten.Advance.StaticFramework;
-using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace CandySugar.CandyWindows.CandyWinViewModel
 {
@@ -100,7 +99,7 @@ namespace CandySugar.CandyWindows.CandyWinViewModel
             catch(Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
 
         }, null);

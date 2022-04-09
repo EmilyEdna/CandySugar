@@ -36,7 +36,7 @@
             Width="1200"
             MouseMove="WindowMove" />
         <StackPanel Grid.Row="1" Background="Transparent">
-            <Button Content="去广告" Click="Button_Click"/>
+            <Button Click="Button_Click" Content="去广告" />
             <web:WebView2
                 Name="AxWebView"
                 Height="728"

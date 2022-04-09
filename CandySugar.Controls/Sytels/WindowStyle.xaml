@@ -64,4 +64,41 @@
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
         <Setter Property="FontFamily" Value="{DynamicResource FontStyle}" />
     </Style>
+
+    <Style
+        x:Key="PopupStyle"
+        BasedOn="{StaticResource SettingStyle}"
+        TargetType="Ctrl:CandyWindow">
+        <Setter Property="Width" Value="300" />
+        <Setter Property="Height" Value="100" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Ctrl:CandyWindow">
+                    <Ctrl:CandyCanvas
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Background="Transparent">
+                        <Rectangle
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            VerticalAlignment="Top"
+                            Fill="White"
+                            RadiusX="15"
+                            RadiusY="15" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Border
+                                Width="{TemplateBinding Width}"
+                                Background="{DynamicResource DeepBlack}"
+                                CornerRadius="15,15,0,0" />
+                            <ContentPresenter Grid.Row="1" />
+                        </Grid>
+                    </Ctrl:CandyCanvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

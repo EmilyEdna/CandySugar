@@ -121,7 +121,7 @@ namespace CandySugar.UserControlViews.AnimeViews
             catch(Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
         #endregion
@@ -154,7 +154,7 @@ namespace CandySugar.UserControlViews.AnimeViews
             catch(Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -181,7 +181,7 @@ namespace CandySugar.UserControlViews.AnimeViews
             catch(Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -214,7 +214,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 catch(Exception ex)
                 {
                     HelpUtilty.WirteLog(string.Empty, ex);
-                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                    Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                 }
             }
             else
@@ -242,7 +242,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 catch(Exception ex)
                 {
                     HelpUtilty.WirteLog(string.Empty, ex);
-                    MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                    Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                 }
             }
         }
@@ -304,7 +304,7 @@ namespace CandySugar.UserControlViews.AnimeViews
             catch (Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
         #endregion

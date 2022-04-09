@@ -60,7 +60,7 @@
     </Ctrl:CandyWindow.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="72" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <CtrlView:BasicHeader
@@ -126,12 +126,25 @@
                                 Stretch="UniformToFill" />
                         </Border.Background>
                     </Border>
+
                 </Grid>
             </WrapPanel>
             <WrapPanel Grid.Column="1">
                 <ContentControl x:Name="Contents" Cmd:View.Model="{Binding ActiveItem}" />
             </WrapPanel>
         </Grid>
+        <hc:ScrollViewer
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            IsInertiaEnabled="True"
+            IsPenetrating="True"
+            VerticalScrollBarVisibility="Hidden">
+            <StackPanel
+                Margin="0,0,0,5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                hc:Growl.GrowlParent="True" />
+        </hc:ScrollViewer>
         <tb:TaskbarIcon DoubleClickCommand="{Cmd:Action ShowWindow}" IconSource="/CandySugar.Resource;component/Assets/Icon.ico">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu FontFamily="{StaticResource FontStyle}" Style="{DynamicResource TrayContextMenu}">

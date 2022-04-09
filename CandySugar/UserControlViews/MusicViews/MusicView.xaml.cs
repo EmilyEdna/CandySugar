@@ -126,7 +126,7 @@ namespace CandySugar.UserControlViews.MusicViews
 
         public async Task LyricData()
         {
-            MusicLyricResult result =await  this.ViewModel.LoadLyric(CurrentPlay.Values.FirstOrDefault());
+            MusicLyricResult result = await this.ViewModel.LoadLyric(CurrentPlay.Values.FirstOrDefault());
             if (result == null)
                 return;
             LyricResult = result;
@@ -337,7 +337,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                 PlayHandle(btn, e);
                             }
                             else
-                                HandyControl.Controls.MessageBox.Info("木有任何歌曲（；´д｀）ゞ", "提示");
+                                HandyControl.Controls.Growl.Info("木有任何歌曲（；´д｀）ゞ");
                         }
                         LyricHandles();
                         break;
@@ -407,7 +407,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                 PlayHandle(btn, e);
                             }
                             else
-                                HandyControl.Controls.MessageBox.Info("木有任何歌曲（；´д｀）ゞ", "提示");
+                                HandyControl.Controls.Growl.Info("木有任何歌曲（；´д｀）ゞ");
                         }
                         LyricHandles();
                         break;
@@ -418,7 +418,7 @@ namespace CandySugar.UserControlViews.MusicViews
         }
         private async void LyricHandle(object sender, MouseButtonEventArgs e)
         {
-           await LyricData();
+            await LyricData();
             LyricStutas = BootResource.Lyric(window =>
             {
                 window.DataContext = ViewModel.GetContainer<CandyLyricViewModel>();
@@ -432,7 +432,7 @@ namespace CandySugar.UserControlViews.MusicViews
         {
             if (LyricStutas)
             {
-               await LyricData();
+                await LyricData();
 
                 LyricStutas = BootResource.Lyric(window =>
                 {
@@ -461,9 +461,9 @@ namespace CandySugar.UserControlViews.MusicViews
             }
             catch
             {
-                HandyControl.Controls.MessageBox.Info("播放失败，未检测到音频设备，请检查设备驱动", "提示");
+                HandyControl.Controls.Growl.Info("播放失败，未检测到音频设备，请检查设备驱动");
             }
-           
+
         }
         #endregion
     }

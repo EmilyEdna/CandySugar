@@ -2,6 +2,7 @@
 using CandySugar.Common.Enum;
 using CandySugar.Common.Navigations;
 using CandySugar.Common.WinDTO;
+using CandySugar.Controls.PopupControl;
 using CandySugar.Controls.UserControls;
 using CandySugar.UserControlViews.AnimeViews;
 using CandySugar.UserControlViews.AxgleViews;
@@ -11,6 +12,7 @@ using CandySugar.UserControlViews.MusicViews;
 using CandySugar.UserControlViews.NovelViews;
 using CandySugar.UserControlViews.UserViews;
 using CandySugar.UserControlViews.WallpaperViews;
+using HC = HandyControl.Controls;
 using Serilog;
 using Stylet;
 using StyletIoC;
@@ -29,7 +31,7 @@ namespace CandySugar.ViewModels
         {
             this.Container = Container;
             this.Menu = MenuOption.InitMenu();
-            this.SoftName= $"甜糖V_{Assembly.GetExecutingAssembly().GetName().Version}";
+            this.SoftName = $"甜糖V_{Assembly.GetExecutingAssembly().GetName().Version}";
         }
 
         #region Property
@@ -69,14 +71,32 @@ namespace CandySugar.ViewModels
                     BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEnum.Wallpaper:
-                    ActivateItem(Container.Get<WallpaperViewModel>());
+                    if (HelpUtilty.PINK) ActivateItem(Container.Get<WallpaperViewModel>());
+                    else
+                    {
+                        if (BootResource.Popup<PINPopupWindow>())
+                        {
+                            HelpUtilty.PINK = true;
+                            ActivateItem(Container.Get<WallpaperViewModel>());
+                        }
+                        else HC.Growl.Info("PIN码错误!");
+                    }
                     BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEnum.Music:
                     ActivateItem(Container.Get<MusicViewModel>());
                     break;
                 case MenuFuncEnum.Axgle:
-                    ActivateItem(Container.Get<AxgleViewModel>());
+                    if (HelpUtilty.PINK) ActivateItem(Container.Get<AxgleViewModel>());
+                    else
+                    {
+                        if (BootResource.Popup<PINPopupWindow>()) 
+                        {
+                            HelpUtilty.PINK = true;
+                            ActivateItem(Container.Get<AxgleViewModel>());
+                        }
+                        else HC.Growl.Info("PIN码错误!");
+                    }
                     BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEnum.UserCenter:

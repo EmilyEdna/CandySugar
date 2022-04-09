@@ -210,7 +210,7 @@ namespace CandySugar.UserControlViews.MusicViews
             catch (Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -240,7 +240,7 @@ namespace CandySugar.UserControlViews.MusicViews
             catch (Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -267,7 +267,7 @@ namespace CandySugar.UserControlViews.MusicViews
 
                 if (SongURL.SongPlayAddressResult.CanPlay == false)
                 {
-                    MessageBox.Info("当前歌曲已下架，请切换到其他其他平台搜索");
+                    Growl.Info("当前歌曲已下架，请切换到其他其他平台搜索");
                     return;
                 }
 
@@ -289,7 +289,7 @@ namespace CandySugar.UserControlViews.MusicViews
             catch (Exception ex)
             {
                 HelpUtilty.WirteLog(string.Empty, ex);
-                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
             }
         }
 
@@ -324,7 +324,7 @@ namespace CandySugar.UserControlViews.MusicViews
         {
             if (input == null)
             {
-                MessageBox.Info("当前没有歌曲在播放中~~~", "提示"); return null;
+                Growl.Info("当前没有歌曲在播放中~~~"); return null;
             }
             var data = await this.YinYue.GetLyrics(input.SongId, input.Platform);
             if (data != null)
@@ -400,7 +400,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         else
@@ -430,7 +430,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         break;
@@ -464,7 +464,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         else
@@ -494,7 +494,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         break;
@@ -528,7 +528,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         else
@@ -558,7 +558,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         break;
@@ -592,7 +592,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         else
@@ -622,7 +622,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         break;
@@ -656,7 +656,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         else
@@ -686,7 +686,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         break;
@@ -720,7 +720,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         else
@@ -750,7 +750,7 @@ namespace CandySugar.UserControlViews.MusicViews
                             catch (Exception ex)
                             {
                                 HelpUtilty.WirteLog(string.Empty, ex);
-                                MessageBox.Info("网络有波动，请稍后再试~`(*>﹏<*)′", "提示");
+                                Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
                             }
                         }
                         break;
