@@ -129,6 +129,7 @@ namespace CandySugar.ViewModels
 
         protected override void OnViewLoaded()
         {
+            ActivateItem(Container.Get<UserViewModel>());
             HelpUtilty.WirteLog("启动完成");
         }
     }
