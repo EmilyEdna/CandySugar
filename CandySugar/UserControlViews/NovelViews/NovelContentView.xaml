@@ -27,6 +27,7 @@
                 Height="400"
                 BorderBrush="#FFFF9999">
                 <Image
+                    Width="290"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Stretch"
                     Source="{C:Binding NovelDetail.Cover}"
