@@ -4,8 +4,6 @@
 
 一款基于C#.NET 6开发的WPF和Android程序，支持在线看小说，轻小说，上K站，看动漫，看漫画，全网听歌等等。
 
-界面采用[MaterialDesignThemes](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit) 和[HandyControl](https://github.com/ghost1372/HandyControls)进行页面绘制，内部播放采用的是windows版本VLCX64和DPlayer，不支持低分辨率屏幕.
-
 有好的建议和BUG请提交在[此处](https://github.com/EmilyEdna/CandySugar/issues)
 
 ### 功能介绍：
@@ -29,8 +27,6 @@
 8.提供个人中心服务等。
 
 9.提供实验性功能~~~
-
-10.功能持续开发中~~~
 
 ### 注意事项：
 
@@ -66,3 +62,12 @@
 ![p5.jpg](Image/p5.jpg)
 
 ![p6.jpg](Image/p6.jpg)
+
+### 软件引用：
+##### WPF
+[MaterialDesignThemes](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
+[HandyControl](https://github.com/ghost1372/HandyControls)
+
+##### Xamarin.Froms
+[FFImageLoading](https://github.com/luberda-molinet/FFImageLoading)
+[XF.Material](https://github.com/Baseflow/XF-Material-Library)
