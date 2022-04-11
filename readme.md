@@ -2,7 +2,7 @@
 
 ### 项目简介：
 
-一款基于C#.NET 6开发的WPF和Android程序，支持在线看小说，轻小说，上K站，看动漫，看漫画，全网听歌等等。
+一款基于C#.NET 6开发的WPF和Xamarin.Forms程序，支持在线看小说，轻小说，上K站，看动漫，看漫画，全网听歌等等。
 
 有好的建议和BUG请提交在[此处](https://github.com/EmilyEdna/CandySugar/issues)
 
