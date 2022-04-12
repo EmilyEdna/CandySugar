@@ -1,10 +1,12 @@
-﻿using Serilog;
+﻿using Newtonsoft.Json.Linq;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using XExten.Advance.HttpFramework.MultiFactory;
 using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
 
@@ -57,9 +59,17 @@ namespace CandySugar.Common
             else
                 Log.Logger.Information($"CandySugar：【{Handle}】，时间：【{DateTime.Now.ToFmtDate(3, "yyyy年MM月dd日 HH时mm分ss秒")}】");
         }
-        public static void DeleteLog() 
+        public static void DeleteLog()
         {
             SyncStatic.DeleteFolder(Path.Combine(Environment.CurrentDirectory, "Logs"));
+        }
+        public static string GetVersion()
+        {
+            var serverVersion = IHttpMultiClient.HttpMulti.AddNode(opt =>
+            {
+                opt.NodePath = "https://gitee.com/EmilyEdna/CandySugar/raw/master/CandySugarOption";
+            }).Build().RunStringFirst();
+            return serverVersion.ToModel<JObject>()["WPF"].ToString();
         }
     }
 }

@@ -30,6 +30,6 @@
 		<PackageReference Include="HandyControls" Version="3.3.10" />
 		<PackageReference Include="Stylet" Version="1.3.6" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
-		<PackageReference Include="XExten.Advance" Version="1.1.3.2-beta" />
+		<PackageReference Include="XExten.Advance" Version="1.1.3.3-beta" />
 	</ItemGroup>
 </Project>

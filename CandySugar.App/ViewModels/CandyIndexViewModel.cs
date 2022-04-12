@@ -21,6 +21,9 @@ using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.App.Controls.Views.Music;
 using CandySugar.App.Controls.Views.About;
 using CandySugar.App.Controls.Views.Logger;
+using XF.Material.Forms.UI.Dialogs;
+using XF.Material.Forms.UI.Dialogs.Configurations;
+using Syncfusion.XForms.BadgeView;
 
 namespace CandySugar.App.ViewModels
 {
@@ -29,9 +32,11 @@ namespace CandySugar.App.ViewModels
         public CandyIndexViewModel(INavigationService navigationService) : base(navigationService)
         {
             base.Title = "首页";
+            this.CurrentVersion = "New";
+            this.Badge = BadgeType.Error;
             this.Menu = MenuOption.InitMenu();
         }
-
+        #region Property
         private ObservableCollection<MenuOption> _Menu;
         public ObservableCollection<MenuOption> Menu
         {
@@ -44,14 +49,27 @@ namespace CandySugar.App.ViewModels
             get => _Version;
             set =>SetProperty(ref _Version, value);
         }
-
+        private string _CurrentVersion;
+        public string CurrentVersion
+        {
+            get => _CurrentVersion;
+            set => SetProperty(ref _CurrentVersion, value);
+        }
         private View _Views;
         public View Views
         {
             get { return _Views; }
             set { SetProperty(ref _Views, value); }
         }
+        private BadgeType _Badge;
+        public BadgeType Badge
+        {
+            get => _Badge;
+            set => SetProperty(ref _Badge, value);
+        }
+        #endregion
 
+        #region Command
         public ICommand ContentCommand => new Command<MenuOption>(input =>
         {
             switch (input.CommandParam)
@@ -100,12 +118,9 @@ namespace CandySugar.App.ViewModels
                     break;
             }
         });
+        #endregion
 
-        private async void Arrived(string input)
-        {
-            await NavigationService.NavigateAsync(new Uri(input, UriKind.Relative));
-        }
-
+        #region Override
         protected override async void OnViewLaunch()
         {
             var option = await ContainerLocator.Container.Resolve<ISetting>().Query();
@@ -120,12 +135,42 @@ namespace CandySugar.App.ViewModels
             Soft.ProxyPwd =option == null ? Soft.ProxyPwd : option.ProxyPwd;
             Version = Extension.VersionCode;
             RefreshView();
+            CheckVersion();
         }
+        #endregion
 
+        #region Method
+        public async void Arrived(string input)
+        {
+            await NavigationService.NavigateAsync(new Uri(input, UriKind.Relative));
+        }
         public void RefreshView()
         {
             Views = new CandyContentIndexView();
             base.Title = "首页";
         }
+
+        public  async void CheckVersion()
+        {
+            if (Extension.CheckVersion())
+            {
+                var result =await  MaterialDialog.Instance.ConfirmAsync("检测到新版本，是否进行升级!", "提示", "确定", "取消", new MaterialAlertDialogConfiguration
+                {
+                    TintColor = Color.Coral,
+                    CornerRadius = 8,
+                    ButtonAllCaps = false
+                }) ;
+
+                if (result.HasValue && result.Value)
+                {
+                    //升级
+                }
+            }
+            else {
+                this.CurrentVersion = "Current";
+                this.Badge = BadgeType.Primary;
+            }
+        }
+        #endregion
     }
 }

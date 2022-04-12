@@ -36,10 +36,7 @@ namespace CandySugar
 
             //校验版本
             var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            var serverVersion = IHttpMultiClient.HttpMulti.AddNode(opt =>
-            {
-                opt.NodePath = "https://gitee.com/Mefelia/CandySugar/raw/master/CandySugarOption";
-            }).Build().RunStringFirst();
+            var serverVersion = HelpUtilty.GetVersion();
             if (!currentVersion.Equals(serverVersion))
             {
                 //升级

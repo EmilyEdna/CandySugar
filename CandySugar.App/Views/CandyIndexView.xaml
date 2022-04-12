@@ -2,18 +2,15 @@
     x:Class="CandySugar.App.Views.CandyIndexView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:IndexView="clr-namespace:CandySugar.App.Controls.Views;assembly=CandySugar.App.Controls"
+    xmlns:SFBadge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors;assembly=CandySugar.App.Controls"
-    xmlns:ctrl="clr-namespace:CandySugar.App.Controls.Controls;assembly=CandySugar.App.Controls"
-    xmlns:ffload="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:ffloadtrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
     xmlns:sf="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <sf:SfNavigationDrawer
             x:Name="drawer"
-            DrawerFooterHeight="30"
+            DrawerFooterHeight="50"
             DrawerHeaderHeight="0"
             DrawerWidth="200">
             <sf:SfNavigationDrawer.DrawerContentView>
@@ -74,16 +71,27 @@
                     <StackLayout
                         BackgroundColor="White"
                         HorizontalOptions="Start"
-                        VerticalOptions="Center">
-                        <Label
-                            Margin="10,0,0,0"
-                            FontAttributes="Bold"
-                            FontSize="Body"
-                            Text="{Binding Version}"
-                            TextColor="Black" />
+                        VerticalOptions="End">
+                        <SFBadge:SfBadgeView
+                            BadgeText="{Binding CurrentVersion}"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start">
+                            <SFBadge:SfBadgeView.BadgeSettings>
+                                <SFBadge:BadgeSetting
+                                    BadgeType="{Binding Badge}"
+                                    FontSize="8"
+                                    Offset="10,0" />
+                            </SFBadge:SfBadgeView.BadgeSettings>
+                            <SFBadge:SfBadgeView.Content>
+                                <Label
+                                    Margin="30,0,0,0"
+                                    FontSize="12"
+                                    Text="{Binding Version}"
+                                    TextColor="Black" />
+                            </SFBadge:SfBadgeView.Content>
+                        </SFBadge:SfBadgeView>
                     </StackLayout>
                 </Grid>
-
             </sf:SfNavigationDrawer.DrawerFooterView>
         </sf:SfNavigationDrawer>
     </ContentPage.Content>

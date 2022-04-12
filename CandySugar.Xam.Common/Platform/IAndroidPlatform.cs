@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CandySugar.Xam.Common.CrossDownManager;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,5 +29,10 @@ namespace CandySugar.Xam.Common.Platform
         /// </summary>
         /// <returns></returns>
         string DownPath();
+        /// <summary>
+        /// 更新Apk
+        /// </summary>
+        /// <returns></returns>
+        IDownloadManager UpdateApk();
     }
 }

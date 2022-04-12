@@ -83,6 +83,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrossDownImpl\DownloadCompletedBroadcastReceiver.cs" />
+    <Compile Include="CrossDownImpl\DownloadFileImplementation.cs" />
+    <Compile Include="CrossDownImpl\DownloadManagerImplementation.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Platforms\AndroidInitializer.cs" />

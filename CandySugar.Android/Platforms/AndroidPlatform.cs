@@ -1,11 +1,11 @@
 ﻿using Android.App;
 using Android.Views;
+using CandySugar.Droid.CrossDownImpl;
+using CandySugar.Xam.Common.CrossDownManager;
 using CandySugar.Xam.Common.Platform;
 using Plugin.CurrentActivity;
+using System;
 using Env = Android.OS.Environment;
-using System.Threading.Tasks;
-using XExten.Advance.StaticFramework;
-using System.IO;
 
 namespace CandySugar.Droid.Platforms
 {
@@ -34,6 +34,14 @@ namespace CandySugar.Droid.Platforms
         public string DownPath()
         {
             return Env.GetExternalStoragePublicDirectory(Env.DirectoryDownloads).AbsoluteFile + "";
+        }
+
+        public IDownloadManager UpdateApk()
+        {
+            var manager = CrossDownloadManager.Current;
+            manager.PathNameForDownloadedFile = new Func<IDownloadFile, string>(File => DownPath() + "CandySugar.apk");
+            ((DownloadManagerImplementation)manager).IsVisibleInDownloadsUi = true;
+            return manager;
         }
     }
 }

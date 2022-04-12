@@ -17,6 +17,7 @@ using MediaManager.Player;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
 using Prism.Ioc;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,7 +30,11 @@ namespace CandySugar.Droid
 {
     [Activity(Theme = "@style/MainTheme",
         LaunchMode = LaunchMode.SingleTop,
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+        ConfigurationChanges = ConfigChanges.ScreenSize |
+        ConfigChanges.Orientation | 
+        ConfigChanges.UiMode | 
+        ConfigChanges.ScreenLayout |
+        ConfigChanges.SmallestScreenSize)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
