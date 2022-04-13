@@ -10,6 +10,7 @@ namespace CandySugar.Xam.Common
         public const string S15X = "rating:questionable";
         public const string S18X = "rating:explicit";
         public const string Toast = "{0}_{1}_网络有波动，请稍后再试~`(*>﹏<*)′";
+        public static bool PINK { get; set; } = false;
         public static string ProxyIP { get; set; } = "";
         public static int ProxyPort { get; set; } = -1;
         public static string ProxyPwd { get; set; }

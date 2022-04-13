@@ -26,6 +26,8 @@ using XF.Material.Forms.UI.Dialogs.Configurations;
 using Syncfusion.XForms.BadgeView;
 using CandySugar.Xam.Common.Platform;
 using CandySugar.Xam.Common.CrossDownManager;
+using XF.Material.Forms.UI;
+using System.Threading.Tasks;
 
 namespace CandySugar.App.ViewModels
 {
@@ -74,51 +76,7 @@ namespace CandySugar.App.ViewModels
         #region Command
         public ICommand ContentCommand => new Command<MenuOption>(input =>
         {
-            switch (input.CommandParam)
-            {
-                case MenuFuncEnum.Novel:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyNovelView));
-                    break;
-                case MenuFuncEnum.LightNovel:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyLightNovelView));
-                    break;
-                case MenuFuncEnum.Anime:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyAnimeView));
-                    break;
-                case MenuFuncEnum.Manga:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyMangaView));
-                    break;
-                case MenuFuncEnum.Wallpaper:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyKonachanView));
-                    break;
-                case MenuFuncEnum.Axgle:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyAxgleView));
-                    break;
-                case MenuFuncEnum.Music:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyMusicView));
-                    break;
-                case MenuFuncEnum.Setting:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyOptionView));
-                    break;
-                case MenuFuncEnum.Loger:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyLogView));
-                    break;
-                case MenuFuncEnum.About:
-                    base.Title = input.CommandParam.ToDes();
-                    Arrived(nameof(CandyAboutView));
-                    break;
-                default:
-                    break;
-            }
+            GotoContent(input);
         });
         #endregion
 
@@ -142,6 +100,76 @@ namespace CandySugar.App.ViewModels
         #endregion
 
         #region Method
+        public async void GotoContent(MenuOption input) 
+        {
+            switch (input.CommandParam)
+            {
+                case MenuFuncEnum.Novel:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyNovelView));
+                    break;
+                case MenuFuncEnum.LightNovel:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyLightNovelView));
+                    break;
+                case MenuFuncEnum.Anime:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyAnimeView));
+                    break;
+                case MenuFuncEnum.Manga:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyMangaView));
+                    break;
+                case MenuFuncEnum.Wallpaper:
+                    base.Title = input.CommandParam.ToDes();
+                    if (await PINK())
+                        Arrived(nameof(CandyKonachanView));
+                    break;
+                case MenuFuncEnum.Axgle:
+                    base.Title = input.CommandParam.ToDes();
+                    if(await PINK())
+                        Arrived(nameof(CandyAxgleView));
+                    break;
+                case MenuFuncEnum.Music:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyMusicView));
+                    break;
+                case MenuFuncEnum.Setting:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyOptionView));
+                    break;
+                case MenuFuncEnum.Loger:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyLogView));
+                    break;
+                case MenuFuncEnum.About:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyAboutView));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public async Task<bool> PINK() 
+        {
+            if (Soft.PINK) return true;
+            else {
+                var res = await MaterialDialog.Instance.InputAsync("信息", "请输入PIN码", null, null, "确定", "取消", new MaterialInputDialogConfiguration
+                {
+                    InputType = MaterialTextFieldInputType.Password,
+                    TintColor = Color.FromHex("FF9999"),
+                    CornerRadius = 8,
+                    ButtonAllCaps = false
+                });
+                if (res.ToUpper().Equals("EMILY"))
+                {
+                    Soft.PINK= true;
+                    return true;
+                }
+                else return false;
+            }
+        }
         public async void Arrived(string input)
         {
             await NavigationService.NavigateAsync(new Uri(input, UriKind.Relative));
@@ -151,14 +179,13 @@ namespace CandySugar.App.ViewModels
             Views = new CandyContentIndexView();
             base.Title = "首页";
         }
-
         public  async void CheckVersion()
         {
             if (Extension.CheckVersion())
             {
                 var result =await  MaterialDialog.Instance.ConfirmAsync("检测到新版本，是否进行升级!", "提示", "确定", "取消", new MaterialAlertDialogConfiguration
                 {
-                    TintColor = Color.Coral,
+                    TintColor = Color.FromHex("FF9999"),
                     CornerRadius = 8,
                     ButtonAllCaps = false
                 }) ;
