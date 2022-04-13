@@ -41,8 +41,8 @@ namespace CandySugar.Xam.Common
                 opt.NodePath = "https://gitee.com/EmilyEdna/CandySugar/raw/master/CandySugarOption";
             }).Build().RunStringFirst();
             var AppVersion = ServerVersion.ToModel<JObject>()["App"].ToString();
-            if (AppVersion.Equals(VersionCode)) return true;
-            else return false;
+            if (AppVersion.Equals(VersionCode)) return false;
+            else return true;
         }
     }
 }

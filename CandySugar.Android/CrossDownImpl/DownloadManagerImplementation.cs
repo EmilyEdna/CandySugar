@@ -20,10 +20,10 @@ namespace CandySugar.Droid.CrossDownImpl
     /// </summary>
     public class DownloadManagerImplementation : IDownloadManager
     {
-        private Android.OS.Handler _downloadWatcherHandler;
+        private Handler _downloadWatcherHandler;
         private Java.Lang.Runnable _downloadWatcherHandlerRunnable;
 
-        private readonly Android.App.DownloadManager _downloadManager;
+        private readonly DownloadManager _downloadManager;
 
         private readonly IList<IDownloadFile> _queue;
 

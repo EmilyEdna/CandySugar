@@ -34,5 +34,9 @@ namespace CandySugar.Xam.Common.Platform
         /// </summary>
         /// <returns></returns>
         IDownloadManager UpdateApk();
+        /// <summary>
+        /// 安装Apk
+        /// </summary>
+        void InstallApk();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace CandySugar.Xam.Common.CrossDownManager
@@ -25,11 +27,8 @@ namespace CandySugar.Xam.Common.CrossDownManager
 
         private static IDownloadManager CreateDownloadManager()
         {
-#if __ANDROID__ || __UNIFIED__ || WINDOWS_UWP
-            return new DownloadManagerImplementation();
-#else
-            return null;
-#endif
+            var type = Assembly.Load("CandySugar.Android.dll").GetTypes().Where(t => t.GetInterface("IDownloadManager") == typeof(IDownloadManager)).FirstOrDefault();
+            return (IDownloadManager)Activator.CreateInstance(type);
         }
     }
 }

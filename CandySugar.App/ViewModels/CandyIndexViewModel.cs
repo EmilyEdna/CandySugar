@@ -24,6 +24,8 @@ using CandySugar.App.Controls.Views.Logger;
 using XF.Material.Forms.UI.Dialogs;
 using XF.Material.Forms.UI.Dialogs.Configurations;
 using Syncfusion.XForms.BadgeView;
+using CandySugar.Xam.Common.Platform;
+using CandySugar.Xam.Common.CrossDownManager;
 
 namespace CandySugar.App.ViewModels
 {
@@ -163,7 +165,23 @@ namespace CandySugar.App.ViewModels
 
                 if (result.HasValue && result.Value)
                 {
+                    var Platform = ContainerLocator.Container.Resolve<IAndroidPlatform>();
                     //升级
+                    var manager = Platform.UpdateApk();
+                    var File = manager.CreateDownloadFile("https://ghproxy.com/https://github.com/EmilyEdna/KuRuMi/releases/download/1.0/CandySugar.apk");
+                    File.PropertyChanged += (sender, obj) =>
+                    {
+                        var IsCompleted = ((IDownloadFile)sender).Status == DownloadFileStatus.COMPLETED;
+                        if (obj.PropertyName == "Status" && IsCompleted)
+                        {
+                            Platform.InstallApk();
+                        }
+                    };
+                    AuthorizeHelper.Instance.ApplyPermission(() =>
+                    {
+                        manager.Start(File);
+                    });
+
                 }
             }
             else {
