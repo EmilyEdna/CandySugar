@@ -155,7 +155,7 @@ namespace CandySugar.App.ViewModels
         {
             if (Soft.PINK) return true;
             else {
-                var res = await MaterialDialog.Instance.InputAsync("信息", "请输入PIN码", null, null, "确定", "取消", new MaterialInputDialogConfiguration
+                var res = await MaterialDialog.Instance.InputAsync("提示", "请输入PIN码", null, null, "确定", "取消", new MaterialInputDialogConfiguration
                 {
                     InputType = MaterialTextFieldInputType.Password,
                     TintColor = Color.FromHex("FF9999"),
@@ -212,7 +212,7 @@ namespace CandySugar.App.ViewModels
                 }
             }
             else {
-                this.CurrentVersion = "Current";
+                this.CurrentVersion = "Cur";
                 this.Badge = BadgeType.Primary;
             }
         }
