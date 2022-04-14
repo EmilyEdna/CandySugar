@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
 using XF.Material.Forms.UI.Dialogs;
-using Prism.Ioc;
 using CandySugar.Xam.Core.Service;
 using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Common.Platform;
@@ -23,7 +22,7 @@ using XExten.Advance.StaticFramework;
 using System.IO;
 using XExten.Advance.HttpFramework.MultiFactory;
 using System.Linq;
-using MediaManager.Library;
+using CandySugar.Xam.Common.Enum;
 
 namespace CandySugar.App.Controls.ViewModels.MusicModel
 {
@@ -47,8 +46,8 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             this.PageSheetIndex = 1;
             this.PageSheetIndex = 1;
             this.Platform = MusicPlatformEnum.NeteaseMusic;
-            Candy = ContainerLocator.Container.Resolve<IYYLiShi>();
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            Candy = Resolve<IYYLiShi>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Property
@@ -66,36 +65,48 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             set { SetProperty(ref _SongItems, value); }
         }
 
-        private ObservableCollection<GalComboDto> _Combo;
-        public ObservableCollection<GalComboDto> Combo
+        private ObservableCollection<ComboDto> _Combo;
+        public ObservableCollection<ComboDto> Combo
         {
             get => _Combo;
             set => SetProperty(ref _Combo, value);
         }
+
+        private ObservableCollection<CandyHistoryDto> _CandyHistory;
+        public ObservableCollection<CandyHistoryDto> CandyHistory
+        {
+            get => _CandyHistory;
+            set => SetProperty(ref _CandyHistory, value);
+        }
+
         private MusicPlatformEnum _Platform;
         public MusicPlatformEnum Platform
         {
             get { return _Platform; }
             set { SetProperty(ref _Platform, value); }
         }
+
         private string _SearchWord;
         public string SearchWord
         {
             get { return _SearchWord; }
             set { SetProperty(ref _SearchWord, value); }
         }
+
         private int _PageSingleIndex;
         public int PageSingleIndex
         {
             get { return _PageSingleIndex; }
             set { SetProperty(ref _PageSingleIndex, value); }
         }
+
         private int _PageSheetIndex;
         public int PageSheetIndex
         {
             get { return _PageSheetIndex; }
             set { SetProperty(ref _PageSheetIndex, value); }
         }
+
         private int _Total;
         public int Total
         {
@@ -121,34 +132,34 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         #region Override
         protected override void OnViewLaunch()
         {
-            Combo = new ObservableCollection<GalComboDto>
+            Combo = new ObservableCollection<ComboDto>
             {
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 0,
                     Name = "QQ"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 1,
                     Name = "网易"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 2,
                     Name = "酷狗"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 3,
                     Name = "酷我"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 4,
                     Name = "B站"
                 },
-                new GalComboDto{
+                new ComboDto{
                    Description = 5,
                    Name="咪咕"
                 }
@@ -159,7 +170,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
         #region Command
         public ICommand ComboSelectCommand => new DelegateCommand<dynamic>(input =>
         {
-            var box = (GalComboDto)input;
+            var box = (ComboDto)input;
             if (box != null)
             {
                 this.Platform = (MusicPlatformEnum)box.Description;
@@ -181,17 +192,6 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                 if (!SearchWord.IsNullOrEmpty())
                     SearchSheetSong();
             }
-        });
-
-        public ICommand SearchCommand => new DelegateCommand<string>((input) =>
-        {
-            this.SearchWord = input;
-            this.PageSingleIndex = 1;
-            this.PageSheetIndex = 1;
-            if (Tap == 0)
-                SearchSingleSong();
-            if (Tap == 1)
-                SearchSheetSong();
         });
 
         public ICommand RefreshsCommand => new DelegateCommand(() =>
@@ -223,6 +223,17 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             if (input != null)
                 LoadMusic(input, this.Platform);
         });
+
+        public ICommand SearchCommand => new DelegateCommand<string>(input => {
+
+            this.SearchWord = input;
+            this.PageSingleIndex = 1;
+            this.PageSheetIndex = 1;
+            if (Tap == 0)
+                SearchSingleSong();
+            if (Tap == 1)
+                SearchSheetSong();
+        });
         #endregion
 
         #region Method
@@ -236,11 +247,11 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             });
             return String.Format(Soft.Toast, nameof(CandyMusicViewModel), Method);
         }
-        private  void Cache(MusicSongItem input, MusicSongPlayAddressResult Song)
+        private void Cache(MusicSongItem input, MusicSongPlayAddressResult Song)
         {
             var SongArtist = string.Join(",", input.SongArtistName);
             var SongFile = $"{input.SongName}({input.SongAlbumName})-{SongArtist}_{Song.MusicPlatformType}.mp3";
-            var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
+            var route = Resolve<IAndroidPlatform>().DownPath();
             AuthorizeHelper.Instance.ApplyPermission(() =>
             {
                 var dir = SyncStatic.CreateDir(Path.Combine(route, "CandyDown", "Music", $"{SongArtist}"));
@@ -272,6 +283,11 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                 Platform = (int)this.Platform,
                 IsPlayed = false
             });
+        }
+        public async void InitAutoComplete(string input,bool type=false) 
+        {
+            var data =  await base.OnInitAutoKey(input, CheckFuncType.Music, type);
+            CandyHistory = new ObservableCollection<CandyHistoryDto>(data);
         }
         /// <summary>
         /// 查单曲
@@ -415,7 +431,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("SearchSingleSong",ex)))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("SearchSingleSong", ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -607,7 +623,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("LoadMusic",ex)))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("LoadMusic", ex)))
                 {
                     await Task.Delay(3000);
                 }

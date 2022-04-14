@@ -54,7 +54,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
         #region Commod
         public ICommand AddPlayCommand => new DelegateCommand<MusicSongItem>(input =>
         {
-            ContainerLocator.Container.Resolve<CandyMusicViewModel>().LoadMusic(input, Platform);
+            Resolve<CandyMusicViewModel>().LoadMusic(input, Platform);
         });
         #endregion
 

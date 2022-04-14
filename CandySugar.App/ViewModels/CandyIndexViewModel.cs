@@ -83,7 +83,7 @@ namespace CandySugar.App.ViewModels
         #region Override
         protected override async void OnViewLaunch()
         {
-            var option = await ContainerLocator.Container.Resolve<ISetting>().Query();
+            var option = await Resolve<ISetting>().Query();
 
             Soft.AgeModule = option==null? Soft.AgeModule: option.AgeModule;
             Soft.CacheTime = option == null ? Soft.CacheTime : option.CacheTime;
@@ -192,7 +192,7 @@ namespace CandySugar.App.ViewModels
 
                 if (result.HasValue && result.Value)
                 {
-                    var Platform = ContainerLocator.Container.Resolve<IAndroidPlatform>();
+                    var Platform = Resolve<IAndroidPlatform>();
                     //升级
                     var manager = Platform.UpdateApk();
                     var File = manager.CreateDownloadFile("https://ghproxy.com/https://github.com/EmilyEdna/KuRuMi/releases/download/1.0/CandySugar.apk");

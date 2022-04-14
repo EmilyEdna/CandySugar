@@ -34,7 +34,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 Port = Soft.ProxyPort,
                 UserName = Soft.ProxyAccount
             };
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Property

@@ -49,7 +49,7 @@ namespace CandySugar.App
         {
             InitializeComponent();
             Material.Init(this);
-            SyncfusionLicenseProvider.RegisterLicense("NTg3MTY3QDMxMzkyZTM0MmUzMFdjM01jRGZXbDIxZ1AxVGNkSlluNndGb0d4OFJLd1dzcFJpZVdYc0VQSnM9");
+            SyncfusionLicenseProvider.RegisterLicense("NjE1NTQ2QDMyMzAyZTMxMmUzMGN4T2F0SjFnVTBld2YxMnhXL1dGUElNRm1vRThVY1ZZc1NaVjFkZmxHNWc9");
             await NavigationService.NavigateAsync("NavigationPage/CandyIndexView");
         }
 
@@ -68,6 +68,7 @@ namespace CandySugar.App
             containerRegistry.Register<IYYLiShi, YYLiShi>();
             containerRegistry.Register<ILoger, Loger>();
             containerRegistry.Register<ISetting, Setting>();
+            containerRegistry.Register<IHistory, History>();
             #endregion
 
             #region Anime
@@ -121,7 +122,7 @@ namespace CandySugar.App
 
             #region Log
             containerRegistry.RegisterForNavigation<CandyLogView, CandyLogViewModel>();
-            
+
             #endregion
         }
 

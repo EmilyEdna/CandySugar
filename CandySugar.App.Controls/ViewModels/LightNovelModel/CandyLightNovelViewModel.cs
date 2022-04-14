@@ -36,7 +36,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Field

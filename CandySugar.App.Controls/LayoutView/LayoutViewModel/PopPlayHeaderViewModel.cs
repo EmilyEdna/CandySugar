@@ -26,7 +26,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
 
         public async void Refresh()
         {
-            Count = await ContainerLocator.Container.Resolve<IYYLiShi>().PlayCount();
+            Count = await Resolve<IYYLiShi>().PlayCount();
         }
     }
 }

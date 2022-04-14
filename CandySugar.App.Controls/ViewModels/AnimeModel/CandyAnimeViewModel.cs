@@ -39,8 +39,8 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
             this.LetterCate = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".Split(",").ToList();
             this.PageIndex = 1;
 
-            Candy = ContainerLocator.Container.Resolve<IDMLiShi>();
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            Candy = Resolve<IDMLiShi>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Field

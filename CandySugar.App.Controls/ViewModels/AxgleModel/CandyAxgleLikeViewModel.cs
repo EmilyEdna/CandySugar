@@ -65,7 +65,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         protected override void OnViewLaunch()
         {
             this.PageIndex = 1;
-            Candy = ContainerLocator.Container.Resolve<IAXLiShi>();
+            Candy = Resolve<IAXLiShi>();
             Query();
         }
         #endregion

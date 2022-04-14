@@ -20,7 +20,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         private readonly ILoger CandyLog;
         public CandyAxglePlayViewModel(INavigationService navigationService) : base(navigationService)
         {
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Property

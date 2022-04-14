@@ -24,7 +24,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
         public override void Initialize(INavigationParameters parameters)
         {
             Route = parameters.GetValue<string>("Route");
-            ContainerLocator.Container.Resolve<IAndroidPlatform>().Transparent();
+            Resolve<IAndroidPlatform>().Transparent();
             CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Landscape);
         }
     }

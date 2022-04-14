@@ -39,7 +39,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             this.PageIndex = 1;
             this.Refresh = false;
             this.IsBusy = false;
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Field
@@ -58,34 +58,34 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         }
         protected override void OnViewLaunch()
         {
-            Combo = new ObservableCollection<GalComboDto>
+            Combo = new ObservableCollection<ComboDto>
             {
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 0,
                     Name = "上次观看"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 1,
                     Name = "最新的"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 2,
                     Name = "最多观看"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 3,
                     Name = "高评分"
                 },
-                new GalComboDto
+                new ComboDto
                 {
                     Description = 4,
                     Name = "最多收藏"
                 },
-                new GalComboDto{
+                new ComboDto{
                    Description = 5,
                    Name="长时常"
                 }
@@ -111,8 +111,8 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
             set => SetProperty(ref _Menu, value);
         }
 
-        private ObservableCollection<GalComboDto> _Combo;
-        public ObservableCollection<GalComboDto> Combo
+        private ObservableCollection<ComboDto> _Combo;
+        public ObservableCollection<ComboDto> Combo
         {
             get => _Combo;
             set => SetProperty(ref _Combo, value);
@@ -257,7 +257,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         }
         public async void Like(CalActorCategoryList input) 
         {
-           await ContainerLocator.Container.Resolve<IAXLiShi>().Insert(input.ToMapest<CandyAXLiShiDto>());
+           await Resolve<IAXLiShi>().Insert(input.ToMapest<CandyAXLiShiDto>());
         }
         public async void Navigation(string input)
         {
@@ -276,7 +276,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
         });
         public ICommand ComboSelectCommand => new DelegateCommand<dynamic>(input =>
         {
-            var box = (GalComboDto)input;
+            var box = (ComboDto)input;
             if (box != null && !KeyWord.IsNullOrEmpty())
             {
                 Desc = (GalActorDescEnum)box.Description;

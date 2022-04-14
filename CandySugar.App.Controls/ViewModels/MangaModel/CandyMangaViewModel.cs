@@ -34,7 +34,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             };
             this.PageIndex = 1;
             this.IsBusy = false;
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Field

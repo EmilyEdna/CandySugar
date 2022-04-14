@@ -40,8 +40,8 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 UserName = Soft.ProxyAccount
             };
             this.PageIndex = 1;
-            Candy = ContainerLocator.Container.Resolve<IBZLiShi>();
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            Candy = Resolve<IBZLiShi>();
+            CandyLog = Resolve<ILoger>();
         }
 
         #region Flied
@@ -367,7 +367,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
 
                 var FileName = (!input.OriginalPng.IsNullOrEmpty() ? input.OriginalPng : input.OriginalJepg).Split("/").LastOrDefault();
 
-                var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
+                var route = Resolve<IAndroidPlatform>().DownPath();
 
                 AuthorizeHelper.Instance.ApplyPermission(async () =>
                 {

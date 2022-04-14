@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace CandySugar.App.Controls
 {
-    public class ViewModelNavigatBase : BindableBase, IInitialize, INavigationAware, IDestructible
+    public class ViewModelNavigatBase : ViewModelRepository, IInitialize, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; private set; }
-
         private string _title;
         public string Title
         {
@@ -18,7 +18,7 @@ namespace CandySugar.App.Controls
             set { SetProperty(ref _title, value); }
         }
 
-        public ViewModelNavigatBase(INavigationService navigationService)
+        public ViewModelNavigatBase(INavigationService navigationService):base()
         {
             NavigationService = navigationService;
 
@@ -47,7 +47,6 @@ namespace CandySugar.App.Controls
 
         public virtual void Destroy()
         {
-
         }
     }
 }

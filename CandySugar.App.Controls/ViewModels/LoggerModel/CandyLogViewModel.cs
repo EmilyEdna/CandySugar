@@ -28,7 +28,7 @@ namespace CandySugar.App.Controls.ViewModels.LoggerModel
 
         protected override void OnViewLaunch()
         {
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
             Query();
         }
 

@@ -36,7 +36,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
             this.PageIndex = 1;
             this.Asc = true;
         }

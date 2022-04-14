@@ -29,7 +29,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
 
         protected override void OnViewLaunch()
         {
-            Candy = ContainerLocator.Container.Resolve<IYYLiShi>();
+            Candy = Resolve<IYYLiShi>();
             Query();
         }
 

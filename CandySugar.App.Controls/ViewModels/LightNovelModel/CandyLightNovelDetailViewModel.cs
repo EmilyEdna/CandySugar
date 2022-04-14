@@ -42,8 +42,8 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
-            Candy = ContainerLocator.Container.Resolve<ILXSLiShi>();
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            Candy = Resolve<ILXSLiShi>();
+            CandyLog = Resolve<ILoger>();
         }
         #region Field
         private readonly LightNovelProxy Proxy;
@@ -179,7 +179,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                         };
                     }).RunsAsync();
 
-                    var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
+                    var route = Resolve<IAndroidPlatform>().DownPath();
 
                     AuthorizeHelper.Instance.ApplyPermission(async () =>
                     {
@@ -273,7 +273,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                         };
                     }).RunsAsync();
 
-                    var route = ContainerLocator.Container.Resolve<IAndroidPlatform>().DownPath();
+                    var route = Resolve<IAndroidPlatform>().DownPath();
 
                     AuthorizeHelper.Instance.ApplyPermission(async () =>
                     {

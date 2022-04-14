@@ -27,7 +27,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
         private readonly ILoger CandyLog;
         public CandyNovelViewModel(INavigationService navigationService) : base(navigationService)
         {
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
             Proxy = new NovelProxy
             {
                 IP = Soft.ProxyIP,

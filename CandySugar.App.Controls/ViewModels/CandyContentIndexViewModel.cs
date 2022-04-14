@@ -23,9 +23,9 @@ namespace CandySugar.App.Controls.ViewModels
     {
         public CandyContentIndexViewModel() : base()
         {
-            XSCandy = ContainerLocator.Container.Resolve<IXSLiShi>();
-            DMCandy = ContainerLocator.Container.Resolve<IDMLiShi>();
-            LXSCandy = ContainerLocator.Container.Resolve<ILXSLiShi>();
+            XSCandy = Resolve<IXSLiShi>();
+            DMCandy = Resolve<IDMLiShi>();
+            LXSCandy = Resolve<ILXSLiShi>();
         }
 
         #region Field
@@ -61,7 +61,7 @@ namespace CandySugar.App.Controls.ViewModels
             NavigationParameters param = new NavigationParameters();
             param.Add("ChapterURL", input.ChapeterAddress);
             param.Add("BookName", input.BookName);
-            await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyNovelContentView), UriKind.Relative), param);
+            await Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyNovelContentView), UriKind.Relative), param);
         });
 
         public ICommand XSDeleteCommand => new DelegateCommand<CandyXSLiShiDto>(async input =>
@@ -80,7 +80,7 @@ namespace CandySugar.App.Controls.ViewModels
 
             NavigationParameters param = new NavigationParameters();
             param.Add("WatchAddress", input.PlayURL);
-            await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyAnimePlayView), UriKind.Relative), param);
+            await Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyAnimePlayView), UriKind.Relative), param);
         });
 
         public ICommand DMDeleteCommand => new DelegateCommand<CandyDMLiShiDto>(async input =>
@@ -101,13 +101,13 @@ namespace CandySugar.App.Controls.ViewModels
                 NavigationParameters param = new NavigationParameters();
                 param.Add("Content", SyncStatic.Compress(input.Content, SecurityType.Base64));
                 param.Add("ChapterName", input.ChapterName);
-                await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelContentView), UriKind.Relative), param);
+                await Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelContentView), UriKind.Relative), param);
             }
             else {
                 NavigationParameters param = new NavigationParameters();
                 param.Add("Image", input.Image);
                 param.Add("ChapterName", input.ChapterName);
-                await ContainerLocator.Container.Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelImageViewModel), UriKind.Relative), param);
+                await Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelImageViewModel), UriKind.Relative), param);
             }
            
         });
@@ -128,9 +128,9 @@ namespace CandySugar.App.Controls.ViewModels
         #region Override
         protected override async void OnViewLaunch()
         {
-            XSLiShi = new ObservableCollection<CandyXSLiShiDto>(await ContainerLocator.Container.Resolve<IXSLiShi>().Query());
-            DMLiShi = new ObservableCollection<CandyDMLiShiDto>(await ContainerLocator.Container.Resolve<IDMLiShi>().Query());
-            LXSLiShi = new ObservableCollection<CandyLXSLiShiDto>(await ContainerLocator.Container.Resolve<ILXSLiShi>().Query());
+            XSLiShi = new ObservableCollection<CandyXSLiShiDto>(await Resolve<IXSLiShi>().Query());
+            DMLiShi = new ObservableCollection<CandyDMLiShiDto>(await Resolve<IDMLiShi>().Query());
+            LXSLiShi = new ObservableCollection<CandyLXSLiShiDto>(await Resolve<ILXSLiShi>().Query());
         }
         #endregion
     }

@@ -33,7 +33,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 UserName = Soft.ProxyAccount
             };
             Refresh = false;
-            CandyLog = CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            CandyLog = Resolve<ILoger>();
         }
         #region Field
         private readonly ILoger CandyLog;

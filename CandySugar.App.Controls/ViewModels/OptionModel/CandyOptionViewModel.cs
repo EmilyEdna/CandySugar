@@ -48,7 +48,7 @@ namespace CandySugar.App.Controls.ViewModels.OptionModel
         #region Override
         protected override async void OnViewLaunch()
         {
-            Candy = ContainerLocator.Container.Resolve<ISetting>();
+            Candy = Resolve<ISetting>();
             Option = await Candy.Query();
         }
         #endregion

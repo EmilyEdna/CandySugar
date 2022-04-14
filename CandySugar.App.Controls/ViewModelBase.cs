@@ -5,9 +5,9 @@ using System.Text;
 
 namespace CandySugar.App.Controls
 {
-    public class ViewModelBase: BindableBase
+    public class ViewModelBase : ViewModelRepository
     {
-        public ViewModelBase()
+        public ViewModelBase() : base()
         {
             OnViewLaunch();
         }
@@ -19,8 +19,8 @@ namespace CandySugar.App.Controls
         }
 
         protected virtual void OnViewLaunch() 
-        { 
-        
+        {
+
         }
     }
 }

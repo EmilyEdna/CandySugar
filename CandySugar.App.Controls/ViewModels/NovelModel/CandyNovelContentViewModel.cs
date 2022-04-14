@@ -33,8 +33,8 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                 PassWord = Soft.ProxyPwd,
                 UserName = Soft.ProxyAccount
             };
-            Candy = ContainerLocator.Container.Resolve<IXSLiShi>();
-            CandyLog = ContainerLocator.Container.Resolve<ILoger>();
+            Candy = Resolve<IXSLiShi>();
+            CandyLog = Resolve<ILoger>();
             this.TextTheme = Color.Black;
             this.Theme = Color.FromHex("DDCDA1");
 
