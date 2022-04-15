@@ -37,11 +37,12 @@ namespace CandySugar.App.Controls.Views.Anime
             await web.EvaluateJavaScriptAsync($"Play('{PlayURL}')");
         }
 
-        private async void ContentPage_Disappearing(object sender, EventArgs e)
+        private void ContentPage_Disappearing(object sender, EventArgs e)
         {
             ContainerLocator.Container.Resolve<IAndroidPlatform>().ShowStatusBar();
             CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Portrait);
-            await web.EvaluateJavaScriptAsync($"Destory()");
+            //此段代码因为是异步线程调用会导致先调用WebView先行被释放，而JS还在执行。
+            //await web.EvaluateJavaScriptAsync($"Destory()");
         }
     }
 }
