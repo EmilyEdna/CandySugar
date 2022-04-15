@@ -2,139 +2,437 @@
     x:Class="CandySugar.App.Controls.Views.CandyContentIndexView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Behavior="clr-namespace:CandySugar.App.Controls.Behaviors"
+    xmlns:Ctrl="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:FFImg="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:Fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:SfTab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
     xmlns:local="clr-namespace:CandySugar.App.Controls.Controls"
     xmlns:prism="http://prismlibrary.com"
     x:Name="Index"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ContentView.Content>
-        <StackLayout>
-            <ScrollView VerticalScrollBarVisibility="Never">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <local:ItemsControl ItemsSource="{Binding XSLiShi}">
-                        <local:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Image
-                                        HeightRequest="70"
-                                        Source="cover.gif"
-                                        WidthRequest="50">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.XSClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <StackLayout>
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding BookName, Converter={x:StaticResource LabelConverter}}" />
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.XSDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                </StackLayout>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemTemplate>
-                        <local:ItemsControl.ItemsLayout>
-                            <DataTemplate>
-                                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                                    <local:WrapLayout
-                                        local:LayoutEx.IsItemsHost="True"
-                                        IsSquare="True"
-                                        Spacing="10" />
-                                </ScrollView>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemsLayout>
-                    </local:ItemsControl>
-                    <local:ItemsControl Grid.Row="1" ItemsSource="{Binding LXSLiShi}">
-                        <local:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Image
-                                        HeightRequest="70"
-                                        Source="{Binding Cover}"
-                                        WidthRequest="50">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.LXSClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <StackLayout>
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding BookName, Converter={x:StaticResource LabelConverter}}" />
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding ChapterName, Converter={x:StaticResource LabelConverter}}" />
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.LXSDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                </StackLayout>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemTemplate>
-                        <local:ItemsControl.ItemsLayout>
-                            <DataTemplate>
-                                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                                    <local:WrapLayout
-                                        local:LayoutEx.IsItemsHost="True"
-                                        IsSquare="True"
-                                        Spacing="10" />
-                                </ScrollView>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemsLayout>
-                    </local:ItemsControl>
-                    <local:ItemsControl Grid.Row="2" ItemsSource="{Binding DMLiShi}">
-                        <local:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Image
-                                        HeightRequest="70"
-                                        Source="{Binding Cover}"
-                                        WidthRequest="50">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.DMClickCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <StackLayout>
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding AnimeName, Converter={x:StaticResource LabelConverter}}" />
-                                        <Label
-                                            Margin="2,0,0,0"
-                                            FontSize="10"
-                                            Text="{Binding CollectionName, Converter={x:StaticResource LabelConverter}}" />
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.DMDeleteCommand, Source={x:Reference Index}}" CommandParameter="{Binding .}" />
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                </StackLayout>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemTemplate>
-                        <local:ItemsControl.ItemsLayout>
-                            <DataTemplate>
-                                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                                    <local:WrapLayout
-                                        local:LayoutEx.IsItemsHost="True"
-                                        IsSquare="True"
-                                        Spacing="10" />
-                                </ScrollView>
-                            </DataTemplate>
-                        </local:ItemsControl.ItemsLayout>
-                    </local:ItemsControl>
-                </Grid>
-            </ScrollView>
-        </StackLayout>
+        <SfTab:SfTabView
+            EnableSwiping="False"
+            OverflowMode="Scroll"
+            TabHeaderPosition="Bottom"
+            TabHeight="40"
+            TabWidth="180"
+            VisibleHeaderCount="4">
+            <SfTab:SfTabView.Behaviors>
+                <Behavior:EventToCommandBehavior
+                    Command="{Binding TabChangedCommand}"
+                    Converter="{StaticResource TabItemConverter}"
+                    EventName="TabItemTapped" />
+            </SfTab:SfTabView.Behaviors>
+            <SfTab:SfTabItem Title="小说" TabIndex="0">
+                <SfTab:SfTabItem.Content>
+                    <Grid>
+                        <SfRefresh:SfPullToRefresh
+                            IsRefreshing="{Binding Refresh}"
+                            ProgressBackgroundColor="Transparent"
+                            ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                            RefreshCommand="{Binding RefreshNovelCommand}"
+                            RefreshContentHeight="50"
+                            RefreshContentWidth="50"
+                            TransitionMode="Push">
+                            <SfRefresh:SfPullToRefresh.PullableContent>
+                                <SfList:SfListView
+                                    AutoFitMode="Height"
+                                    IsScrollBarVisible="False"
+                                    ItemsSource="{Binding XSLiShi}"
+                                    SelectionBackgroundColor="Transparent">
+                                    <SfList:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Ctrl:ShadowFrame
+                                                    Margin="2,5,5,5"
+                                                    Padding="0"
+                                                    Background="{DynamicResource GrayShadowColor}"
+                                                    BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                    BorderWidth="1"
+                                                    CornerRadius="4"
+                                                    HasShadow="True"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Radius="4"
+                                                    VerticalOptions="FillAndExpand">
+                                                    <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                                        <SfBorder:SfBorder
+                                                            BorderColor="Transparent"
+                                                            BorderWidth="0"
+                                                            CornerRadius="4">
+                                                            <Grid ColumnDefinitions="80,*" ColumnSpacing="0">
+                                                                <FFImg:CachedImage
+                                                                    Aspect="AspectFill"
+                                                                    BackgroundColor="{DynamicResource Gray-200}"
+                                                                    DownsampleUseDipUnits="True"
+                                                                    HeightRequest="70"
+                                                                    Source="cover.gif"
+                                                                    WidthRequest="70" />
+                                                                <StackLayout
+                                                                    Grid.Column="1"
+                                                                    Padding="16"
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    Spacing="0"
+                                                                    VerticalOptions="FillAndExpand">
+                                                                    <Label
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource TitleLabelStyle}"
+                                                                        Text="{Binding BookName}" />
+                                                                    <Label
+                                                                        FontSize="12"
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource DescriptionLabelStyle}"
+                                                                        Text="{Binding ChapterName}" />
+                                                                    <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.XSClickCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.Eye}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="42" />
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.XSDeleteCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="40" />
+                                                                    </FlexLayout>
+                                                                </StackLayout>
+                                                            </Grid>
+                                                        </SfBorder:SfBorder>
+                                                    </SfEffect:SfEffectsView>
+                                                </Ctrl:ShadowFrame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </SfList:SfListView.ItemTemplate>
+                                </SfList:SfListView>
+                            </SfRefresh:SfPullToRefresh.PullableContent>
+                        </SfRefresh:SfPullToRefresh>
+                    </Grid>
+                </SfTab:SfTabItem.Content>
+            </SfTab:SfTabItem>
+            <SfTab:SfTabItem Title="轻小说" TabIndex="1">
+                <SfTab:SfTabItem.Content>
+                    <Grid>
+                        <SfRefresh:SfPullToRefresh
+                            IsRefreshing="{Binding Refresh}"
+                            ProgressBackgroundColor="Transparent"
+                            ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                            RefreshCommand="{Binding RefreshLightNovelCommand}"
+                            RefreshContentHeight="50"
+                            RefreshContentWidth="50"
+                            TransitionMode="Push">
+                            <SfRefresh:SfPullToRefresh.PullableContent>
+                                <SfList:SfListView
+                                    AutoFitMode="Height"
+                                    IsScrollBarVisible="False"
+                                    ItemsSource="{Binding LXSLiShi}"
+                                    SelectionBackgroundColor="Transparent">
+                                    <SfList:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Ctrl:ShadowFrame
+                                                    Margin="2,5,5,5"
+                                                    Padding="0"
+                                                    Background="{DynamicResource GrayShadowColor}"
+                                                    BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                    BorderWidth="1"
+                                                    CornerRadius="4"
+                                                    HasShadow="True"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Radius="4"
+                                                    VerticalOptions="FillAndExpand">
+                                                    <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                                        <SfBorder:SfBorder
+                                                            BorderColor="Transparent"
+                                                            BorderWidth="0"
+                                                            CornerRadius="4">
+                                                            <Grid ColumnDefinitions="80,*" ColumnSpacing="0">
+                                                                <FFImg:CachedImage
+                                                                    Aspect="AspectFill"
+                                                                    BackgroundColor="{DynamicResource Gray-200}"
+                                                                    DownsampleUseDipUnits="True"
+                                                                    HeightRequest="70"
+                                                                    Source="{Binding Cover}"
+                                                                    WidthRequest="70" />
+                                                                <StackLayout
+                                                                    Grid.Column="1"
+                                                                    Padding="16"
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    Spacing="0"
+                                                                    VerticalOptions="FillAndExpand">
+                                                                    <Label
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource TitleLabelStyle}"
+                                                                        Text="{Binding BookName}" />
+                                                                    <Label
+                                                                        FontSize="12"
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource DescriptionLabelStyle}"
+                                                                        Text="{Binding ChapterName}" />
+                                                                    <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.LXSClickCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.Eye}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="42" />
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.LXSDeleteCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="40" />
+                                                                    </FlexLayout>
+                                                                </StackLayout>
+                                                            </Grid>
+                                                        </SfBorder:SfBorder>
+                                                    </SfEffect:SfEffectsView>
+                                                </Ctrl:ShadowFrame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </SfList:SfListView.ItemTemplate>
+                                </SfList:SfListView>
+                            </SfRefresh:SfPullToRefresh.PullableContent>
+                        </SfRefresh:SfPullToRefresh>
+                    </Grid>
+                </SfTab:SfTabItem.Content>
+            </SfTab:SfTabItem>
+            <SfTab:SfTabItem Title="动漫" TabIndex="2">
+                <SfTab:SfTabItem.Content>
+                    <Grid>
+                        <SfRefresh:SfPullToRefresh
+                            IsRefreshing="{Binding Refresh}"
+                            ProgressBackgroundColor="Transparent"
+                            ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                            RefreshCommand="{Binding RefreshAnimeCommand}"
+                            RefreshContentHeight="50"
+                            RefreshContentWidth="50"
+                            TransitionMode="Push">
+                            <SfRefresh:SfPullToRefresh.PullableContent>
+                                <SfList:SfListView
+                                    AutoFitMode="Height"
+                                    IsScrollBarVisible="False"
+                                    ItemsSource="{Binding DMLiShi}"
+                                    SelectionBackgroundColor="Transparent">
+                                    <SfList:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Ctrl:ShadowFrame
+                                                    Margin="2,5,5,5"
+                                                    Padding="0"
+                                                    Background="{DynamicResource GrayShadowColor}"
+                                                    BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                    BorderWidth="1"
+                                                    CornerRadius="4"
+                                                    HasShadow="True"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Radius="4"
+                                                    VerticalOptions="FillAndExpand">
+                                                    <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                                        <SfBorder:SfBorder
+                                                            BorderColor="Transparent"
+                                                            BorderWidth="0"
+                                                            CornerRadius="4">
+                                                            <Grid ColumnDefinitions="80,*" ColumnSpacing="0">
+                                                                <FFImg:CachedImage
+                                                                    Aspect="AspectFill"
+                                                                    BackgroundColor="{DynamicResource Gray-200}"
+                                                                    DownsampleUseDipUnits="True"
+                                                                    HeightRequest="70"
+                                                                    Source="{Binding Cover}"
+                                                                    WidthRequest="70" />
+                                                                <StackLayout
+                                                                    Grid.Column="1"
+                                                                    Padding="16"
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    Spacing="0"
+                                                                    VerticalOptions="FillAndExpand">
+                                                                    <Label
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource TitleLabelStyle}"
+                                                                        Text="{Binding AnimeName}" />
+                                                                    <Label
+                                                                        FontSize="12"
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource DescriptionLabelStyle}"
+                                                                        Text="{Binding CollectionName}" />
+                                                                    <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.DMClickCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.Eye}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="42" />
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.DMDeleteCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="40" />
+                                                                    </FlexLayout>
+                                                                </StackLayout>
+                                                            </Grid>
+                                                        </SfBorder:SfBorder>
+                                                    </SfEffect:SfEffectsView>
+                                                </Ctrl:ShadowFrame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </SfList:SfListView.ItemTemplate>
+                                </SfList:SfListView>
+                            </SfRefresh:SfPullToRefresh.PullableContent>
+                        </SfRefresh:SfPullToRefresh>
+                    </Grid>
+                </SfTab:SfTabItem.Content>
+            </SfTab:SfTabItem>
+            <SfTab:SfTabItem Title="漫画" TabIndex="3">
+                <SfTab:SfTabItem.Content>
+                    <Grid>
+                        <SfRefresh:SfPullToRefresh
+                            IsRefreshing="{Binding Refresh}"
+                            ProgressBackgroundColor="Transparent"
+                            ProgressStrokeColor="{DynamicResource PrimaryPink}"
+                            RefreshCommand="{Binding RefreshMangaCommand}"
+                            RefreshContentHeight="50"
+                            RefreshContentWidth="50"
+                            TransitionMode="Push">
+                            <SfRefresh:SfPullToRefresh.PullableContent>
+                                <SfList:SfListView
+                                    AutoFitMode="Height"
+                                    IsScrollBarVisible="False"
+                                    ItemsSource="{Binding MHLiShi}"
+                                    SelectionBackgroundColor="Transparent">
+                                    <SfList:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Ctrl:ShadowFrame
+                                                    Margin="2,5,5,5"
+                                                    Padding="0"
+                                                    Background="{DynamicResource GrayShadowColor}"
+                                                    BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                    BorderWidth="1"
+                                                    CornerRadius="4"
+                                                    HasShadow="True"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Radius="4"
+                                                    VerticalOptions="FillAndExpand">
+                                                    <SfEffect:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple">
+                                                        <SfBorder:SfBorder
+                                                            BorderColor="Transparent"
+                                                            BorderWidth="0"
+                                                            CornerRadius="4">
+                                                            <Grid ColumnDefinitions="80,*" ColumnSpacing="0">
+                                                                <FFImg:CachedImage
+                                                                    Aspect="AspectFill"
+                                                                    BackgroundColor="{DynamicResource Gray-200}"
+                                                                    DownsampleUseDipUnits="True"
+                                                                    HeightRequest="70"
+                                                                    Source="{Binding Cover}"
+                                                                    WidthRequest="70" />
+                                                                <StackLayout
+                                                                    Grid.Column="1"
+                                                                    Padding="16"
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    Spacing="0"
+                                                                    VerticalOptions="FillAndExpand">
+                                                                    <Label
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource TitleLabelStyle}"
+                                                                        Text="{Binding Name}" />
+                                                                    <Label
+                                                                        FontSize="12"
+                                                                        HorizontalOptions="Start"
+                                                                        HorizontalTextAlignment="Start"
+                                                                        Style="{DynamicResource DescriptionLabelStyle}"
+                                                                        Text="{Binding Title}" />
+                                                                    <FlexLayout AlignItems="End" JustifyContent="End">
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.MHClickCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.Eye}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="42" />
+                                                                        <Button
+                                                                            BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                                            Command="{Binding BindingContext.MHDeleteCommand, Source={x:Reference Index}}"
+                                                                            CommandParameter="{Binding .}"
+                                                                            CornerRadius="15"
+                                                                            FontFamily="{DynamicResource FontAwesomeRegular}"
+                                                                            FontSize="15"
+                                                                            HeightRequest="35"
+                                                                            HorizontalOptions="End"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                                            TextColor="{DynamicResource Gray-Black}"
+                                                                            WidthRequest="40" />
+                                                                    </FlexLayout>
+                                                                </StackLayout>
+                                                            </Grid>
+                                                        </SfBorder:SfBorder>
+                                                    </SfEffect:SfEffectsView>
+                                                </Ctrl:ShadowFrame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </SfList:SfListView.ItemTemplate>
+                                </SfList:SfListView>
+                            </SfRefresh:SfPullToRefresh.PullableContent>
+                        </SfRefresh:SfPullToRefresh>
+                    </Grid>
+                </SfTab:SfTabItem.Content>
+            </SfTab:SfTabItem>
+        </SfTab:SfTabView>
     </ContentView.Content>
 </ContentView>

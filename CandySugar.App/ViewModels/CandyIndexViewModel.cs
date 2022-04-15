@@ -212,7 +212,7 @@ namespace CandySugar.App.ViewModels
                 }
             }
             else {
-                this.CurrentVersion = "Cur";
+                this.CurrentVersion = "Lat";
                 this.Badge = BadgeType.Primary;
             }
         }

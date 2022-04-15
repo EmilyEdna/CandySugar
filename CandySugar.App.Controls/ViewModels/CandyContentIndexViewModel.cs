@@ -1,7 +1,9 @@
 ﻿using CandySugar.App.Controls.ViewModels.LightNovelModel;
 using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.LightNovel;
+using CandySugar.App.Controls.Views.Manga;
 using CandySugar.App.Controls.Views.Novel;
+using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.DTO;
 using CandySugar.Xam.Core.Service;
 using Prism.Commands;
@@ -26,12 +28,15 @@ namespace CandySugar.App.Controls.ViewModels
             XSCandy = Resolve<IXSLiShi>();
             DMCandy = Resolve<IDMLiShi>();
             LXSCandy = Resolve<ILXSLiShi>();
+            MHCandy = Resolve<IMHLiShi>();
+            Refresh = false;
         }
 
         #region Field
         private readonly IXSLiShi XSCandy;
         private readonly ILXSLiShi LXSCandy;
         private readonly IDMLiShi DMCandy;
+        private readonly IMHLiShi MHCandy;
         #endregion
 
         #region Property
@@ -53,9 +58,41 @@ namespace CandySugar.App.Controls.ViewModels
             get { return _LXSLiShi; }
             set { SetProperty(ref _LXSLiShi, value); }
         }
+        private ObservableCollection<CandyMHLiShiDto> _MHSLiShi;
+        public ObservableCollection<CandyMHLiShiDto> MHSLiShi
+        {
+            get { return _MHSLiShi; }
+            set { SetProperty(ref _MHSLiShi, value); }
+        }
+        public bool _Refresh;
+        public bool Refresh
+        {
+            get => _Refresh;
+            set => SetProperty(ref _Refresh, value);
+        }
         #endregion
 
         #region Command
+        public ICommand MHClickCommand => new DelegateCommand<CandyMHLiShiDto>(async input =>
+        {
+            NavigationParameters param = new NavigationParameters();
+            param.Add("Route", input.Address);
+            await Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyMangaReaderView), UriKind.Relative), param);
+        });
+
+        public ICommand MHDeleteCommand => new DelegateCommand<CandyMHLiShiDto>(async input => {
+
+            if (await MHCandy.Remove(input))
+            {
+                OnViewLaunch();
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从书架中移除"))
+                {
+                    await Task.Delay(3000);
+                }
+            }
+
+        });
+
         public ICommand XSClickCommand => new DelegateCommand<CandyXSLiShiDto>(async input =>
         {
             NavigationParameters param = new NavigationParameters();
@@ -69,14 +106,15 @@ namespace CandySugar.App.Controls.ViewModels
             if (await XSCandy.Remove(input))
             {
                 OnViewLaunch();
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从书架中移除"))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync("已从列表中移除"))
                 {
                     await Task.Delay(3000);
                 }
             }
         });
 
-        public ICommand DMClickCommand => new DelegateCommand<CandyDMLiShiDto>(async input => {
+        public ICommand DMClickCommand => new DelegateCommand<CandyDMLiShiDto>(async input =>
+        {
 
             NavigationParameters param = new NavigationParameters();
             param.Add("WatchAddress", input.PlayURL);
@@ -95,7 +133,8 @@ namespace CandySugar.App.Controls.ViewModels
             }
         });
 
-        public ICommand LXSClickCommand => new DelegateCommand<CandyLXSLiShiDto>(async input => {
+        public ICommand LXSClickCommand => new DelegateCommand<CandyLXSLiShiDto>(async input =>
+        {
             if (input.IsBook)
             {
                 NavigationParameters param = new NavigationParameters();
@@ -103,13 +142,14 @@ namespace CandySugar.App.Controls.ViewModels
                 param.Add("ChapterName", input.ChapterName);
                 await Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelContentView), UriKind.Relative), param);
             }
-            else {
+            else
+            {
                 NavigationParameters param = new NavigationParameters();
                 param.Add("Image", input.Image);
                 param.Add("ChapterName", input.ChapterName);
                 await Resolve<INavigationService>().NavigateAsync(new Uri(nameof(CandyLightNovelImageViewModel), UriKind.Relative), param);
             }
-           
+
         });
 
         public ICommand LXSDeleteCommand => new DelegateCommand<CandyLXSLiShiDto>(async input =>
@@ -123,15 +163,77 @@ namespace CandySugar.App.Controls.ViewModels
                 }
             }
         });
+
+        public ICommand RefreshNovelCommand => new DelegateCommand(async () =>
+        {
+            Refresh = true;
+            await Task.Delay(Soft.WaitSpan);
+            InitNovel();
+            Refresh = false;
+        });
+
+        public ICommand RefreshLightNovelCommand => new DelegateCommand(async () =>
+        {
+            Refresh = true;
+            await Task.Delay(Soft.WaitSpan);
+            InitLightNovel();
+            Refresh = false;
+        });
+
+        public ICommand RefreshAnimeCommand => new DelegateCommand(async () =>
+        {
+            Refresh = true;
+            await Task.Delay(Soft.WaitSpan);
+            InitAnime();
+            Refresh = false;
+        });
+
+        public ICommand RefreshMangaCommand => new DelegateCommand(async () =>
+        {
+            Refresh = true;
+            await Task.Delay(Soft.WaitSpan);
+            InitManga();
+            Refresh = false;
+        });
+
+        public ICommand TabChangedCommand => new DelegateCommand<dynamic>(input =>
+        {
+            if (input == 0)
+                InitNovel();
+            else if (input == 1)
+                InitLightNovel();
+            else if (input == 2)
+                InitAnime();
+        });
         #endregion
 
         #region Override
-        protected override async void OnViewLaunch()
+        protected override void OnViewLaunch()
         {
-            XSLiShi = new ObservableCollection<CandyXSLiShiDto>(await Resolve<IXSLiShi>().Query());
-            DMLiShi = new ObservableCollection<CandyDMLiShiDto>(await Resolve<IDMLiShi>().Query());
-            LXSLiShi = new ObservableCollection<CandyLXSLiShiDto>(await Resolve<ILXSLiShi>().Query());
+            InitNovel();
+            InitLightNovel();
+            InitAnime();
+            InitManga();
         }
         #endregion
+
+        #region Method
+        public async void InitManga() 
+        {
+            MHSLiShi = new ObservableCollection<CandyMHLiShiDto>(await Resolve<IMHLiShi>().Query());
+        }
+        public async void InitNovel()
+        {
+            XSLiShi = new ObservableCollection<CandyXSLiShiDto>(await Resolve<IXSLiShi>().Query());
+        }
+        public async void InitAnime()
+        {
+            DMLiShi = new ObservableCollection<CandyDMLiShiDto>(await Resolve<IDMLiShi>().Query());
+        }
+        public async void InitLightNovel()
+        {
+            LXSLiShi = new ObservableCollection<CandyLXSLiShiDto>(await Resolve<ILXSLiShi>().Query());
+        }
+        #endregion 
     }
 }

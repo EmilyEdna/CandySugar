@@ -18,6 +18,7 @@ using Prism.Ioc;
 using CandySugar.App.Controls.Views.Manga;
 using CandySugar.Xam.Core.Service;
 using CandySugar.Xam.Common.DTO;
+using XExten.Advance.LinqFramework;
 
 namespace CandySugar.App.Controls.ViewModels.MangaModel
 {
@@ -66,7 +67,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 ErrorMsg = ex.Message,
                 ErrorStack = ex.StackTrace
             });
-            return String.Format(Soft.Toast,nameof(CandyMangaChapterViewModel), Method);
+            return String.Format(Soft.Toast, nameof(CandyMangaChapterViewModel), Method);
         }
         public async void Init(string input)
         {
@@ -91,7 +92,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
             }
             catch (Exception ex)
             {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init",ex)))
+                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Init", ex)))
                 {
                     await Task.Delay(3000);
                 }
@@ -99,6 +100,9 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
         }
         public async void Navigation(MangaChapterResult input)
         {
+            var dto = input.ToMapest<CandyMHLiShiDto>();
+            dto.Cover = this.Cover;
+            await Resolve<IMHLiShi>().InsertOrUpdate(dto);
             var Param = new NavigationParameters();
             Param.Add("Route", input.Address);
             await NavigationService.NavigateAsync(new Uri(nameof(CandyMangaReaderView), UriKind.Relative), Param);

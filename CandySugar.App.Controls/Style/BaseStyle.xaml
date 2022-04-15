@@ -19,7 +19,6 @@
     <Converter:ComboConverter x:Key="ComboConverter" />
     <Converter:TabItemConverter x:Key="TabItemConverter" />
     <Converter:ListViewConverter x:Key="ListViewConverter" />
-    <Converter:LabelConverter x:Key="LabelConverter" />
     <Converter:BytesConverter x:Key="BytesConverter" />
     <Converter:BoolConverter x:Key="BoolConverter" />
     <Converter:ListConverter x:Key="ListConverter" />
