@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms.Internals;
 
 [assembly: ExportRenderer(typeof(WebView), typeof(CandyWebView))]
 namespace CandySugar.Droid.Renders
@@ -33,6 +34,17 @@ namespace CandySugar.Droid.Renders
                 Control.SetWebViewClient(GetWebViewClient());
                 Control.Settings.UserAgentString = UA;
             }
+        }
+        
+        protected override void Dispose(bool disposing)
+        {
+            //see https://github.com/xamarin/Xamarin.Forms/issues/6286
+            if (disposing && Element != null)
+            {
+                var handler = (EvaluateJavaScriptDelegate)Delegate.CreateDelegate(typeof(EvaluateJavaScriptDelegate), this, "OnEvaluateJavaScriptRequested");
+                Element.EvaluateJavaScriptRequested -= handler;
+            }
+            base.Dispose(disposing);
         }
     }
 }
