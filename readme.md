@@ -63,6 +63,18 @@
 
 ![p6.jpg](Image/p6.jpg)
 
+![a1.jpg](Image/a1.jpg)
+
+![a2.jpg](Image/a2.jpg)
+
+![a3.jpg](Image/a3.jpg)
+
+![a4.jpg](Image/a4.jpg)
+
+![a5.jpg](Image/a5.jpg)
+
+![a6.jpg](Image/a6.jpg)
+
 ### 软件引用：
 ##### WPF
 [MaterialDesignThemes](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
