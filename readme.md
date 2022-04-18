@@ -6,7 +6,7 @@
 
 有好的建议和BUG请提交在[此处](https://github.com/EmilyEdna/CandySugar/issues)
 
-### [功能介绍](https://github.com/EmilyEdna/CandySugar/framework.md)：
+### [功能介绍](https://github.com/EmilyEdna/CandySugar/blob/master/framework.md)：
 
 1.支持小说的搜索，阅读。
 
@@ -47,7 +47,7 @@
 ### 下载链接：
 [甜糖](https://github.com/EmilyEdna/CandySugar/releases/download/V1/CandySugar.7z)
 
-### [软件截图](https://github.com/EmilyEdna/CandySugar/description.md)
+### [软件截图](https://github.com/EmilyEdna/CandySugar/blob/master/description.md)
 
 ### 软件引用：
 ##### WPF
