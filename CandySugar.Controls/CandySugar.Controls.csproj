@@ -24,26 +24,11 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Reference Include="Anime.SDK">
-	    <HintPath>..\Lib\Anime.SDK.dll</HintPath>
+	  <Reference Include="SDKColloction">
+	    <HintPath>..\Lib\SDKColloction.dll</HintPath>
 	  </Reference>
-	  <Reference Include="GalActor.SDK">
-	    <HintPath>..\Lib\GalActor.SDK.dll</HintPath>
-	  </Reference>
-	  <Reference Include="LightNovel.SDK">
-	    <HintPath>..\Lib\LightNovel.SDK.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Manga.SDK">
-	    <HintPath>..\Lib\Manga.SDK.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Music.SDK">
-	    <HintPath>..\Lib\Music.SDK.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Novel.SDK">
-	    <HintPath>..\Lib\Novel.SDK.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Wallpaper.SDK">
-	    <HintPath>..\Lib\Wallpaper.SDK.dll</HintPath>
+	  <Reference Include="SDKCore">
+	    <HintPath>..\Lib\SDKCore.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 </Project>

@@ -1,11 +1,11 @@
 ﻿using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Core.Service;
-using Manga.SDK;
-using Manga.SDK.ViewModel;
-using Manga.SDK.ViewModel.Emums;
-using Manga.SDK.ViewModel.Request;
-using Manga.SDK.ViewModel.Response;
+using SDKColloction.MangaSDK;
+using SDKColloction.MangaSDK.ViewModel;
+using SDKColloction.MangaSDK.ViewModel.Emums;
+using SDKColloction.MangaSDK.ViewModel.Request;
+using SDKColloction.MangaSDK.ViewModel.Response;
 using Prism.Commands;
 using Prism.Navigation;
 using System;

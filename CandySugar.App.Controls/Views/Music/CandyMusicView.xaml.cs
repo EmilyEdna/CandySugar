@@ -8,7 +8,7 @@ using MediaManager;
 using MediaManager.Library;
 using MediaManager.Playback;
 using MediaManager.Player;
-using Music.SDK.ViewModel.Response;
+using SDKColloction.MusicSDK.ViewModel.Response;
 using Syncfusion.XForms.PopupLayout;
 using System;
 using System.Collections.Generic;

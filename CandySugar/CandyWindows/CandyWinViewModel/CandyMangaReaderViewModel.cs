@@ -2,11 +2,11 @@
 using CandySugar.Controls.Commands;
 using CandySugar.Controls.UIElementHelper;
 using CandySugar.Properties;
-using Manga.SDK;
-using Manga.SDK.ViewModel;
-using Manga.SDK.ViewModel.Emums;
-using Manga.SDK.ViewModel.Request;
-using Manga.SDK.ViewModel.Response;
+using SDKColloction.MangaSDK;
+using SDKColloction.MangaSDK.ViewModel;
+using SDKColloction.MangaSDK.ViewModel.Emums;
+using SDKColloction.MangaSDK.ViewModel.Request;
+using SDKColloction.MangaSDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
 using System;

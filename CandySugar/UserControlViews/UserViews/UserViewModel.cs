@@ -1,9 +1,9 @@
-﻿using Anime.SDK.ViewModel.Response;
+﻿using SDKColloction.AnimeSDK.ViewModel.Response;
 using CandySugar.CandyWindows.CandyWinViewModel;
 using CandySugar.Common.DTO;
 using CandySugar.Core.Service;
-using Manga.SDK.ViewModel.Response;
-using Novel.SDK.ViewModel.Response;
+using SDKColloction.MangaSDK.ViewModel.Response;
+using SDKColloction.NovelSDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
 using System;

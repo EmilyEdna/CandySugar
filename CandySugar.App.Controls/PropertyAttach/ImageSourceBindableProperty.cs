@@ -1,19 +1,19 @@
 ﻿using FFImageLoading;
 using FFImageLoading.Forms;
-using GalActor.SDK;
-using GalActor.SDK.ViewModel;
-using GalActor.SDK.ViewModel.Eunms;
-using GalActor.SDK.ViewModel.Request;
+using SDKColloction.GalActorSDK;
+using SDKColloction.GalActorSDK.ViewModel;
+using SDKColloction.GalActorSDK.ViewModel.Eunms;
+using SDKColloction.GalActorSDK.ViewModel.Request;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Wallpaper.SDK;
-using Wallpaper.SDK.ViewModel;
-using Wallpaper.SDK.ViewModel.Enums;
-using Wallpaper.SDK.ViewModel.Request;
+using SDKColloction.WallpaperSDK;
+using SDKColloction.WallpaperSDK.ViewModel;
+using SDKColloction.WallpaperSDK.ViewModel.Enums;
+using SDKColloction.WallpaperSDK.ViewModel.Request;
 using Xamarin.Forms;
 using XExten.Advance.LinqFramework;
 

@@ -1,11 +1,11 @@
 ﻿using CandySugar.App.Controls.Views.Novel;
 using CandySugar.Xam.Common;
 using CandySugar.Xam.Core.Service;
-using Novel.SDK;
-using Novel.SDK.ViewModel;
-using Novel.SDK.ViewModel.Enums;
-using Novel.SDK.ViewModel.Request;
-using Novel.SDK.ViewModel.Response;
+using SDKColloction.NovelSDK;
+using SDKColloction.NovelSDK.ViewModel;
+using SDKColloction.NovelSDK.ViewModel.Enums;
+using SDKColloction.NovelSDK.ViewModel.Request;
+using SDKColloction.NovelSDK.ViewModel.Response;
 using Prism.Commands;
 using Prism.Navigation;
 using System;

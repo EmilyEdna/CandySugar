@@ -8,10 +8,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Wallpaper.SDK;
-using Wallpaper.SDK.ViewModel;
-using Wallpaper.SDK.ViewModel.Enums;
-using Wallpaper.SDK.ViewModel.Request;
+using SDKColloction.WallpaperSDK;
+using SDKColloction.WallpaperSDK.ViewModel;
+using SDKColloction.WallpaperSDK.ViewModel.Enums;
+using SDKColloction.WallpaperSDK.ViewModel.Request;
 using XExten.Advance.StaticFramework;
 
 namespace CandySugar.Controls.PropertyAttach

@@ -1,11 +1,11 @@
 ﻿using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.AppDTO;
 using CandySugar.Xam.Core.Service;
-using GalActor.SDK;
-using GalActor.SDK.ViewModel;
-using GalActor.SDK.ViewModel.Eunms;
-using GalActor.SDK.ViewModel.Request;
-using GalActor.SDK.ViewModel.Response;
+using SDKColloction.GalActorSDK;
+using SDKColloction.GalActorSDK.ViewModel;
+using SDKColloction.GalActorSDK.ViewModel.Eunms;
+using SDKColloction.GalActorSDK.ViewModel.Request;
+using SDKColloction.GalActorSDK.ViewModel.Response;
 using Prism.Commands;
 using Prism.Navigation;
 using System;

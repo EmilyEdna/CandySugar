@@ -1,10 +1,10 @@
 ﻿using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.AppDTO;
-using Music.SDK;
-using Music.SDK.ViewModel;
-using Music.SDK.ViewModel.Enums;
-using Music.SDK.ViewModel.Request;
-using Music.SDK.ViewModel.Response;
+using SDKColloction.MusicSDK;
+using SDKColloction.MusicSDK.ViewModel;
+using SDKColloction.MusicSDK.ViewModel.Enums;
+using SDKColloction.MusicSDK.ViewModel.Request;
+using SDKColloction.MusicSDK.ViewModel.Response;
 using Prism.Commands;
 using Prism.Navigation;
 using System;

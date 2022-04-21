@@ -1,8 +1,8 @@
-﻿using Anime.SDK;
-using Anime.SDK.ViewModel;
-using Anime.SDK.ViewModel.Enums;
-using Anime.SDK.ViewModel.Request;
-using Anime.SDK.ViewModel.Response;
+﻿using SDKColloction.AnimeSDK;
+using SDKColloction.AnimeSDK.ViewModel;
+using SDKColloction.AnimeSDK.ViewModel.Enums;
+using SDKColloction.AnimeSDK.ViewModel.Request;
+using SDKColloction.AnimeSDK.ViewModel.Response;
 using CandySugar.CandyWindows.CandyWinViewModel;
 using CandySugar.Common;
 using CandySugar.Common.DTO;

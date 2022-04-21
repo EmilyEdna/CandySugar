@@ -5,11 +5,11 @@ using CandySugar.Core.Service;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using HandyControl.Data;
-using Novel.SDK;
-using Novel.SDK.ViewModel;
-using Novel.SDK.ViewModel.Enums;
-using Novel.SDK.ViewModel.Request;
-using Novel.SDK.ViewModel.Response;
+using SDKColloction.NovelSDK;
+using SDKColloction.NovelSDK.ViewModel;
+using SDKColloction.NovelSDK.ViewModel.Enums;
+using SDKColloction.NovelSDK.ViewModel.Request;
+using SDKColloction.NovelSDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
 using System;
@@ -19,7 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XExten.Advance.LinqFramework;
 using XExten.Advance.StaticFramework;
-using SDKRequest = Novel.SDK.ViewModel.Request;
+using SDKRequest = SDKColloction.NovelSDK.ViewModel.Request;
 
 namespace CandySugar.UserControlViews.NovelViews
 {

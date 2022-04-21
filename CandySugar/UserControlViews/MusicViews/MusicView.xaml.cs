@@ -2,7 +2,7 @@
 using CandySugar.CandyWindows.CandyWinViewModel;
 using CandySugar.Common.DTO;
 using CandySugar.Common.Enum;
-using Music.SDK.ViewModel.Response;
+using SDKColloction.MusicSDK.ViewModel.Response;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;

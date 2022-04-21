@@ -1,4 +1,4 @@
-﻿using Anime.SDK.ViewModel.Response;
+﻿using SDKColloction.AnimeSDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
 using System;

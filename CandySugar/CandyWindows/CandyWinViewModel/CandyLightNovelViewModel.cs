@@ -1,5 +1,5 @@
 ﻿using CandySugar.Controls.Commands;
-using LightNovel.SDK.ViewModel.Response;
+using SDKColloction.LightNovelSDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
 using System;

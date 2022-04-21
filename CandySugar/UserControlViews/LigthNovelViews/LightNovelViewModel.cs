@@ -3,11 +3,11 @@ using CandySugar.Common;
 using CandySugar.Properties;
 using HandyControl.Controls;
 using HandyControl.Data;
-using LightNovel.SDK;
-using LightNovel.SDK.ViewModel;
-using LightNovel.SDK.ViewModel.Enums;
-using LightNovel.SDK.ViewModel.Request;
-using LightNovel.SDK.ViewModel.Response;
+using SDKColloction.LightNovelSDK;
+using SDKColloction.LightNovelSDK.ViewModel;
+using SDKColloction.LightNovelSDK.ViewModel.Enums;
+using SDKColloction.LightNovelSDK.ViewModel.Request;
+using SDKColloction.LightNovelSDK.ViewModel.Response;
 using Stylet;
 using StyletIoC;
 using System;
@@ -309,7 +309,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                         LightNovelType = LightNovelEnum.View,
                         Proxy = new LightNovelProxy(),
                         CacheSpan = Soft.Default.CacheTime,
-                        View = new LightNovel.SDK.ViewModel.Request.LightNovelView
+                        View = new SDKColloction.LightNovelSDK.ViewModel.Request.LightNovelView
                         {
                             ViewAddress = LightNovelDetail.DetailResult.Address,
                         }

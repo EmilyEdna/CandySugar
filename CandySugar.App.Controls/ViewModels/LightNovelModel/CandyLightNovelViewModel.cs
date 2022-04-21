@@ -1,9 +1,9 @@
 ﻿using CandySugar.Xam.Common;
-using LightNovel.SDK;
-using LightNovel.SDK.ViewModel;
-using LightNovel.SDK.ViewModel.Enums;
-using LightNovel.SDK.ViewModel.Request;
-using LightNovel.SDK.ViewModel.Response;
+using SDKColloction.LightNovelSDK;
+using SDKColloction.LightNovelSDK.ViewModel;
+using SDKColloction.LightNovelSDK.ViewModel.Enums;
+using SDKColloction.LightNovelSDK.ViewModel.Request;
+using SDKColloction.LightNovelSDK.ViewModel.Response;
 using Prism.Commands;
 using Prism.Navigation;
 using System;

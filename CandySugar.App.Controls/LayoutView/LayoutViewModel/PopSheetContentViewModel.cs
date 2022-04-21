@@ -1,9 +1,9 @@
 ﻿using CandySugar.Xam.Common;
-using Music.SDK;
-using Music.SDK.ViewModel;
-using Music.SDK.ViewModel.Enums;
-using Music.SDK.ViewModel.Request;
-using Music.SDK.ViewModel.Response;
+using SDKColloction.MusicSDK;
+using SDKColloction.MusicSDK.ViewModel;
+using SDKColloction.MusicSDK.ViewModel.Enums;
+using SDKColloction.MusicSDK.ViewModel.Request;
+using SDKColloction.MusicSDK.ViewModel.Response;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
