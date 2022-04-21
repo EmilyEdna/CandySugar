@@ -55,8 +55,8 @@ namespace CandySugar.Views
             if (!module)Msg.Text = "通行证错误！";
             else
             {
-                Msg.Text = "通行证正确！2秒后关闭窗口";
-                await Task.Delay(2000);
+                Msg.Text = "通行证正确！1秒后关闭窗口";
+                await Task.Delay(1000);
                 DialogResult = true;
             }
         }
