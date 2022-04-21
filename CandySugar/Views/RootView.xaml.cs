@@ -9,6 +9,7 @@ using System;
 using XExten.Advance.StaticFramework;
 using XExten.Advance.LinqFramework;
 using System.Diagnostics;
+using CandySugar.ViewModels;
 
 namespace CandySugar.Views
 {
@@ -54,6 +55,11 @@ namespace CandySugar.Views
             }
             if (!dir.IsNullOrEmpty())
                 Process.Start("explorer.exe", dir);
+        }
+
+        private void LoadEvents(object sender, RoutedEventArgs e)
+        {
+            BootResource.Popup<BootView>();
         }
     }
 }

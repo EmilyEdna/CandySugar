@@ -14,7 +14,6 @@ namespace CandySugar.Common
 {
     public class HelpUtilty
     {
-        public static bool PINK { get; set; } = false;
         public static void Dispose()
         {
             GC.Collect();

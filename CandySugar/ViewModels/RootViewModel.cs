@@ -2,7 +2,6 @@
 using CandySugar.Common.Enum;
 using CandySugar.Common.Navigations;
 using CandySugar.Common.WinDTO;
-using CandySugar.Controls.PopupControl;
 using CandySugar.Controls.UserControls;
 using CandySugar.UserControlViews.AnimeViews;
 using CandySugar.UserControlViews.AxgleViews;
@@ -26,7 +25,7 @@ namespace CandySugar.ViewModels
 {
     public class RootViewModel : Conductor<IScreen>, IActiveNotify
     {
-        private readonly IContainer Container;
+        public  IContainer Container;
         public RootViewModel(IContainer Container)
         {
             this.Container = Container;
@@ -71,32 +70,14 @@ namespace CandySugar.ViewModels
                     BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEnum.Wallpaper:
-                    if (HelpUtilty.PINK) ActivateItem(Container.Get<WallpaperViewModel>());
-                    else
-                    {
-                        if (BootResource.Popup<PINPopupWindow>())
-                        {
-                            HelpUtilty.PINK = true;
-                            ActivateItem(Container.Get<WallpaperViewModel>());
-                        }
-                        else HC.Growl.Info("PIN码错误!");
-                    }
+                    ActivateItem(Container.Get<WallpaperViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEnum.Music:
                     ActivateItem(Container.Get<MusicViewModel>());
                     break;
                 case MenuFuncEnum.Axgle:
-                    if (HelpUtilty.PINK) ActivateItem(Container.Get<AxgleViewModel>());
-                    else
-                    {
-                        if (BootResource.Popup<PINPopupWindow>()) 
-                        {
-                            HelpUtilty.PINK = true;
-                            ActivateItem(Container.Get<AxgleViewModel>());
-                        }
-                        else HC.Growl.Info("PIN码错误!");
-                    }
+                    ActivateItem(Container.Get<AxgleViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEnum.UserCenter:
