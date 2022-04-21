@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows;
 using XExten.Advance.LinqFramework;
+using CandySugar.UserControlViews.AcgAnimeViews;
 
 namespace CandySugar.ViewModels
 {
@@ -78,6 +79,10 @@ namespace CandySugar.ViewModels
                     break;
                 case MenuFuncEnum.Axgle:
                     ActivateItem(Container.Get<AxgleViewModel>());
+                    BootResource.Lyric(null, 2);
+                    break;
+                case MenuFuncEnum.Hentai:
+                    ActivateItem(Container.Get<AcgAnimeViewModel>());
                     BootResource.Lyric(null, 2);
                     break;
                 case MenuFuncEnum.UserCenter:

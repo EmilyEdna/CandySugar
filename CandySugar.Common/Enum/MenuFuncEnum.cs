@@ -38,6 +38,10 @@ namespace CandySugar.Common.Enum
         /// </summary>
         Axgle,
         /// <summary>
+        /// Acg
+        /// </summary>
+        Hentai,
+        /// <summary>
         /// 用户中心
         /// </summary>
         UserCenter
