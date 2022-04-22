@@ -85,7 +85,7 @@ namespace CandySugar
             new SqlSugarDbContext().InitCandy();
 
             BootResource.ReadUserSetting();
-            SDKCore.License.Register(new SDKCore.LicenseModel { Account = "emilyedna", PassWord = DateTime.Now.ToString("yyyyMMdd") });
+            //SDKCore.License.Register(new SDKCore.LicenseModel { Account = "emilyedna", PassWord = DateTime.Now.ToString("yyyyMMdd") });
             base.Configure();
         }
 
