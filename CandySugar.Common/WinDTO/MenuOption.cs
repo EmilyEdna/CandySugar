@@ -62,7 +62,7 @@ namespace CandySugar.Common.WinDTO
             data.Add(new MenuOption
             {
                 FuncName = "ACG(Ctrl+H)",
-                ImageRoute = "https://konachan.com/data/preview/d5/21/d521a54a37b255b44c63ebb3803e7710.jpg",
+                ImageRoute = "https://konachan.com/data/preview/b0/72/b07206b32b3d28f3470b410d02314708.jpg",
                 CommandParam = MenuFuncEnum.Hentai
             });
             return data;

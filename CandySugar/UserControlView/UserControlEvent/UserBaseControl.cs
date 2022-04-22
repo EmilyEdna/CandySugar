@@ -4,6 +4,7 @@ using CandySugar.Common;
 using CandySugar.Common.Enum;
 using CandySugar.Controls.ControlViewModel;
 using CandySugar.Properties;
+using CandySugar.Views;
 using Microsoft.Web.WebView2.Wpf;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,9 @@ namespace CandySugar.UserControlView.UserControlEvent
                 case SysFuncEnum.ShutDown:
                     ShutDown();
                     break;
+                case SysFuncEnum.License:
+                    RegistLicense();
+                    break;
                 default:
                     break;
             }
@@ -70,7 +74,7 @@ namespace CandySugar.UserControlView.UserControlEvent
             var axWebViews = win.FindName("AxWebView");
             if (axWebViews != null)
             {
-                webView =(WebView2)axWebViews;
+                webView = (WebView2)axWebViews;
                 webView.Dispose();
             }
 
@@ -124,6 +128,10 @@ namespace CandySugar.UserControlView.UserControlEvent
                 Application.Current.MainWindow.Visibility = Visibility.Collapsed;
             }
             Window.GetWindow(this).Visibility = Visibility.Collapsed;
+        }
+        private void RegistLicense()
+        {
+            BootResource.Popup<BootView>();
         }
         #endregion
 

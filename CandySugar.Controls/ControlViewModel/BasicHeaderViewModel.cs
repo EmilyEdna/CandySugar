@@ -25,7 +25,8 @@ namespace CandySugar.Controls.ControlViewModel
         {
             Handler = new Dictionary<string, Tuple<Thickness, SysFuncEnum>>
             {
-                { "CogOutline", new Tuple<Thickness, SysFuncEnum>( new Thickness(0,0,0,0),SysFuncEnum.Setting) },
+                { "CardAccountDetailsOutline", new Tuple<Thickness, SysFuncEnum>( new Thickness(0,0,0,0),SysFuncEnum.License) },
+                { "CogOutline", new Tuple<Thickness, SysFuncEnum>( new Thickness(10,0,0,0),SysFuncEnum.Setting) },
                 { "ArrowCollapse",new Tuple<Thickness, SysFuncEnum>( new Thickness(10,0,0,0), SysFuncEnum.MinSize) },
                 { "PowerStandby", new Tuple<Thickness, SysFuncEnum>( new Thickness(10,0,0,0),SysFuncEnum.ShutDown) }
             };

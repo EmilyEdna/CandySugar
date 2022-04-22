@@ -25,8 +25,8 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*" />
-                <ColumnDefinition Width="1.8*" />
-                <ColumnDefinition Width="0.275*" />
+                <ColumnDefinition Width="1.6*" />
+                <ColumnDefinition Width="0.35*" />
             </Grid.ColumnDefinitions>
             <ComboBox
                 x:Name="ThemeBox"

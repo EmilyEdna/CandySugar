@@ -56,10 +56,5 @@ namespace CandySugar.Views
             if (!dir.IsNullOrEmpty())
                 Process.Start("explorer.exe", dir);
         }
-
-        private void LoadEvents(object sender, RoutedEventArgs e)
-        {
-            BootResource.Popup<BootView>();
-        }
     }
 }

@@ -14,6 +14,7 @@ namespace CandySugar.Common.Enum
         Setting,
         MinSize,
         Close,
-        ShutDown
+        ShutDown,
+        License
     }
 }

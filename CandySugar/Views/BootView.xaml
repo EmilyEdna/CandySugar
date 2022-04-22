@@ -11,7 +11,7 @@
     xmlns:local="clr-namespace:CandySugar.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Pas"
-    Style="{StaticResource PwdStyle}"
+    Style="{StaticResource PopupStyle}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>

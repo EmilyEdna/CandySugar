@@ -33,6 +33,7 @@ namespace CandySugar
         private static ConcurrentDictionary<string, CandyLyricWin> CandyLyricWindow = new ConcurrentDictionary<string, CandyLyricWin>();
         private static ConcurrentDictionary<string, CandyPreviewWin> CandyPreviewWindow = new ConcurrentDictionary<string, CandyPreviewWin>();
         private static ConcurrentDictionary<string, CandyAxgleWin> AxgleWindow = new ConcurrentDictionary<string, CandyAxgleWin>();
+        private static ConcurrentDictionary<string,CandyAcgProviderWin> AcgProviderWindown = new ConcurrentDictionary<string,CandyAcgProviderWin>();
 
         #region 属性
         /// <summary>
@@ -102,6 +103,54 @@ namespace CandySugar
         #endregion
 
         #region 窗体控制
+        /// <summary>
+        /// 控制H窗体
+        /// </summary>
+        /// <param name="action"></param>
+        public static void AcgView(Action<CandyAcgProviderWin> action) 
+        {
+            CandyAcgProviderWin windows = null;
+            if (AcgProviderWindown.ContainsKey(nameof(CandyAcgProviderWin)))
+            {
+                var old = AcgProviderWindown.Values.FirstOrDefault();
+                old.Close();
+                AcgProviderWindown.Clear();
+                windows = new CandyAcgProviderWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var Zone = windows.Header.Content as ColorZone;
+                Zone.CornerRadius = new CornerRadius(8, 8, 0, 0);
+                var content = Zone.Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content).FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AcgProviderWindown.TryAdd(nameof(CandyAcgProviderWin), windows);
+                windows.Show();
+            }
+            else
+            {
+                AcgProviderWindown.Clear();
+                windows = new CandyAcgProviderWin();
+                action(windows);
+                var binding = new Binding
+                {
+                    Source = windows.DataContext,
+                    //绑定到附加属性
+                    Path = new PropertyPath("Loading"),
+                    Mode = BindingMode.TwoWay
+                };
+                var Zone = windows.Header.Content as ColorZone;
+                Zone.CornerRadius = new CornerRadius(8, 8, 0, 0);
+                var content = Zone.Content as Grid;
+                UlHelper.FindVisualChild<LoadingLine>(content).FirstOrDefault().SetBinding(UIElement.VisibilityProperty, binding);
+                AcgProviderWindown.TryAdd(nameof(CandyAcgProviderWin), windows);
+                windows.Show();
+            }
+        }
         /// <summary>
         /// 控制预览窗体打开
         /// </summary>
