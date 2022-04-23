@@ -9,7 +9,7 @@ namespace CandySugar.Common.WinDTO
     public class HAcgOption
     {
         public static List<string> Tags { get; set; }= Tags??new List<string>();
-        public static string Brand { get; set; }
+        public static List<string> Brands { get; set; } = Brands ?? new List<string>();
         public static string Type { get; set; }
     }
 }

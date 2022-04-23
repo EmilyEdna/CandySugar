@@ -4,6 +4,7 @@ using CandySugar.Controls.ControlViewModel;
 using CandySugar.Core.Service;
 using CandySugar.Core.ServiceImpl;
 using CandySugar.ViewModels;
+using SDKCore;
 using Serilog;
 using Stylet;
 using StyletIoC;
@@ -62,8 +63,6 @@ namespace CandySugar
                     }
                 }
             }
-
-         
         }
 
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
@@ -85,7 +84,8 @@ namespace CandySugar
             new SqlSugarDbContext().InitCandy();
 
             BootResource.ReadUserSetting();
-            //SDKCore.License.Register(new SDKCore.LicenseModel { Account = "emilyedna", PassWord = DateTime.Now.ToString("yyyyMMdd") });
+            License.UseDisableLicense("WallpaperDown");
+            License.Register(new LicenseModel { Account = "emilyedna", PassWord = DateTime.Now.ToString("yyyyMMdd") });
             base.Configure();
         }
 

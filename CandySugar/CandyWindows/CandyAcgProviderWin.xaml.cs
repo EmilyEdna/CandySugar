@@ -49,16 +49,15 @@ namespace CandySugar.CandyWindows
         private void BrandSelected(object sender, EventArgs e)
         {
             HTag ht = (HTag)sender;
-            if (!ht.IsSelected) return;
-            UlHelper.FindVisualChild<HTag>(BrandList).ForEnumerEach(item =>
+            if (ht.IsSelected)
             {
-                if (item.Content.Equals(ht.Content))
-                {
-                    item.IsSelected = true;
-                    HAcgOption.Brand = item.Content.ToString();
-                }
-                else item.IsSelected = false;
-            });
+                if (!HAcgOption.Brands.Contains(ht.Content.ToString()))
+                    HAcgOption.Brands.Add(ht.Content.ToString());
+            }
+            else
+            {
+                HAcgOption.Brands.Remove(ht.Content.ToString());
+            }
         }
 
         private void TagSelected(object sender, EventArgs e)
