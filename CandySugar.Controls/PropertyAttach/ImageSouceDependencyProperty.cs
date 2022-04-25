@@ -71,7 +71,7 @@ namespace CandySugar.Controls.PropertyAttach
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Shows,
+                        Galype = GalActorEnum.GalShows,
                         CacheSpan = 300,
                         Show = new GalActorShow
                         {

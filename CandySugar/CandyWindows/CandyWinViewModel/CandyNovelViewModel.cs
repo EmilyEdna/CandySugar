@@ -82,7 +82,7 @@ namespace CandySugar.CandyWindows.CandyWinViewModel
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        NovelType = NovelEnum.Watch,
+                        NovelType = NovelEnum.NovelWatch,
                         Proxy = this.Proxy,
                         View = new NovelView
                         {

@@ -46,7 +46,7 @@ namespace CandySugar.Controls.PropertyAttach
             {
                 opt.RequestParam = new WallpaperRequestInput
                 {
-                    WallpaperType = WallpaperEnum.Download,
+                    WallpaperType = WallpaperEnum.ImgDownload,
                     CacheSpan = 60,
                     Download = new WallpaperDownload()
                     {

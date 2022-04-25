@@ -122,13 +122,12 @@ namespace CandySugar.App.ViewModels
                     break;
                 case MenuFuncEnum.Wallpaper:
                     base.Title = input.CommandParam.ToDes();
-                    if (await PINK())
-                        Arrived(nameof(CandyKonachanView));
+                    Arrived(nameof(CandyKonachanView));
+
                     break;
                 case MenuFuncEnum.Axgle:
                     base.Title = input.CommandParam.ToDes();
-                    if(await PINK())
-                        Arrived(nameof(CandyAxgleView));
+                    Arrived(nameof(CandyAxgleView));
                     break;
                 case MenuFuncEnum.Music:
                     base.Title = input.CommandParam.ToDes();
@@ -150,7 +149,10 @@ namespace CandySugar.App.ViewModels
                     break;
             }
         }
-
+        /// <summary>
+        /// PIN
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> PINK() 
         {
             if (Soft.PINK) return true;

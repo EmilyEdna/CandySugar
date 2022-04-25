@@ -115,7 +115,7 @@ namespace CandySugar.CandyWindows.CandyWinViewModel
             {
                 opt.RequestParam = new MangaRequestInput
                 {
-                    MangaType = MangaEnum.Content,
+                    MangaType = MangaEnum.MangaContent,
                     Proxy = this.Proxy,
                     Content = new MangaContent
                     {
@@ -158,7 +158,7 @@ namespace CandySugar.CandyWindows.CandyWinViewModel
                 {
                     opt.RequestParam = new MangaRequestInput
                     {
-                        MangaType = MangaEnum.DownLoad,
+                        MangaType = MangaEnum.MangaDownLoad,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                         ContentByte = new MangaContentByte

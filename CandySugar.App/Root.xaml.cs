@@ -45,12 +45,15 @@ namespace CandySugar.App
         {
         }
 
-        protected async override void OnInitialized()
+        protected override void OnInitialized()
         {
             InitializeComponent();
             Material.Init(this);
             SyncfusionLicenseProvider.RegisterLicense("NjE1NTQ2QDMyMzAyZTMxMmUzMGN4T2F0SjFnVTBld2YxMnhXL1dGUElNRm1vRThVY1ZZc1NaVjFkZmxHNWc9");
-            await NavigationService.NavigateAsync("NavigationPage/CandyIndexView");
+            MainPage = new CandyLoginView
+            {
+                BindingContext = new CandyLoginViewModel(NavigationService)
+            };
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -130,7 +133,6 @@ namespace CandySugar.App
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();
-
             ViewModelLocationProvider.Register<CandyContentIndexView>(() => Container.Resolve<CandyContentIndexViewModel>());
 
             ViewModelLocationProvider.Register<PopPlayHeaderView>(() => Container.Resolve<PopPlayHeaderViewModel>());

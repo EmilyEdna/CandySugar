@@ -37,7 +37,7 @@ namespace CandySugar.Controls.Converters
                          {
                              opt.RequestParam = new WallpaperRequestInput
                              {
-                                 WallpaperType = WallpaperEnum.Download,
+                                 WallpaperType = WallpaperEnum.ImgDownload,
                                  CacheSpan = 180,
                                  Download = new WallpaperDownload()
                                  {
@@ -59,7 +59,7 @@ namespace CandySugar.Controls.Converters
                         {
                             opt.RequestParam = new GalActorRequestInput
                             {
-                                Galype = GalActorEnum.Show,
+                                Galype = GalActorEnum.GalShow,
                                 CacheSpan = 180,
                                 Proxy = new GalActorProxy(),
                                 Show = new GalActorShow

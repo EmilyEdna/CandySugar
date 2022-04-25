@@ -84,7 +84,7 @@ namespace CandySugar
             new SqlSugarDbContext().InitCandy();
 
             BootResource.ReadUserSetting();
-            License.UseDisableLicense("WallpaperDown");
+            License.UseDisableLicense("ImgDownload");
             base.Configure();
         }
 

@@ -111,7 +111,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Detail,
+                        LightNovelType = LightNovelEnum.LightDetail,
                         CacheSpan = Soft.CacheTime,
                         Proxy = this.Proxy,
                         Detail = new LightNovelDetail
@@ -132,7 +132,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.View,
+                        LightNovelType = LightNovelEnum.LightView,
                         Proxy = new LightNovelProxy(),
                         CacheSpan = Soft.CacheTime,
                         View = new LightNovelView
@@ -169,7 +169,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                     {
                         opt.RequestParam = new LightNovelRequestInput
                         {
-                            LightNovelType = LightNovelEnum.Down,
+                            LightNovelType = LightNovelEnum.LightDownLoad,
                             Proxy = this.Proxy,
                             Down = new LightNovelDown
                             {
@@ -213,7 +213,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                         opt.RequestParam = new LightNovelRequestInput
                         {
                             CacheSpan = Soft.CacheTime,
-                            LightNovelType = LightNovelEnum.Content,
+                            LightNovelType = LightNovelEnum.LightContent,
                             Proxy = this.Proxy,
                             Content = new LightNovelContent
                             {
@@ -263,7 +263,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                     {
                         opt.RequestParam = new LightNovelRequestInput
                         {
-                            LightNovelType = LightNovelEnum.Down,
+                            LightNovelType = LightNovelEnum.LightDownLoad,
                             Proxy = this.Proxy,
                             Down = new LightNovelDown
                             {

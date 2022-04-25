@@ -79,7 +79,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Init,
+                        Galype = GalActorEnum.GalInit,
                         Proxy = this.Proxy,
                         GalInit = new GalActorInit(),
                         CacheSpan = Soft.CacheTime

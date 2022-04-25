@@ -172,7 +172,7 @@ namespace CandySugar.UserControlViews.AcgAnimeViews
                 {
                     opt.RequestParam = new AcgAnimeRequestInput
                     {
-                        AcgType = AcgAnimeEnum.Init,
+                        AcgType = AcgAnimeEnum.AcgInit,
                         CacheSpan = Soft.Default.CacheTime,
                         Proxy = this.Proxy,
                     };
@@ -198,7 +198,7 @@ namespace CandySugar.UserControlViews.AcgAnimeViews
                 {
                     opt.RequestParam = new AcgAnimeRequestInput
                     {
-                        AcgType = AcgAnimeEnum.Category,
+                        AcgType = AcgAnimeEnum.AcgCategory,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                         Category = new AcgAnimeCategory
@@ -226,7 +226,7 @@ namespace CandySugar.UserControlViews.AcgAnimeViews
                 {
                     opt.RequestParam = new AcgAnimeRequestInput
                     {
-                        AcgType = AcgAnimeEnum.Search,
+                        AcgType = AcgAnimeEnum.AcgSearch,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                         Search = new AcgAnimeSearch
@@ -257,7 +257,7 @@ namespace CandySugar.UserControlViews.AcgAnimeViews
                 {
                     opt.RequestParam = new AcgAnimeRequestInput
                     {
-                        AcgType = AcgAnimeEnum.Play,
+                        AcgType = AcgAnimeEnum.AcgPlay,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                         Play = new AcgAnimePlay

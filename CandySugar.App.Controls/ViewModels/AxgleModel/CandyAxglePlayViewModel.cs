@@ -57,7 +57,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Detail,
+                        Galype = GalActorEnum.GalDetail,
                         CacheSpan = Soft.CacheTime,
                          Detail = new  GalActorDetail
                         {

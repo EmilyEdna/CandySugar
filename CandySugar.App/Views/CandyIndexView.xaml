@@ -5,7 +5,9 @@
     xmlns:SFBadge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors;assembly=CandySugar.App.Controls"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:prism="http://prismlibrary.com"
     xmlns:sf="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+    prism:ViewModelLocator.AutowireViewModel="True"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <sf:SfNavigationDrawer

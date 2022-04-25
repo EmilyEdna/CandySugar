@@ -138,7 +138,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
                 {
                     opt.RequestParam = new WallpaperRequestInput
                     {
-                        WallpaperType = WallpaperEnum.Download,
+                        WallpaperType = WallpaperEnum.ImgDownload,
                         CacheSpan = Soft.Default.CacheTime,
                         Download = new WallpaperDownload()
                         {
@@ -233,7 +233,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
                     opt.RequestParam = new WallpaperRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        WallpaperType = WallpaperEnum.Init,
+                        WallpaperType = WallpaperEnum.ImgInit,
                         Init = new WallpaperInit
                         {
                             Page = PageIndex,
@@ -275,7 +275,7 @@ namespace CandySugar.UserControlViews.WallpaperViews
                     opt.RequestParam = new WallpaperRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        WallpaperType = WallpaperEnum.Search,
+                        WallpaperType = WallpaperEnum.ImgSearch,
                         Search = new WallpaperSearch
                         {
                             Limit = Limit,

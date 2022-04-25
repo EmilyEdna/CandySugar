@@ -110,7 +110,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.Init,
+                        AnimeType = AnimeEnum.AnimeInit,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime
                     };
@@ -138,7 +138,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.Search,
+                        AnimeType = AnimeEnum.AnimeSearch,
                         CacheSpan = Soft.Default.CacheTime,
                         Proxy = this.Proxy,
                         Search = new AnimeSearch
@@ -167,7 +167,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.Detail,
+                        AnimeType = AnimeEnum.AnimeDetail,
                         CacheSpan = Soft.Default.CacheTime,
                         Proxy = this.Proxy,
                         Detail = new AnimeDetail
@@ -199,7 +199,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                         opt.RequestParam = new AnimeRequestInput
                         {
                             CacheSpan = Soft.Default.CacheTime,
-                            AnimeType = AnimeEnum.Category,
+                            AnimeType = AnimeEnum.AnimeCategory,
                             Proxy = this.Proxy,
                             Category = new AnimeCategory
                             {
@@ -226,7 +226,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                     {
                         opt.RequestParam = new AnimeRequestInput
                         {
-                            AnimeType = AnimeEnum.CategoryType,
+                            AnimeType = AnimeEnum.AnimeCategoryType,
                             CacheSpan = Soft.Default.CacheTime,
                             Proxy = this.Proxy,
                             Category = new AnimeCategory
@@ -265,7 +265,7 @@ namespace CandySugar.UserControlViews.AnimeViews
                  {
                      opt.RequestParam = new AnimeRequestInput
                      {
-                         AnimeType = AnimeEnum.Watch,
+                         AnimeType = AnimeEnum.AnimeWatch,
                          Proxy = new AnimeProxy(),
                          WatchPlay = new AnimeWatchPlay
                          {

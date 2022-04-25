@@ -173,7 +173,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                     opt.RequestParam = new LightNovelRequestInput
                     {
                         CacheSpan = Soft.CacheTime,
-                        LightNovelType = LightNovelEnum.Init,
+                        LightNovelType = LightNovelEnum.LightInit,
                         Proxy = this.Proxy
                     };
                 }).RunsAsync(Light =>
@@ -207,7 +207,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Category,
+                        LightNovelType = LightNovelEnum.LightCategory,
                         CacheSpan = Soft.CacheTime,
                         Proxy = this.Proxy,
                         Category = new LightNovelCategory
@@ -266,7 +266,7 @@ namespace CandySugar.App.Controls.ViewModels.LightNovelModel
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Search,
+                        LightNovelType = LightNovelEnum.LightSearch,
                         CacheSpan = Soft.CacheTime,
                         Proxy = this.Proxy,
                         Search = new LightNovelSearch

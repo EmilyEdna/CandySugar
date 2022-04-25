@@ -168,7 +168,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Category,
+                        Galype = GalActorEnum.GalCategory,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.CacheTime,
                         Category = new CalActorCategory
@@ -217,7 +217,7 @@ namespace CandySugar.App.Controls.ViewModels.AxgleModel
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Search,
+                        Galype = GalActorEnum.GalSearch,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.CacheTime,
                         Search = new GalActorSearch

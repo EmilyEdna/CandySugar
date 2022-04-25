@@ -74,7 +74,7 @@ namespace CandySugar.UserControlViews.NovelViews
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        NovelType = NovelEnum.Detail,
+                        NovelType = NovelEnum.NovelDetail,
                         Proxy = this.Proxy,
                         Detail = new NovelDetail
                         {
@@ -104,7 +104,7 @@ namespace CandySugar.UserControlViews.NovelViews
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        NovelType = NovelEnum.Watch,
+                        NovelType = NovelEnum.NovelWatch,
                         Proxy = this.Proxy,
                         View = new SDKRequest.NovelView
                         {

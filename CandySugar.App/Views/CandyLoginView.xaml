@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CandySugar.App.Views.CandyLoginView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <StackLayout Margin="0,0,0,100" VerticalOptions="Center">
+            <Grid RowDefinitions="*,*,*,*">
+                <Label
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{DynamicResource TitleLabelStyle}"
+                    Text="Login"
+                    VerticalOptions="CenterAndExpand" />
+                <Entry
+                    Grid.Row="1"
+                    Placeholder="请输入账号"
+                    PlaceholderColor="{DynamicResource Gray-400}"
+                    Text="{Binding Account}"
+                    VerticalOptions="Center" />
+                <Entry
+                    Grid.Row="2"
+                    IsPassword="True"
+                    Placeholder="请输入密码"
+                    PlaceholderColor="{DynamicResource Gray-400}"
+                    Text="{Binding PassWord}"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Row="3"
+                    BackgroundColor="{DynamicResource LightSkyBlue}"
+                    Command="{Binding LoginCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="登录"
+                    WidthRequest="100" />
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

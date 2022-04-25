@@ -73,7 +73,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
                     {
                         Proxy = this.Proxy,
                         MusicPlatformType = platform,
-                        MusicType = MusicTypeEnum.SheetDetail,
+                        MusicType = MusicTypeEnum.MusicSheetDetail,
                         SheetSearch = new MusicSheetSearch
                         {
                             Page = PageIndex,

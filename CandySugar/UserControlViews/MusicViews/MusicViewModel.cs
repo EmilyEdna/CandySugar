@@ -196,7 +196,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         Proxy = this.Proxy,
                         MusicPlatformType = Platform,
-                        MusicType = MusicTypeEnum.SheetDetail,
+                        MusicType = MusicTypeEnum.MusicSheetDetail,
                         SheetSearch = new MusicSheetSearch
                         {
                             Page = PageIndex,
@@ -225,7 +225,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         Proxy = this.Proxy,
                         MusicPlatformType = Platform,
-                        MusicType = MusicTypeEnum.AlbumDetail,
+                        MusicType = MusicTypeEnum.MusicAlbumDetail,
                         AlbumSearch = new MusicAlbumSearch
                         {
                             AlbumId = input
@@ -256,7 +256,7 @@ namespace CandySugar.UserControlViews.MusicViews
                     {
                         Proxy = this.Proxy,
                         MusicPlatformType = this.Platform,
-                        MusicType = MusicTypeEnum.PlayAddress,
+                        MusicType = MusicTypeEnum.MusicPlayAddress,
                         AddressSearch = new MusicPlaySearch
                         {
                             Dynamic = input.SongId,
@@ -343,7 +343,7 @@ namespace CandySugar.UserControlViews.MusicViews
 
                         MusicPlatformType = (MusicPlatformEnum)input.Platform,
                         Proxy = this.Proxy,
-                        MusicType = MusicTypeEnum.Lyric,
+                        MusicType = MusicTypeEnum.MusicLyric,
                         LyricSearch = new MusicLyricSearch
                         {
                             Dynamic = input.SongId
@@ -384,7 +384,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.QQMusic,
-                                        MusicType = MusicTypeEnum.SongItem,
+                                        MusicType = MusicTypeEnum.MusicSongItem,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -414,7 +414,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.QQMusic,
-                                        MusicType = MusicTypeEnum.SongSheet,
+                                        MusicType = MusicTypeEnum.MusicSongSheet,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -448,7 +448,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.NeteaseMusic,
-                                        MusicType = MusicTypeEnum.SongItem,
+                                        MusicType = MusicTypeEnum.MusicSongItem,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -478,7 +478,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.NeteaseMusic,
-                                        MusicType = MusicTypeEnum.SongSheet,
+                                        MusicType = MusicTypeEnum.MusicSongSheet,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -512,7 +512,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.KuGouMusic,
-                                        MusicType = MusicTypeEnum.SongItem,
+                                        MusicType = MusicTypeEnum.MusicSongItem,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -542,7 +542,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.KuGouMusic,
-                                        MusicType = MusicTypeEnum.SongSheet,
+                                        MusicType = MusicTypeEnum.MusicSongSheet,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -576,7 +576,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.KuWoMusic,
-                                        MusicType = MusicTypeEnum.SongItem,
+                                        MusicType = MusicTypeEnum.MusicSongItem,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -606,7 +606,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.KuWoMusic,
-                                        MusicType = MusicTypeEnum.SongSheet,
+                                        MusicType = MusicTypeEnum.MusicSongSheet,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -640,7 +640,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.BiliBiliMusic,
-                                        MusicType = MusicTypeEnum.SongItem,
+                                        MusicType = MusicTypeEnum.MusicSongItem,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -670,7 +670,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.BiliBiliMusic,
-                                        MusicType = MusicTypeEnum.SongSheet,
+                                        MusicType = MusicTypeEnum.MusicSongSheet,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -704,7 +704,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.MiGuMusic,
-                                        MusicType = MusicTypeEnum.SongItem,
+                                        MusicType = MusicTypeEnum.MusicSongItem,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,
@@ -734,7 +734,7 @@ namespace CandySugar.UserControlViews.MusicViews
                                     {
                                         Proxy = this.Proxy,
                                         MusicPlatformType = MusicPlatformEnum.MiGuMusic,
-                                        MusicType = MusicTypeEnum.SongSheet,
+                                        MusicType = MusicTypeEnum.MusicSongSheet,
                                         Search = new MusicSearch
                                         {
                                             Page = PageIndex,

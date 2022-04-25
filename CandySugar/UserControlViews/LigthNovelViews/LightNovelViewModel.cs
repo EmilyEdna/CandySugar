@@ -108,7 +108,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     opt.RequestParam = new LightNovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        LightNovelType = LightNovelEnum.Init,
+                        LightNovelType = LightNovelEnum.LightInit,
                         Proxy = this.Proxy
                     };
                 }).RunsAsync(Light =>
@@ -126,7 +126,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                  {
                      opt.RequestParam = new LightNovelRequestInput
                      {
-                         LightNovelType = LightNovelEnum.Category,
+                         LightNovelType = LightNovelEnum.LightCategory,
                          CacheSpan = Soft.Default.CacheTime,
                          Proxy = this.Proxy,
                          Category = new LightNovelCategory
@@ -155,7 +155,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Refresh
+                        LightNovelType = LightNovelEnum.LightRefresh
                     };
                 }).Runs();
                 Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
@@ -175,7 +175,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Search,
+                        LightNovelType = LightNovelEnum.LightSearch,
                         CacheSpan = Soft.Default.CacheTime,
                         Proxy = this.Proxy,
                         Search = new LightNovelSearch
@@ -208,7 +208,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Refresh
+                        LightNovelType = LightNovelEnum.LightRefresh
                     };
                 }).Runs();
                 Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
@@ -226,7 +226,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Category,
+                        LightNovelType = LightNovelEnum.LightCategory,
                         CacheSpan = Soft.Default.CacheTime,
                         Proxy = this.Proxy,
                         Category = new LightNovelCategory
@@ -254,7 +254,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Refresh
+                        LightNovelType = LightNovelEnum.LightRefresh
                     };
                 }).Runs();
                 Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
@@ -285,7 +285,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Detail,
+                        LightNovelType = LightNovelEnum.LightDetail,
                         CacheSpan = Soft.Default.CacheTime,
                         Proxy = this.Proxy,
                         Detail = new LightNovelDetail
@@ -306,7 +306,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.View,
+                        LightNovelType = LightNovelEnum.LightView,
                         Proxy = new LightNovelProxy(),
                         CacheSpan = Soft.Default.CacheTime,
                         View = new SDKColloction.LightNovelSDK.ViewModel.Request.LightNovelView
@@ -332,7 +332,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                 {
                     opt.RequestParam = new LightNovelRequestInput
                     {
-                        LightNovelType = LightNovelEnum.Refresh
+                        LightNovelType = LightNovelEnum.LightRefresh
                     };
                 }).Runs();
                 Growl.Info("网络有波动，请稍后再试~`(*>﹏<*)′");
@@ -357,7 +357,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     {
                         opt.RequestParam = new LightNovelRequestInput
                         {
-                            LightNovelType = LightNovelEnum.Down,
+                            LightNovelType = LightNovelEnum.LightDownLoad,
                             Proxy = this.Proxy,
                             Down = new LightNovelDown
                             {
@@ -388,7 +388,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                          opt.RequestParam = new LightNovelRequestInput
                          {
                              CacheSpan = Soft.Default.CacheTime,
-                             LightNovelType = LightNovelEnum.Content,
+                             LightNovelType = LightNovelEnum.LightContent,
                              Proxy = this.Proxy,
                              Content = new LightNovelContent
                              {
@@ -434,7 +434,7 @@ namespace CandySugar.UserControlViews.LigthNovelViews
                     {
                         opt.RequestParam = new LightNovelRequestInput
                         {
-                            LightNovelType = LightNovelEnum.Down,
+                            LightNovelType = LightNovelEnum.LightDownLoad,
                             Proxy = this.Proxy,
                             Down = new LightNovelDown
                             {

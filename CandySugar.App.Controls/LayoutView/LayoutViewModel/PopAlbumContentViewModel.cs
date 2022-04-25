@@ -56,7 +56,7 @@ namespace CandySugar.App.Controls.LayoutView.LayoutViewModel
                     {
                         Proxy = this.Proxy,
                         MusicPlatformType = platform,
-                        MusicType = MusicTypeEnum.AlbumDetail,
+                        MusicType = MusicTypeEnum.MusicAlbumDetail,
                         AlbumSearch = new MusicAlbumSearch
                         {
                             AlbumId = input.SongAlbumId

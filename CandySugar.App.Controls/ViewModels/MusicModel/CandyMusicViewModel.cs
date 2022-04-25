@@ -309,7 +309,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                        {
                            Proxy = this.Proxy,
                            MusicPlatformType = MusicPlatformEnum.QQMusic,
-                           MusicType = MusicTypeEnum.SongItem,
+                           MusicType = MusicTypeEnum.MusicSongItem,
                            Search = new MusicSearch
                            {
                                Page = PageSingleIndex,
@@ -327,7 +327,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.NeteaseMusic,
-                            MusicType = MusicTypeEnum.SongItem,
+                            MusicType = MusicTypeEnum.MusicSongItem,
                             Search = new MusicSearch
                             {
                                 Page = PageSingleIndex,
@@ -345,7 +345,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.KuGouMusic,
-                            MusicType = MusicTypeEnum.SongItem,
+                            MusicType = MusicTypeEnum.MusicSongItem,
                             Search = new MusicSearch
                             {
                                 Page = PageSingleIndex,
@@ -363,7 +363,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.KuWoMusic,
-                            MusicType = MusicTypeEnum.SongItem,
+                            MusicType = MusicTypeEnum.MusicSongItem,
                             Search = new MusicSearch
                             {
                                 Page = PageSingleIndex,
@@ -381,7 +381,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.BiliBiliMusic,
-                            MusicType = MusicTypeEnum.SongItem,
+                            MusicType = MusicTypeEnum.MusicSongItem,
                             Search = new MusicSearch
                             {
                                 Page = PageSingleIndex,
@@ -399,7 +399,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.MiGuMusic,
-                            MusicType = MusicTypeEnum.SongItem,
+                            MusicType = MusicTypeEnum.MusicSongItem,
                             Search = new MusicSearch
                             {
                                 Page = PageSingleIndex,
@@ -457,7 +457,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.QQMusic,
-                            MusicType = MusicTypeEnum.SongSheet,
+                            MusicType = MusicTypeEnum.MusicSongSheet,
                             Search = new MusicSearch
                             {
                                 Page = PageSheetIndex,
@@ -475,7 +475,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.NeteaseMusic,
-                            MusicType = MusicTypeEnum.SongSheet,
+                            MusicType = MusicTypeEnum.MusicSongSheet,
                             Search = new MusicSearch
                             {
                                 Page = PageSheetIndex,
@@ -493,7 +493,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.KuGouMusic,
-                            MusicType = MusicTypeEnum.SongSheet,
+                            MusicType = MusicTypeEnum.MusicSongSheet,
                             Search = new MusicSearch
                             {
                                 Page = PageSheetIndex,
@@ -511,7 +511,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.KuWoMusic,
-                            MusicType = MusicTypeEnum.SongSheet,
+                            MusicType = MusicTypeEnum.MusicSongSheet,
                             Search = new MusicSearch
                             {
                                 Page = PageSheetIndex,
@@ -529,7 +529,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.BiliBiliMusic,
-                            MusicType = MusicTypeEnum.SongSheet,
+                            MusicType = MusicTypeEnum.MusicSongSheet,
                             Search = new MusicSearch
                             {
                                 Page = PageSheetIndex,
@@ -547,7 +547,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                         {
                             Proxy = this.Proxy,
                             MusicPlatformType = MusicPlatformEnum.MiGuMusic,
-                            MusicType = MusicTypeEnum.SongSheet,
+                            MusicType = MusicTypeEnum.MusicSongSheet,
                             Search = new MusicSearch
                             {
                                 Page = PageSheetIndex,
@@ -601,7 +601,7 @@ namespace CandySugar.App.Controls.ViewModels.MusicModel
                     {
                         Proxy = this.Proxy,
                         MusicPlatformType = PlatformType,
-                        MusicType = MusicTypeEnum.PlayAddress,
+                        MusicType = MusicTypeEnum.MusicPlayAddress,
                         AddressSearch = new MusicPlaySearch
                         {
                             Dynamic = input.SongId,

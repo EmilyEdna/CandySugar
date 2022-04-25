@@ -86,7 +86,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 {
                     opt.RequestParam = new MangaRequestInput
                     {
-                        MangaType = MangaEnum.ContentApp,
+                        MangaType = MangaEnum.MangaContentApp,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.CacheTime,
                         Content = new MangaContent
@@ -119,7 +119,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 {
                     opt.RequestParam = new MangaRequestInput
                     {
-                        MangaType = MangaEnum.DownLoad,
+                        MangaType = MangaEnum.MangaDownLoad,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.CacheTime,
                         ContentByte = new MangaContentByte

@@ -152,7 +152,7 @@ namespace CandySugar.UserControlViews.MangaViews
                     {
                         opt.RequestParam = new MangaRequestInput
                         {
-                            MangaType = MangaEnum.Search,
+                            MangaType = MangaEnum.MangaSearch,
                             Proxy = this.Proxy,
                             CacheSpan = Soft.Default.CacheTime,
                             Search = new MangaSearch
@@ -184,7 +184,7 @@ namespace CandySugar.UserControlViews.MangaViews
                     {
                         opt.RequestParam = new MangaRequestInput
                         {
-                            MangaType = MangaEnum.Category,
+                            MangaType = MangaEnum.MangaCategory,
                             Proxy = this.Proxy,
                             CacheSpan = Soft.Default.CacheTime,
                             Category = new MangaCategory
@@ -218,7 +218,7 @@ namespace CandySugar.UserControlViews.MangaViews
                 {
                     opt.RequestParam = new MangaRequestInput
                     {
-                        MangaType = MangaEnum.Init,
+                        MangaType = MangaEnum.MangaInit,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                     };
@@ -243,7 +243,7 @@ namespace CandySugar.UserControlViews.MangaViews
                 {
                     opt.RequestParam = new MangaRequestInput
                     {
-                        MangaType = MangaEnum.Detail,
+                        MangaType = MangaEnum.MangaDetail,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                         Detail = new MangaDetail

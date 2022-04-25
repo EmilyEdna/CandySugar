@@ -55,7 +55,7 @@ namespace CandySugar.App.Controls.PropertyAttach
             {
                 opt.RequestParam = new WallpaperRequestInput
                 {
-                    WallpaperType = WallpaperEnum.Downloads,
+                    WallpaperType = WallpaperEnum.ImgDownloads,
                     CacheSpan = 600,
                     Download = new WallpaperDownload()
                     {
@@ -101,7 +101,7 @@ namespace CandySugar.App.Controls.PropertyAttach
             {
                 opt.RequestParam = new GalActorRequestInput
                 {
-                    Galype = GalActorEnum.Shows,
+                    Galype = GalActorEnum.GalShows,
                     CacheSpan = 600,
                     Show = new GalActorShow
                     {

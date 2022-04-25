@@ -138,7 +138,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.Init,
+                        AnimeType = AnimeEnum.AnimeInit,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.CacheTime
                     };
@@ -169,7 +169,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.CategoryType,
+                        AnimeType = AnimeEnum.AnimeCategoryType,
                         CacheSpan = Soft.CacheTime,
                         Proxy = this.Proxy,
                         Category = new AnimeCategory
@@ -221,7 +221,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                     opt.RequestParam = new AnimeRequestInput
                     {
                         CacheSpan = Soft.CacheTime,
-                        AnimeType = AnimeEnum.Category,
+                        AnimeType = AnimeEnum.AnimeCategory,
                         Proxy = this.Proxy,
                         Category = new AnimeCategory
                         {
@@ -271,7 +271,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.Search,
+                        AnimeType = AnimeEnum.AnimeSearch,
                         CacheSpan = Soft.CacheTime,
                         Proxy = this.Proxy,
                         Search = new AnimeSearch
@@ -320,7 +320,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.Detail,
+                        AnimeType = AnimeEnum.AnimeDetail,
                         CacheSpan = Soft.CacheTime,
                         Proxy = this.Proxy,
                         Detail = new AnimeDetail
@@ -365,7 +365,7 @@ namespace CandySugar.App.Controls.ViewModels.AnimeModel
                 {
                     opt.RequestParam = new AnimeRequestInput
                     {
-                        AnimeType = AnimeEnum.Watch,
+                        AnimeType = AnimeEnum.AnimeWatch,
                         Proxy = this.Proxy,
                         WatchPlay = new AnimeWatchPlay
                         {

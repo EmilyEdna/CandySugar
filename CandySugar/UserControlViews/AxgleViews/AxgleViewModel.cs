@@ -174,7 +174,7 @@ namespace CandySugar.UserControlViews.AxgleViews
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Init,
+                        Galype = GalActorEnum.GalInit,
                         Proxy = this.Proxy,
                         GalInit = new GalActorInit(),
                         CacheSpan = Soft.Default.CacheTime
@@ -200,7 +200,7 @@ namespace CandySugar.UserControlViews.AxgleViews
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Category,
+                        Galype = GalActorEnum.GalCategory,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                         Category = new CalActorCategory
@@ -237,7 +237,7 @@ namespace CandySugar.UserControlViews.AxgleViews
                 {
                     opt.RequestParam = new GalActorRequestInput
                     {
-                        Galype = GalActorEnum.Search,
+                        Galype = GalActorEnum.GalSearch,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.Default.CacheTime,
                         Search = new GalActorSearch

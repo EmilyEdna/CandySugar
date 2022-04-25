@@ -182,7 +182,7 @@ namespace CandySugar.App.Controls.ViewModels.NovelModel
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.CacheTime,
-                        NovelType = NovelEnum.Detail,
+                        NovelType = NovelEnum.NovelDetail,
                         Proxy = this.Proxy,
                         Detail = new NovelDetail
                         {

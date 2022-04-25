@@ -78,7 +78,7 @@ namespace CandySugar.App.Controls.ViewModels.MangaModel
                 {
                     opt.RequestParam = new MangaRequestInput
                     {
-                        MangaType = MangaEnum.Detail,
+                        MangaType = MangaEnum.MangaDetail,
                         Proxy = this.Proxy,
                         CacheSpan = Soft.CacheTime,
                         Detail = new MangaDetail

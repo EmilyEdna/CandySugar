@@ -210,7 +210,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     opt.RequestParam = new WallpaperRequestInput
                     {
                         CacheSpan = Soft.CacheTime,
-                        WallpaperType = WallpaperEnum.Init,
+                        WallpaperType = WallpaperEnum.ImgInit,
                         Init = new WallpaperInit
                         {
                             Page = PageIndex,
@@ -260,7 +260,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                     opt.RequestParam = new WallpaperRequestInput
                     {
                         CacheSpan = Soft.CacheTime,
-                        WallpaperType = WallpaperEnum.Search,
+                        WallpaperType = WallpaperEnum.ImgSearch,
                         Search = new WallpaperSearch
                         {
                             Limit = Limit,
@@ -355,7 +355,7 @@ namespace CandySugar.App.Controls.ViewModels.KonachanModel
                 {
                     opt.RequestParam = new WallpaperRequestInput
                     {
-                        WallpaperType = WallpaperEnum.Downloads,
+                        WallpaperType = WallpaperEnum.ImgDownloads,
                         CacheSpan = Soft.CacheTime,
                         Download = new WallpaperDownload()
                         {

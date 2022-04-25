@@ -93,7 +93,7 @@ namespace CandySugar.UserControlViews.NovelViews
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        NovelType = NovelEnum.Init,
+                        NovelType = NovelEnum.NovelInit,
                         Proxy = this.Proxy
                     };
                 }).RunsAsync();
@@ -117,7 +117,7 @@ namespace CandySugar.UserControlViews.NovelViews
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        NovelType = NovelEnum.Search,
+                        NovelType = NovelEnum.NovelSearch,
                         Proxy = this.Proxy,
                         Search = new NovelSearch
                         {
@@ -149,7 +149,7 @@ namespace CandySugar.UserControlViews.NovelViews
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        NovelType = NovelEnum.Category,
+                        NovelType = NovelEnum.NovelCategory,
                         Proxy = this.Proxy,
                         Category = new NovelCategory
                         {
@@ -184,7 +184,7 @@ namespace CandySugar.UserControlViews.NovelViews
                     opt.RequestParam = new NovelRequestInput
                     {
                         CacheSpan = Soft.Default.CacheTime,
-                        NovelType = NovelEnum.Detail,
+                        NovelType = NovelEnum.NovelDetail,
                         Proxy = this.Proxy,
                         Detail = new NovelDetail
                         {
