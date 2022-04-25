@@ -85,7 +85,6 @@ namespace CandySugar
 
             BootResource.ReadUserSetting();
             License.UseDisableLicense("WallpaperDown");
-            License.Register(new LicenseModel { Account = "emilyedna", PassWord = DateTime.Now.ToString("yyyyMMdd") });
             base.Configure();
         }
 
