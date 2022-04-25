@@ -2,6 +2,7 @@ using CandySugar.App.Controls.LayoutView;
 using CandySugar.App.Controls.LayoutView.LayoutViewModel;
 using CandySugar.App.Controls.ViewModels;
 using CandySugar.App.Controls.ViewModels.AboutModel;
+using CandySugar.App.Controls.ViewModels.AcgAnimeModel;
 using CandySugar.App.Controls.ViewModels.AnimeModel;
 using CandySugar.App.Controls.ViewModels.AxgleModel;
 using CandySugar.App.Controls.ViewModels.KonachanModel;
@@ -13,6 +14,7 @@ using CandySugar.App.Controls.ViewModels.NovelModel;
 using CandySugar.App.Controls.ViewModels.OptionModel;
 using CandySugar.App.Controls.Views;
 using CandySugar.App.Controls.Views.About;
+using CandySugar.App.Controls.Views.AcgAnime;
 using CandySugar.App.Controls.Views.Anime;
 using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.App.Controls.Views.Konachan;
@@ -78,6 +80,10 @@ namespace CandySugar.App
             #region Anime
             containerRegistry.RegisterForNavigation<CandyAnimeView, CandyAnimeViewModel>();
             containerRegistry.RegisterForNavigation<CandyAnimePlayView, CandyAnimePlayViewModel>();
+            #endregion
+
+            #region ACGAnime
+            containerRegistry.RegisterForNavigation<CandyAcgAnimeView, CandyAcgAnimeViewModel>();
             #endregion
 
             #region Novel

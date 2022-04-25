@@ -28,6 +28,7 @@ using CandySugar.Xam.Common.Platform;
 using CandySugar.Xam.Common.CrossDownManager;
 using XF.Material.Forms.UI;
 using System.Threading.Tasks;
+using CandySugar.App.Controls.Views.AcgAnime;
 
 namespace CandySugar.App.ViewModels
 {
@@ -100,7 +101,7 @@ namespace CandySugar.App.ViewModels
         #endregion
 
         #region Method
-        public async void GotoContent(MenuOption input) 
+        public void GotoContent(MenuOption input) 
         {
             switch (input.CommandParam)
             {
@@ -123,11 +124,14 @@ namespace CandySugar.App.ViewModels
                 case MenuFuncEnum.Wallpaper:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyKonachanView));
-
                     break;
                 case MenuFuncEnum.Axgle:
                     base.Title = input.CommandParam.ToDes();
                     Arrived(nameof(CandyAxgleView));
+                    break;
+                case MenuFuncEnum.HAnime:
+                    base.Title = input.CommandParam.ToDes();
+                    Arrived(nameof(CandyAcgAnimeView));
                     break;
                 case MenuFuncEnum.Music:
                     base.Title = input.CommandParam.ToDes();

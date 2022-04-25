@@ -41,6 +41,11 @@ namespace CandySugar.Xam.Common.Enum
         [Description("茶杯")]
         Axgle,
         /// <summary>
+        /// 里番
+        /// </summary>
+        [Description("里番")]
+        HAnime,
+        /// <summary>
         /// 音乐
         /// </summary>
         [Description("音乐")]

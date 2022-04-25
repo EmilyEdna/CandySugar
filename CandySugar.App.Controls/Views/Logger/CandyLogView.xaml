@@ -68,7 +68,7 @@
                                                 FontSize="15"
                                                 HeightRequest="35"
                                                 HorizontalOptions="End"
-                                                Text="{Static Fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                Text="{Static Fontawesome:FontAwesomeIcons.TrashCan}"
                                                 TextColor="{DynamicResource Gray-Black}"
                                                 WidthRequest="40" />
                                         </StackLayout>

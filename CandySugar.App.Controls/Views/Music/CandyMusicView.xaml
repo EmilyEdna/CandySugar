@@ -21,7 +21,7 @@
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid RowDefinitions="40,*,0.08*">
-            <FlexLayout>
+            <Grid BackgroundColor="{DynamicResource PrimaryPink}" ColumnDefinitions="0.7*,0.3*">
                 <SearchBar
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     Keyboard="Default"
@@ -32,6 +32,7 @@
                     Text="{Binding SearchWord}"
                     WidthRequest="260" />
                 <SfCom:SfComboBox
+                    Grid.Column="1"
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     BorderColor="{DynamicResource Gray-700}"
                     ClearButtonColor="{DynamicResource GrayShadowColor}"
@@ -49,7 +50,7 @@
                             EventName="SelectionChanging" />
                     </SfCom:SfComboBox.Behaviors>
                 </SfCom:SfComboBox>
-            </FlexLayout>
+            </Grid>
             <SfPop:SfPopupLayout x:Name="Pop" />
             <SfTab:SfTabView
                 Grid.Row="1"
@@ -175,7 +176,7 @@
                                                                             FontSize="15"
                                                                             HeightRequest="35"
                                                                             HorizontalOptions="End"
-                                                                            Text="{Static Fontawesome:FontAwesomeIcons.Circle}"
+                                                                            Text="{Static Fontawesome:FontAwesomeIcons.CompactDisc}"
                                                                             TextColor="{DynamicResource Gray-Black}"
                                                                             WidthRequest="40" />
                                                                     </FlexLayout>

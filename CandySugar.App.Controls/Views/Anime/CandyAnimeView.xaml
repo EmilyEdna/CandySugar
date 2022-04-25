@@ -13,14 +13,7 @@
     x:Name="CandyAnime"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+        <Grid RowDefinitions="40,25,25,25,*">
             <SearchBar
                 BackgroundColor="{DynamicResource PrimaryPink}"
                 Placeholder="请输入动漫名称"

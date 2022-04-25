@@ -175,7 +175,7 @@
                                                                                 FontSize="15"
                                                                                 HeightRequest="35"
                                                                                 HorizontalOptions="End"
-                                                                                Text="{Static fontawesome:FontAwesomeIcons.CloudDownloadAlt}"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.CloudArrowDown}"
                                                                                 TextColor="{DynamicResource Gray-Black}"
                                                                                 WidthRequest="45" />
                                                                         </FlexLayout>
@@ -314,7 +314,7 @@
                                                                                 FontSize="15"
                                                                                 HeightRequest="35"
                                                                                 HorizontalOptions="End"
-                                                                                Text="{Static fontawesome:FontAwesomeIcons.TrashAlt}"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.TrashCan}"
                                                                                 TextColor="{DynamicResource Gray-Black}"
                                                                                 WidthRequest="40" />
                                                                             <Button
@@ -326,7 +326,7 @@
                                                                                 FontSize="15"
                                                                                 HeightRequest="35"
                                                                                 HorizontalOptions="End"
-                                                                                Text="{Static fontawesome:FontAwesomeIcons.CloudDownloadAlt}"
+                                                                                Text="{Static fontawesome:FontAwesomeIcons.CloudArrowDown}"
                                                                                 TextColor="{DynamicResource Gray-Black}"
                                                                                 WidthRequest="45" />
                                                                         </FlexLayout>
