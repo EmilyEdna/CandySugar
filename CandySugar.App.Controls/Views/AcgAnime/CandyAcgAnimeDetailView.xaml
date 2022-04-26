@@ -9,7 +9,8 @@
     xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-    x:Name="CandyAcgDetailAnime">
+    x:Name="CandyAcgDetailAnime"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <SfList:SfListView
             AutoFitMode="Height"

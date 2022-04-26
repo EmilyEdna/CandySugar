@@ -46,17 +46,15 @@ namespace CandySugar.App
         public Root(IPlatformInitializer initializer)
             : base(initializer)
         {
-            InitializeComponent();
+           
         }
 
-        protected override void OnInitialized()
+        protected async override void OnInitialized()
         {
+            InitializeComponent();
             Material.Init(this);
             SyncfusionLicenseProvider.RegisterLicense("NjE1NTQ2QDMyMzAyZTMxMmUzMGN4T2F0SjFnVTBld2YxMnhXL1dGUElNRm1vRThVY1ZZc1NaVjFkZmxHNWc9");
-            MainPage = new CandyLoginView
-            {
-                BindingContext = new CandyLoginViewModel(NavigationService)
-            };
+            await NavigationService.NavigateAsync("NavigationPage/CandyIndexView");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -64,6 +62,7 @@ namespace CandySugar.App
 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();
 
             #region Platform
             containerRegistry.Register<IXSLiShi, XSLiShi>();
@@ -90,7 +89,6 @@ namespace CandySugar.App
             #endregion
 
             #region Novel
-            containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();
             containerRegistry.RegisterForNavigation<CandyNovelView, CandyNovelViewModel>();
             containerRegistry.RegisterForNavigation<CandyNovelDetailView, CandyNovelDetailViewModel>();
             containerRegistry.RegisterForNavigation<CandyNovelContentView, CandyNovelContentViewModel>();

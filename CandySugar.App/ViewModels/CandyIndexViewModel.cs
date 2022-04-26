@@ -29,6 +29,7 @@ using CandySugar.Xam.Common.CrossDownManager;
 using XF.Material.Forms.UI;
 using System.Threading.Tasks;
 using CandySugar.App.Controls.Views.AcgAnime;
+using SDKCore;
 
 namespace CandySugar.App.ViewModels
 {
@@ -78,6 +79,14 @@ namespace CandySugar.App.ViewModels
         public ICommand ContentCommand => new Command<MenuOption>(input =>
         {
             GotoContent(input);
+        });
+        public ICommand LoginCommand => new Command(() =>
+        {
+            License.Register(new LicenseModel
+            {
+                Account = "EmilyEdna",
+                PassWord = DateTime.Now.ToString("yyyyMMdd")
+            });
         });
         #endregion
 
