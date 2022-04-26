@@ -51,6 +51,7 @@ namespace CandySugar.Droid
             CrossMediaManager.Current.Init();
 
             base.OnCreate(savedInstanceState);
+
             this.Window.AddFlags(WindowManagerFlags.KeepScreenOn);
             //初始化XF
             Forms.Init(this, savedInstanceState);

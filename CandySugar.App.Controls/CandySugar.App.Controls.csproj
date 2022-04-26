@@ -9,6 +9,7 @@
 		<PackageReference Include="Plugin.DeviceOrientation" Version="1.0.7" />
 		<PackageReference Include="Plugin.MediaManager.Forms" Version="1.1.0" />
 		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+		<PackageReference Include="Syncfusion.Xamarin.Buttons" Version="20.1.0.47" />
 		<PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="20.1.0.47" />
 		<PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="20.1.0.47" />
 		<PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="20.1.0.47" />
@@ -46,7 +47,13 @@
 	  <EmbeddedResource Update="LayoutView\PopSheetHeaderView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
+	  <EmbeddedResource Update="LayoutView\PopTagContentView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\About\CandyAboutView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Views\AcgAnime\CandyAcgAnimeDetailView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Views\AcgAnime\CandyAcgAnimePlayView.xaml">

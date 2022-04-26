@@ -11,6 +11,9 @@ namespace CandySugar.Xam.Common
 {
     public class Extension
     {
+        public static List<string> AcgTags { get; set; } = AcgTags ?? new List<string>();
+        public static List<string> AcgBrands { get; set; } = AcgBrands ?? new List<string>();
+        public static string AcgType { get; set; }
         public static string VersionCode { get; set; }
         public static string ReadLocalHtml(string input)
         {

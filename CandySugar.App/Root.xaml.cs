@@ -38,6 +38,7 @@ using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 using XF.Material.Forms;
 
+
 namespace CandySugar.App
 {
     public partial class Root : PrismApplication
@@ -45,11 +46,11 @@ namespace CandySugar.App
         public Root(IPlatformInitializer initializer)
             : base(initializer)
         {
+            InitializeComponent();
         }
 
         protected override void OnInitialized()
         {
-            InitializeComponent();
             Material.Init(this);
             SyncfusionLicenseProvider.RegisterLicense("NjE1NTQ2QDMyMzAyZTMxMmUzMGN4T2F0SjFnVTBld2YxMnhXL1dGUElNRm1vRThVY1ZZc1NaVjFkZmxHNWc9");
             MainPage = new CandyLoginView
@@ -84,6 +85,8 @@ namespace CandySugar.App
 
             #region ACGAnime
             containerRegistry.RegisterForNavigation<CandyAcgAnimeView, CandyAcgAnimeViewModel>();
+            containerRegistry.RegisterForNavigation<CandyAcgAnimePlayView, CandyAcgAnimePlayViewModel>();
+            containerRegistry.RegisterForNavigation<CandyAcgAnimeDetailView, CandyAcgAnimeDetailViewModel>();
             #endregion
 
             #region Novel

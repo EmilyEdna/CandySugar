@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CandySugar.App.Controls.LayoutView.PopTagContentView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Local="clr-namespace:CandySugar.App.Controls.Controls"
+    xmlns:SfBox="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    x:Name="TagContentView">
+    <ContentView.Content>
+        <Grid RowDefinitions="30,30,30,90,*">
+            <Label
+                Margin="10,2,0,2"
+                FontSize="15"
+                HorizontalOptions="StartAndExpand"
+                Style="{DynamicResource TitleLabelStyle}"
+                Text="类型"
+                VerticalOptions="CenterAndExpand" />
+            <Local:ItemsControl Grid.Row="1" ItemsSource="{Binding HType}">
+                <Local:ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton
+                            CheckedChanged="TypeCheck"
+                            Content="{Binding .}"
+                            FontSize="12"
+                            GroupName="ModuleType"
+                            Value="{Binding .}" />
+                    </DataTemplate>
+                </Local:ItemsControl.ItemTemplate>
+                <Local:ItemsControl.ItemsLayout>
+                    <DataTemplate>
+                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                            <Local:WrapLayout
+                                Local:LayoutEx.IsItemsHost="True"
+                                IsSquare="True"
+                                Spacing="10" />
+                        </ScrollView>
+                    </DataTemplate>
+                </Local:ItemsControl.ItemsLayout>
+            </Local:ItemsControl>
+            <Label
+                Grid.Row="2"
+                Margin="10,2,0,2"
+                FontSize="15"
+                HorizontalOptions="StartAndExpand"
+                Style="{DynamicResource TitleLabelStyle}"
+                Text="品牌"
+                VerticalOptions="CenterAndExpand" />
+            <CollectionView
+                Grid.Row="3"
+                ItemsLayout="HorizontalGrid,4"
+                ItemsSource="{Binding BrandResult.Brands}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SfBox:SfCheckBox
+                            BorderWidth="1"
+                            CheckedColor="Green"
+                            StateChanged="BrandCheck"
+                            Text="{Binding .}"
+                            UncheckedColor="Violet" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <SfList:SfListView
+                Grid.Row="4"
+                AutoFitMode="Height"
+                IsScrollBarVisible="False"
+                ItemsSource="{Binding TagResult}"
+                SelectionBackgroundColor="Transparent">
+                <SfList:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="30,90">
+                            <Label
+                                Margin="10,2,0,2"
+                                FontSize="15"
+                                HorizontalOptions="StartAndExpand"
+                                Style="{DynamicResource TitleLabelStyle}"
+                                Text="{Binding Title}"
+                                VerticalOptions="CenterAndExpand" />
+                            <CollectionView
+                                Grid.Row="1"
+                                Margin="0,0,5,0"
+                                ItemsLayout="HorizontalGrid,4"
+                                ItemsSource="{Binding Tags}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <SfBox:SfCheckBox
+                                            BorderWidth="1"
+                                            CheckedColor="Green"
+                                            StateChanged="TagCheck"
+                                            Text="{Binding .}"
+                                            UncheckedColor="Violet" />
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </DataTemplate>
+                </SfList:SfListView.ItemTemplate>
+            </SfList:SfListView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -10,13 +10,15 @@
     xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:SfEffect="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:SfList="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfPop="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
     xmlns:SfRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
     xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
     x:Name="CandyAcgAnime"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid RowDefinitions="40,25,*">
-            <Grid BackgroundColor="{DynamicResource PrimaryPink}" ColumnDefinitions="*,0.08*">
+            <SfPop:SfPopupLayout x:Name="Pop" />
+            <Grid BackgroundColor="{DynamicResource PrimaryPink}" ColumnDefinitions="*,0.15*">
                 <SearchBar
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     Placeholder="请输入关键字名称"
@@ -24,15 +26,18 @@
                     SearchCommand="{Binding SearchCommand}"
                     SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}"
                     Text="{Binding SearchWord}" />
-                <Label
+                <Button
                     Grid.Column="1"
-                    Margin="0,0,8,0"
+                    Margin="0,0,5,0"
                     BackgroundColor="{DynamicResource PrimaryPink}"
+                    Clicked="ClickCommand"
                     FontFamily="{DynamicResource FontAwesomeSolid}"
-                    FontSize="Body"
+                    FontSize="12"
+                    HeightRequest="40"
                     HorizontalOptions="Center"
                     Text="{Static Fontawesome:FontAwesomeIcons.EllipsisVertical}"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center"
+                    WidthRequest="30" />
             </Grid>
             <Local:ItemsControl Grid.Row="1" ItemsSource="{Binding InitResult}">
                 <Local:ItemsControl.ItemTemplate>

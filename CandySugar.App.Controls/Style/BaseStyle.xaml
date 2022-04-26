@@ -25,4 +25,5 @@
     <Converter:BytesConverter x:Key="BytesConverter" />
     <Converter:BoolConverter x:Key="BoolConverter" />
     <Converter:ListConverter x:Key="ListConverter" />
+    <Converter:VisibleConverter x:Key="VisibleConverter" />
 </ResourceDictionary>

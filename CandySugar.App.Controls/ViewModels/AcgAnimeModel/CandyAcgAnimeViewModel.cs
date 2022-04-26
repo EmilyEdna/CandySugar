@@ -10,10 +10,7 @@ using SDKColloction.AcgAnimeSDK.ViewModel.Enums;
 using SDKColloction.AcgAnimeSDK.ViewModel.Request;
 using SDKColloction.AcgAnimeSDK.ViewModel.Response;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using XExten.Advance.LinqFramework;
@@ -64,13 +61,6 @@ namespace CandySugar.App.Controls.ViewModels.AcgAnimeModel
         {
             get => _TagResult;
             set => SetProperty(ref _TagResult, value);
-        }
-
-        private ObservableCollection<AcgAnimePlayResult> _PlayResult;
-        public ObservableCollection<AcgAnimePlayResult> PlayResult
-        {
-            get => _PlayResult;
-            set => SetProperty(ref _PlayResult, value);
         }
 
         private AcgAnimeBrandsResult _BrandResult;
@@ -290,9 +280,9 @@ namespace CandySugar.App.Controls.ViewModels.AcgAnimeModel
                         {
                             Page = PageIndex,
                             KeyWord = SearchWord,
-                            //AnimeType = HAcgOption.Type,
-                            //Brands = HAcgOption.Brands,
-                            //Tags = HAcgOption.Tags
+                            AnimeType = Extension.AcgType,
+                            Brands = Extension.AcgBrands,
+                            Tags = Extension.AcgTags
                         }
                     };
                 }).RunsAsync();
@@ -329,38 +319,11 @@ namespace CandySugar.App.Controls.ViewModels.AcgAnimeModel
 
         public async void Play(string input)
         {
-            try
+            NavigationParameters pairs = new NavigationParameters
             {
-                this.Refresh = true;
-                var AcgPlay = await AcgAnimeFactory.AcgAnime(opt =>
-                {
-                    opt.RequestParam = new AcgAnimeRequestInput
-                    {
-                        AcgType = AcgAnimeEnum.AcgPlay,
-                        Proxy = this.Proxy,
-                        CacheSpan = Soft.CacheTime,
-                        Play = new AcgAnimePlay
-                        {
-                            Route = input
-                        }
-                    };
-                }).RunsAsync();
-                this.Refresh = false;
-                PlayResult = new ObservableCollection<AcgAnimePlayResult>(AcgPlay.PlayResults);
-
-                var result = PlayResult.FirstOrDefault(t => !t.PlayRoute.IsNullOrEmpty());
-
-                NavigationParameters param = new NavigationParameters();
-                param.Add("WatchAddress", result.PlayRoute);
-                await NavigationService.NavigateAsync(new Uri(nameof(CandyAcgAnimePlayView), UriKind.Relative), param);
-            }
-            catch (Exception ex)
-            {
-                using (await MaterialDialog.Instance.LoadingSnackbarAsync(await Tip("Play", ex)))
-                {
-                    await Task.Delay(3000);
-                }
-            }
+                { "Watch", input }
+            };
+            await NavigationService.NavigateAsync(new Uri(nameof(CandyAcgAnimeDetailView), UriKind.Relative), pairs);
         }
         #endregion
     }
