@@ -1,0 +1,86 @@
+﻿<Ctrl:UserBaseControl
+    x:Class="CandySugar.WPF.UserControlView.MangaHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+    xmlns:Ctrl="clr-namespace:CandySugar.WPF.UserControlView.UserControlEvent"
+    xmlns:Design="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:Opt="clr-namespace:CandySugar.WPF.Properties"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:CandySugar.WPF.UserControlView"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="HeaderCtrl"
+    d:DesignHeight="72"
+    d:DesignWidth="1200"
+    FontFamily="{DynamicResource FontStyle}"
+    mc:Ignorable="d">
+    <Design:ColorZone
+        x:Name="Zone"
+        Width="{Binding Width, ElementName=HeaderCtrl}"
+        Padding="16"
+        Background="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+        Mode="PrimaryMid"
+        Style="{DynamicResource ColorZoneStyle2}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="1.8*" />
+                <ColumnDefinition Width="0.275*" />
+            </Grid.ColumnDefinitions>
+            <ComboBox
+                x:Name="ThemeBox"
+                Margin="8,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Design:ColorZoneAssist.Mode="Standard"
+                Design:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                Background="Transparent"
+                BorderBrush="{DynamicResource MaterialDesignPaper}"
+                BorderThickness="0"
+                FontFamily="{Binding FontFamily, ElementName=HeaderCtrl}"
+                SelectionChanged="ThemeSelected">
+                <ComboBoxItem Content="宝石绿" TabIndex="0" />
+                <ComboBoxItem Content="桃花粉" TabIndex="1" />
+                <ComboBoxItem Content="旬子蓝" TabIndex="2" />
+                <ComboBoxItem Content="山茶红" TabIndex="3" />
+                <ComboBoxItem Content="墨鱼黑" TabIndex="4" />
+                <ComboBoxItem Content="紫薯红" TabIndex="5" />
+            </ComboBox>
+            <hc:LoadingLine Grid.Column="1" Style="{StaticResource LoadingLineLargeLight}" />
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <ItemsControl
+                    ItemsSource="{Binding Handler}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button
+                                Margin="{Binding Value.Item1}"
+                                Design:ShadowAssist.ShadowDepth="Depth2"
+                                Background="{Binding Background, ElementName=Zone}"
+                                BorderBrush="{x:Null}"
+                                Click="CandySystemClick"
+                                CommandParameter="{Binding Value.Item2}"
+                                FontSize="20"
+                                Style="{DynamicResource MaterialDesignFloatingActionMiniButton}">
+                                <Design:PackIcon
+                                    Width="30"
+                                    Height="40"
+                                    Kind="{Binding Key}" />
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
+    </Design:ColorZone>
+</Ctrl:UserBaseControl>

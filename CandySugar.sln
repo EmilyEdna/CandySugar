@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar", "CandySugar\CandySugar.csproj", "{72257093-EDAA-470E-A5C3-819D7AB090B4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Upgrade", "CandySugar.Upgrade\CandySugar.Upgrade.csproj", "{8B6EA520-F36B-4DFD-93E7-4EF9C02F9922}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Core", "CandySugar.Core\CandySugar.Core.csproj", "{E7CED6B2-0EA0-4D15-8C82-8347A4512A64}"
@@ -33,16 +31,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CandyWPFLibray", "CandyWPFL
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CandyWPF", "CandyWPF", "{28CDDA61-CB99-48E6-BD3B-4EC04CB998D3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CandySite", "CandySite", "{7CA30928-7EC2-4461-9959-A6F26A75FF09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.WPF", "CandySugar.WPF\CandySugar.WPF.csproj", "{7C59B225-2127-4F9F-9109-E3FB60B83029}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{72257093-EDAA-470E-A5C3-819D7AB090B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72257093-EDAA-470E-A5C3-819D7AB090B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72257093-EDAA-470E-A5C3-819D7AB090B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72257093-EDAA-470E-A5C3-819D7AB090B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B6EA520-F36B-4DFD-93E7-4EF9C02F9922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B6EA520-F36B-4DFD-93E7-4EF9C02F9922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B6EA520-F36B-4DFD-93E7-4EF9C02F9922}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -85,12 +83,15 @@ Global
 		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C59B225-2127-4F9F-9109-E3FB60B83029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C59B225-2127-4F9F-9109-E3FB60B83029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C59B225-2127-4F9F-9109-E3FB60B83029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C59B225-2127-4F9F-9109-E3FB60B83029}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{72257093-EDAA-470E-A5C3-819D7AB090B4} = {28CDDA61-CB99-48E6-BD3B-4EC04CB998D3}
 		{8B6EA520-F36B-4DFD-93E7-4EF9C02F9922} = {28CDDA61-CB99-48E6-BD3B-4EC04CB998D3}
 		{E7CED6B2-0EA0-4D15-8C82-8347A4512A64} = {EB49A442-6B55-4B20-9D25-738805DBD3F0}
 		{841B9D54-BB71-405D-82A3-490470764425} = {EB49A442-6B55-4B20-9D25-738805DBD3F0}
@@ -101,6 +102,7 @@ Global
 		{AB171EBA-5E4D-422D-AF8C-1A1ED60F6B1A} = {58F49204-F53E-4111-914E-0C9B41EAA5E1}
 		{1C538EF6-5D46-4183-AB85-DAA1573D3051} = {B9621EB4-5763-4417-8274-F9D308D61F52}
 		{EB741A7B-FADA-4353-99F0-BE0BF1DF8677} = {B9621EB4-5763-4417-8274-F9D308D61F52}
+		{7C59B225-2127-4F9F-9109-E3FB60B83029} = {28CDDA61-CB99-48E6-BD3B-4EC04CB998D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBDAE5C3-9B93-4701-ADAB-60C595626BE6}

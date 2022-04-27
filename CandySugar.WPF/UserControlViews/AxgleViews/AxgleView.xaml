@@ -1,0 +1,195 @@
+﻿<UserControl
+    x:Class="CandySugar.WPF.UserControlViews.AxgleViews.AxgleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:C="clr-namespace:CalcBinding;assembly=CalcBinding"
+    xmlns:Cmd="https://github.com/canton7/Stylet"
+    xmlns:Ctrl="clr-namespace:CandySugar.Controls.UserControls;assembly=CandySugar.Controls"
+    xmlns:Enum="clr-namespace:CandySugar.Common.Enum;assembly=CandySugar.Common"
+    xmlns:Opt="clr-namespace:CandySugar.WPF.Properties"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dp="clr-namespace:CandySugar.Controls.PropertyAttach;assembly=CandySugar.Controls"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:CandySugar.WPF.UserControlViews.AxgleViews"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="960"
+    Height="728"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="RightContent" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{Binding Theme, Source={x:Static Opt:Soft.Default}}" />
+            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+            <Setter Property="Margin" Value="0,3" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal">
+            <hc:SearchBar
+                Width="890"
+                dp:SearchBarDependencyProperty.Placeholder="{StaticResource AxgleSearchKey}"
+                hc:BorderElement.CornerRadius="0"
+                BorderBrush="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                BorderThickness="0,0,0,1"
+                Command="{Cmd:Action SearchAxgle}"
+                CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"
+                Foreground="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                ShowClearButton="True"
+                Style="{StaticResource SearchBarBaseStyle}"
+                TextWrapping="Wrap" />
+            <WrapPanel
+                Width="70"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Foreground="Black"
+                    Style="{StaticResource TextBlockDefaultPrimary}"
+                    Text="只看收藏:" />
+                <CheckBox IsChecked="{C:Binding WatchFavorite}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Cmd:Action Check}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="Unchecked">
+                            <i:InvokeCommandAction Command="{Cmd:Action UnCheck}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </CheckBox>
+            </WrapPanel>
+        </WrapPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="310" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ListBox
+                Background="Transparent"
+                BorderBrush="Transparent"
+                ItemsSource="{C:Binding Categories}"
+                Style="{StaticResource WrapPanelVerticalListBox}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Ctrl:CandyImgButton
+                            Width="300"
+                            Height="250"
+                            Margin="5"
+                            dp:ImageSouceDependencyProperty.SourceUri="{Binding Cover}"
+                            Command="{Cmd:Action CategoryCommand}"
+                            CommandParameter="{Binding AId}"
+                            Content="{Binding ShortName}"
+                            Style="{StaticResource ImgBtn}"
+                            Total="{Binding Total}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <ComboBox
+                    x:Name="box"
+                    HorizontalContentAlignment="Left"
+                    BorderBrush="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                    Foreground="{Binding Theme, Source={x:Static Opt:Soft.Default}}"
+                    SelectedIndex="1"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Cmd:Action DescCommand}" CommandParameter="{Binding SelectedItem, ElementName=box}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="上次观看" TabIndex="0" />
+                    <ComboBoxItem Content="最新的" TabIndex="1" />
+                    <ComboBoxItem Content="最多观看" TabIndex="2" />
+                    <ComboBoxItem Content="高评分" TabIndex="3" />
+                    <ComboBoxItem Content="B最多收藏" TabIndex="4" />
+                    <ComboBoxItem Content="长时常" TabIndex="5" />
+                </ComboBox>
+                <ListBox
+                    Grid.Row="1"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    ItemsSource="{C:Binding CategoryList}"
+                    Style="{StaticResource WrapPanelHorizontalListBox}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border BorderBrush="{Binding Theme, Source={x:Static Opt:Soft.Default}}" BorderThickness="1">
+                                    <WrapPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <Image
+                                            Width="220"
+                                            Height="150"
+                                            dp:ImageSouceDependencyProperty.SourceUri="{Binding Preview}"
+                                            Stretch="Fill" />
+                                        <WrapPanel.Effect>
+                                            <BlurEffect Radius="25" />
+                                        </WrapPanel.Effect>
+                                    </WrapPanel>
+                                </Border>
+                                <StackPanel Grid.Column="1" Margin="5,5,0,0">
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Title, StringFormat=标题：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding KeyWord, StringFormat=标签：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Channel, StringFormat=分类：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Duration, StringFormat=时常：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding AddTime, StringFormat=更新时间：{0}}" />
+                                    <TextBlock Style="{StaticResource RightContent}" Text="{C:Binding Views, StringFormat=浏览次数：{0}}" />
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Ctrl:CandyButton
+                                            Command="{Cmd:Action PreviewCommand}"
+                                            CommandParameter="{Binding Play}"
+                                            Shape="{StaticResource PreviewEye}"
+                                            ShapeHeight="12"
+                                            ShapeWidth="22"
+                                            Style="{StaticResource Shape}" />
+                                        <Ctrl:CandyButton
+                                            Canvas.Left="200"
+                                            Command="{Cmd:Action NoFavorite}"
+                                            CommandParameter="{Binding .}"
+                                            Shape="{StaticResource NoFavorite}"
+                                            Style="{StaticResource Shape}"
+                                            Visibility="{C:Binding !IsFavorite,
+                                                                   FalseToVisibility=Hidden}" />
+                                        <Ctrl:CandyButton
+                                            Canvas.Left="200"
+                                            Command="{Cmd:Action Favorite}"
+                                            CommandParameter="{Binding .}"
+                                            Shape="{StaticResource Favorite}"
+                                            Style="{StaticResource Shape}"
+                                            Visibility="{C:Binding IsFavorite,
+                                                                   FalseToVisibility=Hidden}" />
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <hc:Pagination
+                    Grid.Row="2"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    IsJumpEnabled="False"
+                    MaxPageCount="{C:Binding Total}"
+                    PageIndex="{C:Binding PageIndex}">
+                    <hc:Interaction.Triggers>
+                        <hc:EventTrigger EventName="PageUpdated">
+                            <hc:EventToCommand Command="{Cmd:Action PageUpdated}" PassEventArgsToCommand="True" />
+                        </hc:EventTrigger>
+                    </hc:Interaction.Triggers>
+                </hc:Pagination>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>
