@@ -13,9 +13,9 @@ using XF.Material.Forms.UI.Dialogs;
 
 namespace CandySugar.App.ViewModels
 {
-    public class CandyLoginViewModel : ViewModelNavigatBase
+    public class CandyLoginViewModel : ViewModelBase
     {
-        public CandyLoginViewModel(INavigationService navigationService) : base(navigationService)
+        public CandyLoginViewModel()
         {
         }
 
@@ -51,7 +51,7 @@ namespace CandySugar.App.ViewModels
             });
 
             if (IsLogin)
-                Application.Current.MainPage = new CandyIndexView();
+                Application.Current.MainPage = Resolve<CandyIndexView>();
             else
                 using (await MaterialDialog.Instance.LoadingSnackbarAsync("请检查账号和密码是否正确"))
                 {

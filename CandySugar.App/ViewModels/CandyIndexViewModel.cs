@@ -1,41 +1,39 @@
 ﻿using CandySugar.App.Controls;
 using CandySugar.App.Controls.Views;
+using CandySugar.App.Controls.Views.About;
+using CandySugar.App.Controls.Views.AcgAnime;
 using CandySugar.App.Controls.Views.Anime;
+using CandySugar.App.Controls.Views.Axgle;
 using CandySugar.App.Controls.Views.Konachan;
 using CandySugar.App.Controls.Views.LightNovel;
+using CandySugar.App.Controls.Views.Logger;
 using CandySugar.App.Controls.Views.Manga;
+using CandySugar.App.Controls.Views.Music;
 using CandySugar.App.Controls.Views.Novel;
+using CandySugar.App.Controls.Views.Option;
+using CandySugar.Xam.Common;
 using CandySugar.Xam.Common.AppDTO;
+using CandySugar.Xam.Common.CrossDownManager;
 using CandySugar.Xam.Common.Enum;
+using CandySugar.Xam.Common.Platform;
+using CandySugar.Xam.Core.Service;
 using Prism.Navigation;
+using Syncfusion.XForms.BadgeView;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XExten.Advance.LinqFramework;
-using Prism.Ioc;
-using CandySugar.Xam.Core.Service;
-using CandySugar.Xam.Common;
-using CandySugar.App.Controls.Views.Option;
-using CandySugar.App.Controls.Views.Axgle;
-using CandySugar.App.Controls.Views.Music;
-using CandySugar.App.Controls.Views.About;
-using CandySugar.App.Controls.Views.Logger;
+using XF.Material.Forms.UI;
 using XF.Material.Forms.UI.Dialogs;
 using XF.Material.Forms.UI.Dialogs.Configurations;
-using Syncfusion.XForms.BadgeView;
-using CandySugar.Xam.Common.Platform;
-using CandySugar.Xam.Common.CrossDownManager;
-using XF.Material.Forms.UI;
-using System.Threading.Tasks;
-using CandySugar.App.Controls.Views.AcgAnime;
-using SDKCore;
 
 namespace CandySugar.App.ViewModels
 {
-    public class CandyIndexViewModel : ViewModelNavigatBase
+    public class CandyIndexViewModel : ViewModelBase
     {
-        public CandyIndexViewModel(INavigationService navigationService) : base(navigationService)
+        public CandyIndexViewModel()
         {
             base.Title = "首页";
             this.CurrentVersion = "New";
@@ -79,14 +77,6 @@ namespace CandySugar.App.ViewModels
         public ICommand ContentCommand => new Command<MenuOption>(input =>
         {
             GotoContent(input);
-        });
-        public ICommand LoginCommand => new Command(() =>
-        {
-            License.Register(new LicenseModel
-            {
-                Account = "EmilyEdna",
-                PassWord = DateTime.Now.ToString("yyyyMMdd")
-            });
         });
         #endregion
 
@@ -187,7 +177,8 @@ namespace CandySugar.App.ViewModels
         }
         public async void Arrived(string input)
         {
-            await NavigationService.NavigateAsync(new Uri(input, UriKind.Relative));
+            input = $"NavigationPage/{input}";
+            await Resolve<INavigationService>().NavigateAsync(new Uri(input, UriKind.RelativeOrAbsolute));
         }
         public void RefreshView()
         {

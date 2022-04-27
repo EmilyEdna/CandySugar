@@ -49,12 +49,12 @@ namespace CandySugar.App
            
         }
 
-        protected async override void OnInitialized()
+        protected override void OnInitialized()
         {
             InitializeComponent();
             Material.Init(this);
             SyncfusionLicenseProvider.RegisterLicense("NjE1NTQ2QDMyMzAyZTMxMmUzMGN4T2F0SjFnVTBld2YxMnhXL1dGUElNRm1vRThVY1ZZc1NaVjFkZmxHNWc9");
-            await NavigationService.NavigateAsync("NavigationPage/CandyIndexView");
+            MainPage = Container.Resolve<CandyLoginView>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -62,7 +62,6 @@ namespace CandySugar.App
 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<CandyIndexView, CandyIndexViewModel>();
 
             #region Platform
             containerRegistry.Register<IXSLiShi, XSLiShi>();
@@ -140,14 +139,15 @@ namespace CandySugar.App
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();
+
+            ViewModelLocationProvider.Register<CandyLoginView>(() => Container.Resolve<CandyLoginViewModel>());
+            ViewModelLocationProvider.Register<CandyIndexView>(() => Container.Resolve<CandyIndexViewModel>());
             ViewModelLocationProvider.Register<CandyContentIndexView>(() => Container.Resolve<CandyContentIndexViewModel>());
 
             ViewModelLocationProvider.Register<PopPlayHeaderView>(() => Container.Resolve<PopPlayHeaderViewModel>());
             ViewModelLocationProvider.Register<PopPlayContentView>(() => Container.Resolve<PopPlayContentViewModel>());
-
             ViewModelLocationProvider.Register<PopSheetHeaderView>(() => Container.Resolve<PopSheetHeaderViewModel>());
             ViewModelLocationProvider.Register<PopSheetContentView>(() => Container.Resolve<PopSheetContentViewModel>());
-
             ViewModelLocationProvider.Register<PopAlbumHeaderView>(() => Container.Resolve<PopAlbumHeaderViewModel>());
             ViewModelLocationProvider.Register<PopAlbumContentView>(() => Container.Resolve<PopAlbumContentViewModel>());
         }

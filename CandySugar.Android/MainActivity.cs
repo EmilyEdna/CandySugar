@@ -84,7 +84,7 @@ namespace CandySugar.Droid
         {
             if (keyCode == Keycode.Back)
             {
-                var Page = Xamarin.Forms.Application.Current.MainPage.Navigation.NavigationStack.FirstOrDefault();
+                var Page = Xamarin.Forms.Application.Current.MainPage;
                 if (Page is CandyIndexView)
                 {
                     var view = (CandyIndexViewModel)((CandyIndexView)Page).BindingContext;

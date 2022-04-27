@@ -5,8 +5,10 @@
     xmlns:SFBadge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
     xmlns:behavior="clr-namespace:CandySugar.App.Controls.Behaviors;assembly=CandySugar.App.Controls"
     xmlns:fontawesome="clr-namespace:CandySugar.Xam.Common;assembly=CandySugar.Xam.Common"
+    xmlns:prism="http://prismlibrary.com"
     xmlns:sf="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     x:Name="Index"
+    prism:ViewModelLocator.AutowireViewModel="True"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <sf:SfNavigationDrawer
@@ -63,22 +65,6 @@
                             Text="{Binding Title}"
                             TextColor="White"
                             VerticalTextAlignment="Center" />
-                        <Label
-                            Grid.Column="1"
-                            Margin="220,0,0,0"
-                            BackgroundColor="{DynamicResource PrimaryPink}"
-                            FontFamily="{DynamicResource FontAwesomeSolid}"
-                            FontSize="12"
-                            HeightRequest="40"
-                            HorizontalTextAlignment="End"
-                            Text="{Static fontawesome:FontAwesomeIcons.User}"
-                            TextColor="White"
-                            VerticalTextAlignment="Center"
-                            WidthRequest="30">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.LoginCommand, Source={x:Reference Index}}" />
-                            </Label.GestureRecognizers>
-                        </Label>
                     </StackLayout>
                     <ContentView Grid.Row="1" Content="{Binding Views}" />
                 </Grid>
