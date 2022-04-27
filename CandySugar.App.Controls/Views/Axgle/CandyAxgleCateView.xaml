@@ -20,16 +20,16 @@
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid RowDefinitions="40,*">
-            <FlexLayout>
+            <Grid BackgroundColor="{DynamicResource PrimaryPink}" ColumnDefinitions="*,0.5*,0.13*">
                 <SearchBar
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     Keyboard="Default"
                     Placeholder="请输入关键字"
                     PlaceholderColor="{DynamicResource GrayShadowColor}"
                     SearchCommand="{Binding SearchCommand}"
-                    SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}"
-                    WidthRequest="200" />
+                    SearchCommandParameter="{Binding Text, Source={x:RelativeSource Self}}" />
                 <SFCom:SfComboBox
+                    Grid.Column="1"
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     BorderColor="{DynamicResource Gray-700}"
                     ClearButtonColor="{DynamicResource GrayShadowColor}"
@@ -38,8 +38,7 @@
                     DropDownBorderColor="{DynamicResource GrayShadowColor}"
                     HeightRequest="40"
                     SelectedIndex="2"
-                    TextColor="{DynamicResource GrayShadowColor}"
-                    WidthRequest="140">
+                    TextColor="{DynamicResource GrayShadowColor}">
                     <SFCom:SfComboBox.Behaviors>
                         <behavior:EventToCommandBehavior
                             Command="{Binding ComboSelectCommand}"
@@ -48,6 +47,7 @@
                     </SFCom:SfComboBox.Behaviors>
                 </SFCom:SfComboBox>
                 <Button
+                    Grid.Column="2"
                     BackgroundColor="{DynamicResource PrimaryPink}"
                     Command="{Binding GotoLikeCommand}"
                     CornerRadius="0"
@@ -55,10 +55,9 @@
                     FontSize="14"
                     HeightRequest="40"
                     HorizontalOptions="Start"
-                    Text="{Static Fontawesome:FontAwesomeIcons.Bars}"
-                    TextColor="White"
-                    WidthRequest="30" />
-            </FlexLayout>
+                    Text="{Static Fontawesome:FontAwesomeIcons.EllipsisVertical}"
+                    TextColor="White" />
+            </Grid>
             <SfRefresh:SfPullToRefresh
                 Grid.Row="1"
                 IsRefreshing="{Binding Refresh}"
