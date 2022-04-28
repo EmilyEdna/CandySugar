@@ -16,7 +16,7 @@ namespace CandySugar.Web
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(opt =>
+            services.AddControllers(opt=>opt.Filters.Add<ExceptionFilter>()).AddNewtonsoftJson(opt =>
             {
                 opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
                 opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
@@ -38,8 +38,8 @@ namespace CandySugar.Web
 
             License.Register(new LicenseModel
             {
-                 Account="EmilyEdna",
-                 PassWord=DateTime.Now.ToString("yyyyMMdd")
+                Account = "EmilyEdna",
+                PassWord = DateTime.Now.ToString("yyyyMMdd")
             });
 
             app.UseEndpoints(endpoints =>
