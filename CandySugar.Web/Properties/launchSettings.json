@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "CandySugar.Site": {
+    "CandySugar.Web": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
