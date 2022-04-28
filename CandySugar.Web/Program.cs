@@ -2,7 +2,7 @@ using Furion;
 using Newtonsoft.Json.Serialization;
 using SDKCore;
 
-namespace CandySugar.Site
+namespace CandySugar.Web
 {
     public class Program
     {
