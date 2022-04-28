@@ -83,7 +83,6 @@ namespace CandySugar.Web.Application
         {
             return await SyncStatic.TryCatch(async () =>
             {
-                //歌单详情
                 var Music = await MusicFactory.Music(opt =>
             {
                 opt.RequestParam = new MusicRequestInput
