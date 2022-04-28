@@ -34,7 +34,7 @@ namespace CandySugar.Common
         }
         public static bool CheckIntegrity()
         {
-            string[] file = { "CandySugar.dll", "CandySugar.exe", "CandySugar.Common.dll", "CandySugar.Controls.dll", "CandySugar.Core.dll", "CandySugar.Resource.dll", "CandySugar.Upgrade.exe", "CandySugar.Upgrade.dll" };
+            string[] file = { "CandySugar.WPF.dll", "CandySugar.exe", "CandySugar.Common.dll", "CandySugar.Controls.dll", "CandySugar.Core.dll", "CandySugar.Resource.dll", "CandySugar.Upgrade.exe", "CandySugar.Upgrade.dll" };
 
             var files = Directory.GetFiles(Environment.CurrentDirectory)
                  .Select(t => t.Split("\\").LastOrDefault())
