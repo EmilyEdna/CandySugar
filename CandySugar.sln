@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "桌面端", "桌面端", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "云服端", "云服端", "{093C03F4-2959-429E-A459-98EDB99F4BD6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "手机端", "手机端", "{7013C235-7D45-4047-952E-D4936CCDE1C1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "移动端", "移动端", "{7013C235-7D45-4047-952E-D4936CCDE1C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
