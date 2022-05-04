@@ -20,6 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using XExten.Advance.LinqFramework;
+using CandySugar.Controls.JSWindow;
 
 namespace CandySugar.WPF.UserControlViews.AcgAnimeViews
 {
@@ -104,7 +105,8 @@ namespace CandySugar.WPF.UserControlViews.AcgAnimeViews
         #region Override
         protected override void OnViewLoaded()
         {
-            Init();
+           var result = new CnadyJsWin { Visibility = Visibility.Visible }.ShowDialog();
+            if(result.Value) Init();
         }
         #endregion
 
