@@ -32,7 +32,11 @@ namespace CandySugar.Controls.JSWindow
                     {
                         Caches.RunTimeCacheRemove("AcgCookie");
                         Caches.RunTimeCacheSet("AcgCookie", cookie, 60 * 5);
-                        this.DialogResult = true;
+                        try
+                        {
+                            this.DialogResult = true;
+                        }
+                        catch { return; }
                     }
                 }
             };
