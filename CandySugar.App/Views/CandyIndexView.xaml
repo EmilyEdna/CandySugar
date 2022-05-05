@@ -17,7 +17,10 @@
             DrawerHeaderHeight="0"
             DrawerWidth="200">
             <sf:SfNavigationDrawer.DrawerContentView>
-                <ListView BackgroundColor="White" ItemsSource="{Binding Menu}">
+                <ListView
+                    BackgroundColor="White"
+                    ItemSelected="MenuSelected"
+                    ItemsSource="{Binding Menu}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -32,12 +35,12 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.Behaviors>
+                    <!--<ListView.Behaviors>
                         <behavior:EventToCommandBehavior
                             Command="{Binding ContentCommand}"
                             Converter="{StaticResource ListViewConverter}"
                             EventName="ItemSelected" />
-                    </ListView.Behaviors>
+                    </ListView.Behaviors>-->
                 </ListView>
             </sf:SfNavigationDrawer.DrawerContentView>
             <sf:SfNavigationDrawer.ContentView>

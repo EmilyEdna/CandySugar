@@ -22,5 +22,11 @@ namespace CandySugar.App.Views
         {
             drawer.ToggleDrawer();
         }
+
+        private void MenuSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            this.drawer.ToggleDrawer();
+            (this.BindingContext as CandyIndexViewModel).GotoContent((e.SelectedItem as dynamic));
+        }
     }
 }
