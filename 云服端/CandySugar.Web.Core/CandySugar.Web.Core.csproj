@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BaseIntermediateOutputPath />
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Furion" Version="3.1.4" />
+		<PackageReference Include="XExten.Advance" Version="1.2.2-beta2" />
+	</ItemGroup>
+	
+</Project>
