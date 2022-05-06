@@ -57,6 +57,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.Web.Core", "云�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "启动项", "启动项", "{A940D104-2A78-4D45-BA82-5743AE88045D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandySugar.MixUI", "混合端\CandySugar.MixUI\CandySugar.MixUI.csproj", "{0251F79C-4C92-4641-B55C-D503EA4F044B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,12 @@ Global
 		{54130723-F3F3-45D9-A298-014E029AE831}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54130723-F3F3-45D9-A298-014E029AE831}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54130723-F3F3-45D9-A298-014E029AE831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0251F79C-4C92-4641-B55C-D503EA4F044B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0251F79C-4C92-4641-B55C-D503EA4F044B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0251F79C-4C92-4641-B55C-D503EA4F044B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0251F79C-4C92-4641-B55C-D503EA4F044B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0251F79C-4C92-4641-B55C-D503EA4F044B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0251F79C-4C92-4641-B55C-D503EA4F044B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +157,7 @@ Global
 		{2CCB9A45-1CD3-44D4-B72D-81F607ADAFED} = {74CBE120-6464-4AF7-B6F4-ECB8853D144E}
 		{54130723-F3F3-45D9-A298-014E029AE831} = {74CBE120-6464-4AF7-B6F4-ECB8853D144E}
 		{A940D104-2A78-4D45-BA82-5743AE88045D} = {B3568D81-E0B2-4698-868C-D7F34B47DE6F}
+		{0251F79C-4C92-4641-B55C-D503EA4F044B} = {A940D104-2A78-4D45-BA82-5743AE88045D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBDAE5C3-9B93-4701-ADAB-60C595626BE6}
