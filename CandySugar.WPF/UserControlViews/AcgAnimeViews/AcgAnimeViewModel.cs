@@ -105,8 +105,8 @@ namespace CandySugar.WPF.UserControlViews.AcgAnimeViews
         #region Override
         protected override void OnViewLoaded()
         {
-           var result = new CnadyJsWin { Visibility = Visibility.Visible }.ShowDialog();
-            if(result.Value) Init();
+            //var result = new CnadyJsWin { Visibility = Visibility.Visible }.ShowDialog();
+            Init();
         }
         #endregion
 
