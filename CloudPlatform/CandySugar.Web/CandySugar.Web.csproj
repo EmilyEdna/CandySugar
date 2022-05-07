@@ -4,7 +4,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
-		<BaseIntermediateOutputPath />
+		
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\CandySugar.Web.Application\CandySugar.Web.Application.csproj" />
+	  <ProjectReference Include="..\CandySugar.Web.Application\CandySugar.Web.Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

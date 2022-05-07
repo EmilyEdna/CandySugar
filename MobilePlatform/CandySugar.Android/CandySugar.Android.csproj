@@ -125,11 +125,11 @@
       <Name>CandySugar.App</Name>
     </ProjectReference>
     <ProjectReference Include="..\CandySugar.Xam.Common\CandySugar.Xam.Common.csproj">
-      <Project>{1C538EF6-5D46-4183-AB85-DAA1573D3051}</Project>
+      <Project>{30e54e31-d3c2-4eec-8eec-213b381fabd6}</Project>
       <Name>CandySugar.Xam.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj">
-      <Project>{eb741a7b-fada-4353-99f0-be0bf1df8677}</Project>
+      <Project>{f27e3ccf-dd13-44a6-9fa4-58a9dd712268}</Project>
       <Name>CandySugar.Xam.Core</Name>
     </ProjectReference>
   </ItemGroup>

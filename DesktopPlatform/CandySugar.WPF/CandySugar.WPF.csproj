@@ -17,7 +17,7 @@
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
 		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 		<Nullable>disable</Nullable>
-		<BaseIntermediateOutputPath />
+		
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<DefineConstants>TRACE;Core</DefineConstants>

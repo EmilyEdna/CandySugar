@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>disable</Nullable>
-    <BaseIntermediateOutputPath />
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
@@ -28,6 +27,9 @@
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Regular" Version="1.0.0" />
 		<PackageReference Include="Xamarin.Forms.FontAwesome.Solid" Version="1.0.0" />
 		<PackageReference Include="XF.Material" Version="1.8.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Update="LayoutView\PopAlbumContentView.xaml">
@@ -129,9 +131,6 @@
 	  <EmbeddedResource Update="Views\Option\CandyOptionView.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\CandySugar.Xam.Core\CandySugar.Xam.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="SDKColloction">
