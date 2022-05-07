@@ -16,7 +16,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.emilyedna.candysugar</ApplicationId>
-		<ApplicationIdGuid>61355B16-35FB-4055-9635-D6FB654C12B2</ApplicationIdGuid>
+		<ApplicationIdGuid>3D24AFE0-02D2-4CA4-9FA9-1302C5EE8FF8</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -24,25 +24,20 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-android|AnyCPU'">
-	  <Optimize>True</Optimize>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
-	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-	</PropertyGroup>
-
 	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\appicon.png" />
 		<!-- Splash Screen -->
-
+		<MauiSplashScreen Include="Resources\splash.jpg" BaseSize="550,750" />
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -56,12 +51,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Raw\DPlayer.min.js" />
-	  <None Remove="Resources\Raw\hls.min.js" />
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="Resources\Images\" />
+		<None Remove="Platforms\Android\Resources\mipmap\icon.png" />
+		<None Remove="Resources\appicon.png" />
+		<None Remove="Resources\Fonts\FontAwesome6Brands.otf" />
+		<None Remove="Resources\Fonts\FontAwesome6Regular.otf" />
+		<None Remove="Resources\Fonts\FontAwesome6Solid.otf" />
+		<None Remove="Resources\Fonts\FontAwesome6Thin.otf" />
+		<None Remove="Resources\Raw\DPlayer.min.js" />
+		<None Remove="Resources\Raw\hls.min.js" />
+		<None Remove="Resources\splash.jpg" />
 	</ItemGroup>
 
 </Project>
