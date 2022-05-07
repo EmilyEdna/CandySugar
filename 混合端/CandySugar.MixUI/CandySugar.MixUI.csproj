@@ -62,4 +62,8 @@
 		<None Remove="Resources\splash.jpg" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\CandySugar.Mix.Controls\CandySugar.Mix.Controls.csproj" />
+	</ItemGroup>
+
 </Project>
