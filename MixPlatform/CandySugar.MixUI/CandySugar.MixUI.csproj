@@ -12,11 +12,11 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Sugar</ApplicationTitle>
+		<ApplicationTitle>CandySugar</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.emilyedna.candysugar</ApplicationId>
-		<ApplicationIdGuid>3D24AFE0-02D2-4CA4-9FA9-1302C5EE8FF8</ApplicationIdGuid>
+		<ApplicationId>com.emilyedna.mixui</ApplicationId>
+		<ApplicationIdGuid>66A0FD4E-3E5E-4120-9136-2CFB9C01B49F</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -24,17 +24,21 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\appicon.png" />
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\splash.jpg" BaseSize="550,750" />
+		<MauiSplashScreen Include="Resources\splash.jpg" BaseSize="1080,2340" />
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
@@ -47,23 +51,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiCss Remove="Resources\Raw\DPlayer.min.css" />
+	  <None Remove="Platforms\Android\Resources\mipmap\icon.png" />
+	  <None Remove="Platforms\Android\Resources\values\splash.xml" />
+	  <None Remove="Resources\appicon.png" />
+	  <None Remove="Resources\Fonts\FontAwesome6Brands.otf" />
+	  <None Remove="Resources\Fonts\FontAwesome6Regular.otf" />
+	  <None Remove="Resources\Fonts\FontAwesome6Solid.otf" />
+	  <None Remove="Resources\Fonts\FontAwesome6Thin.otf" />
+	  <None Remove="Resources\splash.jpg" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<None Remove="Platforms\Android\Resources\mipmap\icon.png" />
-		<None Remove="Resources\appicon.png" />
-		<None Remove="Resources\Fonts\FontAwesome6Brands.otf" />
-		<None Remove="Resources\Fonts\FontAwesome6Regular.otf" />
-		<None Remove="Resources\Fonts\FontAwesome6Solid.otf" />
-		<None Remove="Resources\Fonts\FontAwesome6Thin.otf" />
-		<None Remove="Resources\Raw\DPlayer.min.js" />
-		<None Remove="Resources\Raw\hls.min.js" />
-		<None Remove="Resources\splash.jpg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\CandySugar.Mix.Controls\CandySugar.Mix.Controls.csproj" />
-	</ItemGroup>
-
 </Project>
