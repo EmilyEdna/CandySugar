@@ -15,7 +15,7 @@ namespace CandySugar.Droid
         protected override async void OnResume()
         {
             base.OnResume();
-            await Task.Delay(3000);
+            await Task.Delay(500);
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }
