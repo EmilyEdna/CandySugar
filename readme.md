@@ -2,7 +2,7 @@
 
 ### 项目简介：
 
-一款基于C#.NET 6开发的WPF和Xamarin.Forms程序，支持在线看小说，轻小说，上K站，看动漫，看漫画，全网听歌等等。
+一款基于C#.NET 6开发的WPF和Xamarin.Forms程序，支持在线看小说，轻小说，看动漫，看漫画，全网听歌等等。
 
 有好的建议和BUG请提交在[此处](https://github.com/EmilyEdna/CandySugar/issues)
 
@@ -12,7 +12,7 @@
 
 2.轻小说内部集成开发者的账号和密码，使用者请自行在配置页面配置账号和密码，支持无版权小说下载阅读，可以看插图，支持作者和书籍名称搜索。
 
-3.支持K站访问(已支持SNI)，支持搜索、收藏、下载、预览大图。
+3.支持壁纸。
 
 4.支持全网动漫观看，包括深夜档，采用VLC或者DPlayer播放。
 
@@ -42,12 +42,7 @@
 
 ### 打赏作者：
 
-![p7.png](Image/p7.png)![p8.png](Image/p8.png)
-
 ### 下载链接：
-[甜糖](https://github.com/EmilyEdna/CandySugar/releases/download/V1/CandySugar.7z)
-
-### [软件截图](https://github.com/EmilyEdna/CandySugar/blob/master/description.md)
 
 ### 软件引用：
 ##### WPF
